@@ -1,0 +1,63 @@
+cff-version: 1.2.0
+message: "If you use this software or the manuscript, please cite them as below."
+title: "Low-discrepancy quasi-uniform digital sequences in every dimension: manuscript, Lean formalization and data archive"
+type: software
+authors:
+  - family-names: "Gruenschloss"
+    given-names: "Leonhard"
+    orcid: "https://orcid.org/0009-0004-6476-2191"
+license: MIT
+repository-code: "https://github.com/lgruen/quasi-uniform-sequences-lean"
+url: "https://lgruen.github.io/quasi-uniform-sequences-lean/"
+version: "1.0.0"
+date-released: "RELEASE_DATE_TBD"   # date of the v1.0.0 release (YYYY-MM-DD; same day as the paper's \VersionDate)
+# doi: "ZENODO_DOI_TBD"   # Zenodo concept DOI (all versions); filled after the release (uncommented then)
+identifiers:
+  - type: url
+    value: "https://lgruen.github.io/quasi-uniform-sequences-lean/explainers/"
+    description: "Interactive explainers"
+keywords:
+  - digital sequences
+  - quasi-Monte Carlo
+  - quasi-uniformity
+  - minimum distance
+  - covering radius
+  - low discrepancy
+  - Halton sequences
+  - Faure sequences
+  - residue theorem
+  - Lean 4
+  - Mathlib
+  - formal verification
+  - "MSC2020: 11K38"
+  - "MSC2020: 65C05"
+  - "MSC2020: 11K45"
+  - "MSC2020: 52C17"
+  - "MSC2020: 68V20"
+abstract: >-
+  LaTeX source, data and verification archive, Lean 4 / Mathlib formalization (Comparator configurations checked
+  with the Lean and NanoDa kernels) and interactive explainers of the manuscript "Low-discrepancy quasi-uniform
+  digital sequences in every dimension" (version 1), which shows that no Halton-type, Sobol', classical Niederreiter
+  or Faure sequence is quasi-uniform in dimension two and higher, and constructs, for every dimension s and every
+  prime base p > 2^s, explicit quasi-uniform digital (0,s)-sequences (residue sequences). The constructions, proofs
+  and Lean formalization were produced by AI systems under the author's direction; see the section "Use of AI" of
+  README.md.
+references:
+  - type: article
+    title: "Low-discrepancy quasi-uniform digital nets in every dimension"
+    authors:
+      - family-names: "Gruenschloss"
+        given-names: "Leonhard"
+        orcid: "https://orcid.org/0009-0004-6476-2191"
+    year: 2026
+    notes: "Version 1. Hexagon identifier hexagon:2610.00217v1"
+    doi: "10.5281/zenodo.23327748"
+preferred-citation:
+  type: article
+  title: "Low-discrepancy quasi-uniform digital sequences in every dimension"
+  authors:
+    - family-names: "Gruenschloss"
+      given-names: "Leonhard"
+      orcid: "https://orcid.org/0009-0004-6476-2191"
+  year: 2026
+  notes: "Version 1"

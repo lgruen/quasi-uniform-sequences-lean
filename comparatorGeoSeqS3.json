@@ -1,0 +1,37 @@
+{
+  "challenge_module": "GeoSeqS3Challenge",
+  "solution_module": "GeoSeqS3Solution",
+  "theorem_names": [
+    "GeoSeq.S3_frames_char",
+    "GeoSeq.cartier_stepS",
+    "GeoSeq.reach_AS",
+    "GeoSeq.reach_BS",
+    "GeoSeq.encVec_add3",
+    "GeoSeq.encVec_two3",
+    "GeoSeq.add3W_div",
+    "GeoSeq.S3_frame_inv",
+    "GeoSeq.S3_law",
+    "GeoSeq.S3_net",
+    "GeoSeq.S3_faure",
+    "GeoSeq.S3_M",
+    "GeoSeq.S3_ghat",
+    "GeoSeq.esemS_init",
+    "GeoSeq.S3_init",
+    "GeoSeq.S3_resp",
+    "GeoSeq.S3_resp_occurs",
+    "GeoSeq.S3_resp_card",
+    "GeoSeq.s3_check",
+    "GeoSeq.S3_cert_lb",
+    "GeoSeq.S3_sep_one",
+    "GeoSeq.S3_sep",
+    "GeoSeq.S3_allN",
+    "GeoSeq.S3_mesh"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

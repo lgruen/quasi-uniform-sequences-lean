@@ -1,0 +1,47 @@
+# GitHub Pages: the interactive explainers and the paper PDF as one site,
+# https://lgruen.github.io/quasi-uniform-sequences-lean/ (landing page, /paper.pdf, /explainers/).
+#
+# It runs ONLY when started by hand (workflow_dispatch): no push, schedule or pull-request trigger.
+# To enable (repository owner, once): Settings -> Pages -> Build and deployment -> Source: "GitHub Actions";
+# then Actions -> "Pages" -> "Run workflow" (branch main). Re-run it by hand after each release.
+#
+# No build tools are needed: the explainer pages are committed as built, self-contained HTML files.
+name: Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+
+      - name: Assemble the site (explainers, paper PDF, landing page)
+        run: site/build_site.sh _site
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

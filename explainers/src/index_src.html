@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classical Sequences Cut Corners</title>
+<meta name="description" content="Interactive companion to the paper on quasi-uniform digital sequences: what quasi-uniform means, and the carry that brings two points of the Faure, Halton and Sobol' sequences close together.">
+<style>__CSS__
+.nrow { display: flex; gap: 6px; align-items: center; }
+.nrow input[type=number] { font: 14px var(--mono); width: 7.5em; min-width: 0; padding: 6px 8px; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; }
+.zoomrow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+@media (max-width: 760px) { .zoomrow { grid-template-columns: minmax(0, 1fr); } }
+.zoomrow figure, .pairrow figure { margin: 0; min-width: 0; }
+.zoomrow figcaption, .pairrow figcaption { font-family: var(--sans); font-size: 13px; color: var(--muted); margin-top: 6px; }
+.zoomrow figcaption b { color: var(--ink); font-weight: 600; }
+.pairrow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+@media (max-width: 760px) { .pairrow { grid-template-columns: minmax(0, 1fr); } }
+.digs { font-family: var(--mono); font-size: 13.5px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 10px; align-items: baseline; }
+.digs .lab { font-family: var(--sans); color: var(--muted); font-size: 13px; }
+.digs .str { overflow-wrap: anywhere; letter-spacing: 0.06em; }
+.digs .c { color: var(--warm); font-weight: 700; }
+.digs .sh { color: var(--accent); font-weight: 700; }
+table.t td.l { text-align: left; font-family: var(--sans); white-space: normal; }
+.tneg td { font-family: var(--sans) !important; white-space: normal !important; text-align: left !important; vertical-align: top; font-size: 13px; }
+.tneg th { text-align: left !important; }
+.tneg { min-width: 660px; }
+.tneg td:nth-child(2), .tneg td:nth-child(3) { width: 36%; }
+</style>
+</head>
+<body>
+<div class="page">
+<nav class="top" aria-label="Explainer pages">
+  <a href="index.html" aria-current="page">1 · Why classical sequences cut corners</a>
+  <a href="residue.html">2 · One scramble that fixes it</a>
+  <a href="limits.html">3 · What exact rules can and cannot do</a>
+  <a href="certificate.html">4 · How separation is certified</a>
+  <a href="practice.html">5 · In practice</a>
+  <span class="sp"></span><a href="#credits">Credits</a>
+</nav>
+
+<header class="prose">
+  <p class="eyebrow">Interactive companion · quasi-uniform digital sequences</p>
+  <h1>Why classical sequences cut corners</h1>
+  <p class="lede">A sampling sequence is read one point at a time, and you may stop after any number of points. This page shows what it means for every such prefix to be well spread, why the Halton, Faure, Sobol' and Niederreiter sequences fail at it, and why a sequence, unlike a point set built for one size, cannot simply be re-scrambled at every size.</p>
+  <p class="note">Every point on this page is computed in your browser, from the generator matrices of the sequences (the residue sequence from the formula of <span class="mono">def:residue</span>). Distances are on the torus, as in the paper, and every separation shown is exact for the plotted points. The paper is cited by its <span class="mono">\label</span> names, for example <span class="mono">thm:nonqu</span>.</p>
+</header>
+
+<!-- ===================================================== 1. quasi-uniform -->
+<section id="qu" aria-labelledby="h-qu">
+  <div class="sechead"><span class="secno">1</span><h2 id="h-qu">Well spread at every number of points</h2></div>
+  <div class="prose">
+    <p><b>The baseline.</b> Monte Carlo puts <i>N</i> independent random points into the unit square. They leave holes and they clump: the two closest points are typically about 1/<i>N</i> apart, much closer than the spacing 1/√<i>N</i> of a grid with the same number of points. A grid has no clumps, but it exists for one <i>N</i> only, and points cannot be added to it.</p>
+    <p><b>Low-discrepancy sequences</b> sit in between. They are one infinite list of points, and every prefix of <i>q</i><sup><i>m</i></sup> points (in base <i>q</i>) is a <em>net</em>: if the square is cut into <i>q</i><sup><i>m</i></sup> boxes of equal area, of any of the allowed shapes, each box holds exactly one point. So there are never large holes. Clumps are another matter.</p>
+    <p><b>Quasi-uniform</b> asks for both at every prefix: no hole and no clump larger, respectively smaller, than a constant times the grid spacing <i>N</i><sup>−1/2</sup> (in dimension <i>s</i>, <i>N</i><sup>−1/<i>s</i></sup>). We measure clumps by the <em>separation</em> δ, the smallest distance between two of the first <i>N</i> points, in grid units: sep = δ·√<i>N</i>. The grid has sep = 1. A sequence is quasi-uniform exactly when sep stays above a positive constant for every <i>N</i> (for the sequences here the holes take care of themselves, <span class="mono">lem:prefix</span>).</p>
+    <p><b>The question.</b> Quasi-uniformity of quasi-Monte Carlo point sets was studied systematically by Dick, Goda, Larcher, Pillichshammer and Suzuki (<a class="cite" href="#ref-DGLPS1">Part I</a>, <a class="cite" href="#ref-DGS2">Part II</a>). Dick, Goda and Suzuki asked for digital nets and sequences in a fixed base that are both low-discrepancy and quasi-uniform. Their positive example is the two-dimensional Larcher–Pillichshammer net (<a class="cite" href="#ref-LP01">Larcher and Pillichshammer</a>); for dimension <i>s</i> ≥ 3 they state the construction as open, for nets and for sequences (<a class="cite" href="#ref-DGS2">Dick, Goda and Suzuki</a>). Goda, Hofer and Suzuki proved that the Halton sequences are not quasi-uniform and asked whether any Halton-type sequence is, their Open Problem 2 (<a class="cite" href="#ref-GHS26">Goda, Hofer and Suzuki</a>). The <a class="cite" href="#ref-Gru26geo">companion paper</a> answers the question of Dick, Goda and Suzuki for nets in every dimension; the paper explained here answers it for sequences and shows that no Halton-type sequence is quasi-uniform.</p>
+    <p>Move the slider. The closest pair of the first <i>N</i> points is circled; the curve below is sep for every <i>N</i> up to the end of the slider. Random points sink fast. Halton, Sobol' and Faure sink too, more slowly and in steps; the last button previews the sequence of page 2, which has a certified floor.</p>
+  </div>
+  <div class="fig">
+    <div>
+      <div class="plot" id="plotV"><canvas id="cV" role="img" aria-label="The first N points of the chosen sequence with the closest pair circled"></canvas><div class="hint" id="hintV"></div></div>
+      <div class="legend" aria-hidden="true">
+        <span><i class="sw" style="background:var(--ink);border-radius:50%;width:8px;height:8px"></i>point</span>
+        <span><i class="sw" style="border:1.5px solid var(--accent);border-radius:50%;width:10px;height:10px"></i>closest pair</span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ctl">
+        <span id="consLab">Sequence</span>
+        <div class="seg" role="group" aria-labelledby="consLab" id="consSeg">
+          <button class="btn" type="button" data-v="random" aria-pressed="false">random (Monte Carlo)</button>
+          <button class="btn" type="button" data-v="halton" aria-pressed="false">Halton, bases 2, 3</button>
+          <button class="btn" type="button" data-v="sobol2" aria-pressed="false">Sobol', base 2</button>
+          <button class="btn" type="button" data-v="faure5" aria-pressed="true">Faure, base 5</button>
+          <button class="btn" type="button" data-v="res5" aria-pressed="false">residue sequence, base 5</button>
+        </div>
+      </div>
+      <div class="ctl">
+        <div class="row"><label for="nV">Number of points <i>N</i></label><span class="val" id="nVv"></span></div>
+        <input type="range" id="nV" min="0" max="1000" step="1" value="500" aria-describedby="nVv">
+        <div class="nrow">
+          <button class="btn" type="button" id="nMinus" aria-label="N minus one">−1</button>
+          <input type="number" id="nNum" min="2" step="1" aria-label="Number of points N, exact">
+          <button class="btn" type="button" id="nPlus" aria-label="N plus one">+1</button>
+        </div>
+        <div class="seg" id="nPresets" role="group" aria-label="Powers of the base"></div>
+        <div class="seg">
+          <button class="btn" type="button" id="dropPrev">◀ previous drop</button>
+          <button class="btn" type="button" id="dropNext">next drop ▶</button>
+        </div>
+      </div>
+      <dl class="read" id="readV"></dl>
+      <p class="note" id="noteV"></p>
+    </div>
+  </div>
+  <div class="chartwrap" style="margin-top:14px"><svg id="curveV" viewBox="0 0 900 230" role="img" aria-label="Separation in grid units of every prefix"></svg></div>
+  <div class="legend" aria-hidden="true">
+    <span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(--ink);stroke-width:1.4"/></svg>sep = δ√N, every N (exact)</span>
+    <span><svg width="22" height="8"><circle cx="11" cy="4" r="3" style="fill:var(--accent)"/></svg>N a power of the base</span>
+    <span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(--good);stroke-width:1.4;stroke-dasharray:5 3"/></svg>proved bound at its certified sizes</span>
+    <span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(--good);stroke-width:1;stroke-dasharray:1.5 2.5"/></svg>proved bound for every N</span>
+  </div>
+  <div class="refs">In the paper: <span class="ref">sec:prelim</span><span class="ref">lem:t0<span>t = 0 for free</span></span><span class="ref">lem:prefix<span>all N</span></span><span class="ref">cor:residueQU</span></div>
+</section>
+
+<!-- ===================================================== 2. the carry -->
+<section id="carry" aria-labelledby="h-carry">
+  <div class="sechead"><span class="secno">2</span><h2 id="h-carry">A carry the other coordinate cannot see</h2></div>
+  <div class="prose">
+    <p>Why do the classical sequences clump? They are built from <em>polynomial bases</em>: the index of a point is written as a polynomial <i>V</i> over a finite field, and each coordinate reads <i>V</i> in its own base, digit block by digit block, like a radical inverse. The Faure (<a class="cite" href="#ref-Fau82">Faure</a>), Sobol' (<a class="cite" href="#ref-Sob67">Sobol'</a>) and Niederreiter (<a class="cite" href="#ref-Nie87">Niederreiter</a>) sequences and Tezuka's generalizations (<a class="cite" href="#ref-Tez93">Tezuka</a>) are of this kind. In the two-dimensional Faure sequence in base <i>p</i>, coordinate 0 reads the ordinary digits of the index (the base <i>z</i>), and coordinate 1 reads the Taylor digits of <i>V</i> around <i>z</i> = 1 (the base <i>z</i> − 1).</p>
+    <p>Take two indices that differ by a <em>carry</em> in the last digits of coordinate 0: in base 5 the digits 0.04444 of one point become 0.1 for the other. As numbers they differ by one unit of the last digit, so the two points sit on either side of a cell boundary, almost touching. If the same index difference is also divisible by a high power of the other base, it leaves the leading digits of the other coordinate unchanged. Then the two points are close in every coordinate at once. Here the difference is <i>D</i> = (<i>z</i> − 1)<sup><i>Q</i>−1</sup>: its first <i>Q</i> digits in base <i>z</i> are all 1 (the carry), and it is divisible by (<i>z</i> − 1)<sup><i>Q</i>−1</sup> (coordinate 1 is blind to it).</p>
+  </div>
+  <div class="pairrow" style="margin-top:18px">
+    <figure><div class="plot"><canvas id="cP" role="img" aria-label="The prefix with the close pair marked"></canvas><div class="hint" id="hintP"></div></div><figcaption id="capP"></figcaption></figure>
+    <figure><div class="plot"><canvas id="cZ" role="img" aria-label="Zoom on the close pair with the fine grid"></canvas></div><figcaption id="capZ"></figcaption></figure>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <div class="ctl"><span id="pLab">Base <i>p</i> (the pair at <i>Q</i> = <i>p</i>, in the prefix of <i>p</i><sup><i>p</i></sup> points)</span>
+      <div class="seg" role="group" aria-labelledby="pLab" id="pSeg">
+        <button class="btn" type="button" data-v="3" aria-pressed="false"><i>p</i> = 3</button>
+        <button class="btn" type="button" data-v="5" aria-pressed="true"><i>p</i> = 5</button>
+      </div></div>
+    <div class="digs" id="digP"></div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">fig:carry</span><span class="ref">lem:carrypair<span>a close pair from a carry</span></span><span class="ref">rem:faurerate</span></div>
+</section>
+
+<!-- ===================================================== 3. every scale -->
+<section id="scale" aria-labelledby="h-scale">
+  <div class="sechead"><span class="secno">3</span><h2 id="h-scale">The same carry at every scale</h2></div>
+  <div class="prose">
+    <p>One close pair does not prove anything about large <i>N</i>. The point of <span class="mono">thm:nonqu</span> is that the pair comes back at ever larger sizes, ever closer in grid units. Over a field of characteristic <i>p</i> the map <i>f</i> ↦ <i>f</i><sup><i>p</i></sup> (the Frobenius map) is additive: (<i>f</i> + <i>g</i>)<sup><i>p</i></sup> = <i>f</i><sup><i>p</i></sup> + <i>g</i><sup><i>p</i></sup>. So raising the index difference to the power <i>p</i> stretches the carry and the shared digits by the factor <i>p</i>, while the gap between the length of the shared digits and the cell side grows each time. The table computes the explicit pairs of <span class="mono">rem:faurerate</span> for <i>Q</i> = <i>p</i>, <i>p</i><sup>2</sup>, <i>p</i><sup>3</sup>, … and the pairs of <span class="mono">cor:sobol</span> for the Sobol' sequence, exactly, with polynomial arithmetic in your browser (the indices run to about a hundred digits; no prefix is enumerated).</p>
+    <p>For the Sobol' sequence this goes against an old expectation. Sobol' and Shukhman suggested, from numerical experiments, that its separation is of the optimal order <i>N</i><sup>−1/<i>s</i></sup> (<a class="cite" href="#ref-SS07">Sobol' and Shukhman</a>). Goda disproved this in dimension two (<a class="cite" href="#ref-Goda23">Goda</a>), and Suzuki showed that there the mesh ratio grows at least like <i>N</i><sup>1/4</sup> (<a class="cite" href="#ref-Suz25">Suzuki</a>); Goda, Hofer and Suzuki stated the question for <i>s</i> ≥ 3 as open (<a class="cite" href="#ref-GHS26">Goda, Hofer and Suzuki</a>). <span class="mono">cor:sobol</span> disproves the expectation in every dimension <i>s</i> ≥ 2, for any admissible direction numbers.</p>
+  </div>
+  <div class="panel" style="flex-direction:row;flex-wrap:wrap;gap:14px 28px;align-items:flex-end">
+    <div class="ctl"><span id="fLab">Sequence</span>
+      <div class="seg" role="group" aria-labelledby="fLab" id="fSeg">
+        <button class="btn" type="button" data-v="f3" aria-pressed="false">Faure, <i>p</i> = 3</button>
+        <button class="btn" type="button" data-v="f5" aria-pressed="true">Faure, <i>p</i> = 5</button>
+        <button class="btn" type="button" data-v="f7" aria-pressed="false">Faure, <i>p</i> = 7</button>
+        <button class="btn" type="button" data-v="sob" aria-pressed="false">Sobol', base 2</button>
+      </div></div>
+  </div>
+  <div class="scrollx" style="margin-top:14px"><table class="t" id="tabQ"></table></div>
+  <div class="chartwrap" style="margin-top:14px"><svg id="chartQ" viewBox="0 0 900 230" role="img" aria-label="Upper bound on the separation at the levels of the explicit pairs"></svg></div>
+  <p class="note" style="max-width:72ch" id="noteQ"></p>
+  <div class="refs">In the paper: <span class="ref">thm:nonqu<span>polynomial bases</span></span><span class="ref">rem:faurerate</span><span class="ref">cor:sobol</span><span class="ref">tab:sobolpar</span></div>
+</section>
+
+<!-- ===================================================== 4. scrambles that do not help -->
+<section id="scr" aria-labelledby="h-scr">
+  <div class="sechead"><span class="secno">4</span><h2 id="h-scr">Scrambling the other coordinates does not help</h2></div>
+  <div class="prose">
+    <p>A standard remedy for bad patterns is a scramble: replace digit <i>n</i> of a coordinate by a fixed combination of its digits 0, …, <i>n</i> (a lower-triangular matrix <i>L</i>; such scrambles of Faure-type sequences are classical, <a class="cite" href="#ref-Tez95">Tezuka</a>, <a class="cite" href="#ref-Mat98">Matoušek</a>). That keeps the net property for free (<span class="mono">lem:t0</span>). But it cannot undo the shared leading digits: if two points agree in the first <i>d</i> digits of a coordinate before the scramble, they agree after it. So scrambling the coordinates that do not carry changes nothing about the pair. Try it on the base-5 pair of section 2: each click draws a new random scramble of coordinate 1 and recomputes the whole prefix of 3125 points.</p>
+  </div>
+  <div class="fig">
+    <div class="plot"><canvas id="cS" role="img" aria-label="The scrambled prefix around the close pair"></canvas></div>
+    <div class="panel">
+      <button class="btn primary" type="button" id="scr1">New random scramble of coordinate 1</button>
+      <button class="btn" type="button" id="scr01">New random scramble of both coordinates</button>
+      <button class="btn" type="button" id="scr0">Back to the unscrambled Faure sequence</button>
+      <dl class="read" id="readS"></dl>
+      <p class="note" id="noteS"></p>
+    </div>
+  </div>
+  <div class="prose" style="margin-top:18px">
+    <p>Corollary <span class="mono">cor:unscrambled</span> says more: as long as one coordinate is still a radical inverse up to a constant factor, no fixed lower-triangular scramble of the other coordinates makes the sequence quasi-uniform. Scrambling every coordinate is not covered by the theorem, and the second button shows that the pair can then disappear. A random scramble comes with no guarantee, though; page 2 builds one fixed scramble of all coordinates with a proved floor.</p>
+  </div>
+  <div class="scrollx"><table class="t tneg" id="tabNeg">
+    <tr><th>sequences</th><th>scope</th><th>earlier (as far as we found)</th><th>where</th></tr>
+    <tr><td>polynomial-base digital sequences</td><td>pairwise coprime bases of any degrees, every coordinate reading its own base, one coordinate a radical inverse</td><td>–</td><td class="mono">thm:nonqu</td></tr>
+    <tr><td>Halton-type</td><td>every prime <i>p</i>, every <i>s</i> ≥ 2, any pairwise coprime bases over 𝔽<sub><i>p</i></sub>, monic or not, irreducible or not (the definition of <a class="cite" href="#ref-GHS26">Goda, Hofer and Suzuki</a>, Def. 2, in the sense of <a class="cite" href="#ref-Hof13">Hofer</a>); answers their Open Problem 2</td><td>Halton sequences and three families of Halton-type sequences (<a class="cite" href="#ref-GHS26">Goda, Hofer and Suzuki</a>)</td><td class="mono">cor:halton</td></tr>
+    <tr><td>Faure, unscrambled frames</td><td>every 2 ≤ <i>s</i> ≤ <i>p</i>; any distinct places over 𝔽<sub><i>q</i></sub></td><td><i>s</i> = <i>p</i> (<a class="cite" href="#ref-DGS2">Dick, Goda and Suzuki</a>); <i>s</i> = 2 and <i>s</i> = <i>p</i> (<a class="cite" href="#ref-GHS26">Goda, Hofer and Suzuki</a>)</td><td class="mono">cor:faure</td></tr>
+    <tr><td>Sobol'</td><td>every <i>s</i> ≥ 2, any admissible direction numbers, natural or Gray-code order, every projection to two or more coordinates</td><td><i>s</i> = 2 (<a class="cite" href="#ref-Goda23">Goda</a>; <a class="cite" href="#ref-Suz25">Suzuki</a>); the opposite was suggested numerically (<a class="cite" href="#ref-SS07">Sobol' and Shukhman</a>)</td><td class="mono">cor:sobol</td></tr>
+    <tr><td>Niederreiter</td><td>classical, over every 𝔽<sub><i>q</i></sub>; generalized, when one coordinate is a radical inverse</td><td>–</td><td class="mono">cor:nied</td></tr>
+    <tr><td>one coordinate unscrambled</td><td>one coordinate a radical inverse up to a scalar, all others with any fixed lower-triangular scramble</td><td>Faure, <i>s</i> = <i>p</i> (every prime <i>p</i>), first coordinate unscrambled (<a class="cite" href="#ref-GHS26">Goda, Hofer and Suzuki</a>, Rem. 3); (<i>L</i>, <i>P</i>) and (<i>I</i>, <i>LP</i>) in base 2 (<a class="cite" href="#ref-DGS2">Dick, Goda and Suzuki</a>, Thm. 4.2)</td><td class="mono">cor:unscrambled</td></tr>
+    <tr><td>randomizations</td><td>digital shifts, Faure–Tezuka index scrambles, reorderings that keep every full level as a set</td><td>Owen scrambling: almost surely not quasi-uniform (<a class="cite" href="#ref-Suz26">Suzuki</a>)</td><td class="mono">rem:randomize</td></tr>
+  </table></div>
+  <p class="note" style="max-width:72ch">Each row is a theorem with explicit close pairs along an explicit sequence of sizes, in exactly the scope stated (<span class="mono">tab:negative</span>). The third column lists the cases known before, as far as we found; the other statements were not found in the literature we searched (through October 2026). The theorems give upper bounds on the separation along those sizes; they do not say how fast it decays in general.</p>
+  <div class="refs">In the paper: <span class="ref">cor:unscrambled</span><span class="ref">rem:escape<span>what escapes</span></span><span class="ref">tab:negative</span></div>
+</section>
+
+<!-- ===================================================== 5. why not re-scramble -->
+<section id="nets" aria-labelledby="h-nets">
+  <div class="sechead"><span class="secno">5</span><h2 id="h-nets">Why a sequence cannot be re-scrambled at every size</h2></div>
+  <div class="prose">
+    <p>At <i>N</i> = <i>q</i><sup>2<i>K</i></sup> points (a <em>full level</em>) the square splits into <i>q</i><sup><i>K</i></sup> × <i>q</i><sup><i>K</i></sup> <em>cells</em>, and each cell holds exactly one point. So separation is decided by where each point sits inside its cell compared with its neighbours. To first order that position is the <em>geometric digit</em>: the first digit of each coordinate below the cell. It is a linear function of the cell digits, the <em>offset map</em>, and what matters is how it changes when one steps to the neighbouring cell.</p>
+    <p>For the Faure sequence the offset map changes with the level. In dimension two one of its coefficients is (−1)<sup><i>K</i></sup>(<i>K</i> + 1) at level <i>K</i> (<span class="mono">ex:faurelaw</span>), which runs through all residues modulo <i>p</i>, the bad ones included:</p>
+  </div>
+  <div class="scrollx"><table class="t" id="tabF"></table></div>
+  <p class="note" style="max-width:72ch">Faure (<i>I</i>, <i>P</i>) in base 7. Row 2: the depth-one cross coefficient, computed in your browser from the generator matrices (and in <span class="mono">gen_data.py</span>). Row 3: exact sep of the full level <i>P</i><sub>2<i>K</i></sub>; <i>K</i> ≤ 3 computed here, <i>K</i> = 4 (5.8 million points) quoted from <span class="mono">tab:faure</span>.</p>
+  <div class="prose" style="margin-top:14px">
+    <p>A <em>net</em> is built for one size and can conjugate this away with a scramble chosen for that size; the nets of the <a class="cite" href="#ref-Gru26geo">companion paper</a> do exactly that. A sequence cannot: a row of its scramble, once used, stays in use at every finer level. The way out is a <em>self-similar</em> scramble. Going one level finer is multiplication of the index by one fixed polynomial <i>w</i>, and a self-similar scramble makes that a shift of every digit by one place. Then the offset map is the same at every level (<span class="mono">prop:law</span>), and one finite check bounds the separation at all levels at once (<span class="mono">lem:cert</span>, page 4).</p>
+    <p>The three panels zoom into a cell twice. Each panel shows 7 × 7 cells with the <em>lattice image</em> of each point (open circle: the position predicted by the geometric digits) joined to the point. The label on an arrow is the change of the geometric digits (<i>r</i><sub>0</sub>, <i>r</i><sub>1</sub>) modulo 7 across that step. Click a cell of the first or second panel to zoom into it.</p>
+  </div>
+  <div class="panel" style="flex-direction:row;flex-wrap:wrap;gap:16px 28px;align-items:flex-end;margin-top:12px">
+    <div class="ctl"><span id="zcLab">Sequence (base 7)</span>
+      <div class="seg" role="group" aria-labelledby="zcLab" id="zSeg">
+        <button class="btn" type="button" data-v="faure7" aria-pressed="true">Faure</button>
+        <button class="btn" type="button" data-v="wf7" aria-pressed="false">brick wall W⁻ (self-similar)</button>
+      </div></div>
+    <button class="btn" type="button" id="zReset">back to the paper's zoom</button>
+  </div>
+  <div class="zoomrow">
+    <figure><div class="plot"><canvas id="z1" tabindex="0" role="img" aria-label="Level 1: 7 by 7 cells"></canvas></div><figcaption id="zc1"></figcaption></figure>
+    <figure><div class="plot"><canvas id="z2" tabindex="0" role="img" aria-label="Level 2: the 49 points inside the marked cell"></canvas></div><figcaption id="zc2"></figcaption></figure>
+    <figure><div class="plot"><canvas id="z3" tabindex="0" role="img" aria-label="Level 3: the 49 points inside the marked subcell"></canvas></div><figcaption id="zc3"></figcaption></figure>
+  </div>
+  <div class="verdict" id="zVerdict" style="margin-top:14px"></div>
+  <div class="prose" style="margin-top:18px">
+    <p>Being self-similar is not enough: the brick wall still has to choose its infinitely many responses well, one for each carry length, and exact linear rules can fix only a few of them (page 3). What it does fix, it fixes with one identity between the coordinates, and that identity is the subject of page 2.</p>
+  </div>
+  <div class="refs">In the paper: <span class="ref">sec:baseline</span><span class="ref">ex:faurelaw</span><span class="ref">tab:faure</span><span class="ref">def:selfsim</span><span class="ref">prop:law</span><span class="ref">fig:idea</span></div>
+</section>
+
+<!-- ===================================================== 6. next -->
+<section id="next" aria-labelledby="h-next">
+  <div class="sechead"><span class="secno">6</span><h2 id="h-next">Where next</h2></div>
+  <div class="three">
+    <div class="card"><b><a href="residue.html">2 · One scramble that fixes it</a></b>Residues tie the coordinates together, so a carry in one coordinate is seen by the others. The residue sequence puts its points on a lattice one digit before every full level, in every dimension.</div>
+    <div class="card c2"><b><a href="limits.html">3 · What exact rules can and cannot do</a></b>About one exact relation per level, so all geometric digits can be designed on at most one level in <i>s</i>. Windows of allowed values reach every full level.</div>
+    <div class="card c3"><b><a href="practice.html">5 · In practice</a></b>The smallest separation over every <i>N</i> up to 2<sup>23</sup> in dimension three, against Owen-scrambled Sobol' and Faure. Page 4 shows how the bounds are certified.</div>
+  </div>
+</section>
+
+<section class="credits" id="credits" aria-labelledby="h-credits">
+  <div class="sechead"><h2 id="h-credits">Credits and references</h2></div>
+  <div class="prose">
+    <p>Companion to L. Gruenschloss, <i>Low-discrepancy quasi-uniform digital sequences in every dimension</i> (draft v4, 2026), cited by its <span class="mono">\label</span> names. Results without a credit are from that paper. Where these pages call a statement new, it means: not found in the literature we searched (through October 2026).</p>
+    <p>On this page: the question of quasi-uniform digital sequences is due to <a class="cite" href="#ref-DGS2">Dick, Goda and Suzuki</a>, the Halton question (Open Problem 2) to <a class="cite" href="#ref-GHS26">Goda, Hofer and Suzuki</a>, and the Halton-type sequences to <a class="cite" href="#ref-Hof13">Hofer</a>. The earlier negative results are those of the third column of the table. The cells, geometric digits and lattice image of section 5 come from the <a class="cite" href="#ref-Gru26geo">companion nets paper</a>.</p>
+  </div>
+  __BIB__
+</section>
+
+<footer>
+  Data: the Faure, Sobol' (= Faure in base 2) and residue matrices are generated in the browser (<span class="mono">src/core.js</span>, a port of <span class="mono">paper/v4/figs/b3_gen.py</span>, checked entry by entry by <span class="mono">check/crosscheck.cjs</span>); the brick wall matrices and the Faure offset maps come from <span class="mono">gen_data.py</span> (builders of <span class="mono">paper/figs/make_figs.py</span>). Exact separations are checked against the audited program <span class="mono">halton/audit6/sepx.cpp</span>: Faure base 5, sep(<i>P</i><sub>5</sub>) = 0.0738 (<span class="mono">fig:carry</span>); Faure base 7, 0.8690, 0.3115, 0.2463 at <i>K</i> = 1, 2, 3 (<span class="mono">tab:faure</span>). Proved bounds are truncated, measured values rounded, to four decimals.
+</footer>
+</div>
+<script>window.__SQDATA = __DATA__;</script>
+<script>
+__CORE__
+</script>
+<script>
+(() => {
+'use strict';
+const { nets, fmt, fmtDown, fmtN, css, svgEl, DATA } = SQ;
+
+// ------------------------------------------------------------------ the sequences of the viewer
+SQ.addNet('random', { kind: 'random', s: 2, q: 2, seed: 20261028 });
+SQ.addNet('halton', { kind: 'halton', s: 2, q: 2, bases: [2, 3] });
+SQ.addNet('sobol2', { q: 2, D: 30, M: 17, C: SQ.faure(2, 2, 30, 17) });
+SQ.addNet('faure5', { q: 5, D: 22, M: 8, C: SQ.faure(5, 2, 22, 8) });
+SQ.addNet('faure3', { q: 3, D: 32, M: 8, C: SQ.faure(3, 2, 32, 8) });
+SQ.addNet('res5', { q: 5, D: 22, M: 8, C: SQ.residue(5, [0, 1], 1, [2, 4], 22, 8) });
+const RES5 = (2 - 1) / Math.sqrt(5);                      // cor:korobov, rho = 2: (rho - 1) p^{-1/2}
+const CFG = {
+  random: { Nmax: 65536, q: 2, grid: false, note: 'Independent uniform random points. The closest pair is typically about 1/N apart, so sep = δ√N keeps falling like N^(−1/2). Random points are not quasi-uniform.' },
+  halton: { Nmax: 65536, q: 2, grid: false, note: 'The Halton sequence in the integer bases 2 and 3. <a class="cite" href="#ref-GHS26">Goda, Hofer and Suzuki</a> proved that the Halton sequences are not quasi-uniform; the paper extends this to every Halton-type sequence in polynomial bases (cor:halton).' },
+  sobol2: { Nmax: 65536, q: 2, grid: true, note: 'The two-dimensional Sobol’ sequence, which is the Faure sequence (I, P) in base 2. Not quasi-uniform (<a class="cite" href="#ref-Goda23">Goda</a>); its mesh ratio grows at least like N<sup>1/4</sup> (<a class="cite" href="#ref-Suz25">Suzuki</a>). Every Sobol’ sequence fails in every dimension (cor:sobol).' },
+  faure5: { Nmax: 78125, q: 5, grid: true, note: 'The Faure sequence (I, P) in base 5. Not quasi-uniform (cor:faure): at N = 5⁵ = 3125 the minimum sep = 0.0738 is attained by several pairs, among them the carry pair (1, 3120) of section 2.' },
+  res5: { Nmax: 78125, q: 5, grid: true, bound: RES5, odd: true, boundAll: RES5 / 5, note: 'The residue sequence of page 2 in base 5 with the check vector v = (2, −1). Proved: sep ≥ 1/√5 = 0.4472 at every N = 5^(2K−1) (thm:residue, cor:korobov), and sep ≥ 0.0894 for every N (cor:residueQU).' },
+};
+const st = { key: 'faure5', N: 3125 };
+const nV = document.getElementById('nV'), nNum = document.getElementById('nNum');
+const cfg = () => CFG[st.key];
+const t2N = t => Math.max(2, Math.round(2 * Math.pow(cfg().Nmax / 2, t / 1000)));
+const N2t = N => Math.round(1000 * Math.log(N / 2) / Math.log(cfg().Nmax / 2));
+function setN(N, fromSlider) {
+  st.N = Math.max(2, Math.min(cfg().Nmax, Math.round(N)));
+  if (!fromSlider) nV.value = N2t(st.N);
+  nNum.value = st.N; draw();
+}
+function presets() {
+  const q = cfg().q, el = document.getElementById('nPresets'); el.innerHTML = '';
+  const step = q === 2 ? 2 : 1;
+  for (let m = q === 2 ? 4 : 2; Math.pow(q, m) <= cfg().Nmax; m += step) {
+    const b = document.createElement('button'); b.className = 'btn'; b.type = 'button';
+    b.innerHTML = `${q}<sup>${m}</sup>`; b.setAttribute('aria-label', `N = ${q} to the ${m}`);
+    b.addEventListener('click', () => setN(Math.pow(q, m))); el.appendChild(b);
+  }
+}
+SQ.seg(document.getElementById('consSeg'), v => { const qOld = cfg().q; st.key = v; nNum.max = cfg().Nmax; presets(); setN(cfg().q === qOld ? Math.min(st.N, cfg().Nmax) : (cfg().q === 2 ? 4096 : 3125)); });
+nV.addEventListener('input', () => setN(t2N(+nV.value), true));
+nNum.addEventListener('change', () => setN(+nNum.value || 2));
+document.getElementById('nMinus').addEventListener('click', () => setN(st.N - 1));
+document.getElementById('nPlus').addEventListener('click', () => setN(st.N + 1));
+function jumpDrop(dir) {
+  const ev = SQ.sepEvents(st.key, cfg().Nmax).evN;
+  if (dir > 0) { const n = ev.find(x => x > st.N); if (n) setN(n); }
+  else { const n = [...ev].reverse().find(x => x < st.N); if (n) setN(n); }
+}
+document.getElementById('dropPrev').addEventListener('click', () => jumpDrop(-1));
+document.getElementById('dropNext').addEventListener('click', () => jumpDrop(1));
+
+function draw() {
+  const key = st.key, c = cfg(), N = st.N, q = c.q;
+  const P = SQ.points(key, c.Nmax), ev = SQ.sepEvents(key, c.Nmax), s = SQ.sepAt(ev, N);
+  const { ctx, w } = SQ.fitCanvas(document.getElementById('cV'));
+  const INK = css('--ink'), ACC = css('--accent'), GRID = css('--grid'), GS = css('--grid-strong');
+  let m = 0; while (Math.pow(q, m + 1) <= N) m++;
+  const K = Math.floor(m / 2), g = Math.pow(q, K);
+  if (c.grid && g > 1 && g <= w / 4) {
+    ctx.strokeStyle = g <= w / 10 ? GS : GRID; ctx.lineWidth = 0.6; ctx.beginPath();
+    for (let a = 1; a < g; a++) { const t = Math.round(a * w / g) + 0.5; ctx.moveTo(t, 0); ctx.lineTo(t, w); ctx.moveTo(0, t); ctx.lineTo(w, t); }
+    ctx.stroke();
+  }
+  const r = Math.max(0.7, Math.min(3, 0.16 * w / Math.sqrt(N)));
+  ctx.fillStyle = INK;
+  if (r < 1.4) { for (let i = 0; i < N; i++) ctx.fillRect(P.x[i] * w - r, (1 - P.y[i]) * w - r, 2 * r, 2 * r); }
+  else { ctx.beginPath(); for (let i = 0; i < N; i++) { const X = P.x[i] * w, Y = (1 - P.y[i]) * w; ctx.moveTo(X + r, Y); ctx.arc(X, Y, r, 0, 7); } ctx.fill(); }
+  ctx.strokeStyle = ACC; ctx.lineWidth = 2;
+  for (const i of [s.i, s.j]) { ctx.beginPath(); ctx.arc(P.x[i] * w, (1 - P.y[i]) * w, Math.max(7, 3 * r), 0, 7); ctx.stroke(); }
+  document.getElementById('hintV').textContent = c.grid ? (g > w / 4 ? `cells ${g} × ${g} (grid hidden)` : `cells ${g} × ${g}`) : '';
+  const rd = [['number of points N', fmtN(N)], ['separation δ', s.d.toExponential(3)], ['closest pair (indices)', `${s.i}, ${s.j}`], ['sep = δ√N', fmt(s.c)]];
+  if (c.grid) rd.splice(1, 0, ['cells (full level below N)', `${g} × ${g}`]);
+  const lo = SQ.minSepRange(ev, 64, N); if (N >= 64) rd.push(['smallest sep, 64 ≤ n ≤ N', fmt(lo.c) + ` (n = ${fmtN(lo.N)})`]);
+  if (c.bound) rd.push(['proved, N = 5^(2K−1)', fmtDown(c.bound)]);
+  if (c.boundAll) rd.push(['proved, every N', fmtDown(c.boundAll)]);
+  document.getElementById('readV').innerHTML = rd.map(([a, b], k) => `<dt>${a}</dt><dd class="${a.startsWith('sep') ? 'em' : ''}">${b}</dd>`).join('');
+  document.getElementById('nVv').textContent = fmtN(N);
+  document.getElementById('noteV').innerHTML = c.note;
+  drawCurve(ev, s);
+}
+function sawPath(evN, evD, Nend, X, Y, s = 2) {           // sep = delta_k N^{1/s} on [N_k, N_{k+1})
+  let d = '';
+  for (let k = 0; k < evN.length; k++) {
+    const a = evN[k], b = k + 1 < evN.length ? evN[k + 1] - 1 : Nend; if (a > Nend) break;
+    const bb = Math.min(b, Nend), steps = Math.max(1, Math.min(12, Math.ceil(Math.log(bb / a) * 6)));
+    for (let t = 0; t <= steps; t++) { const N = a * Math.pow(bb / a, t / steps); d += (d ? 'L' : 'M') + X(N).toFixed(1) + ',' + Y(evD[k] * Math.pow(N, 1 / s)).toFixed(1); }
+  }
+  return d;
+}
+function drawCurve(ev, s) {
+  const svg = document.getElementById('curveV'); svg.innerHTML = '';
+  const c = cfg(), q = c.q, Nmax = c.Nmax, x0 = 46, x1 = 884, y0 = 16, y1 = 190, ymax = 1.2;
+  const lx = Math.log(2), rx = Math.log(Nmax), X = N => x0 + (x1 - x0) * (Math.log(N) - lx) / (rx - lx), Y = v => y1 - (y1 - y0) * Math.min(v, ymax) / ymax;
+  const g = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12, fill: css('--muted') }, svg);
+  for (const t of [0, 0.4, 0.8, 1.2]) { svgEl('line', { x1: x0, x2: x1, y1: Y(t), y2: Y(t), stroke: css('--grid') }, g); svgEl('text', { x: x0 - 6, y: Y(t) + 4, 'text-anchor': 'end' }, g).textContent = t.toFixed(1); }
+  const step = q === 2 ? 2 : 1;
+  for (let m = 1; Math.pow(q, m) <= Nmax; m += step) { const N = Math.pow(q, m); svgEl('line', { x1: X(N), x2: X(N), y1: y0, y2: y1, stroke: css('--grid') }, g); const tx = svgEl('text', { x: X(N), y: y1 + 16, 'text-anchor': 'middle' }, g); tx.innerHTML = `${q}<tspan dy="-5" font-size="9">${m}</tspan>`; }
+  svgEl('text', { x: x1, y: y1 + 32, 'text-anchor': 'end' }, g).textContent = 'N (log scale)';
+  if (c.bound) for (let m = 1; Math.pow(q, m) <= Nmax; m += 2) { const N = Math.pow(q, m); svgEl('line', { x1: X(N) - 9, x2: X(N) + 9, y1: Y(c.bound), y2: Y(c.bound), stroke: css('--good'), 'stroke-width': 2.4 }, svg); }
+  if (c.bound) svgEl('line', { x1: x0, x2: x1, y1: Y(c.bound), y2: Y(c.bound), stroke: css('--good'), 'stroke-width': 1, 'stroke-dasharray': '5 3', opacity: 0.6 }, svg);
+  if (c.boundAll) svgEl('line', { x1: x0, x2: x1, y1: Y(c.boundAll), y2: Y(c.boundAll), stroke: css('--good'), 'stroke-width': 1, 'stroke-dasharray': '1.5 2.5' }, svg);
+  svgEl('path', { d: sawPath(ev.evN, ev.evD, Nmax, X, Y), fill: 'none', stroke: css('--ink'), 'stroke-width': 1.3, 'stroke-linejoin': 'round' }, svg);
+  for (let m = 1; Math.pow(q, m) <= Nmax; m += step) { const N = Math.pow(q, m); svgEl('circle', { cx: X(N), cy: Y(SQ.sepAt(ev, N).c), r: 3.2, fill: css('--accent') }, svg); }
+  svgEl('line', { x1: X(st.N), x2: X(st.N), y1: y0, y2: y1, stroke: css('--accent'), 'stroke-dasharray': '3 3' }, svg);
+  svgEl('circle', { cx: X(st.N), cy: Y(s.c), r: 5, fill: 'none', stroke: css('--accent'), 'stroke-width': 2 }, svg);
+  svg.onclick = e => { const r = svg.getBoundingClientRect(), vx = (e.clientX - r.left) * 900 / r.width; if (vx < x0 || vx > x1) return; setN(Math.exp(lx + (vx - x0) / (x1 - x0) * (rx - lx))); };
+}
+
+// ------------------------------------------------------------------ polynomials over F_p (index polynomials), exact digits and BigInt indices
+const padd = (A, B, p) => { const n = Math.max(A.length, B.length), C = new Array(n).fill(0); for (let i = 0; i < n; i++) C[i] = SQ.mod((A[i] || 0) + (B[i] || 0), p); return C; };
+const pmul = (A, B, p) => { const C = new Array(A.length + B.length - 1).fill(0); for (let i = 0; i < A.length; i++) if (A[i]) for (let j = 0; j < B.length; j++) C[i + j] = (C[i + j] + A[i] * B[j]) % p; return C; };
+function ppow(A, e, p) { let r = [1], b = A.slice(); while (e > 0) { if (e & 1) r = pmul(r, b, p); b = pmul(b, b, p); e >>= 1; } return r; }
+function taylor(V, a, p) {                                // coefficients of V(z + a): the Taylor digits of V at a
+  const c = V.slice(); const n = c.length;
+  for (let i = 0; i < n; i++) for (let j = n - 2; j >= i; j--) c[j] = SQ.mod(c[j] + a * c[j + 1], p);
+  return c;
+}
+const idx = (V, p) => { let r = 0n; const P = BigInt(p); for (let k = V.length - 1; k >= 0; k--) r = r * P + BigInt(V[k]); return r; };
+function coordDigits(V, a, p, R, L1) {                     // first R output digits of the coordinate at place a (optionally scrambled by L1)
+  const t = taylor(V, a, p), d = []; for (let n = 0; n < R; n++) d.push(t[n] || 0);
+  if (!L1) return d;
+  return d.map((_, n) => { let s = 0; for (let k = 0; k <= n; k++) s += L1[n][k] * d[k]; return s % p; });
+}
+function scaledDist(dA, dB, p, L) {                        // toroidal distance of two points (digit lists per coordinate) times p^L
+  let d2 = 0; const R = dA[0].length, P = BigInt(p), PR = P ** BigInt(R), sc = Math.pow(p, R - L);
+  for (let c = 0; c < dA.length; c++) {
+    let a = 0n, b = 0n; for (let n = 0; n < R; n++) { a = a * P + BigInt(dA[c][n]); b = b * P + BigInt(dB[c][n]); }
+    let df = a > b ? a - b : b - a; if (df > PR - df) df = PR - df;
+    const x = Number(df) / sc; d2 += x * x;
+  }
+  return Math.sqrt(d2);
+}
+function fauPair(p, Q) {                                  // rem:faurerate, s = 2, places 0, 1: V1 = -(z + .. + z^{Q-1}), D = (z - 1)^{Q-1}
+  const V1 = [0]; for (let k = 1; k < Q; k++) V1.push(p - 1);
+  const D = ppow([p - 1, 1], Q - 1, p), V2 = padd(V1, D, p);
+  return { V1, V2, D };
+}
+const short = b => { const s = b.toString(); return s.length > 22 ? `${s.slice(0, 8)}…${s.slice(-6)} (${s.length} digits)` : s; };
+
+// ------------------------------------------------------------------ section 2: the carry pair
+const ps = { p: 5 };
+SQ.seg(document.getElementById('pSeg'), v => { ps.p = +v; drawPair(); });
+function drawPair() {
+  const p = ps.p, Q = p, N = Math.pow(p, Q), key = 'faure' + p, pr = fauPair(p, Q);
+  const i1 = Number(idx(pr.V1, p)), i2 = Number(idx(pr.V2, p)), P = SQ.points(key, N);
+  const R = Q + 3, dA = [coordDigits(pr.V1, 0, p, R), coordDigits(pr.V1, 1, p, R)], dB = [coordDigits(pr.V2, 0, p, R), coordDigits(pr.V2, 1, p, R)];
+  const INK = css('--ink'), ACC = css('--accent'), WARM = css('--warm'), GRID = css('--grid'), GS = css('--grid-strong'), MUT = css('--muted');
+  { // whole prefix
+    const { ctx, w } = SQ.fitCanvas(document.getElementById('cP'));
+    ctx.strokeStyle = GS; ctx.lineWidth = 0.6; ctx.beginPath(); for (let a = 1; a < p; a++) { const t = Math.round(a * w / p) + 0.5; ctx.moveTo(t, 0); ctx.lineTo(t, w); ctx.moveTo(0, t); ctx.lineTo(w, t); } ctx.stroke();
+    const r = Math.max(0.8, Math.min(3, 0.16 * w / Math.sqrt(N))); ctx.fillStyle = INK;
+    for (let i = 0; i < N; i++) ctx.fillRect(P.x[i] * w - r, (1 - P.y[i]) * w - r, 2 * r, 2 * r);
+    ctx.strokeStyle = WARM; ctx.lineWidth = 2; const cx = (P.x[i1] + P.x[i2]) / 2 * w, cy = (1 - (P.y[i1] + P.y[i2]) / 2) * w;
+    ctx.strokeRect(cx - 9, cy - 9, 18, 18);
+    document.getElementById('hintP').textContent = `${fmtN(N)} points`;
+  }
+  { // zoom: grid of side p^{-(Q-1)}
+    const { ctx, w } = SQ.fitCanvas(document.getElementById('cZ'));
+    const u = Math.pow(p, -(Q - 1)), W = 4, cx = (P.x[i1] + P.x[i2]) / 2, cy = (P.y[i1] + P.y[i2]) / 2;
+    const x0 = cx - W * u / 2, y0 = cy - W * u / 2, X = x => (x - x0) / (W * u) * w, Y = y => w - (y - y0) / (W * u) * w;
+    ctx.strokeStyle = GRID; ctx.lineWidth = 1; ctx.beginPath();
+    for (let a = Math.ceil(x0 / u); a * u <= x0 + W * u; a++) { ctx.moveTo(X(a * u), 0); ctx.lineTo(X(a * u), w); }
+    for (let b = Math.ceil(y0 / u); b * u <= y0 + W * u; b++) { ctx.moveTo(0, Y(b * u)); ctx.lineTo(w, Y(b * u)); }
+    ctx.stroke();
+    ctx.strokeStyle = WARM; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(X(1 / p), 0); ctx.lineTo(X(1 / p), w); ctx.stroke();
+    ctx.fillStyle = WARM; ctx.font = `12px ${css('--sans')}`; ctx.fillText(`x = 1/${p} (a cell boundary at every level)`, Math.min(X(1 / p) + 5, w - 230), 16);
+    for (let i = 0; i < N; i++) { const x = P.x[i], y = P.y[i]; if (x < x0 || x > x0 + W * u || y < y0 || y > y0 + W * u) continue;
+      ctx.fillStyle = (i === i1 || i === i2) ? INK : MUT; ctx.beginPath(); ctx.arc(X(x), Y(y), 4, 0, 7); ctx.fill(); }
+    ctx.strokeStyle = ACC; ctx.lineWidth = 2;
+    for (const i of [i1, i2]) { ctx.beginPath(); ctx.arc(X(P.x[i]), Y(P.y[i]), 10, 0, 7); ctx.stroke(); ctx.fillStyle = ACC; ctx.fillText(`index ${i}`, X(P.x[i]) + 13, Y(P.y[i]) + 4); }
+  }
+  const d = Math.sqrt(SQ.td2(P, i1, i2)), sep = SQ.closest(P, N).d * Math.sqrt(N);
+  document.getElementById('capP').innerHTML = `Faure (<i>I</i>, <i>P</i>) in base ${p}, the prefix of ${p}<sup>${Q}</sup> = ${fmtN(N)} points; the box marks the pair.`;
+  document.getElementById('capZ').innerHTML = `Zoom, grid of side ${p}<sup>−${Q - 1}</sup>. The two points lie on either side of <i>x</i> = 1/${p} and in the same interval of length ${p}<sup>−${Q - 1}</sup> of coordinate 1.`;
+  const fmtD = (ds, mark) => '0.' + ds.slice(0, Q + 1).map((x, n) => `<span class="${mark(n)}">${x}</span>`).join('');
+  const shared = n => (n < Q - 1 && dA[1][n] === dB[1][n]) ? 'sh' : '';
+  const carry = n => (n < Q) ? 'c' : '';
+  document.getElementById('digP').innerHTML = `
+    <span class="lab">index of point A</span><span class="str">${i1} = (${pr.V1.slice().reverse().join(' ')})<sub>${p}</sub></span>
+    <span class="lab">index of point B</span><span class="str">${i2}; B − A = <i>D</i> = (<i>z</i> − 1)<sup>${Q - 1}</sup></span>
+    <span class="lab">coordinate 0, A</span><span class="str">${fmtD(dA[0], carry)}…</span>
+    <span class="lab">coordinate 0, B</span><span class="str">${fmtD(dB[0], carry)}… &nbsp;(a carry: one unit of ${p}<sup>−${Q}</sup> more)</span>
+    <span class="lab">coordinate 1, A</span><span class="str">${fmtD(dA[1], shared)}…</span>
+    <span class="lab">coordinate 1, B</span><span class="str">${fmtD(dB[1], shared)}… &nbsp;(${Q - 1} shared leading digits)</span>
+    <span class="lab">distance</span><span class="str">${d.toExponential(4)} = ${fmt(d * Math.pow(p, Q), 4)} · ${p}<sup>−${Q}</sup>; sep of the whole prefix = <b>${fmt(sep)}</b></span>`;
+}
+
+// ------------------------------------------------------------------ section 3: every scale
+const fq = { key: 'f5' };
+SQ.seg(document.getElementById('fSeg'), v => { fq.key = v; drawQ(); });
+function sobPair(Q) {                                     // cor:sobol, s = 2: L = 3Q, m = 5Q, V1 = 2^{3Q} - 2^{Q+1}, D = z^Q (1+..+z^{2Q-1}) (z^{2Q} + 1)
+  const L = 3 * Q, m = 5 * Q, S = new Array(2 * Q).fill(1), Th = new Array(2 * Q + 1).fill(0); Th[0] = 1; Th[2 * Q] = 1;
+  const D = [].concat(new Array(Q).fill(0), pmul(S, Th, 2));
+  const V1 = new Array(L).fill(0); for (let k = Q + 1; k < L; k++) V1[k] = 1;
+  return { V1, V2: padd(V1, D, 2), L, m };
+}
+function rowsQ() {
+  const rows = [];
+  if (fq.key === 'sob') {
+    for (const Q of [1, 2, 4, 8, 16, 32]) {
+      const pr = sobPair(Q), R = pr.m + 4, dA = [coordDigits(pr.V1, 0, 2, R), coordDigits(pr.V1, 1, 2, R)], dB = [coordDigits(pr.V2, 0, 2, R), coordDigits(pr.V2, 1, 2, R)];
+      const ds = scaledDist(dA, dB, 2, pr.L), sep = ds * Math.pow(2, pr.m / 2 - pr.L);
+      rows.push({ Q, lev: `2<sup>${pr.m}</sup>`, lb: 2, le: pr.m, m: pr.m, i1: idx(pr.V1, 2), i2: idx(pr.V2, 2), ds, L: pr.L, base: 2, sep, bound: Math.sqrt(5) * Math.pow(2, -Q / 2) });
+    }
+  } else {
+    const p = { f3: 3, f5: 5, f7: 7 }[fq.key], Qs = p === 3 ? [3, 9, 27, 81] : p === 5 ? [5, 25, 125] : [7, 49];
+    for (const Q of Qs) {
+      const pr = fauPair(p, Q), R = Q + 14, dA = [coordDigits(pr.V1, 0, p, R), coordDigits(pr.V1, 1, p, R)], dB = [coordDigits(pr.V2, 0, p, R), coordDigits(pr.V2, 1, p, R)];
+      const ds = scaledDist(dA, dB, p, Q), sep = ds * Math.pow(p, -Q / 2);
+      rows.push({ Q, lev: `${p}<sup>${Q}</sup>`, lb: p, le: Q, m: Q, i1: idx(pr.V1, p), i2: idx(pr.V2, p), ds, L: Q, base: p, sep, bound: Math.sqrt(p * p + 4) * Math.pow(p, -Q / 2) });
+    }
+  }
+  return rows;
+}
+const sci = x => { if (x >= 0.001) return fmt(x, 4); const e = Math.floor(Math.log10(x)), mm = x / Math.pow(10, e); return `${mm.toFixed(2)}·10<sup>${e}</sup>`; };
+function drawQ() {
+  const rows = rowsQ(), sob = fq.key === 'sob';
+  let html = `<tr><th><i>Q</i></th><th>prefix size <i>N</i></th><th>index A</th><th>index B</th><th>distance · ${sob ? '2<sup><i>L</i></sup>' : '<i>p</i><sup><i>Q</i></sup>'}</th><th>sep(<i>P</i>) ≤ distance·√<i>N</i></th><th>bound of the paper</th></tr>`;
+  for (const r of rows) html += `<tr><td>${r.Q}</td><td>${r.lev}</td><td>${short(r.i1)}</td><td>${short(r.i2)}</td><td>${fmt(r.ds, 4)}</td><td class="hot">${sci(r.sep)}</td><td>${sci(r.bound)}</td></tr>`;
+  if (sob) { const s3 = DATA.sobolpairs.find(x => x.s === 3); html += `<tr><td>1</td><td>2<sup>98</sup>, <i>s</i> = 3</td><td>${short(BigInt(s3.V1))}</td><td>${short(BigInt(s3.V2))}</td><td>${fmt(s3.dscaled, 4)}</td><td class="hot">${fmt(s3.sep, 4)}</td><td>${fmt(Math.ceil(s3.bound * 100) / 100, 2)}</td></tr>`; }
+  document.getElementById('tabQ').innerHTML = html;
+  document.getElementById('noteQ').innerHTML = sob
+    ? 'Sobol’ in dimension two (coordinate 0 the van der Corput sequence, which carries). Pair of <span class="mono">cor:sobol</span>: index A = 2<sup>3<i>Q</i></sup> − 2<sup><i>Q</i>+1</sup>, B = A XOR <i>D<sub>Q</sub></i>, in the prefix of 2<sup>5<i>Q</i></sup> points; the paper\'s bound is √5·2<sup>−<i>Q</i>/2</sup>. The pair does not depend on the direction numbers. Last row: the three-dimensional Sobol’ sequence, the pair of <span class="mono">tab:sobolpar</span> at 2<sup>98</sup> points (computed in <span class="mono">gen_data.py</span> with exact integers; bound 0.98 rounded up). At such sizes the pairs prove failure; they are not the closest pairs, and they do not say how fast sep decays.'
+    : `Faure in base ${rows[0].base}, the pair of <span class="mono">rem:faurerate</span> in the prefix of <i>N</i> = <i>p</i><sup><i>Q</i></sup> points, <i>Q</i> = <i>p</i><sup><i>w</i></sup>. The paper's bound is √(<i>p</i><sup>2</sup> + 4)·<i>N</i><sup>−1/2</sup>, so sep falls like <i>N</i><sup>−1/2</sup> along these sizes. Distances computed from exact digits; the first row is the pair of section 2. Index B is always 1: when <i>Q</i> is a power of <i>p</i>, (<i>z</i> − 1)<sup><i>Q</i>−1</sup> = 1 + <i>z</i> + … + <i>z</i><sup><i>Q</i>−1</sup> over 𝔽<sub><i>p</i></sub>, so B = A + <i>D</i> = 1, and the distance in units of <i>p</i><sup>−<i>Q</i></sup> never changes while the cell side, <i>p</i><sup>−<i>Q</i>/2</sup>, keeps growing relative to it.`;
+  const svg = document.getElementById('chartQ'); svg.innerHTML = '';
+  const x0 = 70, x1 = 880, y0 = 30, y1 = 188, Mmax = Math.max(...rows.map(r => r.m)) * 1.05, Emin = Math.floor(Math.min(...rows.map(r => Math.log10(r.sep)))) - 1;
+  const X = m => x0 + (x1 - x0) * m / Mmax, Y = e => y0 + (y1 - y0) * (0.5 - e) / (0.5 - Emin);
+  const g = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12, fill: css('--muted') }, svg);
+  const estep = Math.max(1, Math.ceil(-Emin / 8));
+  for (let e = 0; e >= Emin; e -= estep) { svgEl('line', { x1: x0, x2: x1, y1: Y(e), y2: Y(e), stroke: css('--grid') }, g); const t = svgEl('text', { x: x0 - 6, y: Y(e) + 4, 'text-anchor': 'end' }, g); t.innerHTML = e === 0 ? '1' : `10<tspan dy="-5" font-size="9">${e}</tspan>`; }
+  for (const r of rows) { const t = svgEl('text', { x: X(r.m), y: y1 + 18, 'text-anchor': 'middle' }, g); t.innerHTML = `${r.lb}<tspan dy="-5" font-size="9">${r.le}</tspan>`; }
+  svgEl('text', { x: x1, y: y1 + 34, 'text-anchor': 'end' }, g).textContent = 'prefix size N (exponent on a linear axis)';
+  svgEl('text', { x: x0 - 60, y: 14 }, g).textContent = 'sep (log scale)';
+  let pth = ''; rows.forEach((r, k) => { pth += (k ? 'L' : 'M') + X(r.m).toFixed(1) + ',' + Y(Math.log10(r.sep)).toFixed(1); });
+  svgEl('path', { d: pth, fill: 'none', stroke: css('--warm'), 'stroke-width': 1.5 }, svg);
+  let pb = ''; rows.forEach((r, k) => { pb += (k ? 'L' : 'M') + X(r.m).toFixed(1) + ',' + Y(Math.log10(r.bound)).toFixed(1); });
+  svgEl('path', { d: pb, fill: 'none', stroke: css('--muted'), 'stroke-width': 1, 'stroke-dasharray': '4 3' }, svg);
+  for (const r of rows) svgEl('circle', { cx: X(r.m), cy: Y(Math.log10(r.sep)), r: 4, fill: css('--warm') }, svg);
+  const lg = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12 }, svg);
+  svgEl('circle', { cx: x1 - 300, cy: 10, r: 4, fill: css('--warm') }, lg); svgEl('text', { x: x1 - 290, y: 14, fill: css('--muted') }, lg).textContent = 'distance of the pair · √N';
+  svgEl('line', { x1: x1 - 130, x2: x1 - 110, y1: 10, y2: 10, stroke: css('--muted'), 'stroke-dasharray': '4 3' }, lg); svgEl('text', { x: x1 - 104, y: 14, fill: css('--muted') }, lg).textContent = 'paper\'s bound';
+}
+
+// ------------------------------------------------------------------ section 4: scrambles
+const sc = { mode: 'none', seed: 1, tries: 0, worst: 0 };
+function randLower(p, R, rnd, full) {
+  return Array.from({ length: R }, (_, n) => Array.from({ length: R }, (_, k) => k > n ? 0 : k === n ? 1 + Math.floor(rnd() * (p - 1)) : (full ? Math.floor(rnd() * p) : 0)));
+}
+function drawScr() {
+  const p = 5, Q = 5, N = 3125, R = 22, pr = fauPair(p, Q), i1 = Number(idx(pr.V1, p)), i2 = Number(idx(pr.V2, p));
+  const rnd = SQ.mulberry(sc.seed * 7919 + 13);
+  const F = SQ.faure(p, 2, R, 8);
+  const mulL = (L, M) => L.map(row => M[0].map((_, k) => { let s = 0; for (let j = 0; j < row.length; j++) s += row[j] * M[j][k]; return s % p; }));
+  let C = F;
+  if (sc.mode !== 'none') { const L1 = randLower(p, R, rnd, true); C = [F[0], mulL(L1, F[1])]; if (sc.mode === 'both') C = [mulL(randLower(p, R, rnd, true), F[0]), C[1]]; }
+  SQ.addNet('scr', { q: p, D: R, M: 8, C });
+  const P = SQ.points('scr', N), r = SQ.closest(P, N), dPair = Math.sqrt(SQ.td2(P, i1, i2));
+  if (sc.mode === 'one') { sc.tries++; sc.worst = Math.max(sc.worst, dPair * Math.pow(p, Q)); }
+  const { ctx, w } = SQ.fitCanvas(document.getElementById('cS'));
+  const INK = css('--ink'), ACC = css('--accent'), WARM = css('--warm'), GS = css('--grid-strong');
+  ctx.strokeStyle = GS; ctx.lineWidth = 0.6; ctx.beginPath(); for (let a = 1; a < p; a++) { const t = Math.round(a * w / p) + 0.5; ctx.moveTo(t, 0); ctx.lineTo(t, w); ctx.moveTo(0, t); ctx.lineTo(w, t); } ctx.stroke();
+  ctx.fillStyle = INK; for (let i = 0; i < N; i++) ctx.fillRect(P.x[i] * w - 1, (1 - P.y[i]) * w - 1, 2, 2);
+  ctx.strokeStyle = WARM; ctx.lineWidth = 2; for (const i of [i1, i2]) { ctx.beginPath(); ctx.arc(P.x[i] * w, (1 - P.y[i]) * w, 9, 0, 7); ctx.stroke(); }
+  ctx.strokeStyle = ACC; ctx.lineWidth = 2; for (const i of [r.i, r.j]) { ctx.beginPath(); ctx.arc(P.x[i] * w, (1 - P.y[i]) * w, 14, 0, 7); ctx.stroke(); }
+  const lab = { none: 'none', one: `coordinate 1, #${sc.tries}`, both: 'both' }[sc.mode];
+  document.getElementById('readS').innerHTML = `<dt>scramble</dt><dd>${lab}</dd><dt>pair (3120, 1): distance · 5⁵</dt><dd class="${sc.mode === 'both' ? '' : 'bad'}">${fmt(dPair * Math.pow(p, Q), 4)}</dd><dt>sep, all 3125 points</dt><dd class="em">${fmt(r.d * Math.sqrt(N))}</dd>` + (sc.tries ? `<dt>largest pair distance · 5⁵ in ${sc.tries} draws of L₁ (always below √29 = 5.385)</dt><dd>${fmt(sc.worst, 4)}</dd>` : '');
+  document.getElementById('noteS').innerHTML = sc.mode === 'one' ? 'Orange: the pair of section 2; blue: the closest pair of the scrambled prefix. Coordinate 1 still shares four leading digits, so the pair stays within √29 · 5⁻⁵ whatever L₁ is (rem:faurerate bound).'
+    : sc.mode === 'both' ? 'Both coordinates scrambled: the carry in coordinate 0 is now mixed into other digits, so the pair of section 2 need not be close. Theorem nonqu does not apply; nothing is certified either.'
+      : 'Orange: the pair of section 2. Blue: the closest pair of the prefix (several pairs attain the minimum 0.0738).';
+}
+document.getElementById('scr1').addEventListener('click', () => { sc.mode = 'one'; sc.seed++; drawScr(); });
+document.getElementById('scr01').addEventListener('click', () => { sc.mode = 'both'; sc.seed++; drawScr(); });
+document.getElementById('scr0').addEventListener('click', () => { sc.mode = 'none'; drawScr(); });
+
+// ------------------------------------------------------------------ section 5: Faure offset map table and the zoom
+function tableF() {
+  const FL = DATA.law.faure7; let row1 = '<tr><th><i>K</i></th>', row2 = '<tr><th>depth-one cross coefficient</th>', row3 = '<tr><th>sep(<i>P</i><sub>2<i>K</i></sub>)</th>';
+  const paper = { 1: '.8690', 2: '.3115', 3: '.2463', 4: '.0174' };
+  for (let K = 1; K <= 8; K++) {
+    row1 += `<th>${K}</th>`;
+    let v = '–';
+    if (K >= 2) { const L = SQ.level('faure7', Math.min(K, 5)); const fromM = K <= 5 ? SQ.mod(L.law(2, 1)[0][0] - L.law(1, 1)[0][0], 7) : null; const d = SQ.mod(FL[K][1][0][0][1] - FL[K][0][0][0][1], 7); v = String(d) + (fromM !== null && fromM !== d ? '?' : ''); }
+    row2 += `<td>${v}</td>`;
+    let sv = paper[K] || '–';
+    if (K <= 3) { const N = Math.pow(7, 2 * K), P = SQ.points('faure7', N); sv = fmt(SQ.closest(P, N).d * Math.sqrt(N)).slice(1); }
+    row3 += `<td class="${K === 4 ? 'warm' : ''}">${sv}</td>`;
+  }
+  document.getElementById('tabF').innerHTML = row1 + '</tr>' + row2 + '</tr>' + row3 + '</tr>';
+}
+const zs = { key: 'faure7', sub: [[3, 3], [3, 3]] };
+SQ.seg(document.getElementById('zSeg'), v => { zs.key = v; drawZoom(); });
+document.getElementById('zReset').addEventListener('click', () => { zs.sub = [[3, 3], [3, 3]]; drawZoom(); });
+function zoomPanels() {
+  const p = 7, out = []; let org = [0, 0];
+  for (let K = 1; K <= 3; K++) {
+    const L = SQ.level(zs.key, K), pts = {};
+    for (let a = 0; a < p; a++) for (let b = 0; b < p; b++) pts[a + ',' + b] = L.at(org[0] + a, org[1] + b);
+    const steps = (da, db) => { const set = new Set(); for (let a = 0; a + da < p; a++) for (let b = 0; b + db < p; b++) { const u = pts[a + ',' + b].r, v = pts[(a + da) + ',' + (b + db)].r; set.add(((v[0] - u[0] + p) % p) + ',' + ((v[1] - u[1] + p) % p)); } return [...set]; };
+    out.push({ K, org: org.slice(), pts, h: steps(1, 0), v: steps(0, 1), g: L.g });
+    if (K < 3) org = [(org[0] + zs.sub[K - 1][0]) * p, (org[1] + zs.sub[K - 1][1]) * p];
+  }
+  return out;
+}
+function drawZoom() {
+  const P = zoomPanels(), p = 7;
+  const INK = css('--ink'), ACC = css('--accent'), GS = css('--grid-strong'), JIT = css('--jit'), MUT = css('--muted');
+  P.forEach((pan, k) => {
+    const { ctx, w } = SQ.fitCanvas(document.getElementById('z' + (k + 1)));
+    const pad = w * 0.08, cs = (w - pad) / p, X = a => pad + a * cs, Y = b => w - pad - b * cs;
+    ctx.strokeStyle = GS; ctx.lineWidth = 0.8; ctx.beginPath();
+    for (let a = 0; a <= p; a++) { ctx.moveTo(X(a), Y(0)); ctx.lineTo(X(a), Y(p)); ctx.moveTo(X(0), Y(a)); ctx.lineTo(X(p), Y(a)); }
+    ctx.stroke();
+    ctx.fillStyle = MUT; ctx.font = `${Math.max(9, Math.round(cs * 0.22))}px ${css('--sans')}`; ctx.textAlign = 'center';
+    for (let a = 0; a < p; a += (pan.org[0] > 99 ? 2 : 1)) ctx.fillText(String(pan.org[0] + a), X(a + 0.5), w - pad * 0.2);
+    ctx.textAlign = 'right'; for (let b = 0; b < p; b += (pan.org[1] > 99 ? 2 : 1)) ctx.fillText(String(pan.org[1] + b), pad * 0.95, Y(b + 0.5) + 4); ctx.textAlign = 'left';
+    const loc = pt => [pt.x * pan.g - pan.org[0], pt.y * pan.g - pan.org[1]], img = pt => [pt.n[0] - pan.org[0] + pt.r[0] / p, pt.n[1] - pan.org[1] + pt.r[1] / p];
+    if (k < 2) { const [sa, sb] = zs.sub[k]; ctx.fillStyle = css('--accent-soft'); ctx.fillRect(X(sa), Y(sb + 1), cs, cs); ctx.strokeStyle = ACC; ctx.lineWidth = 2; ctx.strokeRect(X(sa), Y(sb + 1), cs, cs); }
+    const pr = Math.max(2, cs * 0.07);
+    for (const key in pan.pts) {
+      const pt = pan.pts[key], [ix, iy] = img(pt), [ax, ay] = loc(pt);
+      ctx.strokeStyle = JIT; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(ix), Y(iy)); ctx.lineTo(X(ax), Y(ay)); ctx.stroke();
+      ctx.beginPath(); ctx.arc(X(ix), Y(iy), pr * 1.7, 0, 7); ctx.stroke();
+      ctx.fillStyle = INK; ctx.beginPath(); ctx.arc(X(ax), Y(ay), pr, 0, 7); ctx.fill();
+    }
+    const arrow = (u, v) => {
+      const [x1, y1] = img(u), [x2, y2] = img(v), A = [X(x1), Y(y1)], B = [X(x2), Y(y2)];
+      const dx = B[0] - A[0], dy = B[1] - A[1], L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, h = Math.max(5, cs * 0.12);
+      ctx.strokeStyle = ACC; ctx.fillStyle = ACC; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0] - ux * h * 0.8, B[1] - uy * h * 0.8); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(B[0], B[1]); ctx.lineTo(B[0] - ux * h - uy * h * 0.45, B[1] - uy * h + ux * h * 0.45); ctx.lineTo(B[0] - ux * h + uy * h * 0.45, B[1] - uy * h - ux * h * 0.45); ctx.fill();
+    };
+    for (let a = 1; a < 5; a++) arrow(pan.pts[a + ',1'], pan.pts[(a + 1) + ',1']);
+    for (let b = 2; b < 5; b++) arrow(pan.pts['1,' + b], pan.pts['1,' + (b + 1)]);
+    const lab = (txt, x, y) => { ctx.font = `600 ${Math.max(11, Math.round(cs * 0.26))}px ${css('--sans')}`; const tw = ctx.measureText(txt).width; ctx.fillStyle = css('--surface'); ctx.fillRect(x - 3, y - 12, tw + 6, 16); ctx.fillStyle = ACC; ctx.fillText(txt, x, y); };
+    lab(`(${pan.h[0]})`, X(2.6), Y(0.35)); lab(`(${pan.v[0]})`, X(1.15), Y(3.75));
+    document.getElementById('zc' + (k + 1)).innerHTML = `<b>K = ${k + 1}</b>: <i>P</i><sub>${2 * k + 2}</sub>${k ? ` inside one level-${k} cell` : ''}, cells of side 7<sup>−${k + 1}</sup>. Step right: (${pan.h.join(') or (')}); step up: (${pan.v.join(') or (')}).`;
+  });
+  const same = P.every(x => x.h.length === 1 && x.v.length === 1 && x.h[0] === P[0].h[0] && x.v[0] === P[0].v[0]);
+  const vd = document.getElementById('zVerdict');
+  vd.className = 'verdict ' + (same ? 'good' : 'bad');
+  vd.innerHTML = same ? `The same offset map in all three panels: every step to the right changes (r<sub>0</sub>, r<sub>1</sub>) by (${P[0].h[0]}), every step up by (${P[0].v[0]}), modulo 7. Inside one parent cell every step has carry length 1, so this is the carry response D(1), and it does not depend on the level. (The panels are not copies: what repeats is the rule.)`
+    : `The offset map changes with the level: a step to the right changes (r<sub>0</sub>, r<sub>1</sub>) by ${P.map(x => '(' + x.h.join(' or ') + ')').join(', then ')}, a step up by ${P.map(x => '(' + x.v.join(' or ') + ')').join(', then ')}. A sequence cannot re-scramble the rows it has already used, so nothing keeps these numbers away from the bad ones.`;
+}
+[1, 2, 3].forEach(k => {
+  const cv = document.getElementById('z' + k);
+  const pick = (a, b) => { if (k === 3) return; zs.sub[k - 1] = [Math.max(0, Math.min(6, a)), Math.max(0, Math.min(6, b))]; drawZoom(); };
+  cv.addEventListener('click', e => { const r = cv.getBoundingClientRect(), w = r.width, pad = w * 0.08, cs = (w - pad) / 7; pick(Math.floor((e.clientX - r.left - pad) / cs), Math.floor((w - pad - (e.clientY - r.top)) / cs)); });
+  cv.addEventListener('keydown', e => { if (k === 3) return; const s = zs.sub[k - 1], mv = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] }[e.key]; if (mv) { e.preventDefault(); pick(s[0] + mv[0], s[1] + mv[1]); } });
+});
+
+presets(); nNum.max = cfg().Nmax; setN(3125);
+drawPair(); drawQ(); drawScr(); tableF(); drawZoom();
+SQ.onRedraw(() => { draw(); drawPair(); drawQ(); drawScr(); drawZoom(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+%
+%
+%
+%
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.1in,footskip=30pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,mathtools}
+\usepackage{graphicx,array,needspace}
+\usepackage[hidelinks]{hyperref}
+\frenchspacing
+\raggedbottom  %
+\setlength{\emergencystretch}{1.5em}
+\graphicspath{{figs/}}
+
+%
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{plain}
+
+%
+%
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\providecommand{\R}{\mathbb{R}}
+\providecommand{\N}{\mathbb{N}}
+\newcommand{\coef}[1]{[x^{#1}]\,}            %
+\newcommand{\Res}{\operatorname{Res}}         %
+\newcommand{\Toep}{\operatorname{Toep}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\enc}{\operatorname{enc}}         %
+\newcommand{\ind}[1]{\iota(#1)}               %
+\newcommand{\cabs}[1]{\lvert #1\rvert}        %
+\newcommand{\Pas}{\mathsf{P}}                 %
+%
+\newcommand{\sep}[1]{\operatorname{sep}(#1)}  %
+\newcommand{\LB}{\mathrm{LB}}                 %
+\newcommand{\LBact}{\LB^{\mathrm{act}}}       %
+\newcommand{\Lev}{\mathcal{M}}                %
+\newcommand{\FM}{\mathcal{A}}                 %
+%
+\newcommand{\Rv}{\mathcal{R}}                 %
+\newcommand{\Rstar}{\mathcal{R}^{\star}}      %
+\newcommand{\cstar}{c_{\star}}                %
+\newcommand{\ljit}{\lambda_{\mathrm{jit}}}    %
+\newcommand{\ljitB}{\lambda_{\mathrm{jit},B}} %
+%
+\newcommand{\ee}{\mathfrak{e}}                %
+\newcommand{\Wo}{W_{\mathrm o}}               %
+\newcommand{\Wx}{W_{\mathrm x}}               %
+\newcommand{\half}{\tfrac12}                  %
+
+%
+%
+\newcommand{\reservelabel}[1]{\phantomsection\label{#1}\texttt{\detokenize{#1}}}
+\newcommand{\reserved}[1]{\par{\raggedright\small Reserved labels: #1\par}}
+\newcommand{\stubnote}[1]{\par\medskip\noindent\fbox{\parbox{0.96\linewidth}{\small\textit{To be written.} #1}}\par\medskip}
+
+%
+\newcommand{\paperfig}[1]{\IfFileExists{figs/#1.pdf}{\includegraphics[width=\linewidth,height=0.55\textheight,keepaspectratio]{#1.pdf}}{\fbox{\parbox{0.9\textwidth}{\centering figure \texttt{\detokenize{#1}} pending}}}}
+
+\title[Quasi-uniform digital sequences in every dimension]{Low-discrepancy quasi-uniform digital sequences in every dimension}
+\author{Leonhard Gruenschloss}
+\thanks{ORCID iD: \url{https://orcid.org/0009-0004-6476-2191}. Email: \href{mailto:leonhard@gruenschloss.org}{\nolinkurl{leonhard@gruenschloss.org}}}
+\hypersetup{pdfauthor={Leonhard Gruenschloss}}
+%
+%
+%
+%
+\newcommand{\VersionDate}{2026-10-xx}
+\date{Version~1, \VersionDate. The Lean formalization and the archive of the computations of this version are release v1.0.0 of \url{https://github.com/lgruen/quasi-uniform-sequences-lean}.}
+
+\begin{document}
+
+\begin{abstract}
+A sequence of points in the unit cube is quasi-uniform if its first $N$ points are spread like a grid for every $N$: no two of them are closer, and no empty ball between them is larger, than a constant times $N^{-1/s}$ in dimension $s$. Dick, Goda and Suzuki asked for such sequences among the digital sequences of quasi-Monte Carlo integration, and Goda, Hofer and Suzuki asked whether any Halton-type sequence is quasi-uniform. We show that in dimension two and higher no Halton-type sequence, no Sobol' sequence, no classical Niederreiter sequence and no Faure sequence is quasi-uniform, and that linear scrambles of all coordinates but one do not help: a carry in the last digits of one coordinate leaves the leading digits of all others unchanged, giving explicit pairs of points that are far too close. We then show that one fixed linear scramble of a generalized Faure sequence, the same for all numbers of points, repairs this. In it, the digits of all coordinates at one scale are residues of one rational function, each taken at the coordinate's own point of the projective line, so the residue theorem ties the coordinates together and a carry in one coordinate is seen by the others. For every dimension $s$ and every prime base $p>2^s$ this gives explicit quasi-uniform digital $(0,s)$-sequences, hence of low discrepancy, whose first $N=p^{sK-1}$ points are at least $(1-2p^{-1/s})N^{-1/s}$ apart, for every $K$; in dimensions two and three, for every prime $p\ge5$, a variant keeps its first $N$ points at least $(1-2/p)N^{-1/s}$ apart whenever $N$ is a power of $p^{s^2}$. For such scrambles, exact linear rules that place every point inside its cell as a function of the last few digits of the cell's index can hold at no more than about one in $s$ of the sizes $p^{sK}$; with allowed ranges instead of exact rules we certify all of these sizes, with points at least $(1-O(1/p))N^{-1/s}$ apart for large $p$. Quasi-uniform digital sequences follow in every prime base $p\ge3$ in dimension three, and in every prime base in dimension two, base two included. Some steps are computer-assisted.
+\end{abstract}
+
+\maketitle
+
+\input{sections/01-introduction}
+\input{sections/02-prelim}
+\input{sections/03-fail}
+\input{sections/04-law}
+\input{sections/05-residue}
+\input{sections/06-block}
+\input{sections/07-count}
+\input{sections/08-antipode}
+%
+\input{sections/10-frames}
+\input{sections/11-practice}
+\input{sections/12-open}
+
+\subsection*{Use of AI systems}
+The constructions, proofs and Lean formalization were produced by AI systems (Anthropic Claude Opus~5.5; some early exploratory results used Claude Fable~5.1) under the author's direction. The author selected the problems, steered the research and reviewed the statements, but has not verified every proof by hand; the computer-assisted parts are exact finite computations whose scope is stated with each result. AI systems are not listed as authors; responsibility for the paper rests with the author. %
+
+\appendix
+\input{sections/A-machinery}
+\input{sections/B-p7}
+\input{sections/C-cert}
+%
+\input{sections/E-windows}
+
+\bibliographystyle{amsplain}
+\bibliography{refs}
+
+\end{document}

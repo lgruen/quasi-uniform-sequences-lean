@@ -1,0 +1,43 @@
+{
+  "challenge_module": "GeoSeqV2Challenge",
+  "solution_module": "GeoSeqV2Solution",
+  "theorem_names": [
+    "GeoSeq.lex_bound",
+    "GeoSeq.lex_cost",
+    "GeoSeq.lex_exact_row",
+    "GeoSeq.lex_exact",
+    "GeoSeq.lex_eq",
+    "GeoSeq.lex_eq_cost",
+    "GeoSeq.lexcover_iff",
+    "GeoSeq.lexcover_zero",
+    "GeoSeq.lexcover_lattice",
+    "GeoSeq.ws_pos",
+    "GeoSeq.ws_cover",
+    "GeoSeq.cauchy_mul",
+    "GeoSeq.cauchy_super",
+    "GeoSeq.cauchy_prod",
+    "GeoSeq.exists_localRoot",
+    "GeoSeq.faureW_monic",
+    "GeoSeq.faureW_natDegree",
+    "GeoSeq.faure_roots_exist",
+    "GeoSeq.mrMu_mul",
+    "GeoSeq.mrG_dvd",
+    "GeoSeq.mrG_pos",
+    "GeoSeq.mrMuBar_mul",
+    "GeoSeq.faure_placeDer",
+    "GeoSeq.MR_kap",
+    "GeoSeq.MR_LB",
+    "GeoSeq.MR_cond_i",
+    "GeoSeq.MR_cond_ii",
+    "GeoSeq.MR",
+    "GeoSeq.MR_every",
+    "GeoSeq.MR101"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

@@ -1,0 +1,62 @@
+%
+\begin{table}[!tp]
+\centering
+\footnotesize
+\caption{Notation and terms at a glance. Terms marked \cite{Gru26geo} are used in the sense of the companion paper on nets.}
+\label{tab:glossary}
+\renewcommand{\arraystretch}{0.9}\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.61\textwidth}l@{}}
+\toprule
+symbol or term & meaning & defined in\\
+\midrule
+$q$, $p$, $s$ & base (prime power $q=p^r$), its characteristic, dimension & \S\ref{sec:prelim}\\
+$V$, $\ind{V}$ & index polynomial of a point; its integer index & \S\ref{sec:prelim}\\
+$P_m$, $P_{[N]}$ & first $q^m$ points, first $N$ points & \S\ref{sec:prelim}\\
+full level, cell & prefix $P_{sK}$; elementary cube of side $q^{-K}$ & \S\ref{sec:prelim}\\
+level family $\Lev$, $\Delta_{\Lev}$ & the exponents $m$ with a certified bound on $\sep{P_m}$; its largest gap & \S\ref{sec:levels}\\
+$\sep{P}=\delta(P)N^{1/s}$ & toroidal separation in cell units ($1$ for the grid) & \S\ref{sec:prelim}\\
+natural identification & digits of $\F_q$ read as integers through base-$p$ coordinates & \S\ref{sec:prelim}\\
+frame, places $a_c$, $\Pas_a$ & coordinate $c$ reads the Taylor digits of $V$ at $a_c$; Pascal matrix & \S\ref{sec:prelim}\\
+scramble $L_c$ & lower-triangular, nonzero diagonal, fixed for all prefixes & \S\ref{sec:prelim}\\
+$b_c$-adic coordinate & its first $e_cQ$ digits depend only on $V\bmod b_c^Q$ & \S\ref{sec:fail}\\
+radical inverse, digit map $\pi_c$ & digit block $Q$ is $\pi_c$ of the $Q$-th $b_c$-adic digit of $V$ & \S\ref{sec:fail}\\
+Halton-type sequence & coordinate $c$ reads the $b_c$-adic digits of $V$; pairwise coprime $b_c\in\F_p[z]$ \cite{GHS26} & \S\ref{sec:fail}\\
+geometric digit(s) $r_c$, $R_c$; layer & first digit(s) of coordinate $c$ below the cell; layer: their change $D(1)$ under a carry-free step & (\ref{eq:cellunits})\\
+lattice image, jitter $\varepsilon_c$ & $n+\enc(R)/q^j$; the contribution of the deeper digits ($\le q^{-j}$) & (\ref{eq:cellunits})\\
+offset map & linear map from the cell digits to the geometric digits of $P_{sK}$ & \S\ref{sec:law}\\
+carry length $l$, carry depth & cell digits changed by a step; coefficient index from the finest digit & \S\ref{sec:law}\\
+carry response $D_i(l)$ & change of digit $K+i$ under a carry of length $l$ in one coordinate & \S\ref{sec:law}\\
+own, cross response & $O^{(l)}_c$: moving coordinate; $X^{(l)}_{c\leftarrow c'}$: coordinate $c$ when $c'$ moves & \S\ref{sec:law}\\
+constant response & a response that does not depend on the carry length & \S\ref{sec:dislocations}\\
+slip planes & hyperplanes where a geometric digit wraps around modulo $q$ & \S\ref{sec:dislocations}\\
+jump of depth $l$ & change of the lattice image across a boundary of carry length $l\ge2$ & \S\ref{sec:dislocations}\\
+uniformizer $w$, local root $z_c$ & $w=\prod_c(z-a_c)$; the root of $w(Z)=x$ at $a_c$ & (\ref{eq:roots})\\
+self-similar scramble, $\theta$, $g_c$ & one multiplier series per coordinate; scale; multipliers & Def.~\ref{def:selfsim}\\
+$\Res_a$, principal part & coefficient of $(z-a)^{-1}dz$; the polar terms at $a$ & \S\ref{sec:prelim}, Lem.~\ref{lem:resform}\\
+local multiplier $\varphi_c$ & unit series in $z-a_c$; $y_{c,n}=\Res_{a_c}(V\varphi_c(\theta/w)^{n+1}dz)$ & Lem.~\ref{lem:resform}\\
+$f_j$, $\LB_j$ & guaranteed gap in one coordinate; digit relaxation with $j$ digits & Lem.~\ref{lem:cert}\\
+exact digit relation & linear identity among the digits of a prefix, of bounded depth & Def.~\ref{def:exactrel}\\
+depth $J$; admissible range & relation of top index $T$ uses the digits $T-J,\dots,T$; levels $[K_0,K_0+R]$ of Thm.~\ref{thm:count} & Def.~\ref{def:exactrel}, \S\ref{sec:countthm}\\
+level-independent relation & exact relation with the same coefficients at every level & Prop.~\ref{prop:onerel}\\
+skeleton coordinate, digit & at $P_{sK-1}$: a coordinate with one cell digit fewer; its next digit & \S\ref{sec:residue}\\
+skeleton relation, fine cell & $\sum_cv_cy_{c,K-1}=0$ on $P_{sK-1}$; cube of side $q^{-K}$ at $P_{sK-1}$ & \S\ref{sec:residue}\\
+check vector $v$; $\Lambda_v$; $\ljit$ & $\Lambda_v=\{b\in\Z^s:v\cdot b\equiv0\bmod p\}$; $\ljit(\Lambda)=\min_{b\ne0}\|(|b|-1)_+\|_2$ & \S\ref{sec:residue}\\
+residue sequence $\Rv_v$ & every coordinate reads the differential $V\,dz$ at its place & Def.~\ref{def:residue}\\
+staggered res.\ sequence $\Rstar_v$, $\cstar$ & geometric digit of $\cstar$ = rank-1 lattice rule in the finest cell digits & Def.~\ref{def:residuestar}\\
+$\cabs{x}$ & centred absolute value of $x\in\F_p$, in $[0,p/2]$ & \S\ref{sec:brickwall}\\
+brick wall $W^-$ & $\Rstar_v$ for $s=2$: heights staggered by half a cell between columns & Def.~\ref{def:WF}\\
+inclusion bound & bound on $\sep{P_{sK}}$ from $P_{sK}\subset P_{s(K+1)-1}$ & Rem.~\ref{rem:residuefull}\\
+design, reachable & matrices $F_n$: geometric digits from the last cell levels \cite{Gru26geo} & \S\ref{sec:block}\\
+block-periodic residue seq.\ & local multipliers repeat with period $\ell$ in the row index & Def.~\ref{def:block}\\
+free series $\psi_c$; cross $\kappa_{c\leftarrow c'}$ & what a self-similar scramble leaves free; $\kappa_{c\leftarrow c'}=-X^{(1)}_{c\leftarrow c'}$ & Prop.~\ref{prop:LI}\\
+window $W$, $\LB(W)$ & set of values a response may take; the bound given by the windows & Prop.~\ref{prop:steer}\\
+covering condition & every line of the depth direction meets the window & Prop.~\ref{prop:steer}\\
+selection rule, history & picks an admissible free digit at each depth; the digits chosen before & Prop.~\ref{prop:steer}\\
+correction terms $\chi_{c,d}$, $\Psi_c$ & deeper digits in a corrected skeleton relation; their partial sums & Lem.~\ref{lem:corrS}\\
+staggered windows, $\half$ & staggered coordinate offset by half a cell; $\half=(p+1)/2\in\F_p$ & \S\ref{sec:antipode}\\
+first-order deficit & the constant $C$ in a bound $1-C/p$ \cite{Gru26geo} & \S\ref{sec:antipode}\\
+$p_0(s)$ & threshold of the staggered rule & \S\ref{sec:antipode}\\
+proof${}^\star$, c.a. & last step one exact rational evaluation; computer-assisted & \S\ref{sec:conventions}\\
+\bottomrule
+\end{tabular}
+\end{table}

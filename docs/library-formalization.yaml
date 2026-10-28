@@ -1,0 +1,126 @@
+version: "v0.4"
+
+project:
+  name: "Low-discrepancy quasi-uniform digital sequences in every dimension (statement library)"
+  description: >-
+    Lean 4 / Mathlib formalization of the manuscript "Low-discrepancy quasi-uniform digital sequences in every
+    dimension" (version 1). Library GeoSeq (definitions, statement files GeoSeq/Statements/*.lean with sorry by
+    design, proofs), which imports the part Z3Net/ of the Lean library of the companion nets paper. The results new
+    in version 1 are compared in 32 Comparator configurations with 311 theorems (comparatorGeoSeqV9*.json); the
+    results kept from the previous version of the manuscript in the 20 configurations of that version
+    (comparatorGeoSeq.json, comparatorGeoSeq{S3,S3core,S4,S4core,K4,S10,S11}.json,
+    comparatorGeoSeq{V0..V7,V4s4,V4s5,V7d45,V7full}.json). The paper (app:lean) lists the formalized results and the
+    ones that are not formalized; COVERAGE.md maps the configurations to the paper. Two headline results are also a
+    separate Palomar entry: HeadlineSeqV4/Challenge.lean, comparatorHeadlineSeqV4.json, metadata
+    palomar/headline-seq-v4/formalization.yaml. This file describes the library in the same format; it is not
+    Palomar metadata and is deliberately not named formalization.yaml.
+  authors:
+    - {name: "Leonhard Gruenschloss", orcid: "0009-0004-6476-2191"}
+  responsible_maintainers:
+    - {name: "Leonhard Gruenschloss", orcid: "0009-0004-6476-2191"}
+  license: "MIT"
+
+classification:
+  arxiv: [math.NT, math.NA]
+  # MSC 2020: PROPOSED (TODO(author): decide; identical in the Hexagon and Zenodo metadata).
+  msc2020: [11K38, 65C05, 11K45, 52C17, 68V20]
+
+sources:
+  # ZENODO_DOI_TBD: the Zenodo version DOI of release v1.0.0 (filled after the release).
+  - title: "Low-discrepancy quasi-uniform digital sequences in every dimension (version 1)"
+    authors:
+      - {name: "Leonhard Gruenschloss", orcid: "0009-0004-6476-2191"}
+    type: paper
+    id: "doi:ZENODO_DOI_TBD"
+    location: "https://doi.org/ZENODO_DOI_TBD (paper/main.tex of release v1.0.0 of https://github.com/lgruen/quasi-uniform-sequences-lean)"
+    relationship: formalizes
+    note: >-
+      Results are cited by their LaTeX labels, never by number. COVERAGE.md maps the configurations to the labels.
+  - title: "Low-discrepancy quasi-uniform digital nets in every dimension (version 1)"
+    authors:
+      - {name: "Leonhard Gruenschloss", orcid: "0009-0004-6476-2191"}
+    type: paper
+    id: "doi:10.5281/zenodo.23327749"
+    relationship: background
+    note: "The companion paper on nets (Hexagon hexagon:2610.00217v1). Its Lean library is the source of Z3Net/."
+  - title: "On the quasi-uniformity properties of quasi-Monte Carlo point sets and sequences, Part II: digital nets and sequences (Math. Comp. 2026; arXiv:2501.18226)"
+    authors: ["Josef Dick", "Takashi Goda", "Kosuke Suzuki"]
+    type: paper
+    relationship: background
+    note: "The question answered by the paper; quasi-uniformity as defined there."
+
+related_formalizations:
+  - id: "doi:10.5281/zenodo.23327748"
+    relationship: other
+    note: >-
+      Lean formalization of the companion nets paper (github.com/lgruen/separated-nets-lean; Palomar
+      PALOMAR-2026-10-13-000011). Z3Net/ of this repository is the part of that library which GeoSeq imports.
+  - id: "github.com/lennrt/palomar-formalizations (zenodo-22264675/palomar)"
+    relationship: other
+    note: >-
+      Different mathematics (two-dimensional even-order Grünschloß-Keller permutation nets). The project layout
+      follows its Palomar template, and the centred residue cres (Z3Net) is adapted from its GKEvenNet.cres (MIT
+      licence).
+
+status:
+  scope: >-
+    Every compared theorem of the 52 comparatorGeoSeq*.json configurations is proved, symbolic in the dimension, the
+    prime and the level where the paper is; finite computations are evaluated by the Lean kernel (decide +kernel).
+    Comparator accepts each configuration with the Lean kernel and NanoDa (COMPARATOR_RESULTS.md). Results of the
+    paper that are not formalized, and statements whose formal form differs from the printed one, are listed in
+    the paper (app:lean) and in COVERAGE.md.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: [propext, Classical.choice, Quot.sound]
+  main_results:
+    - {declaration: "GeoSeq.res_thm", file: "GeoSeqV9Solution.lean", sorry_count: 0, axioms: [propext, Classical.choice, Quot.sound], comparator_config: "comparatorGeoSeqV9.json"}
+    - {declaration: "GeoSeq.coverage_of_parts", file: "GeoSeqV99covSolution.lean", sorry_count: 0, axioms: [propext, Classical.choice, Quot.sound], comparator_config: "comparatorGeoSeqV99cov.json"}
+
+automation:
+  methods:
+    - method: agent
+      models: ["Anthropic Claude Opus 5.5"]
+      framework: "AI agents for statement drafting, proof development, and review"
+      tool_setup: >-
+        Lean v4.35.0-rc3 with Mathlib v4.35.0-rc3; finite computations by kernel reduction (decide +kernel), no
+        native_decide; Comparator (leanprover/comparator) with the Lean kernel and NanoDa; Python and C++ checkers
+        outside Lean (archive/).
+    - method: manual
+      models: []
+      framework: "n/a"
+      tool_setup: >-
+        Author review of the formal statements against the manuscript. STATUS: TODO(author) -- not yet recorded.
+  spend_usd: "not tracked"
+  notes: >-
+    The constructions, proofs and Lean formalization were produced by AI systems (Anthropic Claude Opus 5.5; some early exploratory results used Claude Fable 5.1) under the author's direction. The author selected the problems, steered the research and reviewed the formal statements, but has not verified every proof by hand. AI systems are not listed as authors; responsibility for the deposit rests with the author.
+
+fidelity:
+  divergences: |-
+    - The statements were drafted from the paper's text and checked against it by AI-assisted review passes; the
+      differences in form are listed in the paper (app:lean, "Where the formal statements differ in form"): the
+      results of sec:fail for prime bases only; self-similar scrambles in residue form (lem:resform(b) is not
+      formalized); thm:block(c) through a checker of the one-digit relaxation evaluated by the kernel at every
+      prime of the computer-assisted range (the inequality the theorem needs, not the equality of LB(F));
+      prop:joint(ii) for one factor; thm:coverage as an assembly of the cited results, without its prime-power rows.
+    - The results kept from the previous version are compared in the configurations of that version, whose
+      statement files cite the labels of that version; COVERAGE.md says where a label changed.
+
+review:
+  status: "agent-reviewed"
+  reviewers: []
+  notes: >-
+    Every statement was checked against the source by AI-assisted passes (Anthropic Claude), acting as automated
+    assistants rather than reviewers of record. TODO(author): the author's review of the statements (the Palomar
+    entry's statements, and the basis on which the other library statements are accepted) is recorded here before
+    the release. No independent human peer review has been performed.
+
+alignment:
+  namespace: "GeoSeq"
+  note: >-
+    COVERAGE.md maps every configuration to the paper labels it covers; the statement files
+    (GeoSeq/Statements/*.lean) cite the labels in their docstrings.
+
+acknowledgements: >-
+  Lean and Mathlib. The centred-residue helper cres (Z3Net) is adapted from Lennart Rudolph's MIT-licensed Palomar
+  formalization of the even-order Grünschloß-Keller nets (github.com/lennrt/palomar-formalizations), whose layout
+  this project also follows.

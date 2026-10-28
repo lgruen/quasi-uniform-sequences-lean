@@ -1,0 +1,29 @@
+{
+  "challenge_module": "GeoSeqV6Challenge",
+  "solution_module": "GeoSeqV6Solution",
+  "theorem_names": [
+    "GeoSeq.P0_c",
+    "GeoSeq.P0_c_nat",
+    "GeoSeq.stCoef_ta",
+    "GeoSeq.coef_ratio",
+    "GeoSeq.hier_geom",
+    "GeoSeq.P0_big",
+    "GeoSeq.eps10_lt",
+    "GeoSeq.A",
+    "GeoSeq.A4_design",
+    "GeoSeq.a4Data_valid",
+    "GeoSeq.A4_threshold",
+    "GeoSeq.A5_design",
+    "GeoSeq.a5Data_valid",
+    "GeoSeq.A5_threshold",
+    "GeoSeq.A4",
+    "GeoSeq.A5"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

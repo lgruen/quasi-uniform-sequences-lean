@@ -1,0 +1,8 @@
+# The four residue sequences of Table tab:practice (Definition def:residue, s = 3): prime p, places a_0 a_1 a_2 (in F_p),
+# scale theta, check vector v. Their generator matrices are residue_U_p<p>.txt (format: see gen_points.py), rebuilt
+# entry by entry from these parameters by rebuild_check.py.
+#p	places	theta	v
+13	2,9,10	12	5,3,6
+17	2,9,6	12	4,10,16
+23	18,22,15	5	4,14,20
+31	8,0,16	9	10,30,7

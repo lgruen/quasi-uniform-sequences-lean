@@ -1,0 +1,163 @@
+%
+%
+%
+%
+%
+%
+%
+\section{Every Full Level: Windows and the Half-Cell Stagger}\label{sec:antipode}
+The staggered residue sequence certifies every full level $P_{sK}$ for every prime $p>2^s$, but with a constant of about $2^{1-s}$ (Corollary~\ref{cor:dyadic}); the block-periodic residue sequences reach $1-2/p$ in dimensions two and three for every prime $p\ge3$ resp.\ $p\ge5$, but only at every $s$-th full level (Theorem~\ref{thm:block}), which costs the factor $p^{-s}$ instead of $p^{-1}$ in the bound for every $N$ (Lemma~\ref{lem:prefix}). For exact relations this is no accident: all $s$ geometric digits can be designed by exact relations of bounded depth on at most a fraction $1/s$ of the full levels (Corollary~\ref{cor:layer}).
+
+This section certifies every full level by inequalities instead. The free digits of a self-similar scramble, chosen one at a time, keep each carry response inside a fixed set of allowed values, a \emph{window}, without fixing it (Section~\ref{sec:steer}); windows are not exact relations, and Theorem~\ref{thm:count} does not apply to them. Which windows are cheap? A response read by a coordinate that steps forward is harmless just behind $0$ and fatal just in front of it; read by a coordinate that does not move, it must stay away from $0$ on both sides. Half a cell is the one response that costs the same for every kind of step: up to $1/p$, the neighbour is half a cell away in that coordinate whether the coordinate steps forward, steps back or stays (Lemma~\ref{lem:antipode}). Staggering one coordinate by half a cell against all the others gives $1-O(1/p)$ at every full level, in every dimension, for large primes (Theorem~\ref{thm:A}), and $1-17/p$ in dimension two for $p>3677$ (Corollary~\ref{cor:HB17}).
+
+So the gain over Theorem~\ref{thm:block} is every full level instead of every $s$-th one, and the gain over the residue sequence (Theorem~\ref{thm:residue}) is a constant tending to~$1$ at the full levels themselves. The thresholds are large ($1-742/p$ for $p\ge1.97\cdot10^7$ in dimension three), so this is a statement about every full level, not a practical recommendation (Section~\ref{sec:practice}). Section~\ref{sec:joint} shows, in a stated scope, that windows and skeleton relations cannot be selected together. All proofs of this section are in Appendix~\ref{app:LIproof}, the finite-prime details in Appendix~\ref{app:LFdata}.
+
+\subsection{Free Digits and Windows}\label{sec:steer}
+Fix a frame $(a_0,\dots,a_{s-1};\infty)$ over $\F_q$ and a scale $\theta$. For $s=2$ put $\hat\varpi_c(z)=z-a_{1-c}$, and for $s\ge3$ put $\hat\varpi_c=1$.
+
+\begin{proposition}[Responses of self-similar scrambles]\label{prop:LI}
+Let $s\ge2$ and consider a self-similar scramble with scale $\theta$ and local multipliers $\varphi_c$ (Lemma~\ref{lem:resform}(b)).
+\begin{enumerate}
+\item[(a)] There are unique $\lambda_c\in\F_q^*$ and unit power series $\psi_c$ with $\psi_c(0)=1$ such that $\theta\,\varphi_c(z)\,\hat\varpi_c(z)=\lambda_c/\psi_c(w(z))$ as power series at $a_c$. Every $\lambda_c\in\F_q^*$ and every unit series $\psi_c$ with $\psi_c(0)=1$ occur, each for exactly one local multiplier. The multiplier of Definition~\ref{def:selfsim} is $g_c(x)=\lambda_c/\bigl(\psi_c\,\hat\varpi_c(z_c)\,w'(z_c)\bigr)$, with $\psi_c$ at $\theta x$ and $z_c=z_c(\theta x)$.
+\item[(b)] The offset map is the same at every level, for every number of geometric digits.
+\item[(c)] Let $s\ge3$. With the own kernel $\hat w_{c'}=w_{c'}/w'(a_{c'})$ and the cross kernel $\check w_{cc'}=(a_{c'}-a_c)/(z-a_c)$, both expanded in $w$ at $a_{c'}$ (so that their value at $w=0$ is $1$),
+\begin{gather*}
+O_{c'}(x)=1-\bigl[\hat w_{c'}\,\psi_{c'}\bigr](\theta x),\qquad X_{c\leftarrow c'}(x)=-\kappa_{c\leftarrow c'}\bigl[\check w_{cc'}\,\psi_{c'}\bigr](\theta x),\\
+\kappa_{c\leftarrow c'}=\frac{\theta\,\lambda_c}{\lambda_{c'}\,w'(a_c)\,(a_{c'}-a_c)}.
+\end{gather*}
+\item[(d)] Let $s=2$, with the places $a_0=0$, $a_1=1$. Then $X_{0\leftarrow1}(x)=-\kappa_{0\leftarrow1}\,\psi_1(\theta x)$ and $O_1(x)=1-z_1(\theta x)^2\,\psi_1(\theta x)$ with $\kappa_{0\leftarrow1}=\theta\lambda_0/\lambda_1$, symmetrically for column~$0$ with $\psi_0$ and $\kappa_{1\leftarrow0}=\theta\lambda_1/\lambda_0$; in particular $\kappa_{0\leftarrow1}\kappa_{1\leftarrow0}=\theta^2$.
+\end{enumerate}
+\end{proposition}
+
+So column $c'$ of the offset map is one free unit series $\psi_{c'}$ times a fixed vector of kernels, and only the \emph{depth-zero crosses} $\kappa_{c\leftarrow c'}=-X^{(1)}_{c\leftarrow c'}$ are fixed, by the constants $\lambda_c$. (The brick wall is $\psi_0=1$, $\psi_1=1/z_1^2$, $\lambda=(1,2)$.) From now on $q=p\ge5$ is prime, and at depth $l\ge1$ we collect column $c'$ in $\mathbf u_l=\bigl(O_{c'}^{(l)},(X_{c\leftarrow c'}^{(l+1)})_{c\ne c'}\bigr)\in\F_p^s$.
+
+\begin{proposition}[Depth direction]\label{prop:depthdir}
+Let $s\ge3$, or $s=2$ with the places $0,1$. For every column $c'$ and every depth $l\ge1$,
+\[
+\mathbf u_l=\beta_l+\bar\psi_l\,\alpha_{c'},\qquad \alpha_{c'}=\bigl(1,\,(\kappa_{c\leftarrow c'})_{c\ne c'}\bigr),\qquad \bar\psi_l=-\theta^l\psi_{c',l},
+\]
+where the offset $\beta_l$ depends only on $\psi_{c',0},\dots,\psi_{c',l-1}$. The coefficients $\psi_{c',l}$, $l\ge1$, are free: every choice is realized by a self-similar scramble, and row $n$ of $L_{c'}$ depends only on $\psi_{c',0},\dots,\psi_{c',n}$.
+\end{proposition}
+
+So the free digit at depth $l$ moves $\mathbf u_l$ along the line $\beta_l+\F_p\alpha_{c'}$, and the earlier choices (the \emph{history}) decide which line. A \emph{window} is a set $W_{c\leftarrow c'}\subseteq\F_p$ of allowed values for every entry (row $c$ affected, column $c'$ carrying), with the \emph{own window} $\Wo^{(c')}:=W_{c'\leftarrow c'}$ and the \emph{column window} $W^{(c')}:=\Wo^{(c')}\times\prod_{c\ne c'}W_{c\leftarrow c'}$. The windows define the \emph{window bound}
+\[
+\LB(W)^2:=\min_e\sum_c\min_{\sigma\in S_c(e)}f_1(e_c,\sigma)^2,\qquad S_c(e):=\sum_{c':\,e_{c'}\ne0}e_{c'}\,W_{c\leftarrow c'}\quad\text{(sumset)},
+\]
+the minimum over all steps $e\in\{-1,0,1\}^s\setminus\{0\}$ up to sign: the digit relaxation (Lemma~\ref{lem:cert}, $j=1$) for responses known only to lie in their windows. A digit $\psi\in\F_p$ is \emph{admissible} at depth $l$ for column $c'$ if $\beta_l-\theta^l\psi\,\alpha_{c'}\in W^{(c')}$, and a \emph{selection rule} assigns to each column, depth and history an admissible digit. We write $\LBact_K$ for the value $\LB_1$ of Lemma~\ref{lem:cert} computed from the actual responses $D(l)$, $l\le K$.
+
+\begin{proposition}[Choosing within windows]\label{prop:steer}
+Let $s\ge3$ and any frame, or $s=2$ and the places $0,1$; fix $\theta$ and the constants $\lambda_c$. Suppose that for every column $c'$
+\begin{enumerate}
+\item[(i)] $-\kappa_{c\leftarrow c'}\in W_{c\leftarrow c'}$ for all $c\ne c'$, and
+\item[(ii)] every line $\beta+\F_p\alpha_{c'}$, $\beta\in\F_p^s$, meets $W^{(c')}$ (the \emph{covering condition}).
+\end{enumerate}
+Then (a) at every depth and for every history admissible digits exist; (b) every selection rule defines a self-similar scramble and a digital $(0,s)$-sequence over $\F_p$; (c) all responses lie in their windows, $O^{(l)}_c\in\Wo^{(c)}$ and $X^{(l)}_{c\leftarrow c'}\in W_{c\leftarrow c'}$ for every $l\ge1$; (d) for every $K\ge1$, $\sep{P_{sK}}\ge\min(1,\LBact_K)\ge\min(1,\LB(W))$.
+\end{proposition}
+
+The bound depends only on the windows, not on the selection rule (Appendix~\ref{app:steerrule} fixes one). Covering costs volume:
+
+\begin{lemma}[Volume bound]\label{lem:volume}
+Let $W\subseteq\F_q^s$ and $\alpha\in\F_q^s\setminus\{0\}$. If every line $\beta+\F_q\alpha$ meets $W$, then $|W|\ge q^{s-1}$. In particular a column window satisfying (ii) of Proposition~\ref{prop:steer} fills at least the fraction $1/p$ of $\F_p^s$.
+\end{lemma}
+
+So one of the $s$ entries of a column window has at least $p^{1-1/s}$ elements (Figure~\ref{fig:cost}); the cross responses of a column never move in lockstep (Proposition~\ref{prop:rank2} in Appendix~\ref{app:responses}), so this cannot be escaped. What a wide window costs depends on where it lies. For $\Phi\in\R/\Z$ let $\operatorname{frac}(\Phi)\in[0,1)$ be its representative and $\|\Phi\|$ its distance to $0$, and put
+\[
+\bar f(+1,\Phi)=1-\operatorname{frac}(-\Phi),\qquad \bar f(-1,\Phi)=\bar f(+1,-\Phi),\qquad \bar f(0,\Phi)=\|\Phi\| .
+\]
+So $\bar f(+1,\Phi)=\operatorname{frac}(\Phi)$ for $\Phi\ne0$, and $\bar f(\pm1,0)=1$.
+
+\begin{lemma}[Cost of a response]\label{lem:antipode}
+Let $p$ be prime, $\sigma\in\F_p$ and $\Phi=\sigma/p\in\R/\Z$. Then $f_1(e,\sigma)=\max\bigl(0,\,\bar f(e,\Phi)-1/p\bigr)$ for $e\in\{-1,0,1\}$. The three functions $\bar f(+1,\cdot)$, $\bar f(-1,\cdot)$, $\bar f(0,\cdot)$ agree at exactly one point, $\Phi=\frac12$, where all three equal $\frac12$.
+\end{lemma}
+
+An own response, read by a coordinate that moves forward, is cheap just behind $0$ and fatal just in front of it; a response read by a coordinate that does not move must stay away from $0$ on both sides (Figure~\ref{fig:principles} in Appendix~\ref{app:LFdata}). Reading every entry of a column window at full cost would lose about $p^{-1/s}$ by Lemma~\ref{lem:volume}. A window can be wide without being read: bounding every step by its first moving coordinate leaves some crosses unread; this ordering of the coordinates gave a closed form at every full level with separation $1-O(p^{-1/s})$ from moderate primes on in an earlier version of this work, and it is not needed here. Or a window can be read without its width mattering: near $\frac12$, which costs the same, up to $1/p$, for a forward step, a backward step and no step.
+
+\subsection{Staggered Windows}\label{sec:staggered}
+In the limit $p\to\infty$ windows become closed sets $W_{c\leftarrow c'}\subseteq\R/\Z$ of responses in cell units, and by Lemma~\ref{lem:antipode} the window bound becomes the \emph{continuum bound} $c^*(W)^2:=\min_e\sum_c\inf_{\Phi\in S_c(e)}\bar f(e_c,\Phi)^2$.
+
+Fix a staggered coordinate $\cstar$ and let $C=\{c\ne\cstar\}$. (The staggered residue sequence of Section~\ref{sec:brickwall} shares this idea of one coordinate staggered by the others, but it is a different construction: there the stagger is an exact relation and the coordinates of $C$ are not controlled inside their cells; here every response is kept in a window.) For $a,\varepsilon>0$ the \emph{staggered windows} are: in column $i\in C$, own $\{-a\}$, cross into $\cstar$ $W_{\star\leftarrow i}=\half+[-\varepsilon,\varepsilon]$ (the \emph{half-cell offset}), crosses into the other coordinates of $C$ $[-\varepsilon,\varepsilon]$; in column $\cstar$, own $\{0\}$ and crosses $[-\varepsilon,\varepsilon]$. A step in a coordinate $i\in C$ offsets $\cstar$ by half a cell and moves the neighbour back by $a$ in coordinate $i$, which shortens the spacing in $i$ to $1-a$.
+
+\begin{theorem}[Staggered windows]\label{thm:BS}
+Let $s\ge2$ and $a,\varepsilon>0$ with $(s-1)\varepsilon<a\le1-\varepsilon$ and $(1-a-\varepsilon)^2+(\frac12-\varepsilon)^2\ge1$. Then the staggered windows have $c^*(W)\ge1$. Such an $a$ exists for every $0<\varepsilon<\varepsilon_s$, where
+\[
+\varepsilon_s=\frac{2s+1-\sqrt{3s^2+4s}}{2(s^2+1)}\approx\frac{2-\sqrt3}{2s}\approx\frac{0.134}s
+\]
+is the smaller root of $(1-s\varepsilon)^2+(\frac12-\varepsilon)^2=1$ (for instance $\varepsilon_3=(7-\sqrt{39})/20=0.0377$).
+\end{theorem}
+The binding steps are the axis step of $\cstar$ and the steps that move one coordinate of $C$ together with $\cstar$; in a step that moves two coordinates of $C$ the half-cell offsets cancel, but two gaps of $0.73$ already exceed distance $1$. So only the own responses need small windows. At $\varepsilon=0$ the points form columns along $\cstar$ on a square grid of spacing $1-a$ in the coordinates of $C$, with heights alternating by half a cell; at $a=1-\sqrt3/2$ this is body-centred tetragonal in dimension three (Figure~\ref{fig:bsgeom} in Appendix~\ref{app:BSfinite}) and the hexagonal brick wall in dimension two (Section~\ref{sec:HB}).
+
+\subsection{Every Full Level at Large Primes}\label{sec:largep}
+At a finite prime the windows become integer intervals of width about $\varepsilon p$ and the half becomes $\half=(p+1)/2$; the fixed crosses $\kappa_{c\leftarrow c'}$ must lie in their windows and every column must cover. On the Faure places every $\kappa_{c\leftarrow c'}$ is taken as one odd integer, a fixed fraction of $p$, times a fixed rational; the half is the one factor $2$ that survives in the row of $\cstar$ (Lemma~\ref{lem:R} in Appendix~\ref{app:BSfinite}), so no congruence condition on $p$ is needed, and the coverings follow from a mixed-radix hierarchy of step sizes (Lemmas~\ref{lem:ws} and~\ref{lem:D}, Appendix~\ref{app:LFdata}). The only loss of order $1/p$ is the own window of $\cstar$, whose size is bounded independently of $p$ (Lemma~\ref{lem:W}). This explicit construction is the \emph{staggered rule} (Definition~\ref{def:BS}, Appendix~\ref{app:BSfinite}).
+
+\begin{theorem}[Separation $1-O(1/p)$ at every full level]\label{thm:A}
+For every $s\ge3$ there are a staggered rule on the Faure places $(0,1,\dots,s-1)$, an effectively computable $p_0(s)$ and a constant $C''_s$ such that for every prime $p\ge p_0(s)$ the staggered rule gives a quasi-uniform digital $(0,s)$-sequence over $\F_p$ with
+\[
+\sep{P_{sK}}\ \ge\ 1-\frac{C''_s}p\qquad\text{for every }K\ge1 .
+\]
+There is no congruence condition on $p$.
+\end{theorem}
+
+The proof is in Appendix~\ref{app:BSfinite}; $C''_s$ is the \emph{first-order deficit}, as in \cite{Gru26geo}%
+. For $s=3$ one explicit rule gives $\sep{P_{3K}}\ge1-742/p$ for every prime $p\ge1.97\cdot10^7$ (Theorem~\ref{thm:A3} in Appendix~\ref{app:BSfinite}, proof${}^\star$), and $1-779/p$ for every prime $p\ge3\cdot10^6$ (Remark~\ref{rem:A3range}, c.a.). For $s=4$ and $s=5$ the rules of Table~\ref{tab:BSdata} give $p_0=1.44\cdot10^{16}$, $C''_4=32\,044$ and $p_0=1.98\cdot10^{21}$, $C''_5=2.73\cdot10^9$ (proof${}^\star$).
+
+\emph{Where this stands.} Among the constructions of this paper certified at every full level, the staggered windows (Theorems~\ref{thm:A} and~\ref{thm:HB}) are the ones with constants $1-O(1/p)$; their thresholds are large, and lowering them is open (Section~\ref{sec:open}).
+
+\subsection{Dimension Two: the Hexagonal Brick Wall}\label{sec:HB}
+For $s=2$ the staggered windows have $C=\{0\}$ and $\cstar=1$: the brick wall with its half kept in a window, and the columns compressed to the hexagonal row spacing $\sqrt3/2$ (Figure~\ref{fig:HB}). Proposition~\ref{prop:LI}(d) takes the place of (c), and the only constraint on the crosses is $\kappa_{1\leftarrow0}\kappa_{0\leftarrow1}=\theta^2$. Let $b,e\ge1$ be integers, $\nu=2b+1$, $k=2\nu e^2$ and $\theta=\nu e$, and choose the constants $\lambda_c$ with $\kappa_{1\leftarrow0}=-\nu/2$ and $\kappa_{0\leftarrow1}=-k$; the product is $\nu k/2=\theta^2$, and the half comes from the factor $2$ in $k$. With $M_A:=\lceil(p-3)/\nu\rceil+3$ and $M_B:=\lceil(p-1)/k\rceil-1$ the windows are
+\[
+\Wo^{(0)}=[-(k+M_A-1),-k],\quad W_{1\leftarrow0}=\half+[-b,b],\qquad \Wo^{(1)}=[-(M_B-1),0],\quad W_{0\leftarrow1}=[-k,k].
+\]
+
+\begin{theorem}[Hexagonal brick wall]\label{thm:HB}
+If $2k+M_A<p$ and $\eta:=(p-1-2b-2M_B)/(2p)>0$, then every selection rule gives a digital $(0,2)$-sequence over $\F_p$ with $\sep{P_{2K}}\ge\min(1,\LB^{\mathrm{HB}})$ for every $K\ge1$, where
+\[
+(\LB^{\mathrm{HB}})^2=\min\Bigl(\Bigl(1-\frac{k+M_A}p\Bigr)^2+\Bigl(\frac{p-3-2b}{2p}\Bigr)^2,\ \Bigl(1-\frac{M_B}p\Bigr)^2,\ \Bigl(1-\frac{2k+M_A}p\Bigr)^2+\eta^2\Bigr).
+\]
+\end{theorem}
+
+\begin{corollary}[Separation $1-17/p$]\label{cor:HB17}
+For every prime $p>3677$, the hexagonal brick wall with $e=1$ and $b=\lfloor p/68\rfloor$ satisfies $\sep{P_{2K}}\ge1-17/p$ for every $K\ge1$, and is quasi-uniform.
+\end{corollary}
+
+The proofs are in Appendix~\ref{app:HBproof}; the corollary is a hand estimate for $p\ge10^4$ and an exact evaluation at the $715$ primes $3677<p<10^4$ (c.a.). The threshold is small because every column has a single cross. At $p=401$ with $(b,e)=(5,1)$ Theorem~\ref{thm:HB} certifies $0.9054$; the exact value at the first level is $\sep{P_2}=0.9922$. For comparison, the brick wall of Theorem~\ref{thm:WF} has the bound $(p-3)/(2p)$, and Theorem~\ref{thm:block} gives $1-2/p$ at $m\in4\N$ for every prime $p\ge3$.
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_HB_v4}
+\caption{The hexagonal brick wall (Theorem~\ref{thm:HB}), exact points from the generator matrices (\texttt{paper/v4/figs/b5\_figs.py}). (a)~Schematic: the heights move by half a cell from one column of cells to the next, as in the brick wall, and the columns are compressed to the hexagonal spacing $\sqrt3/2$, so that all neighbour gaps are about $1$; where the horizontal offset wraps around there is a slip plane. (b)~$p=401$, $(b,e)=(5,1)$, the full level $P_2$, $11\times11$ cells around the closest pair; thin lines join pairs closer than $1.12$ cells. Exact $\sep{P_2}=0.9922$. (c)~A window of the full level $P_4$ of the same sequence. Certified $\sep{P_{2K}}\ge0.9054$ for every $K$.}
+\label{fig:HB}
+\end{figure}
+
+\subsection{Windows and Skeleton Relations}\label{sec:joint}
+The residue sequence certifies every prefix $P_{sK-1}$ with constants tending to~$1$, and windows certify every full level with $1-O(1/p)$. Can one sequence do both? For exact relations of bounded depth Corollary~\ref{cor:nodesign} excludes it. For windows the residue theorem still constrains the answer: every self-similar scramble satisfies a skeleton relation with correction terms, and the corrections move together with the full-level responses.
+
+\begin{lemma}[Every self-similar scramble satisfies a corrected skeleton relation]\label{lem:corrS}
+Consider a self-similar scramble with scale $\theta$ and local multipliers $\varphi_c$. Put $v_c:=1/\varphi_c(a_c)$ and define the \emph{correction coefficients} $\chi_{c,d}\in\F_q$ by the expansion of $1/\varphi_c$ in powers of the uniformizer at $a_c$,
+\[
+\frac1{\varphi_c}=v_c\sum_{d\ge0}\chi_{c,d}\Bigl(\frac w\theta\Bigr)^d,\qquad\chi_{c,0}=1 .
+\]
+Then for every $K\ge1$ and every $V$ with $\deg V\le sK-2$,
+\[
+\sum_cv_c\Bigl[y_{c,K-1}(V)+\sum_{d=1}^{K-1}\chi_{c,d}\,y_{c,K-1-d}(V)\Bigr]=0 .
+\]
+\end{lemma}
+The residue sequence is the case of constant local multipliers, where all $\chi_{c,d}$ vanish and the relation is the skeleton relation of Lemma~\ref{lem:residue-rel}. For $s\ge3$, Proposition~\ref{prop:LI}(a) gives $v_c=\theta/\lambda_c$ and $\chi_{c,d}=\theta^d\psi_{c,d}$: the correction coefficients are the free digits of Proposition~\ref{prop:depthdir}, up to the factor $\theta^d$. With the \emph{correction partial sums} $\Psi_c(j):=\sum_{d=1}^j\chi_{c,d}$ ($\Psi_c(0)=0$), the relation certifies the prefixes $P_{sK-1}$ as follows. For $B\ge0$ let
+\[
+\ljitB(\Lambda):=\min_{0\ne b\in\Lambda}\bigl\|(|b|-(1+B)\mathbf 1)_+\bigr\|_2\ \ge\ \ljit(\Lambda)-B\sqrt s .
+\]
+
+\begin{theorem}[Skeleton relations with bounded corrections]\label{thm:corrected}
+Let $(y(V))$ be a digital $(0,s)$-sequence over $\F_p$ and $K\ge1$, and suppose that every point of $P_{sK-1}$ satisfies the relation of Lemma~\ref{lem:corrS} for some $v\in(\F_p^*)^s$ and $\chi_{c,d}\in\F_p$ (not necessarily coming from a self-similar scramble), where the centred representatives of the partial sums $\Psi_c(j)=\sum_{d=1}^j\chi_{c,d}$ lie in $[0,B]$ for $1\le j\le K-1$. Then $\sep{P_{sK-1}}\ge p^{-1/s}\,\ljitB(\Lambda_v)$.
+\end{theorem}
+So bounded corrections cost an additive $B\sqrt s$ fine cells, not a factor; \cite{Gru26geo} calls the analogous coefficients of its skeleton digits faults%
+. The sign condition $\Psi_c\ge0$ is used in the proof, and it matters: for $s=2$ and $p=11,17,29,37$, scrambles with corrections $-1$ have exact separations $0.02$--$0.08$ at the first prefixes $P_{2K-1}$, where corrections $+1$ give $0.38$--$0.76$, all above the bound of the theorem (exact computations, illustration only).
+
+\begin{proposition}[Windows and corrected skeleton relations cannot be selected together]\label{prop:joint}
+Consider a self-similar scramble over $\F_p$ with the notation of Lemma~\ref{lem:corrS}.
+\begin{enumerate}
+\item[(i)] For every full level $K$, every step $e$ and carry lengths $l_c$ of the moving coordinates, the changes $\sigma_c$ of the geometric digits satisfy $\sum_cv_c\sigma_c=-\sum_ce_cv_c\Psi_c(l_c)$.
+\item[(ii)] For every column $c$ and depth $l$, the sum $O_c^{(l)}+\Psi_c(l)$ depends only on $v_c,\chi_{c,1},\dots,\chi_{c,l-1}$, on $\theta$ and on the local multipliers of the other coordinates. So changing the correction coefficients $\chi_{c,d}$, $d\ge l$, moves the own response $O_c^{(l)}$ and the correction partial sum $\Psi_c(l)$ by equal and opposite amounts, and leaves the cross responses $X^{(l)}_{c'\leftarrow c}$ unchanged.
+\item[(iii)] Let $W$ be product windows and $B\ge0$, and suppose that every column $c$ satisfies the \emph{joint covering condition} $\Wo^{(c)}+[0,B]=\F_p$: every line $\{(\xi-t,t):t\in\F_p\}$, $\xi\in\F_p$, meets $\Wo^{(c)}\times[0,B]$. Then $\LB(W)\le\sqrt s\,B/p$. If moreover Theorem~\ref{thm:corrected} with this $B$ certifies a positive bound for some $\Lambda_v$, then $B<p^{1/s}-1$ and $\LB(W)<\sqrt s\,(p^{1/s}-1)/p$.
+\end{enumerate}
+\end{proposition}
+By (ii), the free digit at depth $l$ moves $(O_c^{(l)},\Psi_c(l))$ along a line of direction $(1,-1)$, so a selection rule that keeps the column response in $W^{(c)}$ and $\Psi_c(l)$ in $[0,B]$ for every history, the analogue of condition (ii) of Proposition~\ref{prop:steer}, needs the joint covering condition of (iii). (Not every line is reached by a history: at depth $1$, and at depth $2$ when $w''(a_c)=0$, the sum takes one value only; so the covering of every line is a hypothesis, as in Proposition~\ref{prop:steer}.) Such a joint selection certifies at the full levels at most the order of the inclusion bound $\ljit(\Lambda_v)/p$ of the residue sequence (Remark~\ref{rem:residuefull}), whatever $B$. \emph{Scope:} Proposition~\ref{prop:joint}(iii) concerns self-similar scrambles of one frame, full levels certified by the window bound of product windows with the covering of every line, and prefixes $P_{sK-1}$ certified by Theorem~\ref{thm:corrected} with a correction window maintained by the same covering. It does not exclude certificates from the actual responses along one specific choice of digits (covering only the lines that are actually reached, a choice that looks at later digits), non-product column windows, windows on several geometric digits, other certificates for the prefixes $P_{sK-1}$, or scrambles that are not self-similar (Section~\ref{sec:open}).

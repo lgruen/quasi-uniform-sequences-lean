@@ -1,0 +1,68 @@
+s 3 p 13 theta 1 brick -1 mode tri
+places 1 2 0
+rho 1 6 6
+kappa_row 0 2 -2
+kappa_row -3 0 3
+kappa_row 3 -3 0
+win 0 -5 -5 -6 6 -6 6
+win 1 -2 2 -7 -3 -6 6
+win 2 -3 3 -3 3 -8 0
+M 1 5 9
+W 2 3 3
+minS 4 LB 0.153846 worst 1 -1 -1
+superdiag 2 3
+order 1 0
+order 2 1 0
+frame 1/1 2/1 0/1 theta -12/1
+
+s 3 p 17 theta 5 brick -1 mode tri
+places 0 3 2
+rho 1 11 11
+kappa_row 0 2 3
+kappa_row -8 0 4
+kappa_row 1 6 0
+win 0 -6 -6 -8 8 -8 8
+win 1 -2 2 -10 -4 -8 8
+win 2 -4 4 -4 4 -7 0
+M 1 7 8
+W 2 4 4
+minS 4 LB 0.117647 worst 0 1 -1
+superdiag 2 4
+order 1 0
+order 2 1 0
+frame 0/1 3/1 2/1 theta -12/1
+
+s 3 p 23 theta 14 brick -1 mode tri
+places 0 1 2
+rho 1 5 19
+kappa_row 0 6 2
+kappa_row 1 0 6
+kappa_row -9 1 0
+win 0 -9 -9 -11 11 -11 11
+win 1 -6 6 -8 -6 -11 11
+win 2 -3 3 -6 6 -13 0
+M 1 3 14
+W 6 3 6
+minS 16 LB 0.173913 worst 1 -1 -1
+superdiag 6 6
+order 1 0
+order 2 1 0
+frame 0/1 1/1 2/1 theta -9/1
+
+s 3 p 31 theta 10 brick -1 mode tri
+places 0 1 27
+rho 1 11 4
+kappa_row 0 4 5
+kappa_row 9 0 2
+kappa_row -15 13 0
+win 0 -9 -9 -15 15 -15 15
+win 1 -4 4 -11 -5 -15 15
+win 2 -5 5 -5 5 -19 0
+M 1 7 20
+W 4 5 5
+minS 121 LB 0.354839 worst 0 0 1
+superdiag 4 2
+order 1 0
+order 2 0 1
+frame 0/1 1/1 -4/1 theta 10/1
+

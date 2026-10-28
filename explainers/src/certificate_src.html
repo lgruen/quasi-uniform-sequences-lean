@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certifying Separation</title>
+<meta name="description" content="Interactive companion to the paper on quasi-uniform digital sequences: geometric digits, carry responses, jumps and the digit relaxation that bounds the separation at every level.">
+<style>__CSS__
+.digrow { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; font-family: var(--mono); font-size: 13px; }
+.digrow .lab { min-width: 6.5em; color: var(--muted); font-family: var(--sans); }
+.d { display: inline-block; min-width: 1.6em; text-align: center; padding: 1px 3px; border-radius: 3px; background: var(--chip); }
+.d.cell { background: var(--chip); }
+.d.geo { background: var(--accent); color: var(--on-accent); }
+.d.jit { background: transparent; color: var(--muted); outline: 1px dashed var(--rule); outline-offset: -1px; }
+.lsel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.mask { font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; overflow-wrap: anywhere; }
+.mask .one { color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+<nav class="top" aria-label="Explainer pages">
+  <a href="index.html">1 · Why classical sequences cut corners</a>
+  <a href="residue.html">2 · One scramble that fixes it</a>
+  <a href="limits.html">3 · What exact rules can and cannot do</a>
+  <a href="certificate.html" aria-current="page">4 · How separation is certified</a>
+  <a href="practice.html">5 · In practice</a>
+  <span class="sp"></span><a href="#credits">Credits</a>
+</nav>
+<header class="prose">
+  <p class="eyebrow">Interactive companion · the digit relaxation</p>
+  <h1>How separation is certified</h1>
+  <p class="lede">A (0,2)-sequence puts one point in every cell at every full level. Separation is decided inside the cells: where each point sits, and how that position changes from a cell to its neighbour. This page shows how the paper turns that into a lower bound that holds at every level at once, following its running example, the brick wall W⁻ in base 7, and then the base-2 sequence of <span class="mono">thm:B2</span>.</p>
+</header>
+
+<!-- ===================================================== 1. geometric digits -->
+<section id="digits" aria-labelledby="h-digits">
+  <div class="sechead"><span class="secno">1</span><h2 id="h-digits">Geometric digits and jitter</h2></div>
+  <div class="prose">
+    <p>At level <i>K</i> the first <i>K</i> digits of each coordinate name the cell. The next digit, the <em>geometric digit</em> <i>r<sub>c</sub></i>, says in which seventh of the cell the point lies; the remaining digits, the <em>jitter</em>, move it by less than one seventh. The position predicted by the geometric digits alone is the <em>lattice image</em>. (Cells, geometric digits, jitter and lattice image are the notions of the <a class="cite" href="#ref-Gru26geo">companion nets paper</a>.) Click a cell of <i>P</i><sub>2</sub> (49 points, level 1) to read its point; the default is the paper's worked example, the index polynomial <i>V</i> = 3 + <i>z</i> (integer index 10).</p>
+  </div>
+  <div class="fig">
+    <div class="plot"><canvas id="cD" tabindex="0" role="img" aria-label="P_2 of the brick wall in base 7 with the selected cell enlarged"></canvas></div>
+    <div class="panel">
+      <div id="digOut"></div>
+      <p class="note">Arrow keys move the selected cell when the picture has focus.</p>
+    </div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">eq:cellunits</span><span class="ref">ex:running<span>running example</span></span><span class="ref">def:WF<span>brick wall</span></span></div>
+</section>
+
+<!-- ===================================================== 2. jumps -->
+<section id="disloc" aria-labelledby="h-disloc">
+  <div class="sechead"><span class="secno">2</span><h2 id="h-disloc">Carries and jumps</h2></div>
+  <div class="prose">
+    <p>Step from a cell to its right neighbour. The cell index <i>n</i><sub>0</sub> goes up by one, and its last <i>l</i> digits change, where <i>l</i> − 1 trailing digits were 6: the <em>carry length</em>. The geometric digits change by the <em>carry response</em> <i>D</i>(<i>l</i>), one column of residues per carry length. Where all steps have <i>l</i> = 1 the points form one sheared lattice. At a boundary of depth <i>l</i> ≥ 2 (every 7<sup><i>l</i>−1</sup>-th boundary) the lattice image changes by <i>D</i>(<i>l</i>) instead of <i>D</i>(1): a <em>jump of depth l</em>. Where a geometric digit wraps around modulo 7 the lattice is offset by a cell: a <em>slip plane</em>. For a self-similar scramble the responses do not depend on the level (<span class="mono">prop:law</span>), so the whole hierarchy repeats at every scale.</p>
+  </div>
+  <div class="fig wide">
+    <div class="plot wide" id="plotH"><canvas id="cH" role="img" aria-label="A window of cells of P_6 with boundaries shaded by depth and the steps along one row"></canvas></div>
+  </div>
+  <div class="panel" style="flex-direction:row;flex-wrap:wrap;gap:14px 28px;margin-top:12px">
+    <div class="ctl" style="min-width:240px;flex:1"><div class="row"><label for="hx">Window start <i>n</i><sub>0</sub></label><span class="val" id="hxv"></span></div><input type="range" id="hx" min="0" max="329" value="40"></div>
+    <div class="ctl" style="min-width:240px;flex:1"><div class="row"><label for="hy">Row <i>n</i><sub>1</sub> of the arrows</label><span class="val" id="hyv"></span></div><input type="range" id="hy" min="1" max="341" value="104"></div>
+  </div>
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw" style="background:var(--grid-strong);width:3px"></i>depth 1</span>
+    <span><i class="sw" style="background:var(--warm);width:3px"></i>depth 2</span>
+    <span><i class="sw" style="background:var(--bad);width:4px"></i>depth ≥ 3</span>
+    <span><i class="sw" style="border:1.5px dashed var(--warm);border-radius:50%;width:10px;height:10px"></i>where a carry-free step would have put the lattice image</span>
+  </div>
+  <div class="scrollx" style="margin-top:16px"><table class="t" id="tabRun"></table></div>
+  <p class="note" style="max-width:68ch">The carry responses of W⁻ for <i>l</i> = 1, …, 18, computed in your browser at level 19 from the generator matrices (and in <span class="mono">gen_data.py</span> at levels 19 and 20, which agree). Green: the two <em>constant</em> responses, the same for every <i>l</i> (the half of the brick wall, from the residue theorem, page 2). The other two are never eventually periodic (<span class="mono">prop:N2</span>).</p>
+  <div class="refs">In the paper: <span class="ref">sec:dislocations</span><span class="ref">fig:hierarchy</span><span class="ref">tab:running</span><span class="ref">prop:law</span></div>
+</section>
+
+<!-- ===================================================== 3. one coordinate -->
+<section id="gap" aria-labelledby="h-gap">
+  <div class="sechead"><span class="secno">3</span><h2 id="h-gap">The guaranteed gap in one coordinate</h2></div>
+  <div class="prose">
+    <p>Take one coordinate. The point sits at <i>R</i>/7 plus a jitter below 1/7; its neighbour sits at <i>e</i> + (<i>R</i> + <i>σ</i>)/7 plus its own jitter, where <i>e</i> = 1 if this coordinate moves to the next cell and <i>e</i> = 0 if it stays, and <i>σ</i> is the change of the geometric digit given by the carry response. We do not know <i>R</i>, so we take the worst one and subtract one seventh for the two jitters: that is the <em>guaranteed gap</em> <i>f</i><sub>1</sub>(<i>e</i>, <i>σ</i>). A backward shift of a moving coordinate is harmless; the forward shift by one is fatal (the two points can touch); a coordinate that stays is safe only when <i>σ</i> is near ±½.</p>
+  </div>
+  <div class="fig">
+    <div>
+      <div class="plot strip" style="height:170px"><canvas id="cG" role="img" aria-label="Two jitter bands on one coordinate axis and the gap between them"></canvas></div>
+      <div class="chartwrap" style="margin-top:12px"><svg id="barG" viewBox="0 0 640 210" role="img" aria-label="Guaranteed gap f_1 for every residue sigma, moving and staying coordinate"></svg></div>
+    </div>
+    <div class="panel">
+      <div class="ctl"><span id="eLab">This coordinate</span>
+        <div class="seg" role="group" aria-labelledby="eLab" id="eSeg">
+          <button class="btn" type="button" data-v="1" aria-pressed="true">moves (<i>e</i> = 1, own)</button>
+          <button class="btn" type="button" data-v="0" aria-pressed="false">stays (<i>e</i> = 0, cross)</button>
+        </div></div>
+      <div class="ctl"><div class="row"><label for="sg">Shift <i>σ</i> (mod 7)</label><span class="val" id="sgv"></span></div><input type="range" id="sg" min="-3" max="3" value="-3"></div>
+      <div class="ctl"><div class="row"><label for="rg">Position <i>R</i> of the point</label><span class="val" id="rgv"></span></div><input type="range" id="rg" min="0" max="6" value="3"></div>
+      <dl class="read" id="readG"></dl>
+    </div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">lem:cert<span>digit relaxation</span></span><span class="ref">rem:onedigit</span><span class="ref">fig:cert</span></div>
+</section>
+
+<!-- ===================================================== 4. neighbours: the digit relaxation -->
+<section id="cert" aria-labelledby="h-cert">
+  <div class="sechead"><span class="secno">4</span><h2 id="h-cert">Neighbours in the plane: the digit relaxation</h2></div>
+  <div class="prose">
+    <p>Two points two or more cells apart in some coordinate are at least one cell apart. So only the eight neighbours matter, four up to sign: right, up, diagonal and antidiagonal. For a step, each moving coordinate crosses a boundary of some carry length, the carry responses give the change <i>σ</i> of both geometric digits, and the two coordinate gaps add in squares. The bound LB<sub><i>j</i></sub> of the <em>digit relaxation</em> (<span class="mono">lem:cert</span>) is the minimum over all steps and all carry lengths. For a self-similar scramble the responses are the same at every level, so this one minimum bounds sep(<i>P</i><sub>2<i>K</i></sub>) for every <i>K</i> at once.</p>
+    <p>Choose a step and carry lengths. The picture shows the worst case in cell units: the point's jitter square at its worst position, the neighbour's jitter square shifted by the step and by <i>σ</i>, and the guaranteed gap. The panel also samples real neighbour pairs of the actual prefix with exactly these carry lengths and reports their smallest distance, which can never fall below the guarantee.</p>
+  </div>
+  <div class="fig">
+    <div>
+      <div class="plot"><canvas id="cC" role="img" aria-label="Worst case of the chosen step: two jitter squares and the guaranteed gap"></canvas></div>
+      <div class="legend" aria-hidden="true">
+        <span><i class="sw" style="background:var(--band);border:1px solid var(--jit)"></i>jitter square (point within it)</span>
+        <span><i class="sw" style="border:1.5px solid var(--accent);border-radius:50%;width:10px;height:10px"></i>lattice image</span>
+        <span><i class="sw" style="background:var(--warm);height:3px"></i>guaranteed gap</span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ctl"><span id="ncLab">Sequence</span>
+        <div class="seg" role="group" aria-labelledby="ncLab" id="ncSeg">
+          <button class="btn" type="button" data-v="wf7" aria-pressed="true">W⁻, <i>p</i> = 7 (<i>j</i> = 1)</button>
+          <button class="btn" type="button" data-v="b2" aria-pressed="false">base 2, <span class="mono">thm:B2</span> (<i>j</i> = 12)</button>
+        </div></div>
+      <div class="ctl"><span id="stLab">Step <i>e</i></span>
+        <div class="seg" role="group" aria-labelledby="stLab" id="stSeg">
+          <button class="btn" type="button" data-v="1,0" aria-pressed="true">→ (1, 0)</button>
+          <button class="btn" type="button" data-v="0,1" aria-pressed="false">↑ (0, 1)</button>
+          <button class="btn" type="button" data-v="1,1" aria-pressed="false">↗ (1, 1)</button>
+          <button class="btn" type="button" data-v="1,-1" aria-pressed="false">↘ (1, −1)</button>
+        </div></div>
+      <div class="lsel">
+        <div class="ctl"><div class="row"><label for="l0">carry <i>l</i><sub>0</sub></label><span class="val" id="l0v"></span></div><input type="range" id="l0" min="1" max="18" value="2"></div>
+        <div class="ctl"><div class="row"><label for="l1">carry <i>l</i><sub>1</sub></label><span class="val" id="l1v"></span></div><input type="range" id="l1" min="1" max="18" value="1"></div>
+      </div>
+      <dl class="read" id="readC"></dl>
+      <div id="realC" class="note"></div>
+    </div>
+  </div>
+  <h3 style="margin-top:26px">Every term, every carry length</h3>
+  <div class="scrollx"><table class="t" id="tabC"></table></div>
+  <p class="note" id="noteC" style="max-width:68ch"></p>
+  <div class="refs">In the paper: <span class="ref">lem:cert</span><span class="ref">rem:onedigit</span><span class="ref">thm:WF</span><span class="ref">thm:B2</span></div>
+</section>
+
+<!-- ===================================================== 5. B2: finitely many patterns -->
+<section id="octave" aria-labelledby="h-oct">
+  <div class="sechead"><span class="secno">5</span><h2 id="h-oct">Base 2: finitely many carry patterns</h2></div>
+  <div class="prose">
+    <p>In base 2 a response is not a small shift but a 12-bit mask XORed onto the geometric digits. Infinitely many carry lengths could give infinitely many masks; for the sequence of <span class="mono">thm:B2</span> they do not. The response to a carry of length <i>l</i> depends only on the <em>pattern</em> of <i>l</i>: its parity and the bits ⌊log<sub>2</sub> <i>n</i>⌋ mod 2 for <i>l</i> ≤ <i>n</i> ≤ <i>l</i> + 12. Every <i>l</i> ≥ 64 has the pattern of a smaller one, in a lower octave: long carries repeat short ones (<span class="mono">lem:octave</span>). So 63 carry lengths give all masks, 35 distinct 12-digit tuples, and the digit relaxation is one finite minimum. This sequence is a scramble of both coordinates of the two-dimensional Sobol' sequence (<a class="cite" href="#ref-Sob67">Sobol'</a>), with sep(<i>P</i><sub>2<i>K</i></sub>) ≥ 0.3678 for every <i>K</i> (computer-assisted). It answers a question of Dick, Goda and Suzuki (<a class="cite" href="#ref-DGS2">Part II</a>, Section 4.2): it is well-separated in their sense (their Def. 3.8). Both coordinates have to be scrambled: they showed that the scrambles (<i>L</i>, <i>P</i>) and (<i>I</i>, <i>LP</i>) in base 2 are not quasi-uniform (their Thm. 4.2), and <span class="mono">cor:unscrambled</span> extends this: while one coordinate stays a radical inverse up to a scalar, no fixed lower-triangular scramble of the others helps (page 1).</p>
+  </div>
+  <div class="fig">
+    <div class="panel">
+      <div class="ctl"><div class="row"><label for="lo">Carry length <i>l</i></label><span class="val" id="lov"></span></div><input type="range" id="lo" min="1" max="148" value="100"></div>
+      <div id="octOut"></div>
+    </div>
+    <div class="panel">
+      <button class="btn primary" type="button" id="runCert">Run the full base-2 bound (35 + 35 + 2 · 35² cases)</button>
+      <div id="certOut" class="verdict" aria-live="polite">Not run yet.</div>
+    </div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">lem:octave<span>long carries repeat short ones</span></span><span class="ref">thm:B2</span><span class="ref">fig:B2</span><span class="ref">fig:automaton</span></div>
+</section>
+
+<!-- ===================================================== 6. summary -->
+<section id="sum" aria-labelledby="h-sum">
+  <div class="sechead"><span class="secno">6</span><h2 id="h-sum">What remains</h2></div>
+  <div class="prose">
+    <p>The digit relaxation takes the worst position in each coordinate separately, so it is a valid lower bound without knowing where the points are, and it can be loose (base 2: certified 0.3678, exact sep(<i>P</i><sub>12</sub>) = 0.3968). Its only infinite input is the set of responses {<i>D</i>(<i>l</i>) : <i>l</i> ≥ 1}. Two responses of one column are never both eventually periodic (<span class="mono">prop:N2</span>), and in dimension two no scramble of the frame (0, 1; ∞) has a sheared lattice without jumps at two consecutive levels (<span class="mono">cor:N1</span>). The paper keeps the responses harmless in three ways: make a few of them constant by the residue theorem (<a href="residue.html">page 2</a>); keep the rest in windows of allowed values (<a href="limits.html">page 3</a>); or, in the smallest bases, choose frames whose responses take finitely many values, as in section 5 (<span class="mono">sec:frames</span>).</p>
+  </div>
+</section>
+<section class="credits" id="credits" aria-labelledby="h-credits">
+  <div class="sechead"><h2 id="h-credits">Credits and references</h2></div>
+  <div class="prose">
+    <p>Companion to L. Gruenschloss, <i>Low-discrepancy quasi-uniform digital sequences in every dimension</i> (draft v4, 2026), cited by its <span class="mono">\label</span> names. Results without a credit are from that paper. Where these pages call a statement new, it means: not found in the literature we searched (through October 2026).</p>
+    <p>On this page: cells, geometric digits, jitter and the lattice image come from the <a class="cite" href="#ref-Gru26geo">companion nets paper</a>; the question answered by the base-2 sequence is that of <a class="cite" href="#ref-DGS2">Dick, Goda and Suzuki</a> (Section 4.2), and the earlier base-2 negative result is their Theorem 4.2. The Sobol' sequence is due to <a class="cite" href="#ref-Sob67">Sobol'</a>.</p>
+  </div>
+  __BIB__
+</section>
+
+<footer>Points, responses and bounds on this page are computed in the browser from the generator matrices exported by <span class="mono">gen_data.py</span> (the brick wall from the residue formula of <span class="mono">paper/v4/figs/b3_gen.py</span>, identical to the builder <span class="mono">wbuild</span>; the base-2 sequence from <span class="mono">b2core</span>); its responses for <i>l</i> ≤ 160 come from the closed-form series of <span class="mono">prop:law</span> and agree with the generator matrices for <i>l</i> ≤ 70. Bounds are truncated.</footer>
+</div>
+<script>window.__SQDATA = __DATA__;</script>
+<script>
+__CORE__
+</script>
+<script>
+(() => {
+'use strict';
+const { nets, fmt, fmtDown, css, svgEl, DATA } = SQ;
+const P7 = 7;
+const sub = n => String(n).split('').map(d => '₀₁₂₃₄₅₆₇₈₉'[d]).join('');
+
+// ------------------------------------------------------------------ 1. digits of one point (level 1, W^-)
+const ds = { cell: [3, 1] };
+function drawDigits() {
+  const L = SQ.level('wf7', 1), { ctx, w } = SQ.fitCanvas(document.getElementById('cD'));
+  const cs = w / 7, INK = css('--ink'), ACC = css('--accent'), GS = css('--grid-strong'), GR = css('--grid'), JIT = css('--jit');
+  const [a, b] = ds.cell, X = x => x * cs, Y = y => w - y * cs;
+  ctx.fillStyle = css('--accent-soft'); ctx.fillRect(X(a), Y(b + 1), cs, cs);
+  ctx.strokeStyle = GR; ctx.lineWidth = 0.6; ctx.beginPath();
+  for (let t = 1; t < 7; t++) { ctx.moveTo(X(a + t / 7), Y(b)); ctx.lineTo(X(a + t / 7), Y(b + 1)); ctx.moveTo(X(a), Y(b + t / 7)); ctx.lineTo(X(a + 1), Y(b + t / 7)); }
+  ctx.stroke();
+  ctx.strokeStyle = GS; ctx.lineWidth = 1; ctx.beginPath();
+  for (let t = 0; t <= 7; t++) { const u = Math.round(t * cs) + 0.5; ctx.moveTo(u, 0); ctx.lineTo(u, w); ctx.moveTo(0, u); ctx.lineTo(w, u); }
+  ctx.stroke(); ctx.strokeStyle = ACC; ctx.lineWidth = 2; ctx.strokeRect(X(a), Y(b + 1), cs, cs);
+  for (let n0 = 0; n0 < 7; n0++) for (let n1 = 0; n1 < 7; n1++) {
+    const pt = L.at(n0, n1), ix = n0 + pt.r[0] / 7, iy = n1 + pt.r[1] / 7;
+    ctx.strokeStyle = JIT; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(ix), Y(iy)); ctx.lineTo(X(pt.x * 7), Y(pt.y * 7)); ctx.stroke();
+    ctx.beginPath(); ctx.arc(X(ix), Y(iy), 5, 0, 7); ctx.stroke();
+    ctx.fillStyle = INK; ctx.beginPath(); ctx.arc(X(pt.x * 7), Y(pt.y * 7), 3, 0, 7); ctx.fill();
+  }
+  const pt = L.at(a, b), dg = c => pt.dig[c].slice(0, 8).map((d, i) => `<span class="d ${i === 0 ? 'cell' : i === 1 ? 'geo' : 'jit'}">${d}</span>`).join('');
+  const im1 = [a + pt.r[0] / 7, b + pt.r[1] / 7], im2 = [a + (7 * pt.dig[0][1] + pt.dig[0][2]) / 49, b + (7 * pt.dig[1][1] + pt.dig[1][2]) / 49];
+  const v0 = pt.v % 7, v1 = Math.floor(pt.v / 7);
+  document.getElementById('digOut').innerHTML = `
+    <dl class="read" style="border:0;padding:0"><dt>cell n</dt><dd>(${a}, ${b})</dd><dt>index v</dt><dd>${pt.v} = ${v0} + ${v1}·7</dd></dl>
+    <div class="digrow" style="margin-top:10px"><span class="lab">digits of x</span>${dg(0)}</div>
+    <div class="digrow" style="margin-top:4px"><span class="lab">digits of y</span>${dg(1)}</div>
+    <p class="note" style="margin:6px 0 10px">grey: cell digit · blue: geometric digit · dashed: jitter digits</p>
+    <dl class="read"><dt>geometric digits (r₀, r₁)</dt><dd class="em">(${pt.r.join(', ')})</dd>
+    <dt>lattice image n + r/7</dt><dd>(${fmt(im1[0], 3)}, ${fmt(im1[1], 3)})</dd>
+    <dt>point 7y</dt><dd>(${fmt(pt.x * 7, 3)}, ${fmt(pt.y * 7, 3)})</dd>
+    <dt>jitter (below 1/7 = 0.143)</dt><dd>(${fmt(pt.x * 7 - im1[0], 3)}, ${fmt(pt.y * 7 - im1[1], 3)})</dd>
+    <dt>lattice image, two digits</dt><dd>(${fmt(im2[0], 3)}, ${fmt(im2[1], 3)})</dd></dl>`;
+}
+const cD = document.getElementById('cD');
+cD.addEventListener('click', e => { const r = cD.getBoundingClientRect(); ds.cell = [Math.min(6, Math.floor((e.clientX - r.left) / r.width * 7)), Math.min(6, Math.floor((r.bottom - e.clientY) / r.height * 7))]; drawDigits(); });
+cD.addEventListener('keydown', e => { const mv = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] }[e.key]; if (!mv) return; e.preventDefault(); ds.cell = ds.cell.map((v, i) => Math.max(0, Math.min(6, v + mv[i]))); drawDigits(); });
+
+// ------------------------------------------------------------------ 2. dislocation hierarchy (level 3, 343 x 343 cells)
+const hx = document.getElementById('hx'), hy = document.getElementById('hy');
+const carryLen = (n, q, K) => { let l = 1; while (l < K && n % q === q - 1) { n = Math.floor(n / q); l++; } return l; };   // step n -> n+1
+function drawHier() {
+  const K = 3, L = SQ.level('wf7', K), g = L.g, H = 10, x0 = +hx.value, row = +hy.value, y0 = Math.max(0, Math.min(g - H, row - 4));
+  const { ctx, w, h } = SQ.fitCanvas(document.getElementById('cH'));
+  const W = Math.max(6, Math.min(22, Math.floor((w - 30) / ((h - 26) / H)), g - x0));
+  document.getElementById('hxv').textContent = `${x0}–${x0 + W - 1}`; document.getElementById('hyv').textContent = row;
+  const cs = Math.min((w - 30) / W, (h - 26) / H), ox = 26, oy = h - 22, X = x => ox + (x - x0) * cs, Y = y => oy - (y - y0) * cs;
+  const col = l => l === 1 ? css('--grid-strong') : l === 2 ? css('--warm') : css('--bad');
+  for (let a = 0; a <= W; a++) { const l = carryLen((x0 + a - 1 + g) % g, 7, K); ctx.strokeStyle = col(l); ctx.lineWidth = l === 1 ? 0.8 : l === 2 ? 2.5 : 4; ctx.beginPath(); ctx.moveTo(X(x0 + a), Y(y0)); ctx.lineTo(X(x0 + a), Y(y0 + H)); ctx.stroke(); }
+  for (let b = 0; b <= H; b++) { const l = carryLen((y0 + b - 1 + g) % g, 7, K); ctx.strokeStyle = col(l); ctx.lineWidth = l === 1 ? 0.8 : l === 2 ? 2 : 3; ctx.globalAlpha = 0.55; ctx.beginPath(); ctx.moveTo(X(x0), Y(y0 + b)); ctx.lineTo(X(x0 + W), Y(y0 + b)); ctx.stroke(); ctx.globalAlpha = 1; }
+  ctx.fillStyle = css('--muted'); ctx.font = `11px ${css('--sans')}`; ctx.textAlign = 'center';
+  for (let a = 0; a < W; a += 2) ctx.fillText(String(x0 + a), X(x0 + a + 0.5), oy + 15);
+  ctx.textAlign = 'right'; for (let b = 0; b < H; b += 2) ctx.fillText(String(y0 + b), ox - 4, Y(y0 + b + 0.5) + 4); ctx.textAlign = 'left';
+  ctx.fillStyle = css('--accent-soft'); ctx.fillRect(X(x0), Y(row + 1), W * cs, cs);
+  const pts = {}, img = pt => [pt.n[0] + pt.r[0] / 7, pt.n[1] + pt.r[1] / 7];
+  for (let a = 0; a < W; a++) for (let b = 0; b < H; b++) {
+    const pt = L.at(x0 + a, y0 + b); pts[a + ',' + b] = pt; const [ix, iy] = img(pt);
+    ctx.strokeStyle = css('--jit'); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(ix), Y(iy)); ctx.lineTo(X(pt.x * g), Y(pt.y * g)); ctx.stroke();
+    ctx.beginPath(); ctx.arc(X(ix), Y(iy), Math.max(3, cs * 0.09), 0, 7); ctx.stroke();
+    ctx.fillStyle = css('--ink'); ctx.beginPath(); ctx.arc(X(pt.x * g), Y(pt.y * g), Math.max(1.8, cs * 0.05), 0, 7); ctx.fill();
+  }
+  const D1 = L.law(1, 0), b = row - y0, ACC = css('--accent'), WARM = css('--warm');
+  ctx.font = `600 ${Math.max(10, Math.round(cs * 0.24))}px ${css('--sans')}`;
+  for (let a = 0; a + 1 < W; a++) {
+    const u = pts[a + ',' + b], v = pts[(a + 1) + ',' + b], l = carryLen(x0 + a, 7, K), [ax, ay] = img(u), [bx, by] = img(v);
+    const dr = [(v.r[0] - u.r[0] + 7) % 7, (v.r[1] - u.r[1] + 7) % 7];
+    ctx.strokeStyle = l > 1 ? WARM : ACC; ctx.lineWidth = l > 1 ? 2.2 : 1.3; ctx.beginPath(); ctx.moveTo(X(ax), Y(ay)); ctx.lineTo(X(bx), Y(by)); ctx.stroke();
+    ctx.beginPath(); ctx.arc(X(bx), Y(by), 3, 0, 7); ctx.fillStyle = ctx.strokeStyle; ctx.fill();
+    if (l > 1) {
+      const pr = [(u.r[0] + D1[0][0]) % 7, (u.r[1] + D1[1][0]) % 7];
+      ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.arc(X(x0 + a + 1 + pr[0] / 7), Y(row + pr[1] / 7), Math.max(5, cs * 0.14), 0, 7); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = WARM; ctx.fillText(`D(${l}) = (${dr.join(',')})`, X(x0 + a + 0.6), Y(row + 1) - 4);
+    }
+  }
+  ctx.fillStyle = ACC; ctx.fillText(`D(1) = (${D1[0][0]},${D1[1][0]})`, X(x0) + 4, Y(row) + Math.max(12, cs * 0.3) + 2);
+}
+hx.addEventListener('input', drawHier); hy.addEventListener('input', drawHier);
+function runTable() {
+  const W = DATA.law.wf7, rows = [['O₀ own, step →', 0, 0], ['X₁←₀ cross, step →', 1, 0], ['O₁ own, step ↑', 1, 1], ['X₀←₁ cross, step ↑', 0, 1]];
+  const L8 = SQ.level('wf7', 8); let ok = true;
+  for (let l = 1; l <= 8; l++) for (const [, c, cp] of rows) if (L8.law(l, cp)[c][0] !== W[l - 1][0][c][cp]) ok = false;
+  let hd = '<tr><th><i>l</i></th>' + W.map((_, i) => `<th>${i + 1}</th>`).join('') + '</tr>';
+  for (const [lab, c, cp] of rows) {
+    const vals = W.map(t => t[0][c][cp]), frz = vals.every(v => v === vals[0]);
+    hd += `<tr><th>${lab}</th>` + vals.map(v => `<td class="${frz ? 'frz' : ''}">${v}</td>`).join('') + '</tr>';
+  }
+  document.getElementById('tabRun').innerHTML = hd;
+  document.getElementById('tabRun').insertAdjacentHTML('afterend', `<p class="note">Browser check at level 8, <i>l</i> ≤ 8: ${ok ? 'identical to the table' : 'MISMATCH'}.</p>`);
+}
+
+// ------------------------------------------------------------------ 3. the one-coordinate gap f_1
+const gs = { e: 1 }, sg = document.getElementById('sg'), rg = document.getElementById('rg');
+SQ.seg(document.getElementById('eSeg'), v => { gs.e = +v; drawGap(); });
+sg.addEventListener('input', drawGap); rg.addEventListener('input', drawGap);
+function drawGap() {
+  const e = gs.e, s = +sg.value, R = +rg.value, R2 = ((R + s) % 7 + 7) % 7;
+  document.getElementById('sgv').textContent = (s > 0 ? '+' : '') + s + (Math.abs(s) === 3 ? ' (≈ ∓½)' : '');
+  document.getElementById('rgv').textContent = R;
+  const { ctx, w, h } = SQ.fitCanvas(document.getElementById('cG'));
+  const lo = -0.08, hi = 2.08, X = t => 12 + (t - lo) / (hi - lo) * (w - 24), y1 = 36, y2 = 104;
+  ctx.fillStyle = css('--muted'); ctx.font = `12px ${css('--sans')}`;
+  for (let c = 0; c < 2; c++) {
+    ctx.strokeStyle = css('--grid-strong'); ctx.lineWidth = 1.4; ctx.strokeRect(X(c), y1 - 16, X(c + 1) - X(c), y2 - y1 + 34);
+    ctx.strokeStyle = css('--grid'); ctx.lineWidth = 1; ctx.beginPath(); for (let t = 1; t < 7; t++) { ctx.moveTo(X(c + t / 7), y1 - 16); ctx.lineTo(X(c + t / 7), y2 + 18); } ctx.stroke();
+    ctx.fillText(c === 0 ? 'cell of the point' : 'next cell', X(c) + 4, y2 + 34);
+  }
+  const band = (a, y, lab) => { ctx.fillStyle = css('--band'); ctx.fillRect(X(a), y - 9, X(a + 1 / 7) - X(a), 18); ctx.strokeStyle = css('--jit'); ctx.strokeRect(X(a), y - 9, X(a + 1 / 7) - X(a), 18);
+    ctx.strokeStyle = css('--accent'); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(X(a), y, 5, 0, 7); ctx.stroke(); ctx.lineWidth = 1; ctx.fillStyle = css('--ink'); ctx.fillText(lab, X(a) + 8, y - 13); };
+  const A = R / 7, B = e + R2 / 7;
+  band(A, y1, `point: R = ${R}`); band(B, y2, `neighbour: R ⊕ σ = ${R2}`);
+  const gap = Math.max(0, Math.abs(7 * e + R2 - R) - 1) / 7, f = SQ.f1(e, s, 7);
+  const [ga, gb] = B >= A ? [A + 1 / 7, B] : [B + 1 / 7, A];
+  if (gap > 0) { const ym = (y1 + y2) / 2; ctx.strokeStyle = css('--warm'); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(X(ga), ym); ctx.lineTo(X(gb), ym); ctx.stroke(); }
+  let worst = 0, wv = Infinity; for (let r = 0; r < 7; r++) { const v = Math.max(0, Math.abs(7 * e + ((r + s) % 7 + 7) % 7 - r) - 1) / 7; if (v < wv) { wv = v; worst = r; } }
+  document.getElementById('readG').innerHTML = `<dt>gap at this R</dt><dd>${gap === 0 ? '0 (can touch)' : (7 * gap) + '/7'}</dd><dt>worst position R</dt><dd>${worst}</dd><dt>guaranteed gap f₁(${e}, ${s})</dt><dd class="${f === 0 ? 'bad' : 'em'}">${7 * f}/7 = ${fmt(f)}</dd>`;
+  const svg = document.getElementById('barG'); svg.innerHTML = '';
+  const x0 = 50, x1 = 630, yb = 170, yt = 20, Yv = v => yb - (yb - yt) * v / 1, bw = (x1 - x0) / 7;
+  const gg = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12, fill: css('--muted') }, svg);
+  for (const t of [0, 0.5, 1]) { svgEl('line', { x1: x0, x2: x1, y1: Yv(t), y2: Yv(t), stroke: css('--grid') }, gg); svgEl('text', { x: x0 - 6, y: Yv(t) + 4, 'text-anchor': 'end' }, gg).textContent = t; }
+  for (let k = 0; k < 7; k++) {
+    const sv = k - 3, xm = x0 + bw * (k + 0.5);
+    for (const [ee, dx, cl] of [[1, -bw * 0.2, '--accent'], [0, bw * 0.2, '--warm']]) {
+      const v = SQ.f1(ee, sv, 7), cur = ee === e && sv === s;
+      svgEl('rect', { x: xm + dx - bw * 0.17, y: Yv(v), width: bw * 0.34, height: Math.max(1, yb - Yv(v)), fill: css(cl), opacity: cur ? 1 : 0.45, stroke: cur ? css('--ink') : 'none', 'stroke-width': 1.5 }, svg);
+    }
+    svgEl('text', { x: xm, y: yb + 16, 'text-anchor': 'middle' }, gg).textContent = (sv > 0 ? '+' : '') + sv;
+  }
+  svgEl('text', { x: x1, y: yb + 34, 'text-anchor': 'end' }, gg).textContent = 'σ (residue mod 7)';
+  const lg = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12 }, svg);
+  svgEl('rect', { x: x0 + 8, y: 2, width: 10, height: 10, fill: css('--accent') }, lg); svgEl('text', { x: x0 + 22, y: 11, fill: css('--muted') }, lg).textContent = 'moves, e = 1 (own response)';
+  svgEl('rect', { x: x0 + 230, y: 2, width: 10, height: 10, fill: css('--warm') }, lg); svgEl('text', { x: x0 + 244, y: 11, fill: css('--muted') }, lg).textContent = 'stays, e = 0 (cross response)';
+}
+
+// ------------------------------------------------------------------ 4. the certificate for one step
+const NC = {
+  wf7: { q: 7, j: 1, Lmax: 18, Kreal: 8, D: (l, c, cp) => DATA.law.wf7[l - 1][0][c][cp] },
+  b2: { q: 2, j: 12, Lmax: 148, Kreal: 10, D: (l, c, cp) => { let m = 0; const t = DATA.law.b2[l - 1]; for (let i = 0; i < 12; i++) m = 2 * m + t[i][c][cp]; return m; } },
+};
+const cs4 = { key: 'wf7', e: [1, 0] }, l0 = document.getElementById('l0'), l1 = document.getElementById('l1');
+const fCache = {};
+function fj(key, e, s) {                                  // f_j(e, sigma) as an integer numerator over q^j
+  const n = NC[key], Q = Math.pow(n.q, n.j), id = key + e + ':' + s; if (id in fCache) return fCache[id];
+  let best = Infinity, arg = 0;
+  for (let R = 0; R < Q; R++) { const R2 = n.q === 2 ? (R ^ s) : (R + s) % Q, d = Math.abs(e * Q + R2 - R); if (d < best) { best = d; arg = R; } }
+  return (fCache[id] = { F: Math.max(0, best - 1), R: arg });
+}
+function sigma(key, e, la, lb) {                          // change of the geometric digits of coordinates 0, 1
+  const n = NC[key], ls = [la, lb], out = [0, 0];
+  for (let c = 0; c < 2; c++) for (let cp = 0; cp < 2; cp++) if (e[cp]) {
+    const d = n.D(ls[cp], c, cp);
+    out[c] = n.q === 2 ? out[c] ^ d : (((out[c] + e[cp] * d) % n.q) + n.q) % n.q;
+  }
+  return out;
+}
+function term(key, e, la, lb) {
+  const n = NC[key], Q = Math.pow(n.q, n.j), s = sigma(key, e, la, lb), f = [0, 1].map(c => fj(key, e[c], s[c]));
+  return { s, f, F: f.map(x => x.F), Q, v: Math.hypot(f[0].F, f[1].F) / Q };
+}
+const showMask = (m, j) => j === 1 ? String(m) : m.toString(2).padStart(j, '0').split('').map(b => b === '1' ? '<span class="one">1</span>' : '0').join('');
+SQ.seg(document.getElementById('ncSeg'), v => { cs4.key = v; const n = NC[v]; l0.max = l1.max = n.Lmax; l0.value = Math.min(+l0.value, n.Lmax); l1.value = Math.min(+l1.value, n.Lmax); drawCert(); tableCert(); });
+SQ.seg(document.getElementById('stSeg'), v => { cs4.e = v.split(',').map(Number); drawCert(); });
+l0.addEventListener('input', drawCert); l1.addEventListener('input', drawCert);
+function realPairs(key, e, la, lb) {                      // sample actual neighbour pairs with these carry lengths
+  const n = NC[key], q = n.q, K = Math.min(n.Kreal, Math.max(e[0] ? la : 0, e[1] ? lb : 0) + 1);
+  if ((e[0] && la > K) || (e[1] && lb > K) || (e[0] && la >= n.Kreal) || (e[1] && lb >= n.Kreal)) return null;
+  const L = SQ.level(key, K), g = L.g; let seed = 12345, best = Infinity, cnt = 0;
+  const rnd = m => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed % m; };
+  const withCarry = l => l === K ? g - 1 : rnd(Math.pow(q, K - l)) * Math.pow(q, l) + rnd(q - 1) * Math.pow(q, l - 1) + Math.pow(q, l - 1) - 1;
+  for (let t = 0; t < 400; t++) {
+    const n0 = e[0] ? withCarry(la) : rnd(g), m1 = e[1] ? withCarry(lb) : rnd(g);
+    const n1 = e[1] === -1 ? m1 + 1 : m1;                  // a step -1 is the reverse of a +1 step from the lower cell
+    const A = L.at(n0, n1), B = L.at(n0 + e[0], n1 + e[1]);
+    const d = Math.sqrt(SQ.td2(A.x, A.y, B.x, B.y)) * g; if (d < best) best = d; cnt++;
+  }
+  return { K, best, cnt };
+}
+function drawCert() {
+  const key = cs4.key, n = NC[key], e = cs4.e, la = +l0.value, lb = +l1.value;
+  l0.disabled = !e[0]; l1.disabled = !e[1];
+  document.getElementById('l0v').textContent = e[0] ? la : '—'; document.getElementById('l1v').textContent = e[1] ? lb : '—';
+  const T = term(key, e, la, lb), Q = T.Q;
+  const { ctx, w } = SQ.fitCanvas(document.getElementById('cC'));
+  const xs = [Math.min(0, e[0]), Math.max(1, 1 + e[0])], ys = [Math.min(0, e[1]), Math.max(1, 1 + e[1])];
+  const span = Math.max(xs[1] - xs[0], ys[1] - ys[0]) + 0.3, sc = w / span, ox = (span - (xs[1] - xs[0])) / 2 - xs[0], oy = (span - (ys[1] - ys[0])) / 2 - ys[0];
+  const X = x => (x + ox) * sc, Y = y => w - (y + oy) * sc;
+  for (const [a, b] of [[0, 0], [e[0], e[1]]]) {
+    ctx.strokeStyle = css('--grid-strong'); ctx.lineWidth = 1.5; ctx.strokeRect(X(a), Y(b + 1), sc, sc);
+    if (n.q === 7) { ctx.strokeStyle = css('--grid'); ctx.lineWidth = 1; ctx.beginPath(); for (let t = 1; t < 7; t++) { ctx.moveTo(X(a + t / 7), Y(b)); ctx.lineTo(X(a + t / 7), Y(b + 1)); ctx.moveTo(X(a), Y(b + t / 7)); ctx.lineTo(X(a + 1), Y(b + t / 7)); } ctx.stroke(); }
+  }
+  ctx.fillStyle = css('--muted'); ctx.font = `12px ${css('--sans')}`; ctx.fillText('cell of the point', X(0) + 5, Y(0) - 6); ctx.fillText('neighbour cell', X(e[0]) + 5, Y(e[1] + 1) + 15);
+  const R = T.f.map(x => x.R), R2 = [0, 1].map(c => n.q === 2 ? R[c] ^ T.s[c] : (R[c] + T.s[c]) % Q);
+  const A = [R[0] / Q, R[1] / Q], B = [e[0] + R2[0] / Q, e[1] + R2[1] / Q], jw = Math.max(1 / Q, 0.012);
+  for (const P of [A, B]) {
+    ctx.fillStyle = css('--band'); ctx.fillRect(X(P[0]), Y(P[1] + jw), jw * sc, jw * sc); ctx.strokeStyle = css('--jit'); ctx.lineWidth = 1; ctx.strokeRect(X(P[0]), Y(P[1] + jw), jw * sc, jw * sc);
+    ctx.strokeStyle = css('--accent'); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(X(P[0]), Y(P[1]), 6, 0, 7); ctx.stroke();
+  }
+  const gx = [0, 1].map(c => { const lo = Math.min(A[c], B[c]), hi = Math.max(A[c], B[c]); return [lo + 1 / Q, Math.max(lo + 1 / Q, hi)]; });
+  const p1 = [A[0] <= B[0] ? gx[0][0] : gx[0][1], A[1] <= B[1] ? gx[1][0] : gx[1][1]], p2 = [A[0] <= B[0] ? gx[0][1] : gx[0][0], A[1] <= B[1] ? gx[1][1] : gx[1][0]];
+  ctx.strokeStyle = css('--warm'); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(X(p1[0]), Y(p1[1])); ctx.lineTo(X(p2[0]), Y(p2[1])); ctx.stroke();
+  const fs = T.F.map(F => n.q === 7 ? `${F}/7` : `${F}/4096`);
+  const rows = [['carry responses used', e.map((x, c) => x ? `D(${c ? lb : la}) col ${c}` : '').filter(Boolean).join(', ')],
+    ['σ₀ (change of x digits)', showMask(T.s[0], n.j)], ['σ₁ (change of y digits)', showMask(T.s[1], n.j)],
+    [`gap in x, f(${e[0]}, σ₀)`, fs[0]], [`gap in y, f(${e[1]}, σ₁)`, fs[1]]];
+  document.getElementById('readC').innerHTML = rows.map(([a, b]) => `<dt>${a}</dt><dd class="mask">${b}</dd>`).join('') + `<dt>guaranteed distance</dt><dd class="em">${fmtDown(T.v)}</dd>`;
+  const rp = realPairs(key, e, la, lb);
+  document.getElementById('realC').innerHTML = rp ? `Real pairs: ${rp.cnt} neighbour pairs of P<sub>${2 * rp.K}</sub> with these carry lengths, smallest distance <b>${fmt(rp.best)}</b> cells ${rp.best >= T.v - 1e-9 ? '≥' : '<'} ${fmtDown(T.v)}. The worst positions of the two coordinates need not occur in the same pair, so the real minimum is usually larger.`
+    : `Real pairs: sampled only for carry lengths below ${NC[key].Kreal} (the exported matrices reach level ${NC[key].Kreal}); the responses themselves are the same at every level.`;
+}
+function tableCert() {
+  const key = cs4.key, n = NC[key], Lt = Math.min(n.Lmax, key === 'wf7' ? 18 : 20);
+  const steps = [['→ (1, 0)', [1, 0]], ['↑ (0, 1)', [0, 1]], ['↗ (1, 1), min over l₁', [1, 1]], ['↘ (1, −1), min over l₁', [1, -1]]];
+  let html = '<tr><th>step \\ carry length l₀ (or l₁ for ↑)</th>' + Array.from({ length: Lt }, (_, i) => `<th>${i + 1}</th>`).join('') + '</tr>';
+  let gmin = Infinity, garg = '';
+  const cells = steps.map(([lab, e]) => Array.from({ length: Lt }, (_, i) => {
+    const l = i + 1; let v;
+    if (!e[0]) v = term(key, e, 1, l).v; else if (!e[1]) v = term(key, e, l, 1).v;
+    else { v = Infinity; for (let m = 1; m <= Lt; m++) v = Math.min(v, term(key, e, l, m).v); }
+    if (v < gmin - 1e-12) { gmin = v; garg = `step ${lab.split(' ')[0]}, l = ${l}`; }
+    return v;
+  }));
+  steps.forEach(([lab], k) => { html += `<tr><th>${lab}</th>` + cells[k].map(v => `<td class="${Math.abs(v - gmin) < 1e-12 ? 'warm' : ''}">${fmtDown(v, 3)}</td>`).join('') + '</tr>'; });
+  document.getElementById('tabC').innerHTML = html;
+  document.getElementById('noteC').innerHTML = key === 'wf7'
+    ? `Minimum over the carry lengths shown: <b>${fmtDown(gmin)}</b> (${garg}) = 2/7, the bound of <span class="mono">thm:WF</span> at p = 7. At l = 2 the own shift is +1, which is fatal on its own; the constant cross response ½ keeps the neighbours 2/7 apart. The table is finite, but the theorem covers every l by hand: coordinate 1 alone gives at least 2/7 on every step, because its responses are constant (thm:WF).`
+    : `Minimum over the carry lengths shown: <b>${fmtDown(gmin)}</b> (${garg}). The minimum over all l is the finite computation of section 5 below.`;
+}
+
+// ------------------------------------------------------------------ 5. B2: type of l and the octave shift
+const lo = document.getElementById('lo');
+const b2tuple = l => JSON.stringify(DATA.law.b2[l - 1]);
+const bitlog = n => Math.floor(Math.log2(n)) % 2;
+function octaveStep(l) {                                   // Lemma octave: a smaller l' of the same type (j = 12)
+  const k = Math.floor(Math.log2(l));
+  if (l + 12 < Math.pow(2, k + 1)) return Math.pow(2, k - 2) + (l % 2);
+  return l - 3 * Math.pow(2, k - 1);
+}
+function drawOct() {
+  const l = +lo.value; document.getElementById('lov').textContent = l;
+  const chain = [l]; while (chain[chain.length - 1] >= 64) chain.push(octaveStep(chain[chain.length - 1]));
+  const r = chain[chain.length - 1], same = b2tuple(l) === b2tuple(r);
+  const type = x => `parity ${x % 2}, bits ${Array.from({ length: 13 }, (_, i) => bitlog(x + i)).join('')}`;
+  const masks = x => ['O₀', 'X₁←₀', 'O₁', 'X₀←₁'].map((nm, k) => { const [c, cp] = [[0, 0], [1, 0], [1, 1], [0, 1]][k]; return `<div class="digrow"><span class="lab">${nm}</span><span class="mask">${showMask(NC.b2.D(x, c, cp), 12)}</span></div>`; }).join('');
+  let distinct = new Set(); for (let x = 1; x <= 63; x++) distinct.add(b2tuple(x));
+  document.getElementById('octOut').innerHTML = `
+    <dl class="read"><dt>pattern of l</dt><dd class="mask">${type(l)}</dd><dt>octave shifts</dt><dd>${chain.join(' → ')}</dd>
+    <dt>pattern of ${r}</dt><dd class="mask">${type(r)}</dd><dt>12-digit responses equal?</dt><dd class="${same ? 'good' : 'bad'}">${same ? 'yes' : 'no'}</dd>
+    <dt>distinct tuples, l ≤ 63</dt><dd>${distinct.size}</dd></dl>
+    <h3 style="margin-top:12px">Masks D<sub>i</sub>(${l}), digits K … K+11</h3>${masks(l)}`;
+}
+lo.addEventListener('input', drawOct);
+document.getElementById('runCert').addEventListener('click', () => {
+  const out = document.getElementById('certOut'), t0 = performance.now();
+  const reps = []; const seen = new Set(); for (let l = 1; l <= 63; l++) { const t = b2tuple(l); if (!seen.has(t)) { seen.add(t); reps.push(l); } }
+  let best = Infinity, arg = null, cases = 0;
+  const consider = (e, a, b) => { const T = term('b2', e, a, b), v = T.F[0] * T.F[0] + T.F[1] * T.F[1]; cases++; if (v < best) { best = v; arg = { e, a, b, T }; } };
+  for (const a of reps) { consider([1, 0], a, 1); consider([0, 1], 1, a); }
+  for (const a of reps) for (const b of reps) { consider([1, 1], a, b); consider([1, -1], a, b); }
+  const v = Math.sqrt(best) / 4096, T = arg.T;
+  out.className = 'verdict ' + (best === 2269618 ? 'good' : 'bad');
+  out.innerHTML = `${cases} cases in ${Math.round(performance.now() - t0)} ms. Minimum of f₁₂(e₀, σ₀)² + f₁₂(e₁, σ₁)², in units of 4096⁻²: <b>${best}</b>, so LB₁₂ = √${best}/4096 = <b>${fmtDown(v)}</b>${best === 2269618 ? ', as in <span class="mono">thm:B2</span>' : ''}. Binding case: step (${arg.e.join(', ')}) with l = ${arg.e[0] ? arg.a : arg.b}; σ₀ = <span class="mask">${showMask(T.s[0], 12)}</span> (gap ${T.F[0]}/4096), σ₁ = <span class="mask">${showMask(T.s[1], 12)}</span> (gap ${T.F[1]}/4096). The own mask lets the neighbour sit almost straight above or below, but the leading 1 of the cross mask staggers it by about half a cell.`;
+});
+
+drawDigits(); drawHier(); runTable(); drawGap(); drawCert(); tableCert(); drawOct();
+SQ.onRedraw(() => { drawDigits(); drawHier(); drawGap(); drawCert(); });
+})();
+</script>
+</body>
+</html>

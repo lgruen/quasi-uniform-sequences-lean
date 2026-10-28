@@ -1,0 +1,5859 @@
+s 4 p 47 theta 24 brick -1 mode tri
+places 0 5 1 6
+rho 1 15 14 25
+kappa_row 0 4 8 2
+kappa_row 13 0 2 -12
+kappa_row 2 -11 0 6
+kappa_row -19 -17 -7 0
+win 0 -22 -22 -23 23 -23 23 -23 23
+win 1 -4 4 -27 -17 -23 23 -23 23
+win 2 -8 8 -5 5 -36 -9 -23 23
+win 3 -10 10 -12 12 -9 9 -32 0
+M 1 11 28 33
+W 4 8 10 5 12 9
+minS 1 LB 0.021277 worst 0 0 1 -1
+superdiag 4 2 6
+order 1 0
+order 2 0 1
+order 3 1 2 0
+frame 0/1 5/1 1/1 6/1 theta 400/1
+member s4_k5 Gamma 46
+
+s 4 p 53 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 17 11 42
+kappa_row 0 7 3 -2
+kappa_row -26 0 12 -6
+kappa_row 24 -19 0 14
+kappa_row 23 -12 -13 0
+win 0 -24 -24 -26 26 -26 26 -26 26
+win 1 -7 7 -27 -21 -26 26 -26 26
+win 2 -6 6 -12 12 -34 -14 -26 26
+win 3 -11 11 -9 9 -14 14 -36 0
+M 1 7 21 37
+W 7 6 11 12 9 14
+minS 16 LB 0.075472 worst 1 -1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 49
+
+s 4 p 59 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 19 32 27
+kappa_row 0 7 3 -2
+kappa_row 29 0 12 -6
+kappa_row -12 -23 0 14
+kappa_row 17 6 -15 0
+win 0 -26 -26 -29 29 -29 29 -29 29
+win 1 -7 7 -31 -24 -29 29 -29 29
+win 2 -6 6 -12 12 -36 -14 -29 29
+win 3 -13 13 -12 12 -14 14 -41 0
+M 1 8 23 42
+W 7 6 13 12 12 14
+minS 9 LB 0.050847 worst 0 1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 56
+
+s 4 p 61 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 40 6 55
+kappa_row 0 7 3 -2
+kappa_row -11 0 12 -6
+kappa_row -19 -4 0 14
+kappa_row -11 -21 25 0
+win 0 -27 -27 -30 30 -30 30 -30 30
+win 1 -7 7 -31 -24 -30 30 -30 30
+win 2 -6 6 -12 12 -37 -14 -30 30
+win 3 -14 14 -12 12 -14 14 -43 0
+M 1 8 24 44
+W 7 6 14 12 12 14
+minS 25 LB 0.081967 worst 0 1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 56
+
+s 4 p 67 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 44 29 38
+kappa_row 0 7 3 -2
+kappa_row -13 0 12 -6
+kappa_row 2 -6 0 14
+kappa_row -7 -1 27 0
+win 0 -29 -29 -33 33 -33 33 -33 33
+win 1 -7 7 -32 -24 -33 33 -33 33
+win 2 -7 7 -12 12 -40 -14 -33 33
+win 3 -15 15 -12 12 -14 14 -47 0
+M 1 9 27 48
+W 7 7 15 12 12 14
+minS 64 LB 0.119403 worst 1 -1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 59
+
+s 4 p 71 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 23 15 56
+kappa_row 0 7 3 -2
+kappa_row 33 0 12 -6
+kappa_row 34 -31 0 14
+kappa_row -24 -17 -19 0
+win 0 -29 -29 -35 35 -35 35 -35 35
+win 1 -7 7 -32 -24 -35 35 -35 35
+win 2 -7 7 -12 12 -41 -14 -35 35
+win 3 -15 15 -12 12 -14 14 -49 0
+M 1 9 28 50
+W 7 7 15 12 12 14
+minS 144 LB 0.169014 worst 1 -1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 59
+
+s 4 p 73 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 48 56 17
+kappa_row 0 7 3 -2
+kappa_row -15 0 12 -6
+kappa_row 27 -8 0 14
+kappa_row 6 23 29 0
+win 0 -31 -31 -36 36 -36 36 -36 36
+win 1 -7 7 -36 -27 -36 36 -36 36
+win 2 -7 7 -12 12 -42 -14 -36 36
+win 3 -17 17 -15 15 -14 14 -52 0
+M 1 10 29 53
+W 7 7 17 12 15 14
+minS 81 LB 0.123288 worst 0 1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 64
+
+s 4 p 79 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 52 8 71
+kappa_row 0 7 3 -2
+kappa_row -17 0 12 -6
+kappa_row -23 -10 0 14
+kappa_row 30 -28 31 0
+win 0 -34 -34 -39 39 -39 39 -39 39
+win 1 -7 7 -37 -27 -39 39 -39 39
+win 2 -9 9 -12 12 -45 -14 -39 39
+win 3 -18 18 -15 15 -14 14 -56 0
+M 1 11 32 57
+W 7 9 18 12 15 14
+minS 100 LB 0.126582 worst 1 -1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 69
+
+s 4 p 83 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 27 73 10
+kappa_row 0 7 3 -2
+kappa_row 37 0 12 -6
+kappa_row 13 -39 0 14
+kappa_row -34 35 -23 0
+win 0 -34 -34 -41 41 -41 41 -41 41
+win 1 -7 7 -37 -27 -41 41 -41 41
+win 2 -9 9 -12 12 -46 -14 -41 41
+win 3 -18 18 -15 15 -14 14 -58 0
+M 1 11 33 59
+W 7 9 18 12 15 14
+minS 196 LB 0.168675 worst 1 -1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 69
+
+s 4 p 89 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 29 19 70
+kappa_row 0 7 3 -2
+kappa_row 39 0 12 -6
+kappa_row 44 -43 0 14
+kappa_row -10 -22 -25 0
+win 0 -37 -37 -44 44 -44 44 -44 44
+win 1 -7 7 -41 -30 -44 44 -44 44
+win 2 -10 10 -12 12 -49 -14 -44 44
+win 3 -20 20 -18 18 -14 14 -63 0
+M 1 12 36 64
+W 7 10 20 12 18 14
+minS 196 LB 0.157303 worst 1 -1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 75
+
+s 4 p 97 theta 28 brick -1 mode tri
+places 0 1 2 3
+rho 1 64 10 87
+kappa_row 0 7 3 -2
+kappa_row -23 0 12 -6
+kappa_row -27 -16 0 14
+kappa_row -6 -35 37 0
+win 0 -39 -39 -48 48 -48 48 -48 48
+win 1 -7 7 -42 -30 -48 48 -48 48
+win 2 -10 10 -12 12 -52 -14 -48 48
+win 3 -22 22 -18 18 -14 14 -69 0
+M 1 13 39 70
+W 7 10 22 12 18 14
+minS 324 LB 0.185567 worst 1 -1 -1 -1
+superdiag 7 12 14
+order 1 0
+order 2 1 0
+order 3 2 1 0
+frame 0/1 1/1 2/1 3/1 theta 28/1
+member s4_faure28 Gamma 79
+
+s 4 p 101 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 74 46 78
+kappa_row 0 5 15 -20
+kappa_row 27 0 6 -6
+kappa_row 23 17 0 2
+kappa_row 25 -7 17 0
+win 0 -40 -40 -50 50 -50 50 -50 50
+win 1 -5 5 -48 -30 -50 50 -50 50
+win 2 -15 15 -18 18 -41 -20 -50 50
+win 3 -20 20 -12 12 -20 20 -69 0
+M 1 19 22 70
+W 5 15 20 18 12 20
+minS 400 LB 0.198020 worst 1 -1 -1 -1
+superdiag 5 6 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 81
+
+s 4 p 103 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 40 8 99
+kappa_row 0 6 15 -20
+kappa_row -40 0 5 -5
+kappa_row 4 -41 0 2
+kappa_row -11 -12 -17 0
+win 0 -41 -41 -51 51 -51 51 -51 51
+win 1 -6 6 -42 -27 -51 51 -51 51
+win 2 -15 15 -15 15 -50 -25 -51 51
+win 3 -20 20 -12 12 -25 25 -75 0
+M 1 16 26 76
+W 6 15 20 15 12 25
+minS 400 LB 0.194175 worst 1 -1 -1 -1
+superdiag 6 5 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 83
+
+s 4 p 107 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 101 63 22
+kappa_row 0 6 15 -20
+kappa_row 6 0 5 -5
+kappa_row -22 43 0 2
+kappa_row -50 -41 18 0
+win 0 -41 -41 -53 53 -53 53 -53 53
+win 1 -6 6 -45 -29 -53 53 -53 53
+win 2 -15 15 -17 17 -53 -26 -53 53
+win 3 -20 20 -12 12 -26 26 -78 0
+M 1 17 28 79
+W 6 15 20 17 12 26
+minS 576 LB 0.224299 worst 1 -1 -1 -1
+superdiag 6 5 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 83
+
+s 4 p 109 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 6 23 43
+kappa_row 0 6 15 -20
+kappa_row -6 0 5 -5
+kappa_row -43 22 0 2
+kappa_row -29 20 -18 0
+win 0 -41 -41 -54 54 -54 54 -54 54
+win 1 -6 6 -45 -29 -54 54 -54 54
+win 2 -15 15 -17 17 -53 -26 -54 54
+win 3 -20 20 -12 12 -26 26 -79 0
+M 1 17 28 80
+W 6 15 20 17 12 26
+minS 676 LB 0.238532 worst 1 -1 -1 -1
+superdiag 6 5 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 83
+
+s 4 p 113 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 69 59 27
+kappa_row 0 6 15 -20
+kappa_row 44 0 5 -5
+kappa_row -27 -45 0 2
+kappa_row -3 -32 19 0
+win 0 -41 -41 -56 56 -56 56 -56 56
+win 1 -6 6 -46 -29 -56 56 -56 56
+win 2 -15 15 -17 17 -55 -27 -56 56
+win 3 -20 20 -12 12 -27 27 -82 0
+M 1 18 29 83
+W 6 15 20 17 12 27
+minS 900 LB 0.265487 worst 1 -1 -1 -1
+superdiag 6 5 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 83
+
+s 4 p 127 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 7 103 12
+kappa_row 0 6 15 -20
+kappa_row -7 0 5 -5
+kappa_row -12 51 0 2
+kappa_row 41 36 -21 0
+win 0 -41 -41 -63 63 -63 63 -63 63
+win 1 -6 6 -54 -35 -63 63 -63 63
+win 2 -15 15 -20 20 -63 -31 -63 63
+win 3 -20 20 -15 15 -31 31 -93 0
+M 1 20 33 94
+W 6 15 20 20 15 31
+minS 1024 LB 0.251969 worst 0 0 1 -1
+superdiag 6 5 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 95
+
+s 4 p 131 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 80 57 37
+kappa_row 0 6 18 -24
+kappa_row 51 0 6 -6
+kappa_row -37 22 0 2
+kappa_row 25 -20 22 0
+win 0 -48 -48 -65 65 -65 65 -65 65
+win 1 -6 6 -56 -36 -65 65 -65 65
+win 2 -18 18 -21 21 -53 -26 -65 65
+win 3 -24 24 -15 15 -26 26 -90 0
+M 1 21 28 91
+W 6 18 24 21 15 26
+minS 1156 LB 0.259542 worst 1 -1 -1 -1
+superdiag 6 6 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 97
+
+s 4 p 137 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 38 52 111
+kappa_row 0 6 18 -24
+kappa_row -38 0 6 -6
+kappa_row 26 23 0 2
+kappa_row -58 59 23 0
+win 0 -48 -48 -68 68 -68 68 -68 68
+win 1 -6 6 -57 -36 -68 68 -68 68
+win 2 -18 18 -21 21 -55 -27 -68 68
+win 3 -24 24 -15 15 -27 27 -94 0
+M 1 22 29 95
+W 6 18 24 21 15 27
+minS 1600 LB 0.291971 worst 1 -1 -1 -1
+superdiag 6 6 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 97
+
+s 4 p 139 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 54 9 65
+kappa_row 0 6 18 -24
+kappa_row -54 0 6 -6
+kappa_row -65 -23 0 2
+kappa_row -69 56 -23 0
+win 0 -48 -48 -69 69 -69 69 -69 69
+win 1 -6 6 -57 -36 -69 69 -69 69
+win 2 -18 18 -21 21 -57 -28 -69 69
+win 3 -24 24 -15 15 -28 28 -96 0
+M 1 22 30 97
+W 6 18 24 21 15 28
+minS 1764 LB 0.302158 worst 1 -1 -1 -1
+superdiag 6 6 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 97
+
+s 4 p 149 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 91 40 129
+kappa_row 0 6 18 -24
+kappa_row 58 0 6 -6
+kappa_row 20 25 0 2
+kappa_row -64 -60 25 0
+win 0 -48 -48 -74 74 -74 74 -74 74
+win 1 -6 6 -65 -42 -74 74 -74 74
+win 2 -18 18 -24 24 -61 -30 -74 74
+win 3 -24 24 -18 18 -30 30 -103 0
+M 1 24 32 104
+W 6 18 24 24 18 30
+minS 1681 LB 0.275168 worst 0 1 -1 -1
+superdiag 6 6 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 108
+
+s 4 p 151 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 109 144 79
+kappa_row 0 6 18 -24
+kappa_row 42 0 6 -6
+kappa_row 72 -25 0 2
+kappa_row 8 -65 -25 0
+win 0 -48 -48 -75 75 -75 75 -75 75
+win 1 -6 6 -65 -42 -75 75 -75 75
+win 2 -18 18 -24 24 -63 -31 -75 75
+win 3 -24 24 -18 18 -31 31 -105 0
+M 1 24 33 106
+W 6 18 24 24 18 31
+minS 1849 LB 0.284768 worst 0 1 -1 -1
+superdiag 6 6 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 108
+
+s 4 p 157 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 61 141 8
+kappa_row 0 6 18 -24
+kappa_row -61 0 6 -6
+kappa_row -8 -26 0 2
+kappa_row 34 24 -26 0
+win 0 -48 -48 -78 78 -78 78 -78 78
+win 1 -6 6 -66 -42 -78 78 -78 78
+win 2 -18 18 -24 24 -65 -32 -78 78
+win 3 -24 24 -18 18 -32 32 -109 0
+M 1 25 34 110
+W 6 18 24 24 18 32
+minS 2209 LB 0.299363 worst 0 0 0 1
+superdiag 6 6 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 110
+
+s 4 p 163 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 9 141 11
+kappa_row 0 6 21 -28
+kappa_row -9 0 7 -7
+kappa_row -11 70 0 2
+kappa_row 35 33 -27 0
+win 0 -55 -55 -81 81 -81 81 -81 81
+win 1 -6 6 -66 -41 -81 81 -81 81
+win 2 -21 21 -24 24 -57 -28 -81 81
+win 3 -28 28 -17 17 -28 28 -108 0
+M 1 26 30 109
+W 6 21 28 24 17 28
+minS 2704 LB 0.319018 worst 1 -1 -1 -1
+superdiag 6 7 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 111
+
+s 4 p 167 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 102 110 112
+kappa_row 0 6 21 -28
+kappa_row 65 0 7 -7
+kappa_row 55 24 0 2
+kappa_row -31 2 28 0
+win 0 -55 -55 -83 83 -83 83 -83 83
+win 1 -6 6 -67 -41 -83 83 -83 83
+win 2 -21 21 -24 24 -57 -28 -83 83
+win 3 -28 28 -17 17 -28 28 -110 0
+M 1 27 30 111
+W 6 21 28 24 17 28
+minS 3136 LB 0.335329 worst 1 -1 -1 -1
+superdiag 6 7 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 111
+
+s 4 p 173 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 140 81 46
+kappa_row 0 7 21 -28
+kappa_row 33 0 6 -6
+kappa_row -46 29 0 2
+kappa_row -82 -12 29 0
+win 0 -56 -56 -86 86 -86 86 -86 86
+win 1 -7 7 -65 -42 -86 86 -86 86
+win 2 -21 21 -24 24 -69 -34 -86 86
+win 3 -28 28 -18 18 -34 34 -119 0
+M 1 24 36 120
+W 7 21 28 24 18 34
+minS 2809 LB 0.306358 worst 0 0 0 1
+superdiag 7 6 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 120
+
+s 4 p 179 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 169 58 100
+kappa_row 0 6 18 -36
+kappa_row 10 0 6 -9
+kappa_row 29 30 0 3
+kappa_row -31 -58 20 0
+win 0 -60 -60 -89 89 -89 89 -89 89
+win 1 -6 6 -73 -45 -89 89 -89 89
+win 2 -18 18 -27 27 -71 -34 -89 89
+win 3 -36 36 -18 18 -34 34 -81 0
+M 1 29 38 82
+W 6 18 36 27 18 34
+minS 3364 LB 0.324022 worst 1 -1 -1 -1
+superdiag 6 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 121
+
+s 4 p 181 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 10 62 100
+kappa_row 0 6 18 -36
+kappa_row -10 0 6 -9
+kappa_row 31 -30 0 3
+kappa_row 9 -62 -20 0
+win 0 -60 -60 -90 90 -90 90 -90 90
+win 1 -6 6 -73 -45 -90 90 -90 90
+win 2 -18 18 -27 27 -74 -36 -90 90
+win 3 -36 36 -18 18 -36 36 -83 0
+M 1 29 39 84
+W 6 18 36 27 18 36
+minS 3600 LB 0.331492 worst 1 -1 -1 -1
+superdiag 6 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 121
+
+s 4 p 191 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 53 126 128
+kappa_row 0 6 24 -32
+kappa_row -53 0 8 -8
+kappa_row 63 24 0 2
+kappa_row 7 2 32 0
+win 0 -62 -62 -95 95 -95 95 -95 95
+win 1 -6 6 -78 -48 -95 95 -95 95
+win 2 -24 24 -28 28 -57 -28 -95 95
+win 3 -32 32 -20 20 -28 28 -122 0
+M 1 31 30 123
+W 6 24 32 28 20 28
+minS 4096 LB 0.335079 worst 0 1 -1 -1
+superdiag 6 8 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 127
+
+s 4 p 193 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 75 130 128
+kappa_row 0 6 24 -32
+kappa_row -75 0 8 -8
+kappa_row 65 -24 0 2
+kappa_row 93 -2 -32 0
+win 0 -62 -62 -96 96 -96 96 -96 96
+win 1 -6 6 -78 -48 -96 96 -96 96
+win 2 -24 24 -28 28 -59 -29 -96 96
+win 3 -32 32 -20 20 -29 29 -124 0
+M 1 31 31 125
+W 6 24 32 28 20 29
+minS 4356 LB 0.341969 worst 0 1 -1 -1
+superdiag 6 8 2
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 127
+
+s 4 p 197 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 186 158 118
+kappa_row 0 9 24 -32
+kappa_row -82 0 8 -8
+kappa_row 20 68 0 3
+kappa_row 46 -60 -49 0
+win 0 -65 -65 -98 98 -98 98 -98 98
+win 1 -9 9 -76 -56 -98 98 -98 98
+win 2 -24 24 -32 32 -76 -45 -98 98
+win 3 -32 32 -24 24 -45 45 -94 0
+M 1 21 32 95
+W 9 24 32 32 24 45
+minS 4096 LB 0.324873 worst 0 1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 133
+
+s 4 p 199 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 11 114 142
+kappa_row 0 9 24 -32
+kappa_row 83 0 8 -8
+kappa_row -14 -93 0 3
+kappa_row -90 42 50 0
+win 0 -65 -65 -99 99 -99 99 -99 99
+win 1 -9 9 -76 -56 -99 99 -99 99
+win 2 -24 24 -32 32 -76 -45 -99 99
+win 3 -32 32 -24 24 -45 45 -95 0
+M 1 21 32 96
+W 9 24 32 32 24 45
+minS 4356 LB 0.331658 worst 0 1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 133
+
+s 4 p 211 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 82 200 111
+kappa_row 0 9 24 -32
+kappa_row 88 0 8 -8
+kappa_row -61 86 0 3
+kappa_row 87 -28 53 0
+win 0 -65 -65 -105 105 -105 105 -105 105
+win 1 -9 9 -78 -56 -105 105 -105 105
+win 2 -24 24 -32 32 -81 -48 -105 105
+win 3 -32 32 -24 24 -48 48 -101 0
+M 1 23 34 102
+W 9 24 32 32 24 48
+minS 5776 LB 0.360190 worst 0 1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 135
+
+s 4 p 223 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 138 23 141
+kappa_row 0 7 21 -42
+kappa_row 85 0 6 -9
+kappa_row -100 -37 0 3
+kappa_row -90 -64 -99 0
+win 0 -70 -70 -111 111 -111 111 -111 111
+win 1 -7 7 -82 -52 -111 111 -111 111
+win 2 -21 21 -30 30 -89 -43 -111 111
+win 3 -42 42 -22 22 -43 43 -102 0
+M 1 31 47 103
+W 7 21 42 30 22 43
+minS 6724 LB 0.367713 worst 1 -1 -1 -1
+superdiag 7 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 141
+
+s 4 p 227 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 54 9 224
+kappa_row 0 7 21 -42
+kappa_row -54 0 6 -9
+kappa_row -109 38 0 3
+kappa_row 76 103 101 0
+win 0 -70 -70 -113 113 -113 113 -113 113
+win 1 -7 7 -83 -52 -113 113 -113 113
+win 2 -21 21 -30 30 -91 -45 -113 113
+win 3 -42 42 -22 22 -45 45 -104 0
+M 1 32 47 105
+W 7 21 42 30 22 45
+minS 7396 LB 0.378855 worst 1 -1 -1 -1
+superdiag 7 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 141
+
+s 4 p 229 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 109 209 83
+kappa_row 0 7 21 -42
+kappa_row -109 0 6 -9
+kappa_row -10 -38 0 3
+kappa_row -111 -53 51 0
+win 0 -70 -70 -114 114 -114 114 -114 114
+win 1 -7 7 -83 -52 -114 114 -114 114
+win 2 -21 21 -30 30 -92 -45 -114 114
+win 3 -42 42 -22 22 -45 45 -105 0
+M 1 32 48 106
+W 7 21 42 30 22 45
+minS 7744 LB 0.384279 worst 1 -1 -1 -1
+superdiag 7 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 141
+
+s 4 p 233 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 122 98 45
+kappa_row 0 7 21 -42
+kappa_row 111 0 6 -9
+kappa_row 49 39 0 3
+kappa_row -5 41 26 0
+win 0 -70 -70 -116 116 -116 116 -116 116
+win 1 -7 7 -87 -55 -116 116 -116 116
+win 2 -21 21 -33 33 -93 -45 -116 116
+win 3 -42 42 -22 22 -45 45 -106 0
+M 1 33 49 107
+W 7 21 42 33 22 45
+minS 8100 LB 0.386266 worst 0 1 -1 -1
+superdiag 7 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 143
+
+s 4 p 239 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 91 55 141
+kappa_row 0 7 21 -42
+kappa_row -91 0 6 -9
+kappa_row -92 40 0 3
+kappa_row 64 -104 -53 0
+win 0 -70 -70 -119 119 -119 119 -119 119
+win 1 -7 7 -87 -55 -119 119 -119 119
+win 2 -21 21 -33 33 -95 -46 -119 119
+win 3 -42 42 -22 22 -46 46 -109 0
+M 1 33 50 110
+W 7 21 42 33 22 46
+minS 9216 LB 0.401674 worst 0 1 -1 -1
+superdiag 7 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 143
+
+s 4 p 241 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 218 197 95
+kappa_row 0 7 21 -42
+kappa_row 23 0 6 -9
+kappa_row -22 -40 0 3
+kappa_row 43 -29 -107 0
+win 0 -70 -70 -120 120 -120 120 -120 120
+win 1 -7 7 -88 -55 -120 120 -120 120
+win 2 -21 21 -33 33 -96 -46 -120 120
+win 3 -42 42 -22 22 -46 46 -110 0
+M 1 34 51 111
+W 7 21 42 33 22 46
+minS 9409 LB 0.402490 worst 0 1 -1 -1
+superdiag 7 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 144
+
+s 4 p 251 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 239 249 168
+kappa_row 0 7 21 -42
+kappa_row 12 0 6 -9
+kappa_row -1 42 0 3
+kappa_row 65 86 28 0
+win 0 -70 -70 -125 125 -125 125 -125 125
+win 1 -7 7 -89 -55 -125 125 -125 125
+win 2 -21 21 -33 33 -99 -48 -125 125
+win 3 -42 42 -22 22 -48 48 -114 0
+M 1 35 52 115
+W 7 21 42 33 22 48
+minS 10609 LB 0.410359 worst 0 0 1 -1
+superdiag 7 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 148
+
+s 4 p 257 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 182 116 47
+kappa_row 0 8 24 -48
+kappa_row 75 0 6 -9
+kappa_row 58 43 0 3
+kappa_row 109 -69 -57 0
+win 0 -80 -80 -128 128 -128 128 -128 128
+win 1 -8 8 -82 -52 -128 128 -128 128
+win 2 -24 24 -30 30 -100 -49 -128 128
+win 3 -48 48 -22 22 -49 49 -117 0
+M 1 31 52 118
+W 8 24 48 30 22 49
+minS 9216 LB 0.373541 worst 1 -1 -1 -1
+superdiag 8 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 161
+
+s 4 p 263 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 252 42 249
+kappa_row 0 8 24 -48
+kappa_row 11 0 6 -9
+kappa_row 21 44 0 3
+kappa_row 60 -56 117 0
+win 0 -80 -80 -131 131 -131 131 -131 131
+win 1 -8 8 -83 -52 -131 131 -131 131
+win 2 -24 24 -30 30 -103 -51 -131 131
+win 3 -48 48 -22 22 -51 51 -120 0
+M 1 32 53 121
+W 8 24 48 30 22 51
+minS 10404 LB 0.387833 worst 1 -1 -1 -1
+superdiag 8 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 161
+
+s 4 p 269 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 56 99 236
+kappa_row 0 8 24 -48
+kappa_row -56 0 6 -9
+kappa_row -85 45 0 3
+kappa_row -86 -132 30 0
+win 0 -80 -80 -134 134 -134 134 -134 134
+win 1 -8 8 -87 -55 -134 134 -134 134
+win 2 -24 24 -33 33 -105 -51 -134 134
+win 3 -48 48 -22 22 -51 51 -122 0
+M 1 33 55 123
+W 8 24 48 33 22 51
+minS 11664 LB 0.401487 worst 1 -1 -1 -1
+superdiag 8 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 161
+
+s 4 p 271 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 79 239 101
+kappa_row 0 8 24 -48
+kappa_row -79 0 6 -9
+kappa_row -16 -45 0 3
+kappa_row 49 133 -30 0
+win 0 -80 -80 -135 135 -135 135 -135 135
+win 1 -8 8 -87 -55 -135 135 -135 135
+win 2 -24 24 -33 33 -107 -52 -135 135
+win 3 -48 48 -22 22 -52 52 -124 0
+M 1 33 56 125
+W 8 24 48 33 22 52
+minS 12100 LB 0.405904 worst 1 -1 -1 -1
+superdiag 8 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 161
+
+s 4 p 277 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 150 25 84
+kappa_row 0 8 24 -48
+kappa_row 127 0 6 -9
+kappa_row -126 -46 0 3
+kappa_row 83 59 -123 0
+win 0 -80 -80 -138 138 -138 138 -138 138
+win 1 -8 8 -88 -55 -138 138 -138 138
+win 2 -24 24 -33 33 -108 -52 -138 138
+win 3 -48 48 -22 22 -52 52 -126 0
+M 1 34 57 127
+W 8 24 48 33 22 52
+minS 13456 LB 0.418773 worst 1 -1 -1 -1
+superdiag 8 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 161
+
+s 4 p 281 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 14 96 233
+kappa_row 0 10 30 -40
+kappa_row -21 0 9 -9
+kappa_row 72 -70 0 3
+kappa_row 8 41 -70 0
+win 0 -80 -80 -140 140 -140 140 -140 140
+win 1 -10 10 -93 -67 -140 140 -140 140
+win 2 -30 30 -40 40 -94 -55 -140 140
+win 3 -40 40 -27 27 -55 55 -129 0
+M 1 27 40 130
+W 10 30 40 40 27 55
+minS 14400 LB 0.427046 worst 1 -1 -1 -1
+superdiag 10 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 161
+
+s 4 p 283 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 224 226 19
+kappa_row 0 8 24 -48
+kappa_row 59 0 6 -9
+kappa_row 113 -47 0 3
+kappa_row -65 76 63 0
+win 0 -80 -80 -141 141 -141 141 -141 141
+win 1 -8 8 -89 -55 -141 141 -141 141
+win 2 -24 24 -33 33 -111 -54 -141 141
+win 3 -48 48 -22 22 -54 54 -129 0
+M 1 35 58 130
+W 8 24 48 33 22 54
+minS 13689 LB 0.413428 worst 0 0 1 -1
+superdiag 8 6 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 166
+
+s 4 p 293 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 249 188 199
+kappa_row 0 10 30 -40
+kappa_row 66 0 9 -9
+kappa_row 141 -73 0 3
+kappa_row -82 116 -73 0
+win 0 -80 -80 -146 146 -146 146 -146 146
+win 1 -10 10 -99 -71 -146 146 -146 146
+win 2 -30 30 -40 40 -98 -58 -146 146
+win 3 -40 40 -31 31 -58 58 -135 0
+M 1 29 41 136
+W 10 30 40 40 31 58
+minS 14884 LB 0.416382 worst 0 1 -1 -1
+superdiag 10 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 171
+
+s 4 p 307 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 293 100 257
+kappa_row 0 11 33 -44
+kappa_row 21 0 9 -9
+kappa_row 75 77 0 3
+kappa_row -94 32 77 0
+win 0 -88 -88 -153 153 -153 153 -153 153
+win 1 -11 11 -93 -67 -153 153 -153 153
+win 2 -33 33 -40 40 -102 -60 -153 153
+win 3 -44 44 -27 27 -60 60 -141 0
+M 1 27 43 142
+W 11 33 44 40 27 60
+minS 16900 LB 0.423453 worst 1 -1 -1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 177
+
+s 4 p 311 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 212 139 86
+kappa_row 0 11 33 -44
+kappa_row -7 0 9 -9
+kappa_row -129 78 0 3
+kappa_row -118 -149 78 0
+win 0 -88 -88 -155 155 -155 155 -155 155
+win 1 -11 11 -98 -71 -155 155 -155 155
+win 2 -33 33 -40 40 -103 -61 -155 155
+win 3 -44 44 -31 31 -61 61 -143 0
+M 1 28 43 144
+W 11 33 44 40 31 61
+minS 17956 LB 0.430868 worst 1 -1 -1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 177
+
+s 4 p 313 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 128 230 198
+kappa_row 0 11 33 -44
+kappa_row 121 0 9 -9
+kappa_row 16 -78 0 3
+kappa_row -33 150 -78 0
+win 0 -88 -88 -156 156 -156 156 -156 156
+win 1 -11 11 -98 -71 -156 156 -156 156
+win 2 -33 33 -40 40 -103 -61 -156 156
+win 3 -44 44 -31 31 -61 61 -144 0
+M 1 28 43 145
+W 11 33 44 40 31 61
+minS 18496 LB 0.434505 worst 1 -1 -1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 177
+
+s 4 p 317 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 72 12 311
+kappa_row 0 11 33 -44
+kappa_row -108 0 9 -9
+kappa_row 9 -79 0 3
+kappa_row 1 -33 -79 0
+win 0 -88 -88 -158 158 -158 158 -158 158
+win 1 -11 11 -98 -71 -158 158 -158 158
+win 2 -33 33 -40 40 -106 -63 -158 158
+win 3 -44 44 -31 31 -63 63 -146 0
+M 1 28 44 147
+W 11 33 44 40 31 63
+minS 19600 LB 0.441640 worst 1 -1 -1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 177
+
+s 4 p 331 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 15 168 247
+kappa_row 0 11 33 -44
+kappa_row 143 0 9 -9
+kappa_row 126 83 0 3
+kappa_row 14 -131 83 0
+win 0 -88 -88 -165 165 -165 165 -165 165
+win 1 -11 11 -99 -71 -165 165 -165 165
+win 2 -33 33 -40 40 -108 -64 -165 165
+win 3 -44 44 -31 31 -64 64 -152 0
+M 1 29 45 153
+W 11 33 44 40 31 64
+minS 23716 LB 0.465257 worst 1 -1 -1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 177
+
+s 4 p 337 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 291 217 60
+kappa_row 0 11 33 -44
+kappa_row 69 0 9 -9
+kappa_row -90 -84 0 3
+kappa_row -10 -7 -84 0
+win 0 -88 -88 -168 168 -168 168 -168 168
+win 1 -11 11 -105 -76 -168 168 -168 168
+win 2 -33 33 -45 45 -112 -66 -168 168
+win 3 -44 44 -31 31 -66 66 -155 0
+M 1 30 47 156
+W 11 33 44 45 31 66
+minS 24025 LB 0.459941 worst 0 1 -1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 182
+
+s 4 p 347 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 205 92 301
+kappa_row 0 11 33 -44
+kappa_row -134 0 9 -9
+kappa_row 69 87 0 3
+kappa_row -108 94 87 0
+win 0 -88 -88 -173 173 -173 173 -173 173
+win 1 -11 11 -106 -76 -173 173 -173 173
+win 2 -33 33 -45 45 -114 -67 -173 173
+win 3 -44 44 -31 31 -67 67 -159 0
+M 1 31 48 160
+W 11 33 44 45 31 67
+minS 26896 LB 0.472622 worst 0 1 -1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 183
+
+s 4 p 349 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 111 193 78
+kappa_row 0 11 33 -44
+kappa_row 8 0 9 -9
+kappa_row -117 -87 0 3
+kappa_row -13 80 -87 0
+win 0 -88 -88 -174 174 -174 174 -174 174
+win 1 -11 11 -106 -76 -174 174 -174 174
+win 2 -33 33 -45 45 -114 -67 -174 174
+win 3 -44 44 -31 31 -67 67 -160 0
+M 1 31 48 161
+W 11 33 44 45 31 67
+minS 27556 LB 0.475645 worst 0 1 -1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 183
+
+s 4 p 353 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 16 238 234
+kappa_row 0 11 33 -44
+kappa_row -24 0 9 -9
+kappa_row 2 -88 0 3
+kappa_row -39 -125 -88 0
+win 0 -88 -88 -176 176 -176 176 -176 176
+win 1 -11 11 -106 -76 -176 176 -176 176
+win 2 -33 33 -45 45 -117 -69 -176 176
+win 3 -44 44 -31 31 -69 69 -162 0
+M 1 31 49 163
+W 11 33 44 45 31 69
+minS 27556 LB 0.470255 worst 0 0 1 -1
+superdiag 11 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 187
+
+s 4 p 359 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 344 177 91
+kappa_row 0 12 36 -48
+kappa_row -157 0 9 -9
+kappa_row 43 90 0 3
+kappa_row -75 -172 90 0
+win 0 -96 -96 -179 179 -179 179 -179 179
+win 1 -12 12 -99 -71 -179 179 -179 179
+win 2 -36 36 -40 40 -116 -69 -179 179
+win 3 -48 48 -31 31 -69 69 -164 0
+M 1 29 48 165
+W 12 36 48 40 31 69
+minS 27556 LB 0.462396 worst 1 -1 -1 -1
+superdiag 12 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 193
+
+s 4 p 367 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 107 79 144
+kappa_row 0 12 36 -48
+kappa_row 23 0 9 -9
+kappa_row 151 92 0 3
+kappa_row -24 130 92 0
+win 0 -96 -96 -183 183 -183 183 -183 183
+win 1 -12 12 -105 -76 -183 183 -183 183
+win 2 -36 36 -45 45 -119 -70 -183 183
+win 3 -48 48 -31 31 -70 70 -168 0
+M 1 30 50 169
+W 12 36 48 45 31 70
+minS 30276 LB 0.474114 worst 1 -1 -1 -1
+superdiag 12 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 193
+
+s 4 p 373 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 202 158 294
+kappa_row 0 12 36 -48
+kappa_row 70 0 9 -9
+kappa_row -68 -93 0 3
+kappa_row -49 -101 -93 0
+win 0 -96 -96 -186 186 -186 186 -186 186
+win 1 -12 12 -105 -76 -186 186 -186 186
+win 2 -36 36 -45 45 -122 -72 -186 186
+win 3 -48 48 -31 31 -72 72 -171 0
+M 1 30 51 172
+W 12 36 48 45 31 72
+minS 31684 LB 0.477212 worst 0 0 1 -1
+superdiag 12 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 195
+
+s 4 p 379 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 300 50 354
+kappa_row 0 12 36 -48
+kappa_row -71 0 9 -9
+kappa_row -152 95 0 3
+kappa_row -59 -150 95 0
+win 0 -96 -96 -189 189 -189 189 -189 189
+win 1 -12 12 -106 -76 -189 189 -189 189
+win 2 -36 36 -45 45 -124 -73 -189 189
+win 3 -48 48 -31 31 -73 73 -174 0
+M 1 31 52 175
+W 12 36 48 45 31 73
+minS 32761 LB 0.477573 worst 0 0 1 -1
+superdiag 12 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 198
+
+s 4 p 383 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 367 125 129
+kappa_row 0 12 36 -48
+kappa_row 24 0 9 -9
+kappa_row -2 96 0 3
+kappa_row 170 8 96 0
+win 0 -96 -96 -191 191 -191 191 -191 191
+win 1 -12 12 -106 -76 -191 191 -191 191
+win 2 -36 36 -45 45 -124 -73 -191 191
+win 3 -48 48 -31 31 -73 73 -175 0
+M 1 31 52 176
+W 12 36 48 45 31 73
+minS 34225 LB 0.483029 worst 0 0 1 -1
+superdiag 12 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 198
+
+s 4 p 389 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 81 208 285
+kappa_row 0 12 36 -48
+kappa_row 73 0 9 -9
+kappa_row 156 -97 0 3
+kappa_row 147 154 -97 0
+win 0 -96 -96 -194 194 -194 194 -194 194
+win 1 -12 12 -112 -81 -194 194 -194 194
+win 2 -36 36 -45 45 -128 -76 -194 194
+win 3 -48 48 -36 36 -76 76 -179 0
+M 1 32 53 180
+W 12 36 48 45 36 76
+minS 33856 LB 0.473008 worst 0 0 1 -1
+superdiag 12 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 205
+
+s 4 p 397 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 229 369 14
+kappa_row 0 13 39 -52
+kappa_row -145 0 9 -9
+kappa_row -21 -99 0 3
+kappa_row 130 91 -99 0
+win 0 -104 -104 -198 198 -198 198 -198 198
+win 1 -13 13 -105 -76 -198 198 -198 198
+win 2 -39 39 -45 45 -129 -76 -198 198
+win 3 -52 52 -31 31 -76 76 -182 0
+M 1 30 54 183
+W 13 39 52 45 31 76
+minS 35344 LB 0.473552 worst 1 -1 -1 -1
+superdiag 13 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 209
+
+s 4 p 401 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 293 383 9
+kappa_row 0 13 39 -52
+kappa_row 162 0 9 -9
+kappa_row 187 -100 0 3
+kappa_row 199 -142 -100 0
+win 0 -104 -104 -200 200 -200 200 -200 200
+win 1 -13 13 -105 -76 -200 200 -200 200
+win 2 -39 39 -45 45 -129 -76 -200 200
+win 3 -52 52 -31 31 -76 76 -183 0
+M 1 30 54 184
+W 13 39 52 45 31 76
+minS 36864 LB 0.478803 worst 1 -1 -1 -1
+superdiag 13 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 209
+
+s 4 p 409 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 173 97 156
+kappa_row 0 13 39 -52
+kappa_row -55 0 9 -9
+kappa_row 175 -102 0 3
+kappa_row -26 196 -102 0
+win 0 -104 -104 -204 204 -204 204 -204 204
+win 1 -13 13 -106 -76 -204 204 -204 204
+win 2 -39 39 -45 45 -132 -78 -204 204
+win 3 -52 52 -31 31 -78 78 -187 0
+M 1 31 55 188
+W 13 39 52 45 31 78
+minS 39204 LB 0.484108 worst 0 0 1 -1
+superdiag 13 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 211
+
+s 4 p 419 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 145 94 372
+kappa_row 0 13 39 -52
+kappa_row -8 0 9 -9
+kappa_row -139 105 0 3
+kappa_row -62 -96 105 0
+win 0 -104 -104 -209 209 -209 209 -209 209
+win 1 -13 13 -112 -81 -209 209 -209 209
+win 2 -39 39 -45 45 -136 -81 -209 209
+win 3 -52 52 -36 36 -81 81 -192 0
+M 1 32 56 193
+W 13 39 52 45 36 81
+minS 40401 LB 0.479714 worst 0 0 1 -1
+superdiag 13 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 218
+
+s 4 p 421 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 340 197 112
+kappa_row 0 13 39 -52
+kappa_row -89 0 9 -9
+kappa_row -168 -105 0 3
+kappa_row -159 -114 -105 0
+win 0 -104 -104 -210 210 -210 210 -210 210
+win 1 -13 13 -112 -81 -210 210 -210 210
+win 2 -39 39 -45 45 -136 -81 -210 210
+win 3 -52 52 -36 36 -81 81 -193 0
+M 1 32 56 194
+W 13 39 52 45 36 81
+minS 41209 LB 0.482185 worst 0 0 1 -1
+superdiag 13 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 218
+
+s 4 p 431 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 413 428 217
+kappa_row 0 12 36 -48
+kappa_row 27 0 9 -9
+kappa_row -110 108 0 3
+kappa_row -108 9 108 0
+win 0 -96 -96 -215 215 -215 215 -215 215
+win 1 -12 12 -119 -85 -215 215 -215 215
+win 2 -36 36 -49 49 -139 -82 -215 215
+win 3 -48 48 -36 36 -82 82 -197 0
+M 1 35 58 198
+W 12 36 48 49 36 82
+minS 43681 LB 0.484919 worst 0 0 1 -1
+superdiag 12 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 222
+
+s 4 p 433 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 201 250 308
+kappa_row 0 14 42 -56
+kappa_row -85 0 9 -9
+kappa_row -29 -108 0 3
+kappa_row 93 -9 -108 0
+win 0 -112 -112 -216 216 -216 216 -216 216
+win 1 -14 14 -105 -76 -216 216 -216 216
+win 2 -42 42 -45 45 -139 -82 -216 216
+win 3 -56 56 -31 31 -82 82 -198 0
+M 1 30 58 199
+W 14 42 56 45 31 82
+minS 43264 LB 0.480370 worst 1 -1 -1 -1
+superdiag 14 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 225
+
+s 4 p 439 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 47 81 179
+kappa_row 0 14 42 -56
+kappa_row 149 0 9 -9
+kappa_row -49 110 0 3
+kappa_row -103 -64 110 0
+win 0 -112 -112 -219 219 -219 219 -219 219
+win 1 -14 14 -106 -76 -219 219 -219 219
+win 2 -42 42 -45 45 -139 -82 -219 219
+win 3 -56 56 -31 31 -82 82 -200 0
+M 1 31 58 201
+W 14 42 56 45 31 82
+minS 45796 LB 0.487472 worst 1 -1 -1 -1
+superdiag 14 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 225
+
+s 4 p 443 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 174 29 207
+kappa_row 0 14 42 -56
+kappa_row 182 0 9 -9
+kappa_row -89 111 0 3
+kappa_row 187 120 111 0
+win 0 -112 -112 -221 221 -221 221 -221 221
+win 1 -14 14 -106 -76 -221 221 -221 221
+win 2 -42 42 -45 45 -142 -84 -221 221
+win 3 -56 56 -31 31 -84 84 -202 0
+M 1 31 59 203
+W 14 42 56 45 31 84
+minS 46656 LB 0.487585 worst 0 0 1 -1
+superdiag 14 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 227
+
+s 4 p 449 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 16 302 298
+kappa_row 0 14 42 -56
+kappa_row -24 0 9 -9
+kappa_row 2 -112 0 3
+kappa_row 100 -159 -112 0
+win 0 -112 -112 -224 224 -224 224 -224 224
+win 1 -14 14 -106 -76 -224 224 -224 224
+win 2 -42 42 -45 45 -142 -84 -224 224
+win 3 -56 56 -31 31 -84 84 -204 0
+M 1 31 59 205
+W 14 42 56 45 31 84
+minS 49284 LB 0.494432 worst 0 0 1 -1
+superdiag 14 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 227
+
+s 4 p 457 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 408 68 423
+kappa_row 0 14 42 -56
+kappa_row -155 0 9 -9
+kappa_row 51 -114 0 3
+kappa_row 158 219 -114 0
+win 0 -112 -112 -228 228 -228 228 -228 228
+win 1 -14 14 -112 -81 -228 228 -228 228
+win 2 -42 42 -45 45 -146 -87 -228 228
+win 3 -56 56 -36 36 -87 87 -209 0
+M 1 32 60 210
+W 14 42 56 45 36 87
+minS 49729 LB 0.487965 worst 0 0 1 -1
+superdiag 14 9 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 234
+
+s 4 p 461 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 239 318 355
+kappa_row 0 9 36 -72
+kappa_row 222 0 8 -12
+kappa_row 159 173 0 3
+kappa_row 63 -16 205 0
+win 0 -117 -117 -230 230 -230 230 -230 230
+win 1 -9 9 -134 -84 -230 230 -230 230
+win 2 -36 36 -48 48 -134 -66 -230 230
+win 3 -72 72 -36 36 -66 66 -196 0
+M 1 51 69 197
+W 9 36 72 48 36 66
+minS 51076 LB 0.490239 worst 1 -1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 235
+
+s 4 p 463 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 120 15 458
+kappa_row 0 9 36 -72
+kappa_row -120 0 8 -12
+kappa_row -224 58 0 3
+kappa_row 52 209 103 0
+win 0 -117 -117 -231 231 -231 231 -231 231
+win 1 -9 9 -134 -84 -231 231 -231 231
+win 2 -36 36 -48 48 -134 -66 -231 231
+win 3 -72 72 -36 36 -66 66 -197 0
+M 1 51 69 198
+W 9 36 72 48 36 66
+minS 51984 LB 0.492441 worst 1 -1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 235
+
+s 4 p 467 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 294 387 338
+kappa_row 0 9 36 -72
+kappa_row 173 0 8 -12
+kappa_row -40 -175 0 3
+kappa_row 170 120 52 0
+win 0 -117 -117 -233 233 -233 233 -233 233
+win 1 -9 9 -134 -84 -233 233 -233 233
+win 2 -36 36 -48 48 -135 -66 -233 233
+win 3 -72 72 -36 36 -66 66 -198 0
+M 1 51 70 199
+W 9 36 72 48 36 66
+minS 53824 LB 0.496788 worst 1 -1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 235
+
+s 4 p 479 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 408 51 462
+kappa_row 0 9 36 -72
+kappa_row 71 0 8 -12
+kappa_row -214 60 0 3
+kappa_row -211 163 213 0
+win 0 -117 -117 -239 239 -239 239 -239 239
+win 1 -9 9 -140 -88 -239 239 -239 239
+win 2 -36 36 -52 52 -138 -67 -239 239
+win 3 -72 72 -36 36 -67 67 -203 0
+M 1 53 72 204
+W 9 36 72 52 36 67
+minS 59536 LB 0.509395 worst 1 -1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 235
+
+s 4 p 487 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 18 124 121
+kappa_row 0 9 36 -72
+kappa_row -18 0 8 -12
+kappa_row 62 61 0 3
+kappa_row 203 -186 -54 0
+win 0 -117 -117 -243 243 -243 243 -243 243
+win 1 -9 9 -140 -88 -243 243 -243 243
+win 2 -36 36 -52 52 -141 -69 -243 243
+win 3 -72 72 -36 36 -69 69 -207 0
+M 1 53 73 208
+W 9 36 72 52 36 69
+minS 63504 LB 0.517454 worst 1 -1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 235
+
+s 4 p 491 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 200 25 319
+kappa_row 0 9 36 -72
+kappa_row -200 0 8 -12
+kappa_row -233 -184 0 3
+kappa_row -90 208 -109 0
+win 0 -117 -117 -245 245 -245 245 -245 245
+win 1 -9 9 -141 -88 -245 245 -245 245
+win 2 -36 36 -52 52 -142 -69 -245 245
+win 3 -72 72 -36 36 -69 69 -208 0
+M 1 54 74 209
+W 9 36 72 52 36 69
+minS 65536 LB 0.521385 worst 1 -1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 235
+
+s 4 p 499 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 462 432 355
+kappa_row 0 9 36 -72
+kappa_row 37 0 8 -12
+kappa_row 216 -187 0 3
+kappa_row 16 -149 111 0
+win 0 -117 -117 -249 249 -249 249 -249 249
+win 1 -9 9 -142 -88 -249 249 -249 249
+win 2 -36 36 -52 52 -144 -70 -249 249
+win 3 -72 72 -36 36 -70 70 -212 0
+M 1 55 75 213
+W 9 36 72 52 36 70
+minS 69696 LB 0.529058 worst 1 -1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 235
+
+s 4 p 503 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 149 333 392
+kappa_row 0 9 36 -72
+kappa_row -149 0 8 -12
+kappa_row -85 63 0 3
+kappa_row 180 -248 56 0
+win 0 -117 -117 -251 251 -251 251 -251 251
+win 1 -9 9 -142 -88 -251 251 -251 251
+win 2 -36 36 -52 52 -144 -70 -251 251
+win 3 -72 72 -36 36 -70 70 -213 0
+M 1 55 75 214
+W 9 36 72 52 36 70
+minS 71824 LB 0.532803 worst 1 -1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 235
+
+s 4 p 509 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 106 395 57
+kappa_row 0 12 48 -64
+kappa_row -159 0 12 -12
+kappa_row 169 32 0 3
+kappa_row 245 -167 -127 0
+win 0 -124 -124 -254 254 -254 254 -254 254
+win 1 -12 12 -143 -102 -254 254 -254 254
+win 2 -48 48 -60 60 -124 -73 -254 254
+win 3 -64 64 -42 42 -73 73 -217 0
+M 1 42 52 218
+W 12 48 64 60 42 73
+minS 67600 LB 0.510806 worst 1 -1 -1 -1
+superdiag 12 12 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 249
+
+s 4 p 521 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 328 41 160
+kappa_row 0 9 36 -72
+kappa_row 193 0 8 -12
+kappa_row -240 -65 0 3
+kappa_row 98 199 58 0
+win 0 -117 -117 -260 260 -260 260 -260 260
+win 1 -9 9 -154 -98 -260 260 -260 260
+win 2 -36 36 -56 56 -153 -75 -260 260
+win 3 -72 72 -42 42 -75 75 -222 0
+M 1 57 79 223
+W 9 36 72 56 42 75
+minS 71824 LB 0.514395 worst 0 1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 253
+
+s 4 p 523 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 368 46 159
+kappa_row 0 9 36 -72
+kappa_row 155 0 8 -12
+kappa_row 23 -196 0 3
+kappa_row -192 -69 -58 0
+win 0 -117 -117 -261 261 -261 261 -261 261
+win 1 -9 9 -154 -98 -261 261 -261 261
+win 2 -36 36 -56 56 -153 -75 -261 261
+win 3 -72 72 -42 42 -75 75 -223 0
+M 1 57 79 224
+W 9 36 72 56 42 75
+minS 72900 LB 0.516252 worst 0 1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 253
+
+s 4 p 541 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 20 273 450
+kappa_row 0 9 36 -72
+kappa_row -20 0 8 -12
+kappa_row -134 203 0 3
+kappa_row -50 -139 -60 0
+win 0 -117 -117 -270 270 -270 270 -270 270
+win 1 -9 9 -156 -98 -270 270 -270 270
+win 2 -36 36 -56 56 -158 -78 -270 270
+win 3 -72 72 -42 42 -78 78 -231 0
+M 1 59 81 232
+W 9 36 72 56 42 78
+minS 81796 LB 0.528651 worst 0 1 -1 -1
+superdiag 9 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 255
+
+s 4 p 547 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 237 98 332
+kappa_row 0 10 40 -80
+kappa_row -237 0 8 -12
+kappa_row 49 -205 0 3
+kappa_row 267 19 -243 0
+win 0 -130 -130 -273 273 -273 273 -273 273
+win 1 -10 10 -141 -88 -273 273 -273 273
+win 2 -40 40 -52 52 -156 -76 -273 273
+win 3 -80 80 -36 36 -76 76 -232 0
+M 1 54 81 233
+W 10 40 80 52 36 76
+minS 81796 LB 0.522852 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 557 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 427 123 516
+kappa_row 0 10 40 -80
+kappa_row 130 0 8 -12
+kappa_row -217 209 0 3
+kappa_row -243 -205 62 0
+win 0 -130 -130 -278 278 -278 278 -278 278
+win 1 -10 10 -142 -88 -278 278 -278 278
+win 2 -40 40 -52 52 -159 -78 -278 278
+win 3 -80 80 -36 36 -78 78 -236 0
+M 1 55 82 237
+W 10 40 80 52 36 78
+minS 87616 LB 0.531418 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 563 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 319 251 104
+kappa_row 0 10 40 -80
+kappa_row 244 0 8 -12
+kappa_row -156 -211 0 3
+kappa_row 51 -43 -125 0
+win 0 -130 -130 -281 281 -281 281 -281 281
+win 1 -10 10 -153 -98 -281 281 -281 281
+win 2 -40 40 -56 56 -162 -79 -281 281
+win 3 -80 80 -42 42 -79 79 -239 0
+M 1 56 84 240
+W 10 40 80 56 42 79
+minS 91204 LB 0.536412 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 569 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 550 211 309
+kappa_row 0 10 40 -80
+kappa_row 19 0 8 -12
+kappa_row -179 -71 0 3
+kappa_row -224 -162 253 0
+win 0 -130 -130 -284 284 -284 284 -284 284
+win 1 -10 10 -153 -98 -284 284 -284 284
+win 2 -40 40 -56 56 -165 -81 -284 284
+win 3 -80 80 -42 42 -81 81 -242 0
+M 1 56 85 243
+W 10 40 80 56 42 81
+minS 94864 LB 0.541301 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 571 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 19 502 23
+kappa_row 0 10 40 -80
+kappa_row -19 0 8 -12
+kappa_row 251 -214 0 3
+kappa_row -66 115 127 0
+win 0 -130 -130 -285 285 -285 285 -285 285
+win 1 -10 10 -153 -98 -285 285 -285 285
+win 2 -40 40 -56 56 -165 -81 -285 285
+win 3 -80 80 -42 42 -81 81 -243 0
+M 1 56 85 244
+W 10 40 80 56 42 81
+minS 96100 LB 0.542907 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 577 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 250 464 230
+kappa_row 0 10 40 -80
+kappa_row -250 0 8 -12
+kappa_row 232 -72 0 3
+kappa_row -282 -4 -64 0
+win 0 -130 -130 -288 288 -288 288 -288 288
+win 1 -10 10 -154 -98 -288 288 -288 288
+win 2 -40 40 -56 56 -167 -82 -288 288
+win 3 -80 80 -42 42 -82 82 -246 0
+M 1 57 86 247
+W 10 40 80 56 42 82
+minS 99856 LB 0.547660 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 587 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 450 203 128
+kappa_row 0 10 40 -80
+kappa_row 137 0 8 -12
+kappa_row -192 -220 0 3
+kappa_row 51 53 261 0
+win 0 -130 -130 -293 293 -293 293 -293 293
+win 1 -10 10 -155 -98 -293 293 -293 293
+win 2 -40 40 -56 56 -168 -82 -293 293
+win 3 -80 80 -42 42 -82 82 -249 0
+M 1 58 87 250
+W 10 40 80 56 42 82
+minS 106276 LB 0.555366 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 593 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 336 42 579
+kappa_row 0 10 40 -80
+kappa_row 257 0 8 -12
+kappa_row 21 -74 0 3
+kappa_row -262 -70 66 0
+win 0 -130 -130 -296 296 -296 296 -296 296
+win 1 -10 10 -156 -98 -296 296 -296 296
+win 2 -40 40 -56 56 -171 -84 -296 296
+win 3 -80 80 -42 42 -84 84 -252 0
+M 1 59 88 253
+W 10 40 80 56 42 84
+minS 110224 LB 0.559865 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 599 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 579 297 500
+kappa_row 0 10 40 -80
+kappa_row 20 0 8 -12
+kappa_row -151 75 0 3
+kappa_row 11 104 -133 0
+win 0 -130 -130 -299 299 -299 299 -299 299
+win 1 -10 10 -156 -98 -299 299 -299 299
+win 2 -40 40 -56 56 -171 -84 -299 299
+win 3 -80 80 -42 42 -84 84 -254 0
+M 1 59 88 255
+W 10 40 80 56 42 84
+minS 114244 LB 0.564274 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 601 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 20 303 500
+kappa_row 0 10 40 -80
+kappa_row -20 0 8 -12
+kappa_row -149 -75 0 3
+kappa_row 78 96 -267 0
+win 0 -130 -130 -300 300 -300 300 -300 300
+win 1 -10 10 -156 -98 -300 300 -300 300
+win 2 -40 40 -56 56 -173 -85 -300 300
+win 3 -80 80 -42 42 -85 85 -256 0
+M 1 59 89 257
+W 10 40 80 56 42 85
+minS 115600 LB 0.565724 worst 1 -1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 261
+
+s 4 p 607 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 263 564 419
+kappa_row 0 10 40 -80
+kappa_row -263 0 8 -12
+kappa_row 282 76 0 3
+kappa_row -114 274 135 0
+win 0 -130 -130 -303 303 -303 303 -303 303
+win 1 -10 10 -161 -102 -303 303 -303 303
+win 2 -40 40 -60 60 -174 -85 -303 303
+win 3 -80 80 -42 42 -85 85 -258 0
+M 1 60 90 259
+W 10 40 80 60 42 85
+minS 117649 LB 0.565074 worst 0 1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 264
+
+s 4 p 613 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 143 401 275
+kappa_row 0 10 40 -80
+kappa_row -143 0 8 -12
+kappa_row -106 230 0 3
+kappa_row -303 149 -68 0
+win 0 -130 -130 -306 306 -306 306 -306 306
+win 1 -10 10 -162 -102 -306 306 -306 306
+win 2 -40 40 -60 60 -177 -87 -306 306
+win 3 -80 80 -42 42 -87 87 -261 0
+M 1 61 91 262
+W 10 40 80 60 42 87
+minS 121104 LB 0.567700 worst 0 1 -1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 265
+
+s 4 p 617 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 473 599 6
+kappa_row 0 10 40 -80
+kappa_row 144 0 8 -12
+kappa_row -9 -77 0 3
+kappa_row 205 30 -137 0
+win 0 -130 -130 -308 308 -308 308 -308 308
+win 1 -10 10 -162 -102 -308 308 -308 308
+win 2 -40 40 -60 60 -178 -87 -308 308
+win 3 -80 80 -42 42 -87 87 -262 0
+M 1 61 92 263
+W 10 40 80 60 42 87
+minS 123201 LB 0.568882 worst 0 0 1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 266
+
+s 4 p 619 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 392 49 190
+kappa_row 0 10 40 -80
+kappa_row 227 0 8 -12
+kappa_row -285 -232 0 3
+kappa_row 254 -288 -275 0
+win 0 -130 -130 -309 309 -309 309 -309 309
+win 1 -10 10 -162 -102 -309 309 -309 309
+win 2 -40 40 -60 60 -178 -87 -309 309
+win 3 -80 80 -42 42 -87 87 -263 0
+M 1 61 92 264
+W 10 40 80 60 42 87
+minS 124609 LB 0.570275 worst 0 0 1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 266
+
+s 4 p 631 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 21 397 78
+kappa_row 0 10 40 -80
+kappa_row -21 0 8 -12
+kappa_row -117 79 0 3
+kappa_row -219 -241 -70 0
+win 0 -130 -130 -315 315 -315 315 -315 315
+win 1 -10 10 -163 -102 -315 315 -315 315
+win 2 -40 40 -60 60 -180 -88 -315 315
+win 3 -80 80 -42 42 -88 88 -268 0
+M 1 62 93 269
+W 10 40 80 60 42 88
+minS 131044 LB 0.573693 worst 0 0 1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 269
+
+s 4 p 641 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 235 430 284
+kappa_row 0 10 40 -80
+kappa_row -235 0 8 -12
+kappa_row 215 -80 0 3
+kappa_row -174 138 285 0
+win 0 -130 -130 -320 320 -320 320 -320 320
+win 1 -10 10 -164 -102 -320 320 -320 320
+win 2 -40 40 -60 60 -184 -90 -320 320
+win 3 -80 80 -42 42 -90 90 -272 0
+M 1 63 95 273
+W 10 40 80 60 42 90
+minS 133956 LB 0.570983 worst 0 0 1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 275
+
+s 4 p 643 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 604 397 82
+kappa_row 0 11 44 -88
+kappa_row 39 0 8 -12
+kappa_row -123 -241 0 3
+kappa_row -152 -192 143 0
+win 0 -143 -143 -321 321 -321 321 -321 321
+win 1 -11 11 -155 -98 -321 321 -321 321
+win 2 -44 44 -56 56 -183 -90 -321 321
+win 3 -88 88 -42 42 -90 90 -273 0
+M 1 58 94 274
+W 11 44 88 56 42 90
+minS 126736 LB 0.553655 worst 1 -1 -1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 287
+
+s 4 p 647 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 98 174 589
+kappa_row 0 11 44 -88
+kappa_row -98 0 8 -12
+kappa_row 87 81 0 3
+kappa_row 294 -319 72 0
+win 0 -143 -143 -323 323 -323 323 -323 323
+win 1 -11 11 -155 -98 -323 323 -323 323
+win 2 -44 44 -56 56 -183 -90 -323 323
+win 3 -88 88 -42 42 -90 90 -274 0
+M 1 58 94 275
+W 11 44 88 56 42 90
+minS 129600 LB 0.556414 worst 1 -1 -1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 287
+
+s 4 p 653 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 277 606 451
+kappa_row 0 11 44 -88
+kappa_row -277 0 8 -12
+kappa_row 303 245 0 3
+kappa_row 95 195 -145 0
+win 0 -143 -143 -326 326 -326 326 -326 326
+win 1 -11 11 -156 -98 -326 326 -326 326
+win 2 -44 44 -56 56 -185 -91 -326 326
+win 3 -88 88 -42 42 -91 91 -277 0
+M 1 59 95 278
+W 11 44 88 56 42 91
+minS 133956 LB 0.560490 worst 1 -1 -1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 287
+
+s 4 p 659 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 639 327 550
+kappa_row 0 11 44 -88
+kappa_row 20 0 8 -12
+kappa_row -166 -247 0 3
+kappa_row 305 -270 293 0
+win 0 -143 -143 -329 329 -329 329 -329 329
+win 1 -11 11 -156 -98 -329 329 -329 329
+win 2 -44 44 -56 56 -186 -91 -329 329
+win 3 -88 88 -42 42 -91 91 -279 0
+M 1 59 96 280
+W 11 44 88 56 42 91
+minS 138384 LB 0.564492 worst 1 -1 -1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 287
+
+s 4 p 661 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 20 333 550
+kappa_row 0 11 44 -88
+kappa_row -20 0 8 -12
+kappa_row -164 248 0 3
+kappa_row -208 -280 147 0
+win 0 -143 -143 -330 330 -330 330 -330 330
+win 1 -11 11 -156 -98 -330 330 -330 330
+win 2 -44 44 -56 56 -188 -93 -330 330
+win 3 -88 88 -42 42 -93 93 -281 0
+M 1 59 96 282
+W 11 44 88 56 42 93
+minS 139876 LB 0.565809 worst 1 -1 -1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 287
+
+s 4 p 673 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 571 492 509
+kappa_row 0 11 44 -88
+kappa_row 102 0 8 -12
+kappa_row 246 -84 0 3
+kappa_row 93 -229 -299 0
+win 0 -143 -143 -336 336 -336 336 -336 336
+win 1 -11 11 -162 -102 -336 336 -336 336
+win 2 -44 44 -60 60 -192 -94 -336 336
+win 3 -88 88 -42 42 -94 94 -286 0
+M 1 61 99 287
+W 11 44 88 60 42 94
+minS 148996 LB 0.573551 worst 1 -1 -1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 287
+
+s 4 p 677 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 41 259 365
+kappa_row 0 11 44 -88
+kappa_row -41 0 8 -12
+kappa_row -209 254 0 3
+kappa_row -191 315 301 0
+win 0 -143 -143 -338 338 -338 338 -338 338
+win 1 -11 11 -162 -102 -338 338 -338 338
+win 2 -44 44 -60 60 -192 -94 -338 338
+win 3 -88 88 -42 42 -94 94 -287 0
+M 1 61 99 288
+W 11 44 88 60 42 94
+minS 151321 LB 0.574594 worst 0 0 0 1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 288
+
+s 4 p 683 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 476 401 94
+kappa_row 0 11 44 -88
+kappa_row 207 0 8 -12
+kappa_row -141 -256 0 3
+kappa_row -314 -166 76 0
+win 0 -143 -143 -341 341 -341 341 -341 341
+win 1 -11 11 -162 -102 -341 341 -341 341
+win 2 -44 44 -60 60 -193 -94 -341 341
+win 3 -88 88 -42 42 -94 94 -289 0
+M 1 61 100 290
+W 11 44 88 60 42 94
+minS 154449 LB 0.575403 worst 0 0 0 1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 290
+
+s 4 p 691 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 335 301 130
+kappa_row 0 11 44 -88
+kappa_row -335 0 8 -12
+kappa_row -195 -259 0 3
+kappa_row -168 24 -307 0
+win 0 -143 -143 -345 345 -345 345 -345 345
+win 1 -11 11 -163 -102 -345 345 -345 345
+win 2 -44 44 -60 60 -196 -96 -345 345
+win 3 -88 88 -42 42 -96 96 -293 0
+M 1 62 101 294
+W 11 44 88 60 42 96
+minS 157609 LB 0.574530 worst 0 0 0 1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 294
+
+s 4 p 701 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 616 77 208
+kappa_row 0 11 44 -88
+kappa_row 85 0 8 -12
+kappa_row -312 263 0 3
+kappa_row -101 -258 78 0
+win 0 -143 -143 -350 350 -350 350 -350 350
+win 1 -11 11 -164 -102 -350 350 -350 350
+win 2 -44 44 -60 60 -198 -97 -350 350
+win 3 -88 88 -42 42 -97 97 -297 0
+M 1 63 102 298
+W 11 44 88 60 42 97
+minS 162409 LB 0.574893 worst 0 0 0 1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 298
+
+s 4 p 709 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 666 615 504
+kappa_row 0 11 44 -88
+kappa_row 43 0 8 -12
+kappa_row -47 266 0 3
+kappa_row -56 -64 -315 0
+win 0 -143 -143 -354 354 -354 354 -354 354
+win 1 -11 11 -175 -112 -354 354 -354 354
+win 2 -44 44 -64 64 -203 -100 -354 354
+win 3 -88 88 -48 48 -100 100 -302 0
+M 1 64 104 303
+W 11 44 88 64 48 100
+minS 164025 LB 0.571227 worst 0 0 1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 304
+
+s 4 p 719 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 695 716 1
+kappa_row 0 10 40 -80
+kappa_row 24 0 8 -12
+kappa_row 358 90 0 3
+kappa_row -80 5 80 0
+win 0 -130 -130 -359 359 -359 359 -359 359
+win 1 -10 10 -186 -116 -359 359 -359 359
+win 2 -40 40 -68 68 -205 -100 -359 359
+win 3 -80 80 -48 48 -100 100 -305 0
+M 1 71 106 306
+W 10 40 80 68 48 100
+minS 170569 LB 0.574409 worst 0 0 1 -1
+superdiag 10 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 306
+
+s 4 p 727 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 22 548 302
+kappa_row 0 11 44 -88
+kappa_row -22 0 8 -12
+kappa_row 274 91 0 3
+kappa_row 128 207 -323 0
+win 0 -143 -143 -363 363 -363 363 -363 363
+win 1 -11 11 -176 -112 -363 363 -363 363
+win 2 -44 44 -64 64 -207 -102 -363 363
+win 3 -88 88 -48 48 -102 102 -309 0
+M 1 65 106 310
+W 11 44 88 64 48 102
+minS 173889 LB 0.573590 worst 0 0 1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 310
+
+s 4 p 733 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 422 236 410
+kappa_row 0 11 44 -88
+kappa_row 311 0 8 -12
+kappa_row 118 275 0 3
+kappa_row -127 56 163 0
+win 0 -143 -143 -366 366 -366 366 -366 366
+win 1 -11 11 -177 -112 -366 366 -366 366
+win 2 -44 44 -64 64 -209 -103 -366 366
+win 3 -88 88 -48 48 -103 103 -312 0
+M 1 66 107 313
+W 11 44 88 64 48 103
+minS 176400 LB 0.572988 worst 0 0 1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 313
+
+s 4 p 739 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 390 603 538
+kappa_row 0 12 48 -96
+kappa_row 349 0 8 -12
+kappa_row -68 -277 0 3
+kappa_row -224 272 -82 0
+win 0 -156 -156 -369 369 -369 369 -369 369
+win 1 -12 12 -162 -102 -369 369 -369 369
+win 2 -48 48 -60 60 -208 -102 -369 369
+win 3 -96 96 -42 42 -102 102 -313 0
+M 1 61 107 314
+W 12 48 96 60 42 102
+minS 180625 LB 0.575101 worst 0 0 0 1
+superdiag 12 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 314
+
+s 4 p 743 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 227 307 393
+kappa_row 0 12 48 -96
+kappa_row -227 0 8 -12
+kappa_row -218 93 0 3
+kappa_row 204 129 -165 0
+win 0 -156 -156 -371 371 -371 371 -371 371
+win 1 -12 12 -162 -102 -371 371 -371 371
+win 2 -48 48 -60 60 -208 -102 -371 371
+win 3 -96 96 -42 42 -102 102 -314 0
+M 1 61 107 315
+W 12 48 96 60 42 102
+minS 183184 LB 0.576043 worst 0 0 0 1
+superdiag 12 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 315
+
+s 4 p 751 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 146 206 432
+kappa_row 0 12 48 -96
+kappa_row -146 0 8 -12
+kappa_row 103 94 0 3
+kappa_row -48 339 167 0
+win 0 -156 -156 -375 375 -375 375 -375 375
+win 1 -12 12 -163 -102 -375 375 -375 375
+win 2 -48 48 -60 60 -210 -103 -375 375
+win 3 -96 96 -42 42 -103 103 -318 0
+M 1 62 108 319
+W 12 48 96 60 42 103
+minS 186624 LB 0.575233 worst 0 0 0 1
+superdiag 12 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 319
+
+s 4 p 757 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 21 665 283
+kappa_row 0 12 48 -96
+kappa_row -21 0 8 -12
+kappa_row -46 284 0 3
+kappa_row 305 184 -84 0
+win 0 -156 -156 -378 378 -378 378 -378 378
+win 1 -12 12 -163 -102 -378 378 -378 378
+win 2 -48 48 -60 60 -213 -105 -378 378
+win 3 -96 96 -42 42 -105 105 -321 0
+M 1 62 109 322
+W 12 48 96 60 42 105
+minS 189225 LB 0.574637 worst 0 0 0 1
+superdiag 12 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 322
+
+s 4 p 761 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 613 362 133
+kappa_row 0 12 48 -96
+kappa_row 148 0 8 -12
+kappa_row 181 -95 0 3
+kappa_row -353 37 -169 0
+win 0 -156 -156 -380 380 -380 380 -380 380
+win 1 -12 12 -164 -102 -380 380 -380 380
+win 2 -48 48 -60 60 -214 -105 -380 380
+win 3 -96 96 -42 42 -105 105 -322 0
+M 1 63 110 323
+W 12 48 96 60 42 105
+minS 191844 LB 0.575558 worst 0 0 0 1
+superdiag 12 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 323
+
+s 4 p 769 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 534 259 170
+kappa_row 0 12 48 -96
+kappa_row 235 0 8 -12
+kappa_row -255 -96 0 3
+kappa_row 152 251 171 0
+win 0 -156 -156 -384 384 -384 384 -384 384
+win 1 -12 12 -164 -102 -384 384 -384 384
+win 2 -48 48 -60 60 -216 -106 -384 384
+win 3 -96 96 -42 42 -106 106 -326 0
+M 1 63 111 327
+W 12 48 96 60 42 106
+minS 195364 LB 0.574772 worst 0 0 0 1
+superdiag 12 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 327
+
+s 4 p 773 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 609 366 651
+kappa_row 0 11 44 -88
+kappa_row 164 0 8 -12
+kappa_row 183 290 0 3
+kappa_row -330 102 86 0
+win 0 -143 -143 -386 386 -386 386 -386 386
+win 1 -11 11 -185 -116 -386 386 -386 386
+win 2 -44 44 -68 68 -220 -108 -386 386
+win 3 -88 88 -48 48 -108 108 -328 0
+M 1 70 113 329
+W 11 44 88 68 48 108
+minS 197136 LB 0.574386 worst 0 0 1 -1
+superdiag 11 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 329
+
+s 4 p 787 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 341 585 592
+kappa_row 0 10 50 -100
+kappa_row -341 0 10 -15
+kappa_row -101 -236 0 3
+kappa_row 284 -188 175 0
+win 0 -160 -160 -393 393 -393 393 -393 393
+win 1 -10 10 -204 -127 -393 393 -393 393
+win 2 -50 50 -75 75 -180 -88 -393 393
+win 3 -100 100 -52 52 -88 88 -320 0
+M 1 78 93 321
+W 10 50 100 75 52 88
+minS 207025 LB 0.578145 worst 0 1 -1 -1
+superdiag 10 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 332
+
+s 4 p 797 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 611 619 325
+kappa_row 0 10 50 -100
+kappa_row 186 0 10 -15
+kappa_row -89 -239 0 3
+kappa_row 141 31 -177 0
+win 0 -160 -160 -398 398 -398 398 -398 398
+win 1 -10 10 -205 -127 -398 398 -398 398
+win 2 -50 50 -75 75 -183 -90 -398 398
+win 3 -100 100 -52 52 -90 90 -324 0
+M 1 79 94 325
+W 10 50 100 75 52 90
+minS 215296 LB 0.582183 worst 0 1 -1 -1
+superdiag 10 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 333
+
+s 4 p 809 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 726 293 172
+kappa_row 0 13 52 -104
+kappa_row 83 0 8 -12
+kappa_row -258 -101 0 3
+kappa_row -109 309 90 0
+win 0 -169 -169 -404 404 -404 404 -404 404
+win 1 -13 13 -163 -102 -404 404 -404 404
+win 2 -52 52 -60 60 -226 -111 -404 404
+win 3 -104 104 -42 42 -111 111 -342 0
+M 1 62 116 343
+W 13 52 104 60 42 111
+minS 217156 LB 0.576020 worst 0 0 0 1
+superdiag 13 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 343
+
+s 4 p 811 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 707 798 545
+kappa_row 0 13 52 -104
+kappa_row 104 0 8 -12
+kappa_row 399 -304 0 3
+kappa_row 390 -107 -90 0
+win 0 -169 -169 -405 405 -405 405 -405 405
+win 1 -13 13 -163 -102 -405 405 -405 405
+win 2 -52 52 -60 60 -226 -111 -405 405
+win 3 -104 104 -42 42 -111 111 -343 0
+M 1 62 116 344
+W 13 52 104 60 42 111
+minS 218089 LB 0.575832 worst 0 0 0 1
+superdiag 13 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 344
+
+s 4 p 821 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 421 771 564
+kappa_row 0 13 52 -104
+kappa_row 400 0 8 -12
+kappa_row -25 308 0 3
+kappa_row 211 382 365 0
+win 0 -169 -169 -410 410 -410 410 -410 410
+win 1 -13 13 -164 -102 -410 410 -410 410
+win 2 -52 52 -60 60 -228 -112 -410 410
+win 3 -104 104 -42 42 -112 112 -347 0
+M 1 63 117 348
+W 13 52 104 60 42 112
+minS 223729 LB 0.576127 worst 0 0 0 1
+superdiag 13 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 348
+
+s 4 p 823 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 211 335 437
+kappa_row 0 13 52 -104
+kappa_row -211 0 8 -12
+kappa_row -244 103 0 3
+kappa_row -140 -40 183 0
+win 0 -169 -169 -411 411 -411 411 -411 411
+win 1 -13 13 -164 -102 -411 411 -411 411
+win 2 -52 52 -60 60 -228 -112 -411 411
+win 3 -104 104 -42 42 -112 112 -348 0
+M 1 63 117 349
+W 13 52 104 60 42 112
+minS 224676 LB 0.575942 worst 0 0 0 1
+superdiag 13 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 349
+
+s 4 p 827 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 106 220 478
+kappa_row 0 13 52 -104
+kappa_row -106 0 8 -12
+kappa_row 110 -310 0 3
+kappa_row -145 -201 92 0
+win 0 -169 -169 -413 413 -413 413 -413 413
+win 1 -13 13 -164 -102 -413 413 -413 413
+win 2 -52 52 -60 60 -229 -112 -413 413
+win 3 -104 104 -42 42 -112 112 -349 0
+M 1 63 118 350
+W 13 52 104 60 42 112
+minS 227529 LB 0.576784 worst 0 0 0 1
+superdiag 13 8 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 350
+
+s 4 p 829 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 525 611 469
+kappa_row 0 10 45 -120
+kappa_row 304 0 9 -18
+kappa_row -109 -92 0 4
+kappa_row 40 -142 -69 0
+win 0 -175 -175 -414 414 -414 414 -414 414
+win 1 -10 10 -216 -135 -414 414 -414 414
+win 2 -45 45 -81 81 -213 -104 -414 414
+win 3 -120 120 -54 54 -104 104 -258 0
+M 1 82 110 259
+W 10 45 120 81 54 104
+minS 227529 LB 0.575392 worst 0 1 -1 -1
+superdiag 10 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 352
+
+s 4 p 839 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 811 463 94
+kappa_row 0 10 45 -120
+kappa_row 28 0 9 -18
+kappa_row -188 373 0 4
+kappa_row 176 -369 70 0
+win 0 -175 -175 -419 419 -419 419 -419 419
+win 1 -10 10 -217 -135 -419 419 -419 419
+win 2 -45 45 -81 81 -214 -104 -419 419
+win 3 -120 120 -54 54 -104 104 -260 0
+M 1 83 111 261
+W 10 45 120 81 54 104
+minS 236196 LB 0.579261 worst 0 1 -1 -1
+superdiag 10 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 353
+
+s 4 p 853 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 336 716 330
+kappa_row 0 11 55 -110
+kappa_row -336 0 10 -15
+kappa_row 358 256 0 3
+kappa_row -321 109 -379 0
+win 0 -176 -176 -426 426 -426 426 -426 426
+win 1 -11 11 -203 -127 -426 426 -426 426
+win 2 -55 55 -75 75 -193 -94 -426 426
+win 3 -110 110 -52 52 -94 94 -346 0
+M 1 77 100 347
+W 11 55 110 75 52 94
+minS 250000 LB 0.586166 worst 1 -1 -1 -1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 353
+
+s 4 p 857 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 831 683 58
+kappa_row 0 11 55 -110
+kappa_row 26 0 10 -15
+kappa_row -87 -257 0 3
+kappa_row 184 319 381 0
+win 0 -176 -176 -428 428 -428 428 -428 428
+win 1 -11 11 -203 -127 -428 428 -428 428
+win 2 -55 55 -75 75 -195 -96 -428 428
+win 3 -110 110 -52 52 -96 96 -348 0
+M 1 77 100 349
+W 11 55 110 75 52 96
+minS 254016 LB 0.588098 worst 1 -1 -1 -1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 353
+
+s 4 p 859 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 26 518 400
+kappa_row 0 11 55 -110
+kappa_row -26 0 10 -15
+kappa_row 259 86 0 3
+kappa_row 51 -377 191 0
+win 0 -176 -176 -429 429 -429 429 -429 429
+win 1 -11 11 -203 -127 -429 429 -429 429
+win 2 -55 55 -75 75 -195 -96 -429 429
+win 3 -110 110 -52 52 -96 96 -349 0
+M 1 77 100 350
+W 11 55 110 75 52 96
+minS 256036 LB 0.589057 worst 1 -1 -1 -1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 353
+
+s 4 p 863 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 523 829 299
+kappa_row 0 11 55 -110
+kappa_row 340 0 10 -15
+kappa_row -17 259 0 3
+kappa_row -225 350 96 0
+win 0 -176 -176 -431 431 -431 431 -431 431
+win 1 -11 11 -204 -127 -431 431 -431 431
+win 2 -55 55 -75 75 -196 -96 -431 431
+win 3 -110 110 -52 52 -96 96 -350 0
+M 1 78 101 351
+W 11 55 110 75 52 96
+minS 260100 LB 0.590962 worst 1 -1 -1 -1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 353
+
+s 4 p 877 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 186 194 520
+kappa_row 0 11 55 -110
+kappa_row -186 0 10 -15
+kappa_row 97 -263 0 3
+kappa_row 332 229 195 0
+win 0 -176 -176 -438 438 -438 438 -438 438
+win 1 -11 11 -205 -127 -438 438 -438 438
+win 2 -55 55 -75 75 -198 -97 -438 438
+win 3 -110 110 -52 52 -97 97 -356 0
+M 1 79 102 357
+W 11 55 110 75 52 97
+minS 270400 LB 0.592930 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 357
+
+s 4 p 881 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 614 590 97
+kappa_row 0 11 55 -110
+kappa_row 267 0 10 -15
+kappa_row 295 -88 0 3
+kappa_row 185 93 98 0
+win 0 -176 -176 -440 440 -440 440 -440 440
+win 1 -11 11 -205 -127 -440 440 -440 440
+win 2 -55 55 -75 75 -199 -97 -440 440
+win 3 -110 110 -52 52 -97 97 -357 0
+M 1 79 103 358
+W 11 55 110 75 52 97
+minS 273529 LB 0.593644 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 358
+
+s 4 p 883 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 107 99 850
+kappa_row 0 11 55 -110
+kappa_row -107 0 10 -15
+kappa_row -392 265 0 3
+kappa_row 298 260 -98 0
+win 0 -176 -176 -441 441 -441 441 -441 441
+win 1 -11 11 -219 -140 -441 441 -441 441
+win 2 -55 55 -80 80 -202 -99 -441 441
+win 3 -110 110 -60 60 -99 99 -359 0
+M 1 80 104 360
+W 11 55 110 80 60 99
+minS 273529 LB 0.592299 worst 0 1 -1 -1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 360
+
+s 4 p 887 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 215 465 732
+kappa_row 0 11 55 -110
+kappa_row -215 0 10 -15
+kappa_row -211 -266 0 3
+kappa_row -377 -409 -197 0
+win 0 -176 -176 -443 443 -443 443 -443 443
+win 1 -11 11 -219 -140 -443 443 -443 443
+win 2 -55 55 -80 80 -203 -100 -443 443
+win 3 -110 110 -60 60 -100 100 -361 0
+M 1 80 104 362
+W 11 55 110 80 60 100
+minS 275625 LB 0.591883 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 362
+
+s 4 p 907 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 852 448 153
+kappa_row 0 11 55 -110
+kappa_row 55 0 10 -15
+kappa_row 224 -272 0 3
+kappa_row -17 388 -403 0
+win 0 -176 -176 -453 453 -453 453 -453 453
+win 1 -11 11 -221 -140 -453 453 -453 453
+win 2 -55 55 -80 80 -207 -102 -453 453
+win 3 -110 110 -60 60 -102 102 -369 0
+M 1 82 106 370
+W 11 55 110 80 60 102
+minS 288369 LB 0.592062 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 370
+
+s 4 p 911 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 138 196 542
+kappa_row 0 11 55 -110
+kappa_row -138 0 10 -15
+kappa_row 98 -91 0 3
+kappa_row 41 248 405 0
+win 0 -176 -176 -455 455 -455 455 -455 455
+win 1 -11 11 -221 -140 -455 455 -455 455
+win 2 -55 55 -80 80 -208 -102 -455 455
+win 3 -110 110 -60 60 -102 102 -370 0
+M 1 82 107 371
+W 11 55 110 80 60 102
+minS 291600 LB 0.592755 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 371
+
+s 4 p 919 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 362 220 233
+kappa_row 0 11 55 -110
+kappa_row -362 0 10 -15
+kappa_row 110 92 0 3
+kappa_row -128 -97 -102 0
+win 0 -176 -176 -459 459 -459 459 -459 459
+win 1 -11 11 -222 -140 -459 459 -459 459
+win 2 -55 55 -80 80 -209 -103 -459 459
+win 3 -110 110 -60 60 -103 103 -374 0
+M 1 83 107 375
+W 11 55 110 80 60 103
+minS 295936 LB 0.591948 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 375
+
+s 4 p 929 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 563 335 198
+kappa_row 0 11 55 -110
+kappa_row 366 0 10 -15
+kappa_row -297 93 0 3
+kappa_row -22 160 413 0
+win 0 -176 -176 -464 464 -464 464 -464 464
+win 1 -11 11 -223 -140 -464 464 -464 464
+win 2 -55 55 -80 80 -210 -103 -464 464
+win 3 -110 110 -60 60 -103 103 -377 0
+M 1 84 108 378
+W 11 55 110 80 60 103
+minS 303601 LB 0.593111 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 378
+
+s 4 p 937 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 795 548 442
+kappa_row 0 11 55 -110
+kappa_row 142 0 10 -15
+kappa_row 274 -281 0 3
+kappa_row 55 -380 -104 0
+win 0 -176 -176 -468 468 -468 468 -468 468
+win 1 -11 11 -229 -145 -468 468 -468 468
+win 2 -55 55 -85 85 -214 -105 -468 468
+win 3 -110 110 -60 60 -105 105 -381 0
+M 1 85 110 382
+W 11 55 110 85 60 105
+minS 308025 LB 0.592316 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 382
+
+s 4 p 941 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 57 288 845
+kappa_row 0 11 55 -110
+kappa_row -57 0 10 -15
+kappa_row 144 -94 0 3
+kappa_row -303 413 -209 0
+win 0 -176 -176 -470 470 -470 470 -470 470
+win 1 -11 11 -229 -145 -470 470 -470 470
+win 2 -55 55 -85 85 -215 -105 -470 470
+win 3 -110 110 -60 60 -105 105 -382 0
+M 1 85 111 383
+W 11 55 110 85 60 105
+minS 311364 LB 0.592986 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 383
+
+s 4 p 947 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 605 534 769
+kappa_row 0 12 60 -120
+kappa_row 342 0 10 -15
+kappa_row 267 -284 0 3
+kappa_row 125 -121 421 0
+win 0 -192 -192 -473 473 -473 473 -473 473
+win 1 -12 12 -204 -127 -473 473 -473 473
+win 2 -60 60 -75 75 -213 -105 -473 473
+win 3 -120 120 -52 52 -105 105 -384 0
+M 1 78 109 385
+W 12 60 120 75 52 105
+minS 315844 LB 0.593453 worst 1 -1 -1 -1
+superdiag 12 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 385
+
+s 4 p 953 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 450 45 938
+kappa_row 0 12 60 -120
+kappa_row -450 0 10 -15
+kappa_row -454 286 0 3
+kappa_row -316 -90 106 0
+win 0 -192 -192 -476 476 -476 476 -476 476
+win 1 -12 12 -205 -127 -476 476 -476 476
+win 2 -60 60 -75 75 -214 -105 -476 476
+win 3 -120 120 -52 52 -105 105 -386 0
+M 1 79 110 387
+W 12 60 120 75 52 105
+minS 320356 LB 0.593914 worst 0 0 0 1
+superdiag 12 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 387
+
+s 4 p 967 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 293 126 925
+kappa_row 0 11 55 -110
+kappa_row -293 0 10 -15
+kappa_row 63 -290 0 3
+kappa_row 327 -231 215 0
+win 0 -176 -176 -483 483 -483 483 -483 483
+win 1 -11 11 -231 -145 -483 483 -483 483
+win 2 -55 55 -85 85 -220 -108 -483 483
+win 3 -110 110 -60 60 -108 108 -393 0
+M 1 87 113 394
+W 11 55 110 85 60 108
+minS 328329 LB 0.592554 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 394
+
+s 4 p 971 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 765 562 460
+kappa_row 0 11 55 -110
+kappa_row 206 0 10 -15
+kappa_row 281 -97 0 3
+kappa_row -159 -383 108 0
+win 0 -176 -176 -485 485 -485 485 -485 485
+win 1 -11 11 -232 -145 -485 485 -485 485
+win 2 -55 55 -85 85 -221 -108 -485 485
+win 3 -110 110 -60 60 -108 108 -394 0
+M 1 88 114 395
+W 11 55 110 85 60 108
+minS 331776 LB 0.593203 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 395
+
+s 4 p 977 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 148 601 451
+kappa_row 0 11 55 -110
+kappa_row -148 0 10 -15
+kappa_row -188 -293 0 3
+kappa_row 167 38 -217 0
+win 0 -176 -176 -488 488 -488 488 -488 488
+win 1 -11 11 -232 -145 -488 488 -488 488
+win 2 -55 55 -85 85 -222 -109 -488 488
+win 3 -110 110 -60 60 -109 109 -397 0
+M 1 88 114 398
+W 11 55 110 85 60 109
+minS 335241 LB 0.592631 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 398
+
+s 4 p 983 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 417 140 281
+kappa_row 0 11 55 -110
+kappa_row -417 0 10 -15
+kappa_row 70 295 0 3
+kappa_row 78 71 437 0
+win 0 -176 -176 -491 491 -491 491 -491 491
+win 1 -11 11 -233 -145 -491 491 -491 491
+win 2 -55 55 -85 85 -223 -109 -491 491
+win 3 -110 110 -60 60 -109 109 -399 0
+M 1 89 115 400
+W 11 55 110 85 60 109
+minS 339889 LB 0.593082 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 400
+
+s 4 p 991 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 30 3 990
+kappa_row 0 11 55 -110
+kappa_row -30 0 10 -15
+kappa_row -494 -99 0 3
+kappa_row -110 490 -110 0
+win 0 -176 -176 -495 495 -495 495 -495 495
+win 1 -11 11 -233 -145 -495 495 -495 495
+win 2 -55 55 -85 85 -226 -111 -495 495
+win 3 -110 110 -60 60 -111 111 -403 0
+M 1 89 116 404
+W 11 55 110 85 60 111
+minS 344569 LB 0.592331 worst 0 0 0 1
+superdiag 11 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 404
+
+s 4 p 997 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 360 36 985
+kappa_row 0 12 60 -120
+kappa_row -360 0 10 -15
+kappa_row 18 -299 0 3
+kappa_row -331 -72 -443 0
+win 0 -192 -192 -498 498 -498 498 -498 498
+win 1 -12 12 -221 -140 -498 498 -498 498
+win 2 -60 60 -80 80 -225 -111 -498 498
+win 3 -120 120 -60 60 -111 111 -405 0
+M 1 82 115 406
+W 12 60 120 80 60 111
+minS 349281 LB 0.592778 worst 0 0 0 1
+superdiag 12 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 406
+
+s 4 p 1009 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 28 810 739
+kappa_row 0 12 60 -120
+kappa_row -28 0 10 -15
+kappa_row 405 101 0 3
+kappa_row 30 398 -112 0
+win 0 -192 -192 -504 504 -504 504 -504 504
+win 1 -12 12 -222 -140 -504 504 -504 504
+win 2 -60 60 -80 80 -227 -112 -504 504
+win 3 -120 120 -60 60 -112 112 -410 0
+M 1 83 116 411
+W 12 60 120 80 60 112
+minS 357604 LB 0.592666 worst 0 0 0 1
+superdiag 12 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 411
+
+s 4 p 1013 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 816 892 378
+kappa_row 0 12 60 -120
+kappa_row 197 0 10 -15
+kappa_row 446 304 0 3
+kappa_row -42 242 -225 0
+win 0 -192 -192 -506 506 -506 506 -506 506
+win 1 -12 12 -223 -140 -506 506 -506 506
+win 2 -60 60 -80 80 -228 -112 -506 506
+win 3 -120 120 -60 60 -112 112 -411 0
+M 1 84 117 412
+W 12 60 120 80 60 112
+minS 361201 LB 0.593287 worst 0 0 0 1
+superdiag 12 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 412
+
+s 4 p 1019 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 651 167 284
+kappa_row 0 12 60 -120
+kappa_row 368 0 10 -15
+kappa_row -426 102 0 3
+kappa_row -258 -334 453 0
+win 0 -192 -192 -509 509 -509 509 -509 509
+win 1 -12 12 -223 -140 -509 509 -509 509
+win 2 -60 60 -80 80 -228 -112 -509 509
+win 3 -120 120 -60 60 -112 112 -413 0
+M 1 84 117 414
+W 12 60 120 80 60 112
+minS 366025 LB 0.593719 worst 0 0 0 1
+superdiag 12 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 414
+
+s 4 p 1021 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 709 173 623
+kappa_row 0 12 60 -120
+kappa_row 312 0 10 -15
+kappa_row -424 -102 0 3
+kappa_row 498 -346 227 0
+win 0 -192 -192 -510 510 -510 510 -510 510
+win 1 -12 12 -223 -140 -510 510 -510 510
+win 2 -60 60 -80 80 -231 -114 -510 510
+win 3 -120 120 -60 60 -114 114 -415 0
+M 1 84 118 416
+W 12 60 120 80 60 114
+minS 366025 LB 0.592556 worst 0 0 0 1
+superdiag 12 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 416
+
+s 4 p 1031 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 608 267 942
+kappa_row 0 13 65 -130
+kappa_row 423 0 10 -15
+kappa_row -382 -103 0 3
+kappa_row 239 -63 -229 0
+win 0 -208 -208 -515 515 -515 515 -515 515
+win 1 -13 13 -205 -127 -515 515 -515 515
+win 2 -65 65 -75 75 -229 -112 -515 515
+win 3 -130 130 -52 52 -112 112 -417 0
+M 1 79 118 418
+W 13 65 130 75 52 112
+minS 375769 LB 0.594568 worst 0 0 0 1
+superdiag 13 10 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 418
+
+s 4 p 1033 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 313 973 20
+kappa_row 0 11 66 -132
+kappa_row -313 0 12 -18
+kappa_row -30 -86 0 3
+kappa_row -117 110 -459 0
+win 0 -209 -209 -516 516 -516 516 -516 516
+win 1 -11 11 -245 -153 -516 516 -516 516
+win 2 -66 66 -90 90 -196 -96 -516 516
+win 3 -132 132 -63 63 -96 96 -407 0
+M 1 93 101 408
+W 11 66 132 90 63 96
+minS 376996 LB 0.594385 worst 1 -1 -1 -1
+superdiag 11 12 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 419
+
+s 4 p 1039 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 976 774 781
+kappa_row 0 11 66 -132
+kappa_row 63 0 12 -18
+kappa_row 387 433 0 3
+kappa_row 375 -380 231 0
+win 0 -209 -209 -519 519 -519 519 -519 519
+win 1 -11 11 -246 -153 -519 519 -519 519
+win 2 -66 66 -90 90 -196 -96 -519 519
+win 3 -132 132 -63 63 -96 96 -409 0
+M 1 94 101 410
+W 11 66 132 90 63 96
+minS 384400 LB 0.596728 worst 1 -1 -1 -1
+superdiag 11 12 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 419
+
+s 4 p 1049 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 445 649 483
+kappa_row 0 11 66 -132
+kappa_row -445 0 12 -18
+kappa_row -200 -437 0 3
+kappa_row 296 34 -233 0
+win 0 -209 -209 -524 524 -524 524 -524 524
+win 1 -11 11 -247 -153 -524 524 -524 524
+win 2 -66 66 -90 90 -198 -97 -524 524
+win 3 -132 132 -63 63 -97 97 -413 0
+M 1 95 102 414
+W 11 66 132 90 63 97
+minS 396900 LB 0.600572 worst 1 -1 -1 -1
+superdiag 11 12 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 419
+
+s 4 p 1051 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 414 560 514
+kappa_row 0 11 66 -132
+kappa_row -414 0 12 -18
+kappa_row 280 438 0 3
+kappa_row 410 -326 -467 0
+win 0 -209 -209 -525 525 -525 525 -525 525
+win 1 -11 11 -247 -153 -525 525 -525 525
+win 2 -66 66 -90 90 -198 -97 -525 525
+win 3 -132 132 -63 63 -97 97 -414 0
+M 1 95 102 415
+W 11 66 132 90 63 97
+minS 399424 LB 0.601332 worst 1 -1 -1 -1
+superdiag 11 12 3
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 419
+
+s 4 p 1061 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 501 763 605
+kappa_row 0 12 54 -144
+kappa_row -501 0 9 -18
+kappa_row -149 118 0 4
+kappa_row -303 447 -442 0
+win 0 -210 -210 -530 530 -530 530 -530 530
+win 1 -12 12 -235 -148 -530 530 -530 530
+win 2 -54 54 -85 85 -265 -130 -530 530
+win 3 -144 144 -63 63 -130 130 -329 0
+M 1 88 136 330
+W 12 54 144 85 63 130
+minS 409600 LB 0.603205 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1063 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 561 771 73
+kappa_row 0 12 54 -144
+kappa_row 502 0 9 -18
+kappa_row -146 -118 0 4
+kappa_row 110 438 443 0
+win 0 -210 -210 -531 531 -531 531 -531 531
+win 1 -12 12 -235 -148 -531 531 -531 531
+win 2 -54 54 -85 85 -268 -132 -531 531
+win 3 -144 144 -63 63 -132 132 -330 0
+M 1 88 137 331
+W 12 54 144 85 63 132
+minS 412164 LB 0.603951 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1069 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 386 518 405
+kappa_row 0 12 54 -144
+kappa_row -386 0 9 -18
+kappa_row 259 -475 0 4
+kappa_row -45 292 -89 0
+win 0 -210 -210 -534 534 -534 534 -534 534
+win 1 -12 12 -235 -148 -534 534 -534 534
+win 2 -54 54 -85 85 -268 -132 -534 534
+win 3 -144 144 -63 63 -132 132 -332 0
+M 1 88 137 333
+W 12 54 144 85 63 132
+minS 419904 LB 0.606174 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1087 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 936 104 1061
+kappa_row 0 12 54 -144
+kappa_row 151 0 9 -18
+kappa_row 52 -483 0 4
+kappa_row 486 -156 453 0
+win 0 -210 -210 -543 543 -543 543 -543 543
+win 1 -12 12 -242 -153 -543 543 -543 543
+win 2 -54 54 -90 90 -273 -134 -543 543
+win 3 -144 144 -63 63 -134 134 -337 0
+M 1 90 140 338
+W 12 54 144 90 63 134
+minS 443556 LB 0.612695 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1091 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 697 926 314
+kappa_row 0 12 54 -144
+kappa_row 394 0 9 -18
+kappa_row 463 485 0 4
+kappa_row 450 -298 91 0
+win 0 -210 -210 -545 545 -545 545 -545 545
+win 1 -12 12 -242 -153 -545 545 -545 545
+win 2 -54 54 -90 90 -274 -134 -545 545
+win 3 -144 144 -63 63 -134 134 -338 0
+M 1 90 141 339
+W 12 54 144 90 63 134
+minS 448900 LB 0.614115 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1093 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 759 813 70
+kappa_row 0 12 54 -144
+kappa_row 334 0 9 -18
+kappa_row -140 243 0 4
+kappa_row 478 420 -91 0
+win 0 -210 -210 -546 546 -546 546 -546 546
+win 1 -12 12 -242 -153 -546 546 -546 546
+win 2 -54 54 -90 90 -274 -134 -546 546
+win 3 -144 144 -63 63 -134 134 -339 0
+M 1 90 141 340
+W 12 54 144 90 63 134
+minS 451584 LB 0.614822 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1097 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 518 667 656
+kappa_row 0 12 54 -144
+kappa_row -518 0 9 -18
+kappa_row -215 122 0 4
+kappa_row 49 -452 -457 0
+win 0 -210 -210 -548 548 -548 548 -548 548
+win 1 -12 12 -243 -153 -548 548 -548 548
+win 2 -54 54 -90 90 -274 -134 -548 548
+win 3 -144 144 -63 63 -134 134 -340 0
+M 1 91 141 341
+W 12 54 144 90 63 134
+minS 456976 LB 0.616226 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1103 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 337 160 1063
+kappa_row 0 12 54 -144
+kappa_row -337 0 9 -18
+kappa_row 80 -245 0 4
+kappa_row 127 -240 92 0
+win 0 -210 -210 -551 551 -551 551 -551 551
+win 1 -12 12 -243 -153 -551 551 -551 551
+win 2 -54 54 -90 90 -277 -136 -551 551
+win 3 -144 144 -63 63 -136 136 -342 0
+M 1 91 142 343
+W 12 54 144 90 63 136
+minS 465124 LB 0.618314 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1109 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 154 510 427
+kappa_row 0 12 54 -144
+kappa_row -154 0 9 -18
+kappa_row 255 493 0 4
+kappa_row 199 344 -462 0
+win 0 -210 -210 -554 554 -554 554 -554 554
+win 1 -12 12 -244 -153 -554 554 -554 554
+win 2 -54 54 -90 90 -278 -136 -554 554
+win 3 -144 144 -63 63 -136 136 -344 0
+M 1 92 143 345
+W 12 54 144 90 63 136
+minS 473344 LB 0.620379 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1117 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 31 624 961
+kappa_row 0 12 54 -144
+kappa_row -31 0 9 -18
+kappa_row 312 -124 0 4
+kappa_row -355 181 -93 0
+win 0 -210 -210 -558 558 -558 558 -558 558
+win 1 -12 12 -244 -153 -558 558 -558 558
+win 2 -54 54 -90 90 -281 -138 -558 558
+win 3 -144 144 -63 63 -138 138 -347 0
+M 1 92 144 348
+W 12 54 144 90 63 138
+minS 484416 LB 0.623098 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1123 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 967 357 753
+kappa_row 0 12 54 -144
+kappa_row 156 0 9 -18
+kappa_row -383 -499 0 4
+kappa_row -458 26 468 0
+win 0 -210 -210 -561 561 -561 561 -561 561
+win 1 -12 12 -245 -153 -561 561 -561 561
+win 2 -54 54 -90 90 -281 -138 -561 561
+win 3 -144 144 -63 63 -138 138 -348 0
+M 1 93 144 349
+W 12 54 144 90 63 138
+minS 492804 LB 0.625111 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1129 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 784 338 480
+kappa_row 0 12 54 -144
+kappa_row 345 0 9 -18
+kappa_row 169 251 0 4
+kappa_row 323 -507 -94 0
+win 0 -210 -210 -564 564 -564 564 -564 564
+win 1 -12 12 -245 -153 -564 564 -564 564
+win 2 -54 54 -90 90 -282 -138 -564 564
+win 3 -144 144 -63 63 -138 138 -350 0
+M 1 93 145 351
+W 12 54 144 90 63 138
+minS 501264 LB 0.627104 worst 1 -1 -1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 421
+
+s 4 p 1151 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1119 508 1024
+kappa_row 0 12 54 -144
+kappa_row 32 0 9 -18
+kappa_row 254 128 0 4
+kappa_row 142 389 96 0
+win 0 -210 -210 -575 575 -575 575 -575 575
+win 1 -12 12 -251 -157 -575 575 -575 575
+win 2 -54 54 -94 94 -287 -140 -575 575
+win 3 -144 144 -63 63 -140 140 -356 0
+M 1 95 148 357
+W 12 54 144 94 63 140
+minS 522729 LB 0.628149 worst 0 0 1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 428
+
+s 4 p 1153 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 32 516 1024
+kappa_row 0 12 54 -144
+kappa_row -32 0 9 -18
+kappa_row 258 -128 0 4
+kappa_row -370 379 -96 0
+win 0 -210 -210 -576 576 -576 576 -576 576
+win 1 -12 12 -251 -157 -576 576 -576 576
+win 2 -54 54 -94 94 -290 -142 -576 576
+win 3 -144 144 -63 63 -142 142 -358 0
+M 1 95 149 359
+W 12 54 144 94 63 142
+minS 518400 LB 0.624458 worst 0 0 1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 433
+
+s 4 p 1163 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 743 529 1110
+kappa_row 0 18 72 -128
+kappa_row -533 0 12 -16
+kappa_row 106 509 0 4
+kappa_row -185 -477 509 0
+win 0 -218 -218 -581 581 -581 581 -581 581
+win 1 -18 18 -231 -168 -581 581 -581 581
+win 2 -72 72 -96 96 -273 -162 -581 581
+win 3 -128 128 -72 72 -162 162 -370 0
+M 1 64 112 371
+W 18 72 128 96 72 162
+minS 527076 LB 0.624248 worst 1 -1 -1 -1
+superdiag 18 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 437
+
+s 4 p 1171 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 618 370 154
+kappa_row 0 18 72 -128
+kappa_row 244 0 12 -16
+kappa_row -308 -73 0 4
+kappa_row -416 215 -73 0
+win 0 -218 -218 -585 585 -585 585 -585 585
+win 1 -18 18 -231 -168 -585 585 -585 585
+win 2 -72 72 -96 96 -276 -164 -585 585
+win 3 -128 128 -72 72 -164 164 -373 0
+M 1 64 113 374
+W 18 72 128 96 72 164
+minS 532900 LB 0.623399 worst 0 0 1 -1
+superdiag 18 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 441
+
+s 4 p 1181 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 164 611 509
+kappa_row 0 18 72 -128
+kappa_row -246 0 12 -16
+kappa_row 163 74 0 4
+kappa_row 112 -143 74 0
+win 0 -218 -218 -590 590 -590 590 -590 590
+win 1 -18 18 -232 -168 -590 590 -590 590
+win 2 -72 72 -96 96 -277 -164 -590 590
+win 3 -128 128 -72 72 -164 164 -376 0
+M 1 65 114 377
+W 18 72 128 96 72 164
+minS 546121 LB 0.625741 worst 0 0 1 -1
+superdiag 18 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 442
+
+s 4 p 1187 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1154 392 1089
+kappa_row 0 12 54 -144
+kappa_row 33 0 9 -18
+kappa_row 196 132 0 4
+kappa_row -121 -588 99 0
+win 0 -210 -210 -593 593 -593 593 -593 593
+win 1 -12 12 -263 -166 -593 593 -593 593
+win 2 -54 54 -94 94 -297 -146 -593 593
+win 3 -144 144 -72 72 -146 146 -368 0
+M 1 98 152 369
+W 12 54 144 94 72 146
+minS 552049 LB 0.625948 worst 0 0 1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 444
+
+s 4 p 1193 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 961 1164 160
+kappa_row 0 18 72 -128
+kappa_row 348 0 12 -16
+kappa_row -320 373 0 4
+kappa_row 371 247 373 0
+win 0 -218 -218 -596 596 -596 596 -596 596
+win 1 -18 18 -233 -168 -596 596 -596 596
+win 2 -72 72 -96 96 -280 -166 -596 596
+win 3 -128 128 -72 72 -166 166 -380 0
+M 1 66 115 381
+W 18 72 128 96 72 166
+minS 556516 LB 0.625314 worst 0 0 1 -1
+superdiag 18 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 447
+
+s 4 p 1201 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 834 493 177
+kappa_row 0 12 54 -144
+kappa_row 367 0 9 -18
+kappa_row -354 267 0 4
+kappa_row -420 -139 -100 0
+win 0 -210 -210 -600 600 -600 600 -600 600
+win 1 -12 12 -269 -171 -600 600 -600 600
+win 2 -54 54 -99 99 -302 -148 -600 600
+win 3 -144 144 -72 72 -148 148 -373 0
+M 1 99 155 374
+W 12 54 144 99 72 148
+minS 562500 LB 0.624480 worst 0 0 1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 451
+
+s 4 p 1213 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 438 358 169
+kappa_row 0 18 72 -128
+kappa_row 556 0 12 -16
+kappa_row -338 76 0 4
+kappa_row 174 308 76 0
+win 0 -218 -218 -606 606 -606 606 -606 606
+win 1 -18 18 -234 -168 -606 606 -606 606
+win 2 -72 72 -96 96 -284 -168 -606 606
+win 3 -128 128 -72 72 -168 168 -386 0
+M 1 67 117 387
+W 18 72 128 96 72 168
+minS 577600 LB 0.626546 worst 0 0 1 -1
+superdiag 18 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 453
+
+s 4 p 1217 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 169 154 570
+kappa_row 0 12 54 -144
+kappa_row -169 0 9 -18
+kappa_row 77 541 0 4
+kappa_row -469 -231 -507 0
+win 0 -210 -210 -608 608 -608 608 -608 608
+win 1 -12 12 -271 -171 -608 608 -608 608
+win 2 -54 54 -99 99 -306 -150 -608 608
+win 3 -144 144 -72 72 -150 150 -378 0
+M 1 101 157 379
+W 12 54 144 99 72 150
+minS 577600 LB 0.624486 worst 0 0 1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 457
+
+s 4 p 1223 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1189 268 1156
+kappa_row 0 12 54 -144
+kappa_row 34 0 9 -18
+kappa_row 134 136 0 4
+kappa_row 551 -402 102 0
+win 0 -210 -210 -611 611 -611 611 -611 611
+win 1 -12 12 -271 -171 -611 611 -611 611
+win 2 -54 54 -99 99 -306 -150 -611 611
+win 3 -144 144 -72 72 -150 150 -379 0
+M 1 101 157 380
+W 12 54 144 99 72 150
+minS 586756 LB 0.626329 worst 0 0 1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 457
+
+s 4 p 1229 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 990 431 1221
+kappa_row 0 18 72 -128
+kappa_row -256 0 12 -16
+kappa_row 16 77 0 4
+kappa_row 411 -72 77 0
+win 0 -218 -218 -614 614 -614 614 -614 614
+win 1 -18 18 -241 -174 -614 614 -614 614
+win 2 -72 72 -102 102 -288 -170 -614 614
+win 3 -128 128 -72 72 -170 170 -391 0
+M 1 68 119 392
+W 18 72 128 102 72 170
+minS 592900 LB 0.626526 worst 0 0 1 -1
+superdiag 18 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 459
+
+s 4 p 1231 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1060 748 335
+kappa_row 0 18 72 -128
+kappa_row -359 0 12 -16
+kappa_row 561 231 0 4
+kappa_row -261 553 231 0
+win 0 -218 -218 -615 615 -615 615 -615 615
+win 1 -18 18 -241 -174 -615 615 -615 615
+win 2 -72 72 -102 102 -288 -170 -615 615
+win 3 -128 128 -72 72 -170 170 -391 0
+M 1 68 119 392
+W 18 72 128 102 72 170
+minS 595984 LB 0.627132 worst 0 0 1 -1
+superdiag 18 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 459
+
+s 4 p 1237 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 859 1195 629
+kappa_row 0 12 54 -144
+kappa_row 378 0 9 -18
+kappa_row -21 275 0 4
+kappa_row 205 63 -103 0
+win 0 -210 -210 -618 618 -618 618 -618 618
+win 1 -12 12 -272 -171 -618 618 -618 618
+win 2 -54 54 -99 99 -310 -152 -618 618
+win 3 -144 144 -72 72 -152 152 -384 0
+M 1 102 159 385
+W 12 54 144 99 72 152
+minS 599076 LB 0.625707 worst 0 0 1 -1
+superdiag 12 9 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 463
+
+s 4 p 1249 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 451 170 582
+kappa_row 0 12 60 -160
+kappa_row -451 0 10 -20
+kappa_row 85 125 0 4
+kappa_row -481 -255 -104 0
+win 0 -232 -232 -624 624 -624 624 -624 624
+win 1 -12 12 -272 -170 -624 624 -624 624
+win 2 -60 60 -100 100 -281 -138 -624 624
+win 3 -160 160 -70 70 -138 138 -380 0
+M 1 103 144 381
+W 12 60 160 100 70 138
+minS 614656 LB 0.627702 worst 1 -1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 465
+
+s 4 p 1259 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1224 626 473
+kappa_row 0 12 60 -160
+kappa_row 35 0 10 -20
+kappa_row 313 126 0 4
+kappa_row 507 320 105 0
+win 0 -232 -232 -629 629 -629 629 -629 629
+win 1 -12 12 -273 -170 -629 629 -629 629
+win 2 -60 60 -100 100 -282 -138 -629 629
+win 3 -160 160 -70 70 -138 138 -382 0
+M 1 104 145 383
+W 12 60 160 100 70 138
+minS 630436 LB 0.630659 worst 1 -1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 465
+
+s 4 p 1277 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 603 188 1230
+kappa_row 0 12 60 -160
+kappa_row -603 0 10 -20
+kappa_row 94 -383 0 4
+kappa_row 289 -282 -532 0
+win 0 -232 -232 -638 638 -638 638 -638 638
+win 1 -12 12 -280 -175 -638 638 -638 638
+win 2 -60 60 -105 105 -287 -140 -638 638
+win 3 -160 160 -70 70 -140 140 -388 0
+M 1 106 148 389
+W 12 60 160 105 70 140
+minS 659344 LB 0.635865 worst 1 -1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 465
+
+s 4 p 1279 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 675 707 143
+kappa_row 0 12 60 -160
+kappa_row 604 0 10 -20
+kappa_row -286 128 0 4
+kappa_row -158 -421 533 0
+win 0 -232 -232 -639 639 -639 639 -639 639
+win 1 -12 12 -280 -175 -639 639 -639 639
+win 2 -60 60 -105 105 -287 -140 -639 639
+win 3 -160 160 -70 70 -140 140 -388 0
+M 1 106 148 389
+W 12 60 160 105 70 140
+minS 662596 LB 0.636435 worst 1 -1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 465
+
+s 4 p 1283 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 392 809 760
+kappa_row 0 12 60 -160
+kappa_row -392 0 10 -20
+kappa_row -237 385 0 4
+kappa_row -227 -572 107 0
+win 0 -232 -232 -641 641 -641 641 -641 641
+win 1 -12 12 -290 -185 -641 641 -641 641
+win 2 -60 60 -105 105 -292 -144 -641 641
+win 3 -160 160 -80 80 -144 144 -391 0
+M 1 106 149 392
+W 12 60 160 105 80 144
+minS 651249 LB 0.628995 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 476
+
+s 4 p 1289 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 179 1178 350
+kappa_row 0 12 60 -160
+kappa_row -179 0 10 -20
+kappa_row 589 129 0 4
+kappa_row 534 -478 -537 0
+win 0 -232 -232 -644 644 -644 644 -644 644
+win 1 -12 12 -291 -185 -644 644 -644 644
+win 2 -60 60 -105 105 -292 -144 -644 644
+win 3 -160 160 -80 80 -144 144 -393 0
+M 1 107 149 394
+W 12 60 160 105 80 144
+minS 659344 LB 0.629946 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 477
+
+s 4 p 1291 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 251 1187 26
+kappa_row 0 12 60 -160
+kappa_row -251 0 10 -20
+kappa_row -52 -129 0 4
+kappa_row 284 156 538 0
+win 0 -232 -232 -645 645 -645 645 -645 645
+win 1 -12 12 -291 -185 -645 645 -645 645
+win 2 -60 60 -105 105 -293 -144 -645 645
+win 3 -160 160 -80 80 -144 144 -393 0
+M 1 107 150 394
+W 12 60 160 105 80 144
+minS 662596 LB 0.630519 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 477
+
+s 4 p 1297 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 36 263 907
+kappa_row 0 12 60 -160
+kappa_row -36 0 10 -20
+kappa_row -517 -389 0 4
+kappa_row -389 254 -108 0
+win 0 -232 -232 -648 648 -648 648 -648 648
+win 1 -12 12 -291 -185 -648 648 -648 648
+win 2 -60 60 -105 105 -293 -144 -648 648
+win 3 -160 160 -80 80 -144 144 -395 0
+M 1 107 150 396
+W 12 60 160 105 80 144
+minS 672400 LB 0.632228 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 477
+
+s 4 p 1301 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1048 365 234
+kappa_row 0 12 60 -160
+kappa_row 253 0 10 -20
+kappa_row -468 -130 0 4
+kappa_row -26 103 -542 0
+win 0 -232 -232 -650 650 -650 650 -650 650
+win 1 -12 12 -292 -185 -650 650 -650 650
+win 2 -60 60 -105 105 -296 -146 -650 650
+win 3 -160 160 -80 80 -146 146 -397 0
+M 1 108 151 398
+W 12 60 160 105 80 146
+minS 677329 LB 0.632590 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 478
+
+s 4 p 1303 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1122 894 428
+kappa_row 0 12 60 -160
+kappa_row 181 0 10 -20
+kappa_row 447 391 0 4
+kappa_row 242 -38 543 0
+win 0 -232 -232 -651 651 -651 651 -651 651
+win 1 -12 12 -292 -185 -651 651 -651 651
+win 2 -60 60 -105 105 -296 -146 -651 651
+win 3 -160 160 -80 80 -146 146 -397 0
+M 1 108 151 398
+W 12 60 160 105 80 146
+minS 680625 LB 0.633154 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 478
+
+s 4 p 1307 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 835 737 796
+kappa_row 0 12 60 -160
+kappa_row 472 0 10 -20
+kappa_row -285 -392 0 4
+kappa_row 202 -452 109 0
+win 0 -232 -232 -653 653 -653 653 -653 653
+win 1 -12 12 -292 -185 -653 653 -653 653
+win 2 -60 60 -105 105 -296 -146 -653 653
+win 3 -160 160 -80 80 -146 146 -398 0
+M 1 108 151 399
+W 12 60 160 105 80 146
+minS 687241 LB 0.634277 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 478
+
+s 4 p 1319 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 403 436 1210
+kappa_row 0 12 60 -160
+kappa_row -403 0 10 -20
+kappa_row 218 132 0 4
+kappa_row -281 -654 110 0
+win 0 -232 -232 -659 659 -659 659 -659 659
+win 1 -12 12 -293 -185 -659 659 -659 659
+win 2 -60 60 -105 105 -297 -146 -659 659
+win 3 -160 160 -80 80 -146 146 -401 0
+M 1 109 152 402
+W 12 60 160 105 80 146
+minS 705600 LB 0.636846 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 479
+
+s 4 p 1321 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 477 444 1210
+kappa_row 0 12 60 -160
+kappa_row -477 0 10 -20
+kappa_row 222 -132 0 4
+kappa_row -428 655 -110 0
+win 0 -232 -232 -660 660 -660 660 -660 660
+win 1 -12 12 -293 -185 -660 660 -660 660
+win 2 -60 60 -105 105 -300 -148 -660 660
+win 3 -160 160 -80 80 -148 148 -403 0
+M 1 109 153 404
+W 12 60 160 105 80 148
+minS 708964 LB 0.637396 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 479
+
+s 4 p 1327 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 258 822 458
+kappa_row 0 12 60 -160
+kappa_row -258 0 10 -20
+kappa_row 411 -398 0 4
+kappa_row 244 94 553 0
+win 0 -232 -232 -663 663 -663 663 -663 663
+win 1 -12 12 -299 -190 -663 663 -663 663
+win 2 -60 60 -110 110 -301 -148 -663 663
+win 3 -160 160 -80 80 -148 148 -404 0
+M 1 110 154 405
+W 12 60 160 110 80 148
+minS 700569 LB 0.630746 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 490
+
+s 4 p 1361 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 189 155 982
+kappa_row 0 12 60 -160
+kappa_row -189 0 10 -20
+kappa_row -603 -136 0 4
+kappa_row 647 448 -567 0
+win 0 -232 -232 -680 680 -680 680 -680 680
+win 1 -12 12 -302 -190 -680 680 -680 680
+win 2 -60 60 -110 110 -309 -152 -680 680
+win 3 -160 160 -80 80 -152 152 -415 0
+M 1 113 158 416
+W 12 60 160 110 80 152
+minS 753424 LB 0.637766 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 493
+
+s 4 p 1367 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1329 543 206
+kappa_row 0 12 60 -160
+kappa_row 38 0 10 -20
+kappa_row -412 -410 0 4
+kappa_row 129 -131 114 0
+win 0 -232 -232 -683 683 -683 683 -683 683
+win 1 -12 12 -302 -190 -683 683 -683 683
+win 2 -60 60 -110 110 -309 -152 -683 683
+win 3 -160 160 -80 80 -152 152 -416 0
+M 1 113 158 417
+W 12 60 160 110 80 152
+minS 763876 LB 0.639356 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 493
+
+s 4 p 1373 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1106 1209 41
+kappa_row 0 12 60 -160
+kappa_row 267 0 10 -20
+kappa_row -82 412 0 4
+kappa_row 148 246 -572 0
+win 0 -232 -232 -686 686 -686 686 -686 686
+win 1 -12 12 -303 -190 -686 686 -686 686
+win 2 -60 60 -110 110 -310 -152 -686 686
+win 3 -160 160 -80 80 -152 152 -418 0
+M 1 114 159 419
+W 12 60 160 110 80 152
+minS 772641 LB 0.640204 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 494
+
+s 4 p 1381 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 959 234 632
+kappa_row 0 12 60 -160
+kappa_row 422 0 10 -20
+kappa_row 117 -138 0 4
+kappa_row -684 -351 -115 0
+win 0 -232 -232 -690 690 -690 690 -690 690
+win 1 -12 12 -303 -190 -690 690 -690 690
+win 2 -60 60 -110 110 -313 -154 -690 690
+win 3 -160 160 -80 80 -154 154 -421 0
+M 1 114 160 422
+W 12 60 160 110 80 154
+minS 786769 LB 0.642288 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 494
+
+s 4 p 1399 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 272 307 273
+kappa_row 0 12 60 -160
+kappa_row -272 0 10 -20
+kappa_row -546 140 0 4
+kappa_row 436 239 583 0
+win 0 -232 -232 -699 699 -699 699 -699 699
+win 1 -12 12 -310 -195 -699 699 -699 699
+win 2 -60 60 -115 115 -315 -154 -699 699
+win 3 -160 160 -80 80 -154 154 -425 0
+M 1 116 162 426
+W 12 60 160 115 80 154
+minS 797449 LB 0.638313 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 506
+
+s 4 p 1409 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1135 818 500
+kappa_row 0 12 60 -160
+kappa_row 274 0 10 -20
+kappa_row 409 141 0 4
+kappa_row 101 182 -587 0
+win 0 -232 -232 -704 704 -704 704 -704 704
+win 1 -12 12 -311 -195 -704 704 -704 704
+win 2 -60 60 -115 115 -318 -156 -704 704
+win 3 -160 160 -80 80 -156 156 -429 0
+M 1 117 163 430
+W 12 60 160 115 80 156
+minS 813604 LB 0.640170 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 507
+
+s 4 p 1423 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 751 502 586
+kappa_row 0 12 60 -160
+kappa_row 672 0 10 -20
+kappa_row 251 427 0 4
+kappa_row 93 670 593 0
+win 0 -232 -232 -711 711 -711 711 -711 711
+win 1 -12 12 -312 -195 -711 711 -711 711
+win 2 -60 60 -115 115 -322 -158 -711 711
+win 3 -160 160 -80 80 -158 158 -433 0
+M 1 118 165 434
+W 12 60 160 115 80 158
+minS 837225 LB 0.643008 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 508
+
+s 4 p 1427 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 436 329 988
+kappa_row 0 12 60 -160
+kappa_row -436 0 10 -20
+kappa_row -549 -428 0 4
+kappa_row 683 220 119 0
+win 0 -232 -232 -713 713 -713 713 -713 713
+win 1 -12 12 -312 -195 -713 713 -713 713
+win 2 -60 60 -115 115 -322 -158 -713 713
+win 3 -160 160 -80 80 -158 158 -434 0
+M 1 118 165 435
+W 12 60 160 115 80 158
+minS 844561 LB 0.644008 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 508
+
+s 4 p 1429 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 516 909 130
+kappa_row 0 12 60 -160
+kappa_row -516 0 10 -20
+kappa_row -260 143 0 4
+kappa_row -332 -649 -119 0
+win 0 -232 -232 -714 714 -714 714 -714 714
+win 1 -12 12 -312 -195 -714 714 -714 714
+win 2 -60 60 -115 115 -322 -158 -714 714
+win 3 -160 160 -80 80 -158 158 -435 0
+M 1 118 165 436
+W 12 60 160 115 80 158
+minS 848241 LB 0.644507 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 508
+
+s 4 p 1433 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 199 1023 819
+kappa_row 0 12 60 -160
+kappa_row -199 0 10 -20
+kappa_row -205 430 0 4
+kappa_row -91 615 -597 0
+win 0 -232 -232 -716 716 -716 716 -716 716
+win 1 -12 12 -313 -195 -716 716 -716 716
+win 2 -60 60 -115 115 -323 -158 -716 716
+win 3 -160 160 -80 80 -158 158 -436 0
+M 1 119 166 437
+W 12 60 160 115 80 158
+minS 853776 LB 0.644801 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 509
+
+s 4 p 1439 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1399 1435 1
+kappa_row 0 12 60 -160
+kappa_row 40 0 10 -20
+kappa_row -2 144 0 4
+kappa_row -160 6 120 0
+win 0 -232 -232 -719 719 -719 719 -719 719
+win 1 -12 12 -313 -195 -719 719 -719 719
+win 2 -60 60 -115 115 -323 -158 -719 719
+win 3 -160 160 -80 80 -158 158 -437 0
+M 1 119 166 438
+W 12 60 160 115 80 158
+minS 864900 LB 0.646282 worst 0 1 -1 -1
+superdiag 12 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 509
+
+s 4 p 1447 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1246 771 169
+kappa_row 0 12 66 -176
+kappa_row 201 0 11 -22
+kappa_row -338 -263 0 4
+kappa_row 142 -433 603 0
+win 0 -254 -254 -723 723 -723 723 -723 723
+win 1 -12 12 -322 -203 -723 723 -723 723
+win 2 -66 66 -115 115 -297 -146 -723 723
+win 3 -176 176 -88 88 -146 146 -433 0
+M 1 120 152 434
+W 12 66 176 115 88 146
+minS 848241 LB 0.636489 worst 0 1 -1 -1
+superdiag 12 11 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 526
+
+s 4 p 1451 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 927 480 1331
+kappa_row 0 12 66 -176
+kappa_row 524 0 11 -22
+kappa_row 240 132 0 4
+kappa_row 497 -720 121 0
+win 0 -254 -254 -725 725 -725 725 -725 725
+win 1 -12 12 -322 -203 -725 725 -725 725
+win 2 -66 66 -115 115 -297 -146 -725 725
+win 3 -176 176 -88 88 -146 146 -434 0
+M 1 120 152 435
+W 12 66 176 115 88 146
+minS 855625 LB 0.637491 worst 0 1 -1 -1
+superdiag 12 11 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 526
+
+s 4 p 1453 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1009 488 1331
+kappa_row 0 12 66 -176
+kappa_row 444 0 11 -22
+kappa_row 244 -132 0 4
+kappa_row 175 721 -121 0
+win 0 -254 -254 -726 726 -726 726 -726 726
+win 1 -12 12 -322 -203 -726 726 -726 726
+win 2 -66 66 -115 115 -300 -148 -726 726
+win 3 -176 176 -88 88 -148 148 -436 0
+M 1 120 153 437
+W 12 66 176 115 88 148
+minS 859329 LB 0.637990 worst 0 1 -1 -1
+superdiag 12 11 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 526
+
+s 4 p 1459 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 770 77 883
+kappa_row 0 18 90 -160
+kappa_row 304 0 15 -20
+kappa_row -307 219 0 4
+kappa_row 96 652 -91 0
+win 0 -268 -268 -729 729 -729 729 -729 729
+win 1 -18 18 -289 -210 -729 729 -729 729
+win 2 -90 90 -120 120 -274 -162 -729 729
+win 3 -160 160 -90 90 -162 162 -444 0
+M 1 80 113 445
+W 18 90 160 120 90 162
+minS 850084 LB 0.631940 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1471 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 286 617 688
+kappa_row 0 18 90 -160
+kappa_row -429 0 15 -20
+kappa_row 95 515 0 4
+kappa_row -605 308 276 0
+win 0 -268 -268 -735 735 -735 735 -735 735
+win 1 -18 18 -290 -210 -735 735 -735 735
+win 2 -90 90 -120 120 -277 -164 -735 735
+win 3 -160 160 -90 90 -164 164 -448 0
+M 1 81 114 449
+W 18 90 160 120 90 164
+minS 872356 LB 0.634942 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1481 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1193 1156 307
+kappa_row 0 18 90 -160
+kappa_row 432 0 15 -20
+kappa_row -614 -222 0 4
+kappa_row -298 -199 463 0
+win 0 -268 -268 -740 740 -740 740 -740 740
+win 1 -18 18 -291 -210 -740 740 -740 740
+win 2 -90 90 -120 120 -279 -166 -740 740
+win 3 -160 160 -90 90 -166 166 -452 0
+M 1 82 114 453
+W 18 90 160 120 90 166
+minS 891136 LB 0.637407 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1483 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1277 276 638
+kappa_row 0 18 90 -160
+kappa_row 309 0 15 -20
+kappa_row 207 -74 0 4
+kappa_row 388 -190 649 0
+win 0 -268 -268 -741 741 -741 741 -741 741
+win 1 -18 18 -291 -210 -741 741 -741 741
+win 2 -90 90 -120 120 -279 -166 -741 741
+win 3 -160 160 -90 90 -166 166 -452 0
+M 1 82 114 453
+W 18 90 160 120 90 166
+minS 894916 LB 0.637896 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1487 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 950 95 522
+kappa_row 0 18 90 -160
+kappa_row 62 0 15 -20
+kappa_row 443 -669 0 4
+kappa_row -87 237 279 0
+win 0 -268 -268 -743 743 -743 743 -743 743
+win 1 -18 18 -291 -210 -743 743 -743 743
+win 2 -90 90 -120 120 -280 -166 -743 743
+win 3 -160 160 -90 90 -166 166 -453 0
+M 1 82 115 454
+W 18 90 160 120 90 166
+minS 902500 LB 0.638870 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1489 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1034 699 1413
+kappa_row 0 18 90 -160
+kappa_row -62 0 15 -20
+kappa_row 152 -521 0 4
+kappa_row 509 -684 -279 0
+win 0 -268 -268 -744 744 -744 744 -744 744
+win 1 -18 18 -291 -210 -744 744 -744 744
+win 2 -90 90 -120 120 -280 -166 -744 744
+win 3 -160 160 -90 90 -166 166 -454 0
+M 1 82 115 455
+W 18 90 160 120 90 166
+minS 906304 LB 0.639355 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1493 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 705 817 1000
+kappa_row 0 18 90 -160
+kappa_row -311 0 15 -20
+kappa_row -507 672 0 4
+kappa_row 331 42 -653 0
+win 0 -268 -268 -746 746 -746 746 -746 746
+win 1 -18 18 -291 -210 -746 746 -746 746
+win 2 -90 90 -120 120 -280 -166 -746 746
+win 3 -160 160 -90 90 -166 166 -455 0
+M 1 82 115 456
+W 18 90 160 120 90 166
+minS 913936 LB 0.640322 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1499 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 458 1245 470
+kappa_row 0 18 90 -160
+kappa_row -687 0 15 -20
+kappa_row 559 225 0 4
+kappa_row -578 -267 656 0
+win 0 -268 -268 -749 749 -749 749 -749 749
+win 1 -18 18 -292 -210 -749 749 -749 749
+win 2 -90 90 -120 120 -280 -166 -749 749
+win 3 -160 160 -90 90 -166 166 -456 0
+M 1 83 115 457
+W 18 90 160 120 90 166
+minS 925444 LB 0.641761 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1511 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1469 298 266
+kappa_row 0 18 90 -160
+kappa_row 63 0 15 -20
+kappa_row -532 529 0 4
+kappa_row -548 -628 -472 0
+win 0 -268 -268 -755 755 -755 755 -755 755
+win 1 -18 18 -292 -210 -755 755 -755 755
+win 2 -90 90 -120 120 -283 -168 -755 755
+win 3 -160 160 -90 90 -168 168 -460 0
+M 1 83 116 461
+W 18 90 160 120 90 168
+minS 948676 LB 0.644606 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1523 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 973 1468 211
+kappa_row 0 18 90 -160
+kappa_row -698 0 15 -20
+kappa_row -422 -76 0 4
+kappa_row -289 376 -95 0
+win 0 -268 -268 -761 761 -761 761 -761 761
+win 1 -18 18 -293 -210 -761 761 -761 761
+win 2 -90 90 -120 120 -286 -170 -761 761
+win 3 -160 160 -90 90 -170 170 -464 0
+M 1 84 117 465
+W 18 90 160 120 90 170
+minS 972196 LB 0.647406 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1531 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 808 387 429
+kappa_row 0 18 90 -160
+kappa_row 319 0 15 -20
+kappa_row 673 536 0 4
+kappa_row 694 -732 670 0
+win 0 -268 -268 -765 765 -765 765 -765 765
+win 1 -18 18 -293 -210 -765 765 -765 765
+win 2 -90 90 -120 120 -287 -170 -765 765
+win 3 -160 160 -90 90 -170 170 -466 0
+M 1 84 118 467
+W 18 90 160 120 90 170
+minS 988036 LB 0.649249 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1543 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 300 30 1146
+kappa_row 0 18 90 -160
+kappa_row -450 0 15 -20
+kappa_row -749 -77 0 4
+kappa_row -191 -487 -482 0
+win 0 -268 -268 -771 771 -771 771 -771 771
+win 1 -18 18 -301 -217 -771 771 -771 771
+win 2 -90 90 -127 127 -290 -172 -771 771
+win 3 -160 160 -90 90 -172 172 -470 0
+M 1 85 119 471
+W 18 90 160 127 90 172
+minS 1012036 LB 0.651977 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1549 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 43 469 405
+kappa_row 0 18 90 -160
+kappa_row 710 0 15 -20
+kappa_row 739 -542 0 4
+kappa_row 707 547 97 0
+win 0 -268 -268 -774 774 -774 774 -774 774
+win 1 -18 18 -301 -217 -774 774 -774 774
+win 2 -90 90 -127 127 -291 -172 -774 774
+win 3 -160 160 -90 90 -172 172 -472 0
+M 1 85 120 473
+W 18 90 160 127 90 172
+minS 1024144 LB 0.653325 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1553 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1251 591 749
+kappa_row 0 18 90 -160
+kappa_row 453 0 15 -20
+kappa_row 55 699 0 4
+kappa_row 134 529 -291 0
+win 0 -268 -268 -776 776 -776 776 -776 776
+win 1 -18 18 -302 -217 -776 776 -776 776
+win 2 -90 90 -127 127 -291 -172 -776 776
+win 3 -160 160 -90 90 -172 172 -473 0
+M 1 86 120 474
+W 18 90 160 127 90 172
+minS 1032256 LB 0.654218 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1559 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 996 1035 976
+kappa_row 0 18 90 -160
+kappa_row 65 0 15 -20
+kappa_row -393 234 0 4
+kappa_row 357 -570 -487 0
+win 0 -268 -268 -779 779 -779 779 -779 779
+win 1 -18 18 -302 -217 -779 779 -779 779
+win 2 -90 90 -127 127 -291 -172 -779 779
+win 3 -160 160 -90 90 -172 172 -474 0
+M 1 86 120 475
+W 18 90 160 127 90 172
+minS 1044484 LB 0.655548 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1567 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 827 1493 1203
+kappa_row 0 18 90 -160
+kappa_row -457 0 15 -20
+kappa_row 728 -705 0 4
+kappa_row 583 -142 294 0
+win 0 -268 -268 -783 783 -783 783 -783 783
+win 1 -18 18 -302 -217 -783 783 -783 783
+win 2 -90 90 -127 127 -294 -174 -783 783
+win 3 -160 160 -90 90 -174 174 -477 0
+M 1 86 121 478
+W 18 90 160 127 90 174
+minS 1060900 LB 0.657307 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1571 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 480 48 1553
+kappa_row 0 18 90 -160
+kappa_row -720 0 15 -20
+kappa_row 36 550 0 4
+kappa_row 3 -162 -98 0
+win 0 -268 -268 -785 785 -785 785 -785 785
+win 1 -18 18 -303 -217 -785 785 -785 785
+win 2 -90 90 -127 127 -294 -174 -785 785
+win 3 -160 160 -90 90 -174 174 -478 0
+M 1 87 121 479
+W 18 90 160 127 90 174
+minS 1069156 LB 0.658180 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1579 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 307 1136 1153
+kappa_row 0 18 90 -160
+kappa_row 329 0 15 -20
+kappa_row -727 237 0 4
+kappa_row 71 -676 691 0
+win 0 -268 -268 -789 789 -789 789 -789 789
+win 1 -18 18 -303 -217 -789 789 -789 789
+win 2 -90 90 -127 127 -295 -174 -789 789
+win 3 -160 160 -90 90 -174 174 -480 0
+M 1 87 122 481
+W 18 90 160 127 90 174
+minS 1085764 LB 0.659911 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1583 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1539 1262 714
+kappa_row 0 18 90 -160
+kappa_row 66 0 15 -20
+kappa_row 155 -79 0 4
+kappa_row -119 94 297 0
+win 0 -268 -268 -791 791 -791 791 -791 791
+win 1 -18 18 -303 -217 -791 791 -791 791
+win 2 -90 90 -127 127 -297 -176 -791 791
+win 3 -160 160 -90 90 -176 176 -482 0
+M 1 87 122 483
+W 18 90 160 127 90 176
+minS 1094116 LB 0.660771 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1597 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1109 590 178
+kappa_row 0 18 90 -160
+kappa_row 732 0 15 -20
+kappa_row -356 80 0 4
+kappa_row -562 5 100 0
+win 0 -268 -268 -798 798 -798 798 -798 798
+win 1 -18 18 -304 -217 -798 798 -798 798
+win 2 -90 90 -127 127 -298 -176 -798 798
+win 3 -160 160 -90 90 -176 176 -486 0
+M 1 88 123 487
+W 18 90 160 127 90 176
+minS 1123600 LB 0.663745 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1601 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 756 716 532
+kappa_row 0 18 90 -160
+kappa_row 467 0 15 -20
+kappa_row 537 -240 0 4
+kappa_row 445 -15 -300 0
+win 0 -268 -268 -800 800 -800 800 -800 800
+win 1 -18 18 -304 -217 -800 800 -800 800
+win 2 -90 90 -127 127 -300 -178 -800 800
+win 3 -160 160 -90 90 -178 178 -488 0
+M 1 88 123 489
+W 18 90 160 127 90 178
+minS 1132096 LB 0.664585 worst 1 -1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 537
+
+s 4 p 1607 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 491 1174 765
+kappa_row 0 18 90 -160
+kappa_row 67 0 15 -20
+kappa_row 77 -723 0 4
+kappa_row 676 457 -502 0
+win 0 -268 -268 -803 803 -803 803 -803 803
+win 1 -18 18 -315 -227 -803 803 -803 803
+win 2 -90 90 -127 127 -303 -180 -803 803
+win 3 -160 160 -100 100 -180 180 -490 0
+M 1 89 124 491
+W 18 90 160 127 100 180
+minS 1132096 LB 0.662103 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 543
+
+s 4 p 1609 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 581 219 119
+kappa_row 0 18 90 -160
+kappa_row -67 0 15 -20
+kappa_row -238 -563 0 4
+kappa_row -288 -538 503 0
+win 0 -268 -268 -804 804 -804 804 -804 804
+win 1 -18 18 -315 -227 -804 804 -804 804
+win 2 -90 90 -127 127 -303 -180 -804 804
+win 3 -160 160 -100 100 -180 180 -491 0
+M 1 89 124 492
+W 18 90 160 127 100 180
+minS 1136356 LB 0.662523 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 543
+
+s 4 p 1613 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 224 345 1282
+kappa_row 0 18 90 -160
+kappa_row -336 0 15 -20
+kappa_row 662 726 0 4
+kappa_row 324 247 101 0
+win 0 -268 -268 -806 806 -806 806 -806 806
+win 1 -18 18 -315 -227 -806 806 -806 806
+win 2 -90 90 -127 127 -303 -180 -806 806
+win 3 -160 160 -100 100 -180 180 -492 0
+M 1 89 124 493
+W 18 90 160 127 100 180
+minS 1144900 LB 0.663360 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 543
+
+s 4 p 1619 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1574 805 710
+kappa_row 0 18 90 -160
+kappa_row -742 0 15 -20
+kappa_row 199 243 0 4
+kappa_row -658 -86 -101 0
+win 0 -268 -268 -809 809 -809 809 -809 809
+win 1 -18 18 -315 -227 -809 809 -809 809
+win 2 -90 90 -127 127 -303 -180 -809 809
+win 3 -160 160 -100 100 -180 180 -493 0
+M 1 89 124 494
+W 18 90 160 127 100 180
+minS 1157776 LB 0.664608 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 543
+
+s 4 p 1621 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 45 815 1518
+kappa_row 0 18 90 -160
+kappa_row 743 0 15 -20
+kappa_row 206 -243 0 4
+kappa_row -253 694 -709 0
+win 0 -268 -268 -810 810 -810 810 -810 810
+win 1 -18 18 -315 -227 -810 810 -810 810
+win 2 -90 90 -127 127 -306 -182 -810 810
+win 3 -160 160 -100 100 -182 182 -495 0
+M 1 89 125 496
+W 18 90 160 127 100 182
+minS 1162084 LB 0.665022 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 543
+
+s 4 p 1627 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1401 1279 944
+kappa_row 0 18 90 -160
+kappa_row 339 0 15 -20
+kappa_row -261 -732 0 4
+kappa_row 385 361 712 0
+win 0 -268 -268 -813 813 -813 813 -813 813
+win 1 -18 18 -324 -235 -813 813 -813 813
+win 2 -90 90 -135 135 -307 -182 -813 813
+win 3 -160 160 -100 100 -182 182 -496 0
+M 1 90 126 497
+W 18 90 160 135 100 182
+minS 1138489 LB 0.655808 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 560
+
+s 4 p 1637 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 773 241 1342
+kappa_row 0 18 90 -160
+kappa_row -341 0 15 -20
+kappa_row 590 82 0 4
+kappa_row 322 619 -716 0
+win 0 -268 -268 -818 818 -818 818 -818 818
+win 1 -18 18 -324 -235 -818 818 -818 818
+win 2 -90 90 -135 135 -308 -182 -818 818
+win 3 -160 160 -100 100 -182 182 -499 0
+M 1 90 127 500
+W 18 90 160 135 100 182
+minS 1159929 LB 0.657911 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 560
+
+s 4 p 1657 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 46 336 1531
+kappa_row 0 18 90 -160
+kappa_row -69 0 15 -20
+kappa_row 252 83 0 4
+kappa_row 21 523 518 0
+win 0 -268 -268 -828 828 -828 828 -828 828
+win 1 -18 18 -325 -235 -828 828 -828 828
+win 2 -90 90 -135 135 -311 -184 -828 828
+win 3 -160 160 -100 100 -184 184 -505 0
+M 1 91 128 506
+W 18 90 160 135 100 184
+minS 1201216 LB 0.661436 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 561
+
+s 4 p 1663 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1432 1141 1443
+kappa_row 0 18 90 -160
+kappa_row -485 0 15 -20
+kappa_row 440 -83 0 4
+kappa_row 591 -317 312 0
+win 0 -268 -268 -831 831 -831 831 -831 831
+win 1 -18 18 -326 -235 -831 831 -831 831
+win 2 -90 90 -135 135 -313 -186 -831 831
+win 3 -160 160 -100 100 -186 186 -507 0
+M 1 92 128 508
+W 18 90 160 135 100 186
+minS 1212201 LB 0.662057 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 562
+
+s 4 p 1667 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1065 940 481
+kappa_row 0 18 90 -160
+kappa_row -764 0 15 -20
+kappa_row 705 -750 0 4
+kappa_row -358 -672 -104 0
+win 0 -268 -268 -833 833 -833 833 -833 833
+win 1 -18 18 -326 -235 -833 833 -833 833
+win 2 -90 90 -135 135 -314 -186 -833 833
+win 3 -160 160 -100 100 -186 186 -508 0
+M 1 92 129 509
+W 18 90 160 135 100 186
+minS 1221025 LB 0.662867 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 562
+
+s 4 p 1669 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1159 1618 645
+kappa_row 0 18 90 -160
+kappa_row 765 0 15 -20
+kappa_row 379 -584 0 4
+kappa_row 727 798 -730 0
+win 0 -268 -268 -834 834 -834 834 -834 834
+win 1 -18 18 -326 -235 -834 834 -834 834
+win 2 -90 90 -135 135 -314 -186 -834 834
+win 3 -160 160 -100 100 -186 186 -509 0
+M 1 92 129 510
+W 18 90 160 135 100 186
+minS 1225449 LB 0.663271 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 562
+
+s 4 p 1693 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 47 174 358
+kappa_row 0 18 90 -160
+kappa_row 776 0 15 -20
+kappa_row -716 762 0 4
+kappa_row -624 -164 106 0
+win 0 -268 -268 -846 846 -846 846 -846 846
+win 1 -18 18 -327 -235 -846 846 -846 846
+win 2 -90 90 -135 135 -317 -188 -846 846
+win 3 -160 160 -100 100 -188 188 -516 0
+M 1 93 130 517
+W 18 90 160 135 100 188
+minS 1276900 LB 0.667454 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 563
+
+s 4 p 1697 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1367 1664 1073
+kappa_row 0 18 90 -160
+kappa_row 495 0 15 -20
+kappa_row -449 85 0 4
+kappa_row 104 -525 -318 0
+win 0 -268 -268 -848 848 -848 848 -848 848
+win 1 -18 18 -328 -235 -848 848 -848 848
+win 2 -90 90 -135 135 -318 -188 -848 848
+win 3 -160 160 -100 100 -188 188 -517 0
+M 1 94 131 518
+W 18 90 160 135 100 188
+minS 1283689 LB 0.667649 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 564
+
+s 4 p 1699 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1463 656 1453
+kappa_row 0 18 90 -160
+kappa_row 354 0 15 -20
+kappa_row 492 255 0 4
+kappa_row 41 -515 -106 0
+win 0 -268 -268 -849 849 -849 849 -849 849
+win 1 -18 18 -328 -235 -849 849 -849 849
+win 2 -90 90 -135 135 -318 -188 -849 849
+win 3 -160 160 -100 100 -188 188 -517 0
+M 1 94 131 518
+W 18 90 160 135 100 188
+minS 1288225 LB 0.668040 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 564
+
+s 4 p 1709 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 807 1277 162
+kappa_row 0 18 90 -160
+kappa_row -356 0 15 -20
+kappa_row -324 -598 0 4
+kappa_row -27 -251 107 0
+win 0 -268 -268 -854 854 -854 854 -854 854
+win 1 -18 18 -328 -235 -854 854 -854 854
+win 2 -90 90 -135 135 -320 -190 -854 854
+win 3 -160 160 -100 100 -190 190 -521 0
+M 1 94 131 522
+W 18 90 160 135 100 190
+minS 1311025 LB 0.669982 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 564
+
+s 4 p 1721 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 239 196 787
+kappa_row 0 18 90 -160
+kappa_row 502 0 15 -20
+kappa_row 147 -258 0 4
+kappa_row -418 199 538 0
+win 0 -268 -268 -860 860 -860 860 -860 860
+win 1 -18 18 -336 -242 -860 860 -860 860
+win 2 -90 90 -142 142 -324 -192 -860 860
+win 3 -160 160 -100 100 -192 192 -525 0
+M 1 95 133 526
+W 18 90 160 142 100 192
+minS 1304164 LB 0.663568 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 579
+
+s 4 p 1723 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 335 895 1172
+kappa_row 0 18 90 -160
+kappa_row 359 0 15 -20
+kappa_row -621 -86 0 4
+kappa_row 379 210 754 0
+win 0 -268 -268 -861 861 -861 861 -861 861
+win 1 -18 18 -336 -242 -861 861 -861 861
+win 2 -90 90 -142 142 -324 -192 -861 861
+win 3 -160 160 -100 100 -192 192 -525 0
+M 1 95 133 526
+W 18 90 160 142 100 192
+minS 1308736 LB 0.663958 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 579
+
+s 4 p 1733 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1396 1526 1594
+kappa_row 0 18 90 -160
+kappa_row -361 0 15 -20
+kappa_row 278 780 0 4
+kappa_row 312 482 -758 0
+win 0 -268 -268 -866 866 -866 866 -866 866
+win 1 -18 18 -337 -242 -866 866 -866 866
+win 2 -90 90 -142 142 -325 -192 -866 866
+win 3 -160 160 -100 100 -192 192 -528 0
+M 1 96 134 529
+W 18 90 160 142 100 192
+minS 1329409 LB 0.665320 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 580
+
+s 4 p 1741 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 1209 295 107
+kappa_row 0 18 90 -160
+kappa_row 798 0 15 -20
+kappa_row -214 -261 0 4
+kappa_row -308 -778 109 0
+win 0 -268 -268 -870 870 -870 870 -870 870
+win 1 -18 18 -337 -242 -870 870 -870 870
+win 2 -90 90 -142 142 -328 -194 -870 870
+win 3 -160 160 -100 100 -194 194 -531 0
+M 1 96 135 532
+W 18 90 160 142 100 194
+minS 1347921 LB 0.666858 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 580
+
+s 4 p 1747 theta 3 brick -1 mode tri
+places 0 1 2 3
+rho 1 922 791 1232
+kappa_row 0 18 90 -160
+kappa_row 364 0 15 -20
+kappa_row -717 -786 0 4
+kappa_row 377 606 -109 0
+win 0 -268 -268 -873 873 -873 873 -873 873
+win 1 -18 18 -337 -242 -873 873 -873 873
+win 2 -90 90 -142 142 -328 -194 -873 873
+win 3 -160 160 -100 100 -194 194 -532 0
+M 1 96 135 533
+W 18 90 160 142 100 194
+minS 1361889 LB 0.668002 worst 0 1 -1 -1
+superdiag 18 15 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 3/1
+member s4_faure3 Gamma 580
+
+s 4 p 1753 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 857 261 373
+kappa_row 0 15 75 -200
+kappa_row -857 0 10 -20
+kappa_row -746 526 0 4
+kappa_row -431 168 -146 0
+win 0 -290 -290 -876 876 -876 876 -876 876
+win 1 -15 15 -310 -195 -876 876 -876 876
+win 2 -75 75 -115 115 -387 -190 -876 876
+win 3 -200 200 -80 80 -190 190 -532 0
+M 1 116 198 533
+W 15 75 200 115 80 190
+minS 1373584 LB 0.668568 worst 1 -1 -1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 581
+
+s 4 p 1759 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1329 1716 1330
+kappa_row 0 15 75 -200
+kappa_row 430 0 10 -20
+kappa_row 858 176 0 4
+kappa_row 634 -579 733 0
+win 0 -290 -290 -879 879 -879 879 -879 879
+win 1 -15 15 -311 -195 -879 879 -879 879
+win 2 -75 75 -115 115 -387 -190 -879 879
+win 3 -200 200 -80 80 -190 190 -533 0
+M 1 117 198 534
+W 15 75 200 115 80 190
+minS 1387684 LB 0.669699 worst 1 -1 -1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 581
+
+s 4 p 1777 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1698 1236 1468
+kappa_row 0 15 75 -200
+kappa_row 79 0 10 -20
+kappa_row 618 -533 0 4
+kappa_row -558 348 -148 0
+win 0 -290 -290 -888 888 -888 888 -888 888
+win 1 -15 15 -312 -195 -888 888 -888 888
+win 2 -75 75 -115 115 -391 -192 -888 888
+win 3 -200 200 -80 80 -192 192 -539 0
+M 1 118 200 540
+W 15 75 200 115 80 192
+minS 1423249 LB 0.671356 worst 0 0 1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 584
+
+s 4 p 1783 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1466 1573 944
+kappa_row 0 15 75 -200
+kappa_row 317 0 10 -20
+kappa_row -105 535 0 4
+kappa_row -303 -52 743 0
+win 0 -290 -290 -891 891 -891 891 -891 891
+win 1 -15 15 -312 -195 -891 891 -891 891
+win 2 -75 75 -115 115 -394 -194 -891 891
+win 3 -200 200 -80 80 -194 194 -541 0
+M 1 118 201 542
+W 15 75 200 115 80 194
+minS 1425636 LB 0.669658 worst 0 0 1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 589
+
+s 4 p 1787 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1509 687 275
+kappa_row 0 15 75 -200
+kappa_row 278 0 10 -20
+kappa_row -550 -536 0 4
+kappa_row 168 -618 149 0
+win 0 -290 -290 -893 893 -893 893 -893 893
+win 1 -15 15 -313 -195 -893 893 -893 893
+win 2 -75 75 -115 115 -394 -194 -893 893
+win 3 -200 200 -80 80 -194 194 -542 0
+M 1 119 201 543
+W 15 75 200 115 80 194
+minS 1435204 LB 0.670397 worst 0 0 1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 589
+
+s 4 p 1789 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 159 1626 488
+kappa_row 0 15 75 -200
+kappa_row -159 0 10 -20
+kappa_row 813 179 0 4
+kappa_row -253 82 -149 0
+win 0 -290 -290 -894 894 -894 894 -894 894
+win 1 -15 15 -313 -195 -894 894 -894 894
+win 2 -75 75 -115 115 -394 -194 -894 894
+win 3 -200 200 -80 80 -194 194 -543 0
+M 1 119 201 544
+W 15 75 200 115 80 194
+minS 1440000 LB 0.670766 worst 0 0 1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 589
+
+s 4 p 1801 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 40 4 1800
+kappa_row 0 15 75 -200
+kappa_row -40 0 10 -20
+kappa_row 2 -180 0 4
+kappa_row -200 893 -150 0
+win 0 -290 -290 -900 900 -900 900 -900 900
+win 1 -15 15 -313 -195 -900 900 -900 900
+win 2 -75 75 -115 115 -398 -196 -900 900
+win 3 -200 200 -80 80 -196 196 -547 0
+M 1 119 203 548
+W 15 75 200 115 80 196
+minS 1454436 LB 0.669628 worst 0 0 1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 595
+
+s 4 p 1811 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1650 165 1317
+kappa_row 0 15 75 -200
+kappa_row 161 0 10 -20
+kappa_row -823 -181 0 4
+kappa_row -750 -83 151 0
+win 0 -290 -290 -905 905 -905 905 -905 905
+win 1 -15 15 -329 -210 -905 905 -905 905
+win 2 -75 75 -120 120 -402 -198 -905 905
+win 3 -200 200 -90 90 -198 198 -550 0
+M 1 120 205 551
+W 15 75 200 120 90 198
+minS 1464100 LB 0.668139 worst 0 0 1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 601
+
+s 4 p 1823 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 81 555 317
+kappa_row 0 15 75 -200
+kappa_row -81 0 10 -20
+kappa_row -634 547 0 4
+kappa_row 775 -357 152 0
+win 0 -290 -290 -911 911 -911 911 -911 911
+win 1 -15 15 -330 -210 -911 911 -911 911
+win 2 -75 75 -120 120 -405 -200 -911 911
+win 3 -200 200 -90 90 -200 200 -554 0
+M 1 121 206 555
+W 15 75 200 120 90 200
+minS 1481089 LB 0.667581 worst 0 0 1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 606
+
+s 4 p 1831 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 651 1713 945
+kappa_row 0 15 75 -200
+kappa_row -651 0 10 -20
+kappa_row -59 -183 0 4
+kappa_row -105 679 763 0
+win 0 -290 -290 -915 915 -915 915 -915 915
+win 1 -15 15 -330 -210 -915 915 -915 915
+win 2 -75 75 -120 120 -406 -200 -915 915
+win 3 -200 200 -90 90 -200 200 -556 0
+M 1 121 207 557
+W 15 75 200 120 90 200
+minS 1498176 LB 0.668487 worst 0 0 1 -1
+superdiag 15 10 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 607
+
+s 4 p 1847 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 663 517 1256
+kappa_row 0 13 78 -208
+kappa_row -663 0 12 -24
+kappa_row -665 154 0 4
+kappa_row -550 776 154 0
+win 0 -299 -299 -923 923 -923 923 -923 923
+win 1 -13 13 -374 -234 -923 923 -923 923
+win 2 -78 78 -138 138 -343 -168 -923 923
+win 3 -208 208 -96 96 -168 168 -544 0
+M 1 141 176 545
+W 13 78 208 138 96 168
+minS 1532644 LB 0.670276 worst 0 1 -1 -1
+superdiag 13 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 609
+
+s 4 p 1861 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 334 338 846
+kappa_row 0 13 78 -208
+kappa_row -334 0 12 -24
+kappa_row 169 -155 0 4
+kappa_row -94 -84 -155 0
+win 0 -299 -299 -930 930 -930 930 -930 930
+win 1 -13 13 -376 -234 -930 930 -930 930
+win 2 -78 78 -138 138 -347 -170 -930 930
+win 3 -208 208 -96 96 -170 170 -549 0
+M 1 143 178 550
+W 13 78 208 138 96 170
+minS 1562500 LB 0.671682 worst 0 1 -1 -1
+superdiag 13 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 611
+
+s 4 p 1867 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1484 746 747
+kappa_row 0 13 78 -208
+kappa_row 383 0 12 -24
+kappa_row 373 778 0 4
+kappa_row -83 188 778 0
+win 0 -299 -299 -933 933 -933 933 -933 933
+win 1 -13 13 -376 -234 -933 933 -933 933
+win 2 -78 78 -138 138 -347 -170 -933 933
+win 3 -208 208 -96 96 -170 170 -550 0
+M 1 143 178 551
+W 13 78 208 138 96 170
+minS 1577536 LB 0.672737 worst 0 1 -1 -1
+superdiag 13 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 611
+
+s 4 p 1871 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 1823 1867 1
+kappa_row 0 13 78 -208
+kappa_row 48 0 12 -24
+kappa_row -2 156 0 4
+kappa_row -208 -929 156 0
+win 0 -299 -299 -935 935 -935 935 -935 935
+win 1 -13 13 -376 -234 -935 935 -935 935
+win 2 -78 78 -138 138 -347 -170 -935 935
+win 3 -208 208 -96 96 -170 170 -551 0
+M 1 143 178 552
+W 13 78 208 138 96 170
+minS 1587600 LB 0.673437 worst 0 1 -1 -1
+superdiag 13 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 611
+
+s 4 p 1873 theta 2 brick -1 mode tri
+places 0 1 2 3
+rho 1 48 4 1872
+kappa_row 0 13 78 -208
+kappa_row -48 0 12 -24
+kappa_row 2 -156 0 4
+kappa_row -208 930 -156 0
+win 0 -299 -299 -936 936 -936 936 -936 936
+win 1 -13 13 -376 -234 -936 936 -936 936
+win 2 -78 78 -138 138 -350 -172 -936 936
+win 3 -208 208 -96 96 -172 172 -553 0
+M 1 143 179 554
+W 13 78 208 138 96 172
+minS 1592644 LB 0.673785 worst 0 1 -1 -1
+superdiag 13 12 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 2/1
+member s4_faure2 Gamma 611
+
+s 4 p 1877 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 1 1512 189 1266
+kappa_row 0 36 144 -128
+kappa_row -782 0 24 -16
+kappa_row -655 235 0 4
+kappa_row -422 264 470 0
+win 0 -308 -308 -938 938 -938 938 -938 938
+win 1 -36 36 -319 -268 -938 938 -938 938
+win 2 -144 144 -156 156 -352 -262 -938 938
+win 3 -128 128 -112 112 -262 262 -599 0
+M 1 52 91 600
+W 36 144 128 156 112 262
+minS 1587600 LB 0.671284 worst 1 -1 -1 -1
+superdiag 36 24 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 6/1
+member s4_faure6 Gamma 617
+
+s 4 p 1879 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 1 1618 672 1375
+kappa_row 0 36 144 -128
+kappa_row 783 0 24 -16
+kappa_row -871 705 0 4
+kappa_row 168 323 -469 0
+win 0 -308 -308 -939 939 -939 939 -939 939
+win 1 -36 36 -319 -268 -939 939 -939 939
+win 2 -144 144 -156 156 -352 -262 -939 939
+win 3 -128 128 -112 112 -262 262 -599 0
+M 1 52 91 600
+W 36 144 128 156 112 262
+minS 1592644 LB 0.671634 worst 1 -1 -1 -1
+superdiag 36 24 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 6/1
+member s4_faure6 Gamma 617
+
+s 4 p 1889 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 1 892 1056 1097
+kappa_row 0 36 144 -128
+kappa_row -787 0 24 -16
+kappa_row -305 -708 0 4
+kappa_row 264 856 473 0
+win 0 -308 -308 -944 944 -944 944 -944 944
+win 1 -36 36 -319 -268 -944 944 -944 944
+win 2 -144 144 -156 156 -354 -264 -944 944
+win 3 -128 128 -112 112 -264 264 -603 0
+M 1 52 91 604
+W 36 144 128 156 112 264
+minS 1612900 LB 0.672313 worst 0 0 1 -1
+superdiag 36 24 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 6/1
+member s4_faure6 Gamma 619
+
+s 4 p 1901 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 1 264 33 1401
+kappa_row 0 36 144 -128
+kappa_row -792 0 24 -16
+kappa_row -901 238 0 4
+kappa_row -467 505 476 0
+win 0 -308 -308 -950 950 -950 950 -950 950
+win 1 -36 36 -319 -268 -950 950 -950 950
+win 2 -144 144 -156 156 -355 -264 -950 950
+win 3 -128 128 -112 112 -264 264 -606 0
+M 1 52 92 607
+W 36 144 128 156 112 264
+minS 1640961 LB 0.673856 worst 0 0 1 -1
+superdiag 36 24 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 6/1
+member s4_faure6 Gamma 620
+
+s 4 p 1907 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 1 1854 1662 1614
+kappa_row 0 36 144 -128
+kappa_row 159 0 24 -16
+kappa_row 586 -238 0 4
+kappa_row -538 447 -476 0
+win 0 -308 -308 -953 953 -953 953 -953 953
+win 1 -36 36 -319 -268 -953 953 -953 953
+win 2 -144 144 -156 156 -357 -266 -953 953
+win 3 -128 128 -112 112 -266 266 -608 0
+M 1 52 92 609
+W 36 144 128 156 112 266
+minS 1646089 LB 0.672784 worst 0 0 1 -1
+superdiag 36 24 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 6/1
+member s4_faure6 Gamma 624
+
+s 4 p 1913 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 1 1541 910 274
+kappa_row 0 36 144 -128
+kappa_row -797 0 24 -16
+kappa_row -548 -717 0 4
+kappa_row -729 -807 479 0
+win 0 -308 -308 -956 956 -956 956 -956 956
+win 1 -36 36 -320 -268 -956 956 -956 956
+win 2 -144 144 -156 156 -357 -266 -956 956
+win 3 -128 128 -112 112 -266 266 -610 0
+M 1 53 92 611
+W 36 144 128 156 112 266
+minS 1661521 LB 0.673811 worst 0 0 1 -1
+superdiag 36 24 4
+order 1 0
+order 2 0 1
+order 3 0 1 2
+frame 0/1 1/1 2/1 3/1 theta 6/1
+member s4_faure6 Gamma 624
+

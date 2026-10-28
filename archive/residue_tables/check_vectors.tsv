@@ -1,0 +1,28 @@
+# Table tab:residue: s, p, check vector v = (x_1..x_{s-1}, -1), exact ljit(Lambda_v)^2, search (E = exhaustive over all
+# (x,-1); R = random over 3e6 vectors), certified bound p^(-1/s) ljit truncated to 3 digits, Korobov bound (rho-1) p^(-1/s)
+# truncated to 3 digits (rho = floor(p^(1/s)), Korobov vector (rho, ..., rho^(s-1), -1), ljit = rho - 1).
+# Last block: the four check vectors of Table tab:practice (s = 3; v as stored, not normalised to last entry -1).
+#s	p	v	ljit2	search	bound	korobov
+2	11	3,-1	4	E	.603	.603
+2	17	4,-1	9	E	.727	.727
+2	37	6,-1	25	E	.821	.821
+2	101	30,-1	85	E	.917	.895
+2	1009	122,-1	1060	E	1.024	.944
+3	11	9,4,-1	1	E	.449	.449
+3	17	6,2,-1	1	E	.388	.388
+3	37	9,3,-1	4	E	.600	.600
+3	101	35,13,-1	13	E	.774	.644
+3	1009	105,11,-1	89	E	.940	.897
+3	10007	7775,9087,-1	498	R	1.035	.928
+4	17	9,15,4,-1	1	E	.492	.492
+4	37	14,4,2,-1	1	E	.405	.405
+4	101	27,9,3,-1	4	E	.630	.630
+4	1009	443,201,758,-1	25	R	.887	.709
+5	37	16,8,4,2,-1	1	E	.485	.485
+5	101	2,4,8,16,-1	1	R	.397	.397
+5	1009	560,313,92,858,-1	9	R	.752	.501
+# tab:practice
+3	13	5,3,6	1	-	.425	-
+3	17	4,10,16	1	-	.388	-
+3	23	4,14,20	2	-	.497	-
+3	31	10,30,7	4	-	.636	-

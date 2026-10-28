@@ -1,0 +1,36 @@
+{
+  "challenge_module": "GeoSeqV7Challenge",
+  "solution_module": "GeoSeqV7Solution",
+  "theorem_names": [
+    "GeoSeq.graphRule_unique",
+    "GeoSeq.graph_resp",
+    "GeoSeq.graphSig_neg",
+    "GeoSeq.graph_cert",
+    "GeoSeq.graph_seq",
+    "GeoSeq.p7chk_sound",
+    "GeoSeq.p7chk_111",
+    "GeoSeq.p7chk_116",
+    "GeoSeq.p7chk_161",
+    "GeoSeq.p7chk_166",
+    "GeoSeq.p7chk_small",
+    "GeoSeq.p7_LB",
+    "GeoSeq.p7_LB_eq",
+    "GeoSeq.p7",
+    "GeoSeq.p7_exists",
+    "GeoSeq.shift_seq0",
+    "GeoSeq.cert_shift",
+    "GeoSeq.shift_prefix",
+    "GeoSeq.shift_prefix_q4",
+    "GeoSeq.B2_kappa",
+    "GeoSeq.dim3_primes",
+    "GeoSeq.dim3_every_prime",
+    "GeoSeq.dim3_of_small"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

@@ -1,0 +1,27 @@
+PASS lf_designs_s3.txt:p13 s=3 p=13 s3_faure_th3_2 cover=EEE LB=0.153846 Gamma=11
+PASS lf_designs_s3.txt:p17 s=3 p=17 s3_faure_th3_2 cover=EEE LB=0.117647 Gamma=15
+PASS lf_designs_s3.txt:p19 s=3 p=19 s3_faure_th3_2 cover=EEE LB=0.210526 Gamma=15
+PASS lf_designs_s3.txt:p23 s=3 p=23 s3_faure_th3_2 cover=EEE LB=0.173913 Gamma=19
+PASS lf_designs_s3.txt:p29 s=3 p=29 s3_faure_th3_2 cover=EEE LB=0.275862 Gamma=21
+PASS lf_designs_s3.txt:p31 s=3 p=31 s3_faure_th3_2 cover=EEE LB=0.322581 Gamma=21
+PASS lf_designs_s3.txt:p37 s=3 p=37 s3_faure_th3_2 cover=EEE LB=0.324324 Gamma=25
+PASS lf_designs_s3.txt:p41 s=3 p=41 s3_faure_th3_2 cover=EEE LB=0.390244 Gamma=25
+PASS lf_designs_s3.txt:p43 s=3 p=43 s3_faure_th3_2 cover=EEE LB=0.418605 Gamma=25
+PASS lf_designs_s3.txt:p47 s=3 p=47 s3_faure_th3_2 cover=EEE LB=0.425532 Gamma=27
+PASS lf_designs_s3.txt:p53 s=3 p=53 s3_faure_th3_2 cover=EEE LB=0.452830 Gamma=29
+PASS lf_designs_s3.txt:p59 s=3 p=59 s3_faure_th3_2 cover=EEE LB=0.457627 Gamma=32
+PASS lf_designs_s3.txt:p61 s=3 p=61 s3_faure_th3_2 cover=EEE LB=0.475410 Gamma=32
+PASS lf_designs_s3.txt:p67 s=3 p=67 s3_faure_th3_2 cover=EEE LB=0.507463 Gamma=33
+PASS lf_designs_s3.txt:p71 s=3 p=71 s3_faure_th3_2 cover=EEE LB=0.535211 Gamma=33
+PASS lf_designs_s3.txt:p73 s=3 p=73 s3_faure_th3_2 cover=EEE LB=0.547945 Gamma=33
+PASS lf_designs_s3.txt:p79 s=3 p=79 s3_faure_th3_2 cover=EEE LB=0.556962 Gamma=35
+PASS lf_designs_s3.txt:p83 s=3 p=83 s3_faure_th3_2 cover=EEE LB=0.554217 Gamma=37
+PASS lf_designs_s3.txt:p89 s=3 p=89 s3_faure_th3_2 cover=EEE LB=0.573034 Gamma=38
+PASS lf_designs_s3.txt:p97 s=3 p=97 s3_faure_th3_2 cover=EEE LB=0.577320 Gamma=41
+PASS lf_designs_s3.txt:p101 s=3 p=101 s3_faure_th3_2 cover=EEE LB=0.584158 Gamma=42
+PASS lf_designs_s3.txt:p103 s=3 p=103 s3_faure_th3_2 cover=EEE LB=0.582524 Gamma=43
+PASS lf_designs_s3.txt:p107 s=3 p=107 s3_faure_th3_2 cover=EEE LB=0.598131 Gamma=43
+PASS lf_designs_s3.txt:p109 s=3 p=109 s3_faure_th3_2 cover=EEE LB=0.605505 Gamma=43
+PASS lf_designs_s3.txt:p113 s=3 p=113 s3_faure_th3_2 cover=EEE LB=0.584071 Gamma=47
+## lf_designs/lf_designs_s3.txt: 25/25 PASS
+## TOTAL 25/25 PASS

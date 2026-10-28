@@ -1,0 +1,19 @@
+{
+  "challenge_module": "GeoSeqV0Challenge",
+  "solution_module": "GeoSeqV0Solution",
+  "theorem_names": [
+    "GeoSeq.placeDer_ne_zero",
+    "GeoSeq.LI_a_lambda",
+    "GeoSeq.LI_c_lambda",
+    "GeoSeq.cover_prod",
+    "GeoSeq.freeze_c",
+    "GeoSeq.HB17_qu"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

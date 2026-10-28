@@ -1,0 +1,901 @@
+s 4 p 557 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 93 499 499
+kappa_row 0 -36 -144 -96
+kappa_row 232 0 24 12
+kappa_row 264 70 0 -3
+kappa_row 127 174 -1 0
+win 0 -276 -276 -278 278 -278 278 -278 278
+win 1 -36 36 -80 -66 -278 278 -278 278
+win 2 -144 144 -36 36 -101 -76 -278 278
+win 3 -96 96 -30 30 -76 76 -235 0
+M 1 15 26 236
+W 36 144 96 36 30 76
+minS 16 LB 0.007181 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 563 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 94 434 434
+kappa_row 0 -36 -144 -96
+kappa_row -47 0 24 12
+kappa_row -173 -70 0 -3
+kappa_row 101 -176 -1 0
+win 0 -276 -276 -281 281 -281 281 -281 281
+win 1 -36 36 -80 -66 -281 281 -281 281
+win 2 -144 144 -36 36 -101 -76 -281 281
+win 3 -96 96 -30 30 -76 76 -237 0
+M 1 15 26 238
+W 36 144 96 36 30 76
+minS 100 LB 0.017762 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 569 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 95 83 83
+kappa_row 0 -36 -144 -96
+kappa_row 237 0 24 12
+kappa_row 163 -213 0 -3
+kappa_row 27 -249 -1 0
+win 0 -276 -276 -284 284 -284 284 -284 284
+win 1 -36 36 -80 -66 -284 284 -284 284
+win 2 -144 144 -36 36 -103 -78 -284 284
+win 3 -96 96 -30 30 -78 78 -240 0
+M 1 15 26 241
+W 36 144 96 36 30 78
+minS 256 LB 0.028120 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 571 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 476 345 345
+kappa_row 0 -36 -144 -96
+kappa_row -238 0 24 12
+kappa_row 229 -71 0 -3
+kappa_row 76 107 -1 0
+win 0 -276 -276 -285 285 -285 285 -285 285
+win 1 -36 36 -80 -66 -285 285 -285 285
+win 2 -144 144 -36 36 -103 -78 -285 285
+win 3 -96 96 -30 30 -78 78 -241 0
+M 1 15 26 242
+W 36 144 96 36 30 78
+minS 324 LB 0.031524 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 577 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 481 565 565
+kappa_row 0 -36 -144 -96
+kappa_row 48 0 24 12
+kappa_row -3 -216 0 -3
+kappa_row 193 36 -1 0
+win 0 -276 -276 -288 288 -288 288 -288 288
+win 1 -36 36 -80 -66 -288 288 -288 288
+win 2 -144 144 -36 36 -105 -79 -288 288
+win 3 -96 96 -30 30 -79 79 -244 0
+M 1 15 27 245
+W 36 144 96 36 30 79
+minS 576 LB 0.041594 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 587 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 98 159 159
+kappa_row 0 -36 -144 -96
+kappa_row -49 0 24 12
+kappa_row -107 -73 0 -3
+kappa_row 89 110 -1 0
+win 0 -276 -276 -293 293 -293 293 -293 293
+win 1 -36 36 -99 -84 -293 293 -293 293
+win 2 -144 144 -48 48 -108 -81 -293 293
+win 3 -96 96 -36 36 -81 81 -248 0
+M 1 16 28 249
+W 36 144 96 48 36 81
+minS 1156 LB 0.057922 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 593 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 99 383 383
+kappa_row 0 -36 -144 -96
+kappa_row 247 0 24 12
+kappa_row 244 -222 0 -3
+kappa_row -186 37 -1 0
+win 0 -276 -276 -296 296 -296 296 -296 296
+win 1 -36 36 -99 -84 -296 296 -296 296
+win 2 -144 144 -48 48 -109 -82 -296 296
+win 3 -96 96 -36 36 -82 82 -251 0
+M 1 16 28 252
+W 36 144 96 48 36 82
+minS 1600 LB 0.067454 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 599 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 100 312 312
+kappa_row 0 -36 -144 -96
+kappa_row -50 0 24 12
+kappa_row 78 225 0 -3
+kappa_row -217 262 -1 0
+win 0 -276 -276 -299 299 -299 299 -299 299
+win 1 -36 36 -99 -84 -299 299 -299 299
+win 2 -144 144 -48 48 -109 -82 -299 299
+win 3 -96 96 -36 36 -82 82 -253 0
+M 1 16 28 254
+W 36 144 96 48 36 82
+minS 2116 LB 0.076795 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 601 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 501 288 288
+kappa_row 0 -36 -144 -96
+kappa_row 50 0 24 12
+kappa_row 72 -225 0 -3
+kappa_row -16 -263 -1 0
+win 0 -276 -276 -300 300 -300 300 -300 300
+win 1 -36 36 -99 -84 -300 300 -300 300
+win 2 -144 144 -48 48 -112 -84 -300 300
+win 3 -96 96 -36 36 -84 84 -255 0
+M 1 16 29 256
+W 36 144 96 48 36 84
+minS 2304 LB 0.079867 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 607 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 506 215 215
+kappa_row 0 -36 -144 -96
+kappa_row -253 0 24 12
+kappa_row -98 228 0 -3
+kappa_row -248 -38 -1 0
+win 0 -276 -276 -303 303 -303 303 -303 303
+win 1 -36 36 -99 -84 -303 303 -303 303
+win 2 -144 144 -48 48 -112 -84 -303 303
+win 3 -96 96 -36 36 -84 84 -257 0
+M 1 16 29 258
+W 36 144 96 48 36 84
+minS 2916 LB 0.088962 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 613 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 511 447 447
+kappa_row 0 -36 -144 -96
+kappa_row 51 0 24 12
+kappa_row 265 77 0 -3
+kappa_row -127 -115 -1 0
+win 0 -276 -276 -306 306 -306 306 -306 306
+win 1 -36 36 -99 -84 -306 306 -306 306
+win 2 -144 144 -48 48 -113 -85 -306 306
+win 3 -96 96 -36 36 -85 85 -260 0
+M 1 16 29 261
+W 36 144 96 48 36 85
+minS 3600 LB 0.097879 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 617 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 103 90 90
+kappa_row 0 -36 -144 -96
+kappa_row 257 0 24 12
+kappa_row -286 -231 0 -3
+kappa_row -5 -270 -1 0
+win 0 -276 -276 -308 308 -308 308 -308 308
+win 1 -36 36 -100 -84 -308 308 -308 308
+win 2 -144 144 -48 48 -113 -85 -308 308
+win 3 -96 96 -36 36 -85 85 -261 0
+M 1 17 29 262
+W 36 144 96 48 36 85
+minS 4096 LB 0.103728 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 619 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 516 374 374
+kappa_row 0 -36 -144 -96
+kappa_row -258 0 24 12
+kappa_row -216 -77 0 -3
+kappa_row 48 116 -1 0
+win 0 -276 -276 -309 309 -309 309 -309 309
+win 1 -36 36 -100 -84 -309 309 -309 309
+win 2 -144 144 -48 48 -113 -85 -309 309
+win 3 -96 96 -36 36 -85 85 -262 0
+M 1 17 29 263
+W 36 144 96 48 36 85
+minS 4356 LB 0.106624 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 631 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 526 539 539
+kappa_row 0 -36 -144 -96
+kappa_row -263 0 24 12
+kappa_row -23 237 0 -3
+kappa_row -65 276 -1 0
+win 0 -276 -276 -315 315 -315 315 -315 315
+win 1 -36 36 -100 -84 -315 315 -315 315
+win 2 -144 144 -48 48 -116 -87 -315 315
+win 3 -96 96 -36 36 -87 87 -267 0
+M 1 17 30 268
+W 36 144 96 48 36 87
+minS 6084 LB 0.123613 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 641 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 107 414 414
+kappa_row 0 -36 -144 -96
+kappa_row 267 0 24 12
+kappa_row -217 -240 0 -3
+kappa_row -23 40 -1 0
+win 0 -276 -276 -320 320 -320 320 -320 320
+win 1 -36 36 -100 -84 -320 320 -320 320
+win 2 -144 144 -48 48 -117 -88 -320 320
+win 3 -96 96 -36 36 -88 88 -271 0
+M 1 17 30 272
+W 36 144 96 48 36 88
+minS 7744 LB 0.137285 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 643 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 536 67 67
+kappa_row 0 -36 -144 -96
+kappa_row -268 0 24 12
+kappa_row -144 -80 0 -3
+kappa_row 32 -201 -1 0
+win 0 -276 -276 -321 321 -321 321 -321 321
+win 1 -36 36 -100 -84 -321 321 -321 321
+win 2 -144 144 -48 48 -117 -88 -321 321
+win 3 -96 96 -36 36 -88 88 -272 0
+M 1 17 30 273
+W 36 144 96 48 36 88
+minS 8100 LB 0.139969 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 647 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 108 337 337
+kappa_row 0 -36 -144 -96
+kappa_row -54 0 24 12
+kappa_row 246 243 0 -3
+kappa_row 161 283 -1 0
+win 0 -276 -276 -323 323 -323 323 -323 323
+win 1 -36 36 -100 -84 -323 323 -323 323
+win 2 -144 144 -48 48 -117 -88 -323 323
+win 3 -96 96 -36 36 -88 88 -273 0
+M 1 17 30 274
+W 36 144 96 48 36 88
+minS 8836 LB 0.145286 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 653 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 109 585 585
+kappa_row 0 -36 -144 -96
+kappa_row 272 0 24 12
+kappa_row -17 82 0 -3
+kappa_row 294 204 -1 0
+win 0 -276 -276 -326 326 -326 326 -326 326
+win 1 -36 36 -101 -84 -326 326 -326 326
+win 2 -144 144 -48 48 -120 -90 -326 326
+win 3 -96 96 -36 36 -90 90 -276 0
+M 1 18 31 277
+W 36 144 96 48 36 90
+minS 10000 LB 0.153139 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 659 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 110 508 508
+kappa_row 0 -36 -144 -96
+kappa_row -55 0 24 12
+kappa_row 127 -82 0 -3
+kappa_row 45 -206 -1 0
+win 0 -276 -276 -329 329 -329 329 -329 329
+win 1 -36 36 -101 -84 -329 329 -329 329
+win 2 -144 144 -48 48 -120 -90 -329 329
+win 3 -96 96 -36 36 -90 90 -278 0
+M 1 18 31 279
+W 36 144 96 48 36 90
+minS 11236 LB 0.160850 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 661 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 551 482 482
+kappa_row 0 -36 -144 -96
+kappa_row 55 0 24 12
+kappa_row -210 83 0 -3
+kappa_row 267 -124 -1 0
+win 0 -276 -276 -330 330 -330 330 -330 330
+win 1 -36 36 -101 -84 -330 330 -330 330
+win 2 -144 144 -48 48 -121 -91 -330 330
+win 3 -96 96 -36 36 -91 91 -280 0
+M 1 18 31 281
+W 36 144 96 48 36 91
+minS 11664 LB 0.163389 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 673 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 561 659 659
+kappa_row 0 -36 -144 -96
+kappa_row 56 0 24 12
+kappa_row 333 -252 0 -3
+kappa_row -74 42 -1 0
+win 0 -276 -276 -336 336 -336 336 -336 336
+win 1 -36 36 -101 -84 -336 336 -336 336
+win 2 -144 144 -48 48 -124 -93 -336 336
+win 3 -96 96 -36 36 -93 93 -285 0
+M 1 18 32 286
+W 36 144 96 48 36 93
+minS 14400 LB 0.178306 worst 1 -1 -1 -1
+heights 12 4 1
+member MR-A
+
+s 4 p 677 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 573 664 664
+kappa_row 0 -39 -156 -104
+kappa_row 52 0 24 12
+kappa_row 166 85 0 -3
+kappa_row 264 -127 -1 0
+win 0 -299 -299 -338 338 -338 338 -338 338
+win 1 -39 39 -100 -84 -338 338 -338 338
+win 2 -156 156 -48 48 -124 -93 -338 338
+win 3 -104 104 -36 36 -93 93 -286 0
+M 1 17 32 287
+W 39 156 104 48 36 93
+minS 6084 LB 0.115214 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 683 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 473 486 486
+kappa_row 0 -39 -156 -104
+kappa_row 105 0 24 12
+kappa_row -220 -85 0 -3
+kappa_row -27 128 -1 0
+win 0 -299 -299 -341 341 -341 341 -341 341
+win 1 -39 39 -100 -84 -341 341 -341 341
+win 2 -156 156 -48 48 -124 -93 -341 341
+win 3 -104 104 -36 36 -93 93 -288 0
+M 1 17 32 289
+W 39 156 104 48 36 93
+minS 7056 LB 0.122987 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 691 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 638 598 598
+kappa_row 0 -39 -156 -104
+kappa_row -319 0 24 12
+kappa_row -196 -86 0 -3
+kappa_row -110 -216 -1 0
+win 0 -299 -299 -345 345 -345 345 -345 345
+win 1 -39 39 -100 -84 -345 345 -345 345
+win 2 -156 156 -48 48 -125 -94 -345 345
+win 3 -104 104 -36 36 -94 94 -292 0
+M 1 17 32 293
+W 39 156 104 48 36 94
+minS 8464 LB 0.133140 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 701 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 108 364 364
+kappa_row 0 -39 -156 -104
+kappa_row -54 0 24 12
+kappa_row 91 88 0 -3
+kappa_row -176 219 -1 0
+win 0 -299 -299 -350 350 -350 350 -350 350
+win 1 -39 39 -100 -84 -350 350 -350 350
+win 2 -156 156 -48 48 -128 -96 -350 350
+win 3 -104 104 -36 36 -96 96 -296 0
+M 1 17 33 297
+W 39 156 104 48 36 96
+minS 10404 LB 0.145506 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 709 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 491 150 150
+kappa_row 0 -39 -156 -104
+kappa_row 109 0 24 12
+kappa_row -317 89 0 -3
+kappa_row 228 -133 -1 0
+win 0 -299 -299 -354 354 -354 354 -354 354
+win 1 -39 39 -101 -84 -354 354 -354 354
+win 2 -156 156 -48 48 -129 -97 -354 354
+win 3 -104 104 -36 36 -97 97 -300 0
+M 1 18 33 301
+W 39 156 104 48 36 97
+minS 12100 LB 0.155148 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 719 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 332 401 401
+kappa_row 0 -39 -156 -104
+kappa_row -166 0 24 12
+kappa_row 280 270 0 -3
+kappa_row -222 -45 -1 0
+win 0 -299 -299 -359 359 -359 359 -359 359
+win 1 -39 39 -101 -84 -359 359 -359 359
+win 2 -156 156 -48 48 -129 -97 -359 359
+win 3 -104 104 -36 36 -97 97 -303 0
+M 1 18 33 304
+W 39 156 104 48 36 97
+minS 14400 LB 0.166898 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 727 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 112 14 14
+kappa_row 0 -39 -156 -104
+kappa_row -56 0 24 12
+kappa_row -360 273 0 -3
+kappa_row 80 318 -1 0
+win 0 -299 -299 -363 363 -363 363 -363 363
+win 1 -39 39 -101 -84 -363 363 -363 363
+win 2 -156 156 -48 48 -132 -99 -363 363
+win 3 -104 104 -36 36 -99 99 -307 0
+M 1 18 34 308
+W 39 156 104 48 36 99
+minS 16384 LB 0.176066 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 733 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 564 437 437
+kappa_row 0 -39 -156 -104
+kappa_row -282 0 24 12
+kappa_row -74 92 0 -3
+kappa_row -65 229 -1 0
+win 0 -299 -299 -366 366 -366 366 -366 366
+win 1 -39 39 -107 -90 -366 366 -366 366
+win 2 -156 156 -48 48 -135 -102 -366 366
+win 3 -104 104 -42 42 -102 102 -311 0
+M 1 18 34 312
+W 39 156 104 48 42 102
+minS 17956 LB 0.182810 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 739 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 57 469 469
+kappa_row 0 -39 -156 -104
+kappa_row 341 0 24 12
+kappa_row 302 -92 0 -3
+kappa_row 15 -231 -1 0
+win 0 -299 -299 -369 369 -369 369 -369 369
+win 1 -39 39 -107 -90 -369 369 -369 369
+win 2 -156 156 -48 48 -135 -102 -369 369
+win 3 -104 104 -42 42 -102 102 -313 0
+M 1 18 34 314
+W 39 156 104 48 42 102
+minS 19600 LB 0.189445 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 743 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 686 643 643
+kappa_row 0 -39 -156 -104
+kappa_row -343 0 24 12
+kappa_row -25 279 0 -3
+kappa_row -77 325 -1 0
+win 0 -299 -299 -371 371 -371 371 -371 371
+win 1 -39 39 -108 -90 -371 371 -371 371
+win 2 -156 156 -48 48 -135 -102 -371 371
+win 3 -104 104 -42 42 -102 102 -314 0
+M 1 19 34 315
+W 39 156 104 48 42 102
+minS 20736 LB 0.193809 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 751 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 289 130 130
+kappa_row 0 -39 -156 -104
+kappa_row 231 0 24 12
+kappa_row -343 282 0 -3
+kappa_row -341 -47 -1 0
+win 0 -299 -299 -375 375 -375 375 -375 375
+win 1 -39 39 -108 -90 -375 375 -375 375
+win 2 -156 156 -48 48 -137 -103 -375 375
+win 3 -104 104 -42 42 -103 103 -318 0
+M 1 19 35 319
+W 39 156 104 48 42 103
+minS 23104 LB 0.202397 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 757 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 466 626 626
+kappa_row 0 -39 -156 -104
+kappa_row -233 0 24 12
+kappa_row -222 95 0 -3
+kappa_row -203 -142 -1 0
+win 0 -299 -299 -378 378 -378 378 -378 378
+win 1 -39 39 -108 -90 -378 378 -378 378
+win 2 -156 156 -48 48 -139 -105 -378 378
+win 3 -104 104 -42 42 -105 105 -321 0
+M 1 19 35 322
+W 39 156 104 48 42 105
+minS 24964 LB 0.208719 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 761 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 527 161 161
+kappa_row 0 -39 -156 -104
+kappa_row 117 0 24 12
+kappa_row -150 -285 0 -3
+kappa_row 287 -333 -1 0
+win 0 -299 -299 -380 380 -380 380 -380 380
+win 1 -39 39 -108 -90 -380 380 -380 380
+win 2 -156 156 -48 48 -139 -105 -380 380
+win 3 -104 104 -42 42 -105 105 -322 0
+M 1 19 35 323
+W 39 156 104 48 42 105
+minS 26244 LB 0.212878 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 769 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 710 281 281
+kappa_row 0 -39 -156 -104
+kappa_row -355 0 24 12
+kappa_row -122 -288 0 -3
+kappa_row 198 48 -1 0
+win 0 -299 -299 -384 384 -384 384 -384 384
+win 1 -39 39 -108 -90 -384 384 -384 384
+win 2 -156 156 -48 48 -141 -106 -384 384
+win 3 -104 104 -42 42 -106 106 -326 0
+M 1 19 36 327
+W 39 156 104 48 42 106
+minS 28900 LB 0.221066 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 773 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 238 223 223
+kappa_row 0 -39 -156 -104
+kappa_row -119 0 24 12
+kappa_row 249 97 0 -3
+kappa_row -313 -145 -1 0
+win 0 -299 -299 -386 386 -386 386 -386 386
+win 1 -39 39 -108 -90 -386 386 -386 386
+win 2 -156 156 -48 48 -141 -106 -386 386
+win 3 -104 104 -42 42 -106 106 -327 0
+M 1 19 36 328
+W 39 156 104 48 42 106
+minS 30276 LB 0.225097 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 787 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 545 560 560
+kappa_row 0 -39 -156 -104
+kappa_row 121 0 24 12
+kappa_row 140 -98 0 -3
+kappa_row -206 -246 -1 0
+win 0 -299 -299 -393 393 -393 393 -393 393
+win 1 -39 39 -121 -102 -393 393 -393 393
+win 2 -156 156 -60 60 -144 -108 -393 393
+win 3 -104 104 -42 42 -108 108 -333 0
+M 1 20 37 334
+W 39 156 104 60 42 108
+minS 35344 LB 0.238882 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 797 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 368 46 46
+kappa_row 0 -39 -156 -104
+kappa_row -184 0 24 12
+kappa_row -387 100 0 -3
+kappa_row 86 249 -1 0
+win 0 -299 -299 -398 398 -398 398 -398 398
+win 1 -39 39 -121 -102 -398 398 -398 398
+win 2 -156 156 -60 60 -146 -109 -398 398
+win 3 -104 104 -42 42 -109 109 -337 0
+M 1 20 38 338
+W 39 156 104 60 42 109
+minS 39204 LB 0.248432 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 809 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 498 669 669
+kappa_row 0 -39 -156 -104
+kappa_row -249 0 24 12
+kappa_row -35 -303 0 -3
+kappa_row -172 -354 -1 0
+win 0 -299 -299 -404 404 -404 404 -404 404
+win 1 -39 39 -121 -102 -404 404 -404 404
+win 2 -156 156 -60 60 -148 -111 -404 404
+win 3 -104 104 -42 42 -111 111 -342 0
+M 1 20 38 343
+W 39 156 104 60 42 111
+minS 44100 LB 0.259580 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 811 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 624 78 78
+kappa_row 0 -39 -156 -104
+kappa_row -312 0 24 12
+kappa_row -386 -101 0 -3
+kappa_row 266 152 -1 0
+win 0 -299 -299 -405 405 -405 405 -405 405
+win 1 -39 39 -121 -102 -405 405 -405 405
+win 2 -156 156 -60 60 -148 -111 -405 405
+win 3 -104 104 -42 42 -111 111 -343 0
+M 1 20 38 344
+W 39 156 104 60 42 111
+minS 44944 LB 0.261406 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 821 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 758 300 300
+kappa_row 0 -39 -156 -104
+kappa_row -379 0 24 12
+kappa_row 75 103 0 -3
+kappa_row 257 -154 -1 0
+win 0 -299 -299 -410 410 -410 410 -410 410
+win 1 -39 39 -122 -102 -410 410 -410 410
+win 2 -156 156 -60 60 -150 -112 -410 410
+win 3 -104 104 -42 42 -112 112 -347 0
+M 1 21 39 348
+W 39 156 104 60 42 112
+minS 49284 LB 0.270402 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 823 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 380 459 459
+kappa_row 0 -39 -156 -104
+kappa_row -190 0 24 12
+kappa_row -91 309 0 -3
+kappa_row 386 360 -1 0
+win 0 -299 -299 -411 411 -411 411 -411 411
+win 1 -39 39 -122 -102 -411 411 -411 411
+win 2 -156 156 -60 60 -150 -112 -411 411
+win 3 -104 104 -42 42 -112 112 -348 0
+M 1 21 39 349
+W 39 156 104 60 42 112
+minS 50176 LB 0.272175 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 827 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 191 334 334
+kappa_row 0 -39 -156 -104
+kappa_row 318 0 24 12
+kappa_row -330 -103 0 -3
+kappa_row 349 155 -1 0
+win 0 -299 -299 -413 413 -413 413 -413 413
+win 1 -39 39 -122 -102 -413 413 -413 413
+win 2 -156 156 -60 60 -150 -112 -413 413
+win 3 -104 104 -42 42 -112 112 -349 0
+M 1 21 39 350
+W 39 156 104 60 42 112
+minS 51984 LB 0.275695 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 829 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 319 558 558
+kappa_row 0 -39 -156 -104
+kappa_row 255 0 24 12
+kappa_row -275 104 0 -3
+kappa_row -31 259 -1 0
+win 0 -299 -299 -414 414 -414 414 -414 414
+win 1 -39 39 -122 -102 -414 414 -414 414
+win 2 -156 156 -60 60 -152 -114 -414 414
+win 3 -104 104 -42 42 -114 114 -351 0
+M 1 21 39 352
+W 39 156 104 60 42 114
+minS 52900 LB 0.277443 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 839 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 581 597 597
+kappa_row 0 -39 -156 -104
+kappa_row 129 0 24 12
+kappa_row 359 315 0 -3
+kappa_row -173 367 -1 0
+win 0 -299 -299 -419 419 -419 419 -419 419
+win 1 -39 39 -128 -108 -419 419 -419 419
+win 2 -156 156 -60 60 -153 -115 -419 419
+win 3 -104 104 -48 48 -115 115 -355 0
+M 1 21 39 356
+W 39 156 104 60 48 115
+minS 57600 LB 0.286055 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 853 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 197 771 771
+kappa_row 0 -39 -156 -104
+kappa_row 328 0 24 12
+kappa_row 406 107 0 -3
+kappa_row -185 -160 -1 0
+win 0 -299 -299 -426 426 -426 426 -426 426
+win 1 -39 39 -128 -108 -426 426 -426 426
+win 2 -156 156 -60 60 -157 -118 -426 426
+win 3 -104 104 -48 48 -118 118 -362 0
+M 1 21 40 363
+W 39 156 104 60 48 118
+minS 64516 LB 0.297773 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 857 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 132 445 445
+kappa_row 0 -39 -156 -104
+kappa_row -66 0 24 12
+kappa_row -103 -321 0 -3
+kappa_row -358 -375 -1 0
+win 0 -299 -299 -428 428 -428 428 -428 428
+win 1 -39 39 -128 -108 -428 428 -428 428
+win 2 -156 156 -60 60 -157 -118 -428 428
+win 3 -104 104 -48 48 -118 118 -363 0
+M 1 21 40 364
+W 39 156 104 60 48 118
+minS 66564 LB 0.301050 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 859 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 727 413 413
+kappa_row 0 -39 -156 -104
+kappa_row 66 0 24 12
+kappa_row 318 -107 0 -3
+kappa_row -357 161 -1 0
+win 0 -299 -299 -429 429 -429 429 -429 429
+win 1 -39 39 -128 -108 -429 429 -429 429
+win 2 -156 156 -60 60 -157 -118 -429 429
+win 3 -104 104 -48 48 -118 118 -364 0
+M 1 21 40 365
+W 39 156 104 60 48 118
+minS 67600 LB 0.302678 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 863 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 664 83 83
+kappa_row 0 -39 -156 -104
+kappa_row -332 0 24 12
+kappa_row -195 324 0 -3
+kappa_row 331 -54 -1 0
+win 0 -299 -299 -431 431 -431 431 -431 431
+win 1 -39 39 -129 -108 -431 431 -431 431
+win 2 -156 156 -60 60 -157 -118 -431 431
+win 3 -104 104 -48 48 -118 118 -365 0
+M 1 22 40 366
+W 39 156 104 60 48 118
+minS 69696 LB 0.305910 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 877 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 270 253 253
+kappa_row 0 -39 -156 -104
+kappa_row -135 0 24 12
+kappa_row -156 110 0 -3
+kappa_row 327 274 -1 0
+win 0 -299 -299 -438 438 -438 438 -438 438
+win 1 -39 39 -129 -108 -438 438 -438 438
+win 2 -156 156 -60 60 -161 -121 -438 438
+win 3 -104 104 -48 48 -121 121 -372 0
+M 1 22 41 373
+W 39 156 104 60 48 121
+minS 77284 LB 0.316990 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 881 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 339 593 593
+kappa_row 0 -39 -156 -104
+kappa_row 271 0 24 12
+kappa_row -72 -330 0 -3
+kappa_row 16 55 -1 0
+win 0 -299 -299 -440 440 -440 440 -440 440
+win 1 -39 39 -129 -108 -440 440 -440 440
+win 2 -156 156 -60 60 -161 -121 -440 440
+win 3 -104 104 -48 48 -121 121 -373 0
+M 1 22 41 374
+W 39 156 104 60 48 121
+minS 79524 LB 0.320091 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 883 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 136 17 17
+kappa_row 0 -39 -156 -104
+kappa_row -68 0 24 12
+kappa_row 225 -110 0 -3
+kappa_row -50 -276 -1 0
+win 0 -299 -299 -441 441 -441 441 -441 441
+win 1 -39 39 -129 -108 -441 441 -441 441
+win 2 -156 156 -60 60 -161 -121 -441 441
+win 3 -104 104 -48 48 -121 121 -374 0
+M 1 22 41 375
+W 39 156 104 60 48 121
+minS 80656 LB 0.321631 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+
+s 4 p 887 theta 6 brick -1 mode tri
+places 0 1 2 3
+rho 6 546 290 290
+kappa_row 0 -39 -156 -104
+kappa_row -273 0 24 12
+kappa_row -371 333 0 -3
+kappa_row 181 388 -1 0
+win 0 -299 -299 -443 443 -443 443 -443 443
+win 1 -39 39 -129 -108 -443 443 -443 443
+win 2 -156 156 -60 60 -161 -121 -443 443
+win 3 -104 104 -48 48 -121 121 -375 0
+M 1 22 41 376
+W 39 156 104 60 48 121
+minS 82944 LB 0.324690 worst 1 -1 -1 -1
+heights 13 4 1
+member MR-A
+

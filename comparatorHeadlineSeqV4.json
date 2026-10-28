@@ -1,0 +1,17 @@
+{
+  "challenge_module": "HeadlineSeqV4.Challenge",
+  "solution_module": "HeadlineSeqV4.Solution",
+  "theorem_names": [
+    "GeoSeqV4.halton_not_quasiUniform",
+    "GeoSeqV4.halton_bases_exist",
+    "GeoSeqV4.residue_quasiUniform",
+    "GeoSeqV4.residue_data"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

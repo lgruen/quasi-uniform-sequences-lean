@@ -1,0 +1,30 @@
+{
+  "challenge_module": "GeoSeqV97Challenge",
+  "solution_module": "GeoSeqV97Solution",
+  "theorem_names": [
+    "GeoSeq.ssResGen_t0",
+    "GeoSeq.ssRes_corr",
+    "GeoSeq.ssRes_corr_seq",
+    "GeoSeq.ssRes_modify",
+    "GeoSeq.corrTrunc_modify",
+    "GeoSeq.ljitB_ge",
+    "GeoSeq.corrected",
+    "GeoSeq.corrected_sepAtPrefix",
+    "GeoSeq.shift_skel_rel",
+    "GeoSeq.shift_skel_sep",
+    "GeoSeq.shift_residue",
+    "GeoSeq.joint_col",
+    "GeoSeq.joint_step",
+    "GeoSeq.joint_transfer",
+    "GeoSeq.joint_window",
+    "GeoSeq.joint_minkowski",
+    "GeoSeq.joint_iii"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

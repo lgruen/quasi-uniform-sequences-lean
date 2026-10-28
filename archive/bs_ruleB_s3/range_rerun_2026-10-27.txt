@@ -1,0 +1,2 @@
+rule B primes=509701 fails=0 first_fail=-1 last_fail=-1 | min LB_W=0.9997467 at 3039499 (>=0.6437 exactly: yes) | min exact-window LB=0.9997467 at 3039499 | LemmaW>exact count=0 | brick-axis binding count=509701 | max (1-LB_W)p for p>=3000000: 779.000 at 3078857 real 1.26 
+rule B primes=526176 fails=0 first_fail=-1 last_fail=-1 | min LB_W=0.9999331 at 11009261 (>=0.6437 exactly: yes) | min exact-window LB=0.9999331 at 11009261 | LemmaW>exact count=0 | brick-axis binding count=526176 | max (1-LB_W)p for p>=3000000: 746.000 at 11524111 real 1.32 

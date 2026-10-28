@@ -1,0 +1,279 @@
+%
+%
+%
+%
+%
+%
+\section{Why the Classical Sequences Fail}\label{sec:fail}
+The classical low-discrepancy sequences of Halton, Faure, Sobol' and Niederreiter are built from polynomial bases. Each coordinate reads the index polynomial in its own base $b_c(z)$, one block of digits at a time, like a radical inverse. Their prefixes are nets at every scale, so their covering radius is always of the right order $N^{-1/s}$. Dick, Goda and Suzuki asked for quasi-uniform digital sequences \cite{DGS2}, and Goda, Hofer and Suzuki asked whether any Halton-type sequence is \cite{GHS26}. For the classical sequences of all four kinds the answer is no, and the reason is one picture.
+
+Take two indices whose difference is a carry in the last digits of one coordinate. In base $p$ the digits $0.a(p-1)\cdots(p-1)$ of one point become $0.(a+1)0\cdots0$ for the other: the two points sit on either side of a cell boundary, one unit of the last digit apart. If the same index difference is divisible by a high power of every other base, then it does not change the leading digits of any other coordinate. The two points are close in every coordinate at once, much closer than $N^{-1/s}$ (Figure~\ref{fig:carry}). For polynomial bases such differences exist at infinitely many sizes, because a run of ones in one base is divisible by high powers of all the other bases (Theorem~\ref{thm:nonqu}).
+
+This section proves this for every digital sequence in polynomial bases with one coordinate a radical inverse (Theorem~\ref{thm:nonqu}), derives the classical cases (Halton-type, Faure, Niederreiter and Sobol' sequences), and shows which scrambles do not help: as long as one coordinate is still a radical inverse, up to a scalar, the sequence is not quasi-uniform, whatever triangular scrambles the other coordinates receive (Corollary~\ref{cor:unscrambled}). The repair scrambles every coordinate, through residues at the places (Sections~\ref{sec:law} and~\ref{sec:residue}).
+
+
+Throughout this section $s\ge2$, $q=p^r$, and digits are read through the natural identification $\enc$ of Section~\ref{sec:prelim}. The distance between two points is the Euclidean distance in the cube; it bounds the toroidal distance from above, so every upper bound on $\delta$ below holds for both (Section~\ref{sec:prelim}). As in \cite{GHS26}, the separation of a prefix is the minimum over pairs of distinct indices.
+
+\begin{figure}[tb]
+\centering
+\paperfig{fig_carry}
+\caption{A carry that the other coordinate cannot see. The two-dimensional Faure sequence $(I,\Pas)$ in base~$5$ (the Halton-type sequence with the bases $z$ and $z-1$), prefix $P_5$ ($3125$ points), exact points from the generator matrices. (a)~The prefix; the small box marks a closest pair, the points with indices $1$ and $3120$ (the minimum is attained by several pairs). (b)~Zoom with the grid of side $5^{-4}$: the two points lie on either side of the line $y_0=\frac15$ and in the same interval of length $5^{-4}$ of coordinate~$1$. (c)~Their digits. Coordinate~$0$ is a carry: $0.04444_5$ and $0.1_5$ differ by $5^{-5}$. Coordinate~$1$ has four equal leading digits. The distance $\sqrt{17}\cdot5^{-5}=1.32\cdot10^{-3}$ is the separation of $P_5$ (Euclidean and toroidal; $\sep{P_5}=0.0738$), and the pair is the one of Remark~\ref{rem:faurerate} with $Q=5$. Builder: \texttt{paper/\allowbreak v4/\allowbreak figs/\allowbreak b2\_carry.py}.}
+\label{fig:carry}
+\end{figure}
+
+\subsection{Polynomial Bases}\label{sec:polybases}
+Let $b_c\in\F_q[z]$ have degree $e_c\ge1$; it need not be monic or irreducible. Every $V\in\F_q[z]$ has a unique \emph{$b_c$-adic expansion} $V=\sum_{Q\ge0}a_Qb_c^Q$ with $\deg a_Q<e_c$, obtained by repeated division by $b_c$; the $a_Q$ are the $b_c$-adic digits of~$V$, and $a_0,\dots,a_{Q-1}$ are determined by $V\bmod b_c^Q$. The map $V\mapsto(a_Q)_Q$ is $\F_q$-linear.
+
+\begin{definition}[$b_c$-adic coordinates and radical inverses]\label{def:radinv}
+Coordinate $c$ of a digital sequence over $\F_q$ is \emph{$b_c$-adic} if for every $Q\ge1$ its first $e_cQ$ digits $y_{c,0}(V),\dots,y_{c,e_cQ-1}(V)$ depend only on $V\bmod b_c^Q$; by linearity this means that they vanish for $V\in b_c^Q\F_q[z]$. It is a \emph{$b_c$-adic radical inverse with digit map $\pi_c$}, where $\pi_c$ is an $\F_q$-linear bijection from the polynomials of degree less than $e_c$ onto $\F_q^{e_c}$, if for every $V$ and every $Q\ge0$ its digit block $(y_{c,Qe_c}(V),\dots,y_{c,(Q+1)e_c-1}(V))$ equals $\pi_c(a_Q)$, where $a_Q$ is the $Q$-th $b_c$-adic digit of~$V$.
+\end{definition}
+
+A radical inverse is $b_c$-adic. The examples:
+\begin{itemize}
+\item The unscrambled frame of Section~\ref{sec:prelim}: coordinate $c$ is a $(z-a_c)$-adic radical inverse with the identity as digit map, since the $(z-a_c)$-adic digits of $V$ are its Taylor coefficients at~$a_c$.
+\item The Halton-type sequences of Goda, Hofer and Suzuki \cite[Def.~2]{GHS26}, in the sense of Hofer \cite{Hof13}: $q=p$ prime, pairwise coprime $b_0,\dots,b_{s-1}\in\F_p[z]$, and coordinate $c$ reads the $b_c$-adic digits of the index, each digit $a_Q$ written as the $e_c$ base-$p$ digits given by its coefficients, the coefficient of $z^{e_c-1}$ first. This is a $b_c$-adic radical inverse with $\pi_c(a)=([z^{e_c-1}]a,\dots,[z^0]a)$. Their index $n=\sum_in_ip^i\mapsto\sum_in_iz^i$ is our $V$ with $\ind V=n$.
+\item A lower-triangular scramble $L_c$ of a $b_c$-adic coordinate is $b_c$-adic: its first $d$ digits are combinations of the first $d$ unscrambled digits. A nonzero scalar multiple of a radical inverse with digit map $\pi_c$ is a radical inverse with digit map $\mu\pi_c$.
+\item Sobol' and Niederreiter sequences (Lemmas~\ref{lem:sobol} and~\ref{lem:nied} below).
+\end{itemize}
+For a digital sequence the digits of the two points with indices $V$ and $V+D$ differ by the digits of $D$, coordinate by coordinate. So a coordinate is blind to every index difference $D$ that is divisible by a high power of its base: the leading digits of the two points agree.
+
+\subsection{A Close Pair from a Carry}
+In a prime base the carry looks as follows. Add the digit string $0.0\,1\,1\cdots1$ to $0.0\,0\,(p-1)\cdots(p-1)$ digit by digit modulo~$p$: the result is $0.0\,1\,0\cdots0$, which as a real number is exactly one unit of the last digit larger. For a prime power $q=p^r$ the same works with two special digits. Put
+\[
+\bar y=\enc^{-1}(q-1),\qquad y^\circ=\enc^{-1}(q/p-1),
+\]
+so $\bar y=-1$ and $y^\circ=0$ for prime $q$. Under the natural identification $\enc^{-1}$ is additive on base-$p$ digit vectors. The integers $q/p-1$ and $q/p$ have the base-$p$ digit vectors $(p-1,\dots,p-1,0)$ and $(0,\dots,0,1)$, and $q-1$ and $0$ have $(p-1,\dots,p-1)$ and $(0,\dots,0)$. In both cases the difference is the vector $(1,\dots,1)$ modulo~$p$, so
+\begin{equation}\label{eq:carrydigit}
+\enc^{-1}(q/p)-y^\circ=\enc^{-1}(0)-\bar y=-\bar y.
+\end{equation}
+Adding $-\bar y$ to every digit of $y^\circ\bar y\cdots\bar y$ therefore gives $\enc^{-1}(q/p)\,0\cdots0$, one unit of the last digit more.
+
+In the lemma below these digits are written as polynomials of degree less than $e$ through the digit map $\pi$: $g$ is the carry digit, added at every position of the run, and $\tilde g$ and $g'$ write the lower of the two points, just below the cell boundary. The lemma needs three things of the index difference $D$: in the carrying base it is a run of the carry digit, (i); in every other base it is divisible by a high power, (ii), so those coordinates share their leading digits; and it is small enough for both points to lie in $P_m$, (iii).
+
+\begin{lemma}[A close pair from a carry]\label{lem:carrypair}
+Let coordinate $\hat c$ of a digital sequence over $\F_q$ be a $b$-adic radical inverse with digit map $\pi$, where $b=b_{\hat c}$ has degree $e=e_{\hat c}$, and let every other coordinate $c$ be $b_c$-adic. Let $g,\tilde g,g'\in\F_q[z]$ have degree less than $e$ with
+\[
+\pi(g)=-\bar y\,(1,\dots,1),\qquad\pi(\tilde g)=(y^\circ,\bar y,\dots,\bar y),\qquad\pi(g')=\bar y\,(1,\dots,1),
+\]
+and put $S_n=(b^n-1)/(b-1)=1+b+\dots+b^{n-1}$. Let $D\in\F_q[z]\setminus\{0\}$, let $0\le\eta<\lambda$ be integers, $L=e\lambda$, and suppose
+\begin{enumerate}
+\item[(i)] $D\equiv g\,b^\eta S_{\lambda-\eta}\pmod{b^\lambda}$;
+\item[(ii)] for every $c\ne\hat c$, $b_c^{j_c}$ divides $D$ for some $j_c$ with $e_cj_c\ge L$;
+\item[(iii)] $\deg D<m$.
+\end{enumerate}
+Then $V_1=\tilde g\,b^\eta+g'\,b^{\eta+1}S_{\lambda-\eta-1}$ and $V_2=V_1+D$ are indices of points of $P_m$, and $\|y(V_1)-y(V_2)\|<\sqrt{s+3}\,q^{-L}$. In particular $\delta(P_m)<\sqrt{s+3}\,q^{-L}$ and $\sep{P_m}<\sqrt{s+3}\,q^{m/s-L}$.
+\end{lemma}
+
+\begin{proof}
+\emph{Degrees.} $\deg V_1\le e(\lambda-1)+e-1<L$. By (ii) for one $c\ne\hat c$ (here $s\ge2$ is used) and $D\ne0$, $\deg D\ge e_cj_c\ge L$, so $L<m$ by (iii). Hence $V_1$ and $V_2$ have degree less than $m$, and $V_1\ne V_2$.
+
+\emph{Coordinate $\hat c$.} $V_1=\tilde g\,b^\eta+\sum_{j=\eta+1}^{\lambda-1}g'b^j$ is its own $b$-adic expansion: its $b$-adic digits are $\tilde g$ at position $\eta$, $g'$ at the positions $\eta+1,\dots,\lambda-1$, and $0$ elsewhere. By (i) the $b$-adic digits of $D$ at the positions below $\lambda$ are those of $g\,b^\eta S_{\lambda-\eta}=\sum_{j=\eta}^{\lambda-1}g\,b^j$: $0$ below $\eta$ and $g$ from $\eta$ on. Applying $\pi$ blockwise and using linearity, the first $L$ digits of coordinate $\hat c$ are
+\[
+V_1:\ (0^{e\eta},\,y^\circ,\,\bar y^{\,L-e\eta-1}),\qquad V_2:\ (0^{e\eta},\,y^\circ-\bar y,\,0^{L-e\eta-1})=(0^{e\eta},\,\enc^{-1}(q/p),\,0^{L-e\eta-1})
+\]
+by (\ref{eq:carrydigit}). Read as integers in units of $q^{-L}$, these prefixes are $A=(q/p-1)q^{L-e\eta-1}+q^{L-e\eta-1}-1$ and $(q/p)q^{L-e\eta-1}=A+1$. A polynomial has finitely many nonzero $b$-adic digits and $\pi(0)=0$, so the remaining digits of each point are finitely many and contribute some $\tau_i\in[0,q^{-L})$. Hence $y_{\hat c}(V_2)-y_{\hat c}(V_1)=q^{-L}+\tau_2-\tau_1\in(0,2q^{-L})$.
+
+\emph{Coordinates $c\ne\hat c$.} $V_2-V_1=D$ is divisible by $b_c^{j_c}$, so the first $e_cj_c\ge L$ digits of coordinate $c$ agree, the two values lie in one closed interval of length $q^{-L}$, and $|y_c(V_2)-y_c(V_1)|\le q^{-L}$.
+
+Summing the squares, $\|y(V_1)-y(V_2)\|^2<(4+s-1)\,q^{-2L}$.
+\end{proof}
+
+The lemma turns the search for a close pair into polynomial arithmetic: one needs a difference $D$ of small degree that is a run of the carry digit $g$ in base $b$ and is divisible by high powers of all the other bases. What counts is the excess $sL-m$ of the length of the shared digits over the cell side: the lemma gives $\sep{P_m}<\sqrt{s+3}\,q^{-(sL-m)/s}$. A family of differences along which $sL-m$ grows without bound proves that the sequence is not quasi-uniform.
+
+\subsection{The General Theorem}
+The differences come from one divisibility. In the carrying base $b$, the run of ones is $S_n=1+b+\dots+b^{n-1}=(b^n-1)/(b-1)$. Let $\Theta$ be the product of the other bases, each raised to a power so that all factors have the same degree, and $R=(1-b)\Theta$. The polynomial $b$ is a unit modulo $R$, so some power $b^\nu$ is $\equiv1\pmod R$, and then $S_\nu$ is divisible by $\Theta$, that is, by all the other bases. Multiplying by a power of the other bases that is $\equiv1$ modulo $b^\nu$ lengthens their shared digits without touching the carry, and raising to the power $Q=p^w$ (the Frobenius map) stretches carry and shared digits by $Q$, while the excess grows linearly in~$Q$.
+
+\begin{theorem}[Polynomial-base digital sequences are not quasi-uniform]\label{thm:nonqu}
+Let $s\ge2$ and let a digital sequence over $\F_q$ have pairwise coprime $b_0,\dots,b_{s-1}\in\F_q[z]$ of degrees $e_c\ge1$ such that every coordinate $c$ is $b_c$-adic and one coordinate $\hat c$ is a $b_{\hat c}$-adic radical inverse (Definition~\ref{def:radinv}). Put $b=b_{\hat c}$, $e=e_{\hat c}$, $E=\operatorname{lcm}(e_0,\dots,e_{s-1})$ and
+\[
+\Theta=\prod_{c\ne\hat c}b_c^{E/e_c},\qquad R=(1-b)\,\Theta .
+\]
+Let $\nu\ge1$ be such that $R$ divides $b^\nu-1$ (for example the order of $b$ modulo $R$), let $k\ge1$ be a multiple of the order of $\Theta$ modulo $b^\nu$ with $(E/e)(k+1)\ge\nu$, and put $\eta=(E/e)(k+1)-\nu$. With $g$ as in Lemma~\ref{lem:carrypair}, define for $Q\in\{1,p,p^2,\dots\}$
+\[
+D_Q=g\,b^{Q\eta}\,S_{Q\nu}\,\Theta^{Qk},\qquad L_Q=QE(k+1),\qquad m_Q=Q\bigl(sE(k+1)-(s-1)E\bigr).
+\]
+Then $D_Q$ satisfies (i)--(iii) of Lemma~\ref{lem:carrypair} with $(\eta,\lambda,L,m)=(Q\eta,\,Q(\eta+\nu),\,L_Q,\,m_Q)$. So $P_{m_Q}$ contains the two points with indices $V_1$ and $V_1+D_Q$ of the lemma, at distance less than $\sqrt{s+3}\,q^{-L_Q}$, and
+\[
+\sep{P_{m_Q}}<\sqrt{s+3}\;q^{-Q(s-1)E/s},\qquad \sep{P_{sK_Q}}<\sqrt{s+3}\;q^{\,1-Q(s-1)E/s}\quad(K_Q=\lceil m_Q/s\rceil).
+\]
+Both tend to $0$ as $Q\to\infty$, and the sequence is not quasi-uniform.
+\end{theorem}
+
+\begin{proof}
+\emph{Existence of $\nu$ and $k$.} A common factor of $b$ and $1-b$ divides $1$, and $b$ is coprime to every $b_c$ with $c\ne\hat c$; so $b$ is a unit in the finite ring $\F_q[z]/(R)$ ($\deg R\ge e\ge1$), and its order is an admissible~$\nu$. Likewise $\Theta$ is a unit modulo $b^\nu$, and any large multiple of its order serves as $k$. The integer $\eta$ is $\ge0$, and it is an integer because $e$ divides $E$.
+
+\emph{(i).} Since $k$ is a multiple of the order of $\Theta$ modulo $b^\nu$, $\Theta^k=1+b^\nu H$ for a polynomial $H$. In characteristic $p$ the map $f\mapsto f^Q$ is additive on $\F_q[z]$ for every power $Q$ of $p$, so
+\[
+\Theta^{Qk}=(1+b^\nu H)^Q=1+b^{Q\nu}H^Q .
+\]
+(Only $1^Q=1$ is used here. Had we only $\Theta^k\equiv\gamma\pmod{b^\nu}$ with a constant $\gamma\ne1$, we would get $\gamma^Q$, and $\gamma^Q=\gamma$ would require $Q$ to be a power of $q$.) Hence $D_Q\equiv g\,b^{Q\eta}S_{Q\nu}\pmod{b^{Q\eta+Q\nu}}$, which is (i) with $\eta\mapsto Q\eta$, $\lambda=Q(\eta+\nu)$ and $\lambda-Q\eta=Q\nu$. Then $L=e\lambda=QE(k+1)=L_Q$.
+
+\emph{(ii).} $R$ divides $b^\nu-1$, so $R^Q$ divides $(b^\nu-1)^Q=b^{Q\nu}-1=(b-1)S_{Q\nu}$, by additivity of $f\mapsto f^Q$ again. As $R^Q=(1-b)^Q\Theta^Q$ and $b-1\ne0$, cancelling one factor $b-1$ in the factorial ring $\F_q[z]$ gives $(b-1)^{Q-1}\Theta^Q\mid S_{Q\nu}$. So $\Theta^{Q(k+1)}$ divides $D_Q$, and $b_c^{j_c}$ divides $D_Q$ with $j_c=QE(k+1)/e_c$, that is $e_cj_c=L_Q$, for every $c\ne\hat c$.
+
+\emph{(iii).} $\deg\Theta=(s-1)E$, so
+\[
+\deg D_Q\le(e-1)+eQ\eta+e(Q\nu-1)+(s-1)EQk=L_Q-1+(s-1)(L_Q-QE)=m_Q-1 .
+\]
+
+Lemma~\ref{lem:carrypair} gives the pair and $\sep{P_{m_Q}}<\sqrt{s+3}\,q^{m_Q/s-L_Q}$, and $m_Q/s-L_Q=-Q(s-1)E/s$. The pair also lies in the full level $P_{sK_Q}\supseteq P_{m_Q}$, and $K_Q-L_Q\le m_Q/s+1-L_Q$. Finally, $N$ balls of radius $h(P)$ cover the cube, so $h(P)\ge\omega_s^{-1/s}N^{-1/s}$ for every $N$-point set, $\omega_s$ the volume of the unit ball. Along $N=q^{m_Q}$ the mesh ratio is therefore at least $\omega_s^{-1/s}/\sep{P_{m_Q}}\to\infty$.
+\end{proof}
+
+The pair needs nothing about the coordinates $c\ne\hat c$ except that they are $b_c$-adic, and nothing about $\hat c$ except its digit map $\pi$ (through $g$ and $V_1$). For a fixed choice of bases and of $\pi$, the close pairs are the same for every choice of the other coordinates. The levels $m_Q$ can be very large (Table~\ref{tab:sobolpar}), but they are explicit, and nothing is searched. The theorem gives upper bounds on $\delta$ along one family of levels; it does not determine the rate at which the separation decays.
+
+In the language of Section~\ref{sec:law} (where carry responses are defined), the index difference $D_Q$ moves the point of a cell to the next cell of coordinate $\hat c$ with an own response of $+1$ in the last digit and with cross responses that vanish to many digits: the configuration that Remark~\ref{rem:onedigit} calls fatal.
+
+\subsection{Halton-Type and Faure Sequences}
+Goda, Hofer and Suzuki proved that the Halton sequences (in integer bases) are not quasi-uniform, and so are three families of Halton-type sequences: dimension two with the bases $z+a$, $z+a+1$; base two with the bases $z$, $z+1$, $z^2+z+1$; and dimension $p$ with the bases $z,z-1,\dots,z-(p-1)$ \cite[Thm.~2]{GHS26}. Their Open Problem~2 asks to ``prove or disprove that no Halton-type sequence is quasi-uniform'' in dimension $d\ge2$ and, if none is, to find for arbitrary bases a pair of indices that disproves quasi-uniformity \cite[Open Problem~2]{GHS26} (wording of the arXiv version). The following corollary answers it in the affirmative, with explicit pairs.
+
+\begin{corollary}[No Halton-type sequence is quasi-uniform]\label{cor:halton}
+Let $p$ be prime, $s\ge2$, and let $b_0,\dots,b_{s-1}\in\F_p[z]$ be pairwise coprime of degrees $e_c\ge1$, not necessarily monic or irreducible. The Halton-type sequence in these bases \cite[Def.~2]{GHS26} is not quasi-uniform. Explicitly, choose any coordinate $\hat c$, use the notation of Theorem~\ref{thm:nonqu}, and put $\Sigma=1+z+\dots+z^{e-1}$ and $\Sigma'=1+z+\dots+z^{e-2}$ ($\Sigma'=0$ for $e=1$). For $Q=1,p,p^2,\dots$ the indices
+\[
+V_1=-\Sigma'\,b^{Q\eta}-\Sigma\,b^{Q\eta+1}S_{Q\nu-1},\qquad V_2=V_1+\Sigma\,b^{Q\eta}S_{Q\nu}\Theta^{Qk}
+\]
+satisfy $\ind{V_1},\ind{V_2}<p^{m_Q}$, the two points are at Euclidean distance less than $\sqrt{s+3}\,p^{-L_Q}$, and $\delta(P_{m_Q})\,p^{m_Q/s}<\sqrt{s+3}\,p^{-Q(s-1)E/s}$.
+\end{corollary}
+
+\begin{proof}
+Every coordinate is a $b_c$-adic radical inverse with $\pi_c(a)=([z^{e_c-1}]a,\dots,[z^0]a)$ (Section~\ref{sec:polybases}), and the sequence is digital over $\F_p$ because the $b_c$-adic digits depend linearly on the index. For $q=p$ we have $\bar y=-1$ and $y^\circ=0$, so $g=\Sigma$, $\tilde g=-\Sigma'$ and $g'=-\Sigma$ in Lemma~\ref{lem:carrypair}. Theorem~\ref{thm:nonqu} applies with any $\hat c$.
+\end{proof}
+
+The corollary concerns the Halton-type sequences of \cite[Def.~2]{GHS26}, over prime fields. Theorem~\ref{thm:nonqu} holds over $\F_q$ whenever digits are read through the natural identification; the more general Halton-type sequences of Hofer in rational bases \cite{Hof18}, to which \cite{GHS26} refer, are not treated here (Section~\ref{sec:open}). For linear bases the corollary is about the unscrambled frames of Section~\ref{sec:prelim}.
+
+\begin{corollary}[Faure sequences and unscrambled frames]\label{cor:faure}
+For every prime power $q$, every $2\le s\le q$ and all distinct places $a_0,\dots,a_{s-1}\in\F_q$, the unscrambled frame sequence $(\Pas_{a_0},\dots,\Pas_{a_{s-1}})$ is not quasi-uniform. In particular, the Faure sequence $(\Pas^0,\Pas^1,\dots,\Pas^{s-1})$ in prime base $p$ is not quasi-uniform for every $2\le s\le p$.
+\end{corollary}
+
+\begin{proof}
+Coordinate $c$ is a $(z-a_c)$-adic radical inverse with the identity as digit map, and distinct linear polynomials are pairwise coprime. Apply Theorem~\ref{thm:nonqu}. The Faure sequence has the places $0,1,\dots,s-1$.
+\end{proof}
+
+For $s=p$ this is due to Dick, Goda and Suzuki \cite{DGS2}, who note that their argument does not decide the Faure sequences with $2<s<p$; Goda, Hofer and Suzuki treat $s=2$ and $s=p$ \cite{GHS26}. When two places are one apart, as for the Faure sequence, a direct construction gives the rate of \cite{GHS26}.
+
+\begin{remark}[A faster rate when two places are one apart]\label{rem:faurerate}
+Let $q=p$ be prime, let the unscrambled frame have places $a_{\hat c}$ and $a_{c_1}=a_{\hat c}+1$, put $Y=z-a_{\hat c}$, $\delta_c=a_c-a_{\hat c}$ and $\gamma=\prod_{c\ne\hat c}(-\delta_c)$, and for $Q\in\{p,p^2,\dots\}$
+\[
+D=-\gamma^{-1}(Y-1)^{Q-1}\prod_{c\ne\hat c,c_1}(Y-\delta_c)^Q,\qquad V_1=-(Y+Y^2+\dots+Y^{Q-1}),\qquad V_2=V_1+D .
+\]
+Then $\delta(P_{(s-1)Q})<\sqrt{p^2+s+2}\,N^{-1/(s-1)}$ with $N=p^{(s-1)Q}$, and $\sep{P_{(s-1)Q}}\to0$ like $N^{1/s-1/(s-1)}$. Indeed, since $\delta_c^Q=\delta_c$ in $\F_p$, $(Y-1)D=-\gamma^{-1}\prod_{c\ne\hat c}(Y^Q-\delta_c)\equiv-1\pmod{Y^Q}$, so the first $Q$ Taylor digits of $D$ at $a_{\hat c}$ are all~$1$. The digits of $V_1$ there are $(0,-1,\dots,-1)$ and those of $V_2$ are $(1,0,\dots,0)$, a carry of length~$Q$, so coordinate $\hat c$ differs by less than $2p^{-Q}$ (as in Lemma~\ref{lem:carrypair}). As $Y-1=z-a_{c_1}$, the polynomial $D$ is divisible by $(z-a_{c_1})^{Q-1}$ and by $(z-a_c)^Q$ for the other $c$: coordinate $c_1$ shares $Q-1$ leading digits and differs by at most $p^{1-Q}$, the others share $Q$ digits. Finally $\deg D=(s-1)Q-1$, $\deg V_1=Q-1$, and $(4+p^2+s-2)p^{-2Q}$ bounds the squared distance. Figure~\ref{fig:carry} shows the case $p=5$, $s=2$, places $0$ and $1$, $Q=5$: $\ind{V_1}=5^5-5=3120$, $\ind{V_2}=1$; there the pair is the closest pair of $P_5$.
+\end{remark}
+
+\subsection{Niederreiter Sequences}
+Niederreiter's sequences \cite{Nie87} and their generalization by Tezuka \cite{Tez93} (see \cite[Ch.~8]{DP10}) are digital sequences over $\F_q$ with distinct monic irreducible bases $b_c\in\F_q[z]$. For every $c$, $Q\ge0$ and $0\le i<e_c$ a polynomial $\vartheta_{c,Q,i}\in\F_q[z]$ is given, such that $\vartheta_{c,Q,0},\dots,\vartheta_{c,Q,e_c-1}$ are linearly independent modulo $b_c$ for every $Q$, and digit $Qe_c+i$ of coordinate $c$ is
+\[
+y_{c,Qe_c+i}(V)=[z^{-1}]\,\frac{\vartheta_{c,Q,i}(z)\,V(z)}{b_c(z)^{Q+1}},
+\]
+the coefficient of $z^{-1}$ in the expansion in powers of $z^{-1}$. (This is the generator matrix whose row $Qe_c+i$ lists the coefficients of $z^{-1},z^{-2},\dots$ of $\vartheta_{c,Q,i}/b_c^{Q+1}$.) The classical sequence has $\vartheta_{c,Q,i}=z^i$. Write $\bar\vartheta_{c,i}$ for the remainder of $\vartheta_{c,0,i}$ modulo $b_c$.
+
+\begin{lemma}[Niederreiter coordinates are $b_c$-adic]\label{lem:nied}
+In a generalized Niederreiter sequence every coordinate $c$ is $b_c$-adic. If $\vartheta_{c,Q,i}\equiv\bar\vartheta_{c,i}\pmod{b_c^{Q+1}}$ for all $Q$ and $i$, then coordinate $c$ is a $b_c$-adic radical inverse; in particular every coordinate of a classical Niederreiter sequence is.
+\end{lemma}
+
+\begin{proof}
+Write $b=b_c$, $e=e_c$, $\vartheta_{c,Q,i}=\sum_{j\ge0}\vartheta^{(j)}b^j$ and $V=\sum_ja_jb^j$ ($b$-adic expansions). Then $\vartheta_{c,Q,i}V/b^{Q+1}$ is the sum of the terms $\vartheta^{(j')}a_j\,b^{j+j'-Q-1}$. A term with $j+j'\ge Q+1$ is a polynomial. A term with $j+j'=Q+1-u$, $u\ge2$, is $O(z^{-2})$ at infinity, since $\deg(\vartheta^{(j')}a_j)\le2e-2<ue-1$. Neither has a $z^{-1}$ coefficient, so
+\[
+y_{c,Qe+i}(V)=\sum_{j=0}^{Q}[z^{-1}]\,\frac{\vartheta^{(Q-j)}a_j}{b}.
+\]
+Block $Q$ depends only on $a_0,\dots,a_Q$, that is on $V\bmod b^{Q+1}$: the coordinate is $b$-adic. Under the congruence, $\vartheta^{(0)}=\bar\vartheta_{c,i}$ and $\vartheta^{(j)}=0$ for $1\le j\le Q$, so block $Q$ is $\pi_c(a_Q)$ with $\pi_c(a)=([z^{-1}]\,\bar\vartheta_{c,i}a/b)_{i<e}$. The pairing $(f,a)\mapsto[z^{-1}]fa/b$ on polynomials of degree less than $e$ is nondegenerate: for $a\ne0$ pick $f$ with $fa\equiv z^{e-1}\pmod b$ ($b$ is irreducible); then the value is $1/\mathrm{lc}(b)\ne0$. Since the $\bar\vartheta_{c,i}$ form a basis of these polynomials, $\pi_c$ is a bijection.
+\end{proof}
+
+\begin{corollary}[Niederreiter sequences]\label{cor:nied}
+Every classical Niederreiter sequence over $\F_q$ ($s\ge2$, natural identification) is not quasi-uniform. So is every generalized Niederreiter sequence in which one coordinate $\hat c$ satisfies $\vartheta_{\hat c,Q,i}\equiv\bar\vartheta_{\hat c,i}\pmod{b_{\hat c}^{Q+1}}$ for all $Q,i$, whatever the polynomials of the other coordinates; the close pairs of Theorem~\ref{thm:nonqu} then depend only on the bases and on the $\bar\vartheta_{\hat c,i}$.
+\end{corollary}
+
+\begin{proof}
+Lemma~\ref{lem:nied} and Theorem~\ref{thm:nonqu}; distinct monic irreducible polynomials are pairwise coprime.
+\end{proof}
+
+The corollary uses the natural identification for the output digits. Niederreiter's general definition allows other bijections between $\F_q$ and the digits; with those the identity (\ref{eq:carrydigit}) can fail (over $\F_5$, if the digits $0,1,2,3,4$ stand for the field elements $0,3,2,1,4$, the differences $3,4,4,3$ of consecutive digits all differ from the wrap-around difference $0-4=1$), and we do not treat them. Generalized Niederreiter sequences with no coordinate of the stated form, and the sequences of Niederreiter and Xing, are not treated either.
+
+\subsection{Sobol' Sequences}
+Sobol' sequences \cite{Sob67} are digital sequences in base~$2$. Coordinate $c$ has a polynomial $b_c=z^e+\alpha_1z^{e-1}+\dots+\alpha_{e-1}z+1\in\F_2[z]$ of degree $e=e_c$ and initial direction numbers $u_1,\dots,u_e$ (written $m_k$ in \cite{Sob67}), which are \emph{admissible}: $u_k$ is odd and $u_k<2^k$. The further direction numbers follow Sobol's recurrence
+\begin{equation}\label{eq:sobrec}
+u_k=2\alpha_1u_{k-1}\oplus2^2\alpha_2u_{k-2}\oplus\dots\oplus2^{e-1}\alpha_{e-1}u_{k-e+1}\oplus2^eu_{k-e}\oplus u_{k-e}\qquad(k>e),
+\end{equation}
+where $\oplus$ adds binary expansions digit by digit modulo~$2$. Column $k-1$ of $C_c$ holds the binary digits of $2^{-k}u_k$, so $y_c(V)=\bigoplus_kV_{k-1}\,2^{-k}u_k$. Sobol' takes distinct primitive polynomials. In the usual implementations the first coordinate is the van der Corput coordinate, $b=z$ and $u_k=1$ (so $C=I$) \cite{BF88,JK08}; some implementations start with $z+1$. Points are produced in the natural order or in Gray-code order \cite{AS79}, which permutes $\{0,\dots,2^m-1\}$ for every $m$ and therefore has the same prefixes $P_m$ as sets.
+
+\begin{lemma}[Sobol' coordinates are radical inverses]\label{lem:sobol}
+Let coordinate $c$ of a Sobol' sequence have the polynomial $b_c$ of degree $e$ and constant term~$1$, and admissible initial direction numbers. Then it is a $b_c$-adic radical inverse whose digit map $\pi_c$ is upper unitriangular in the bases $1,z,\dots,z^{e-1}$ and digits $0,\dots,e-1$.
+\end{lemma}
+
+\begin{proof}
+(a) \emph{Multiplication by $b_c$ shifts the digits by $e$ places:} $y_c(b_cV)=2^{-e}y_c(V)$, in the sense of binary expansions. For $V=z^{k-1}$ we have $b_cz^{k-1}=z^{k+e-1}+\alpha_1z^{k+e-2}+\dots+\alpha_{e-1}z^k+z^{k-1}$, so
+\[
+\begin{aligned}
+y_c(b_cz^{k-1})&=2^{-k-e}u_{k+e}\oplus\alpha_12^{-k-e+1}u_{k+e-1}\oplus\dots\oplus\alpha_{e-1}2^{-k-1}u_{k+1}\oplus2^{-k}u_k\\
+&=2^{-k-e}u_k=2^{-e}y_c(z^{k-1}),
+\end{aligned}
+\]
+by (\ref{eq:sobrec}) at the index $k+e$, multiplied by $2^{-k-e}$. Both sides are linear in~$V$.
+(b) For $i<e$ the number $2^{-i-1}u_{i+1}$ has binary digits only at the digit positions $0,\dots,i$ (since $u_{i+1}<2^{i+1}$), with a $1$ at position $i$ (since $u_{i+1}$ is odd). So for $\deg a<e$ the point $y_c(a)$ has digits only at the positions $0,\dots,e-1$, and $\pi_c(a)$, the vector of these digits, is upper unitriangular in $a$.
+(c) For $V=\sum_Qa_Qb_c^Q$, (a) and (b) give $y_c(V)=\bigoplus_Q2^{-eQ}y_c(a_Q)$, with the terms in disjoint blocks of digits; so block $Q$ is $\pi_c(a_Q)$.
+\end{proof}
+
+Only admissibility and the constant term~$1$ are used; primitivity is not. The lemma is about the ideal sequence with infinitely many binary digits; an implementation with $32$ or $64$ bits agrees with it on those digits and on indices below $2^{32}$ or $2^{64}$.
+
+\begin{corollary}[No Sobol' sequence is quasi-uniform]\label{cor:sobol}
+Every Sobol' sequence is not quasi-uniform: in every dimension $s\ge2$, for every choice of admissible initial direction numbers, for any pairwise coprime polynomials with constant term~$1$ (in particular Sobol's distinct primitive polynomials), with or without the van der Corput coordinate, in natural or in Gray-code order. The same holds for the projection to any $s'\ge2$ of its coordinates. With the van der Corput coordinate as $\hat c$ the close pairs are explicit and do not depend on the direction numbers: let $b_1,\dots,b_{s-1}$ be the other polynomials, $E=\operatorname{lcm}e_c$, $\Theta=\prod_{c\ge1}b_c^{E/e_c}$, choose $\nu\ge1$ with $(1+z)\Theta\mid z^\nu-1$ and $j$ with $2^j\ge\nu$, put $\eta=E(2^j+1)-\nu$, and for $Q=2^w$, $w\ge0$,
+\[
+D_Q=z^{Q\eta}\bigl(1+z+\dots+z^{Q\nu-1}\bigr)\,\Theta\bigl(z^{2^jQ}\bigr),\qquad \ind{V_1}=2^{L_Q}-2^{Q\eta+1},\qquad \ind{V_2}=\ind{V_1}\ \mathrm{XOR}\ \ind{D_Q},
+\]
+with $L_Q=QE(2^j+1)$ and $m_Q=Q(sE(2^j+1)-(s-1)E)$. The two points lie in $P_{m_Q}$, at distance less than $\sqrt{s+3}\,2^{-L_Q}$, and $\sep{P_{m_Q}}<\sqrt{s+3}\,2^{-Q(s-1)E/s}$.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:sobol} every coordinate with a polynomial of constant term~$1$ is a radical inverse, and the van der Corput coordinate ($C=I$) is the $z$-adic radical inverse with $\pi=1$. Polynomials with constant term $1$ are coprime to $z$, and distinct irreducible polynomials are coprime. A projection is again a digital sequence of the same kind, and a sequence without the van der Corput coordinate is a projection of one with it. Theorem~\ref{thm:nonqu} applies with any $\hat c$. For the explicit pair take $b=z$, $e=1$, $\pi=1$, so $g=g'=1$, $\tilde g=0$, and $k=2^j$. Over $\F_2$ we have $\Theta^{2^j}=\Theta(z^{2^j})\equiv\Theta(0)=1\pmod{z^{2^j}}$, hence $\Theta^k\equiv1\pmod{z^\nu}$; this is all that the proof of Theorem~\ref{thm:nonqu} uses about $k$, and $E(k+1)\ge\nu$. Then $\Theta^{Qk}=\Theta(z^{2^jQ})$, $S_{Q\nu}=1+z+\dots+z^{Q\nu-1}$, and $V_1=z^{Q\eta+1}S_{Q\nu-1}=\sum_{i=Q\eta+1}^{L_Q-1}z^i$. Addition in $\F_2[z]$ is the XOR of the integer indices.
+\end{proof}
+
+\begin{table}[t]
+\centering\small
+\caption{The close pairs of Corollary~\ref{cor:sobol} with the van der Corput coordinate as $\hat c$, for the first $s$ Sobol' polynomials in the order of \cite{BF88,JK08}: $z$, $z+1$, $z^2+z+1$, $z^3+z+1$, $z^3+z^2+1$, $z^4+z+1$, $z^4+z^3+1$; $\nu$ is the least admissible value, $k=2^j$ the least power of two $\ge\nu$, and $Q=1$. For $Q=2^w$ multiply $L$, $m$ and $(s-1)E$ by $Q$. The last column (rounded up) bounds $\sep{P_m}$ at $Q=1$; at level $m_Q$ the bound is $\sqrt{s+3}\,2^{-Q(s-1)E/s}$. The pairs do not depend on the direction numbers. Exact computation, recomputed independently (Appendix~\ref{app:cert}).}
+\label{tab:sobolpar}
+\begin{tabular}{rlrrrrrrl}
+\toprule
+$s$ & degrees $e_1,\dots,e_{s-1}$ & $E$ & $\nu$ & $k$ & $L_1$ & $m_1$ & $(s-1)E$ & $\sqrt{s+3}\,2^{-(s-1)E/s}$\\
+\midrule
+$2$ & $1$ & $1$ & $2$ & $2$ & $3$ & $5$ & $1$ & $1.59$\\
+$3$ & $1,2$ & $2$ & $12$ & $16$ & $34$ & $98$ & $4$ & $0.98$\\
+$4$ & $1,2,3$ & $6$ & $168$ & $256$ & $1\,542$ & $6\,150$ & $18$ & $0.12$\\
+$5$ & $1,2,3,3$ & $6$ & $168$ & $256$ & $1\,542$ & $7\,686$ & $24$ & $0.11$\\
+$6$ & $1,2,3,3,4$ & $12$ & $1\,680$ & $2\,048$ & $24\,588$ & $147\,468$ & $60$ & $2.93\cdot10^{-3}$\\
+$7$ & $1,2,3,3,4,4$ & $12$ & $1\,680$ & $2\,048$ & $24\,588$ & $172\,044$ & $72$ & $2.54\cdot10^{-3}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two-dimensional Sobol' sequence $(I,\Pas)$ was known not to be quasi-uniform \cite{Goda23}, with a mesh ratio that grows at least like $N^{1/4}$ \cite{Suz25}. Goda, Hofer and Suzuki proved it for the Halton-type sequence with the bases $z,z+1,z^2+z+1$, which they relate to the three-dimensional Sobol' sequence, and state that the question remains open for Sobol' sequences in dimension $d\ge3$ \cite{GHS26}. Sobol' and Shukhman had suggested, from numerical experiments, that the separation of the Sobol' sequence is of the optimal order $N^{-1/s}$ \cite{SS07}; Corollary~\ref{cor:sobol} disproves this in every dimension $s\ge2$ (for $s=2$ this is \cite{Goda23}). By Lemma~\ref{lem:sobol} the three-dimensional Sobol' sequence differs from that Halton-type sequence only in the digit map of the third coordinate, which the close pairs do not see. Corollaries~\ref{cor:halton}, \ref{cor:faure} (for $2<s<p$), \ref{cor:sobol} (for $s\ge3$) and~\ref{cor:nied} were not found in the literature we searched (through October 2026). The pairs of Table~\ref{tab:sobolpar} sit at astronomically large levels for $s\ge4$; they prove the failure, but they are not the closest pairs, and they do not determine how fast $\sep{P_m}$ decays.
+
+\subsection{Scrambles That Do Not Help, and What Escapes}
+A scramble changes the points but keeps the shared leading digits: a lower-triangular scramble of a coordinate makes each of its first $d$ digits a combination of the first $d$ unscrambled digits. So the shared leading digits that $D$ produces in the other coordinates survive any lower-triangular scramble. What a scramble can destroy is the carry, and only in the coordinate that carries it.
+
+\begin{corollary}[One coordinate left unscrambled]\label{cor:unscrambled}
+Let $s\ge2$ and let $b_0,\dots,b_{s-1}\in\F_q[z]$ be pairwise coprime. Suppose that coordinate $\hat c$ of a digital sequence over $\F_q$ is $\mu$ times a $b_{\hat c}$-adic radical inverse, $\mu\in\F_q^*$, and that every other coordinate $c$ is $L_c$ times a $b_c$-adic coordinate, for arbitrary fixed nonsingular lower-triangular matrices $L_c$. Then the sequence is not quasi-uniform. In particular, for distinct places $a_c\in\F_q$ the scrambled frame $C_{\hat c}=\mu\,\diag(\beta^n)\,\Pas_{a_{\hat c}}$, $C_c=L_c\Pas_{a_c}$ ($c\ne\hat c$) is not quasi-uniform for any $\mu,\beta\in\F_q^*$.
+\end{corollary}
+
+\begin{proof}
+$L_c$ times a $b_c$-adic coordinate is $b_c$-adic, and $\mu$ times a radical inverse with digit map $\pi$ is a radical inverse with digit map $\mu\pi$ (Section~\ref{sec:polybases}); Theorem~\ref{thm:nonqu} applies. For the frame, write $V=\sum_n[(z-a)^n]V\,(z-a)^n=\sum_n\bigl(\beta^n[(z-a)^n]V\bigr)\bigl(\beta^{-1}(z-a)\bigr)^n$ with $a=a_{\hat c}$: the digits $\beta^n[(z-a)^n]V$ of coordinate $\hat c$ before the factor $\mu$ are the $\beta^{-1}(z-a)$-adic digits of $V$, a radical inverse in a linear base that is coprime to the other bases.
+\end{proof}
+
+So within the polynomial-base sequences (pairwise coprime bases, every coordinate $b_c$-adic), a quasi-uniform sequence has no coordinate that is a radical inverse up to a scalar; for a coordinate with a linear base, a diagonal scramble is not enough. The generalized Faure sequences of Tezuka \cite{Tez95} with one scalar scramble are covered, and so are the generalized Niederreiter sequences of Corollary~\ref{cor:nied} after any lower-triangular scramble of the other coordinates. The sequences of Sections~\ref{sec:residue}--\ref{sec:frames} scramble every coordinate non-diagonally. For a self-similar scramble (Definition~\ref{def:selfsim}) this is a one-line check: $C_c=L_c\Pas_{a_c}$ with $L_c[n][j]=\coef{n}g_c(x)\bigl(z_c(\theta x)-a_c\bigr)^j$, and $L_c$ diagonal would force $g_c$ to be constant and $z_c(\theta x)=a_c+\beta x$, hence $w(a_c+\beta x)=\theta x$, impossible since $w(a_c+\beta x)$ has degree $s\ge2$ in~$x$.
+
+\begin{remark}[Randomizations and reorderings]\label{rem:randomize}
+The following do not restore quasi-uniformity of any sequence covered by Theorem~\ref{thm:nonqu}.
+(a)~\emph{Digital shifts}, $y_{c,n}(V)\mapsto y_{c,n}(V)+\sigma_{c,n}$ with addition in $\F_q$, in every coordinate: the first $L$ digits of coordinate $\hat c$ are a bijective function of $V\bmod b^\lambda$, so there is $V_1$ of degree less than $L$ whose shifted digits are $(0^{e\eta},y^\circ,\bar y,\dots,\bar y)$, and the pair $V_1$, $V_1+D_Q$ works as before. Only the bound becomes $\le\sqrt{s+3}\,q^{-L_Q}$, because a shifted coordinate may have infinitely many nonzero digits.
+(b)~\emph{Index scrambles} $C_c\mapsto C_cU$ with one nonsingular upper-triangular $U$ for all coordinates (Faure and Tezuka \cite{FT02}), and the Gray-code order: every prefix $P_m$ is unchanged as a set.
+(c)~\emph{Reorderings} that keep every full level $P_{sK}$ as a set: by Theorem~\ref{thm:nonqu}, $\sep{P_{sK_Q}}\to0$ along the full levels $K_Q$, and these prefixes are the same sets in the new order.
+\end{remark}
+
+\begin{remark}[A fixed rational multiplier in the carrying coordinate is not enough]\label{rem:toeplitz}
+One might try to break the carry with a fixed Toeplitz scramble of the carrying coordinate: read coordinate $\hat c$ of a frame over $\F_p$ as the Taylor digits at $a=a_{\hat c}$ of $\varrho(Y)V$, where $Y=z-a$ and $\varrho=A/B$ is a rational unit, $A,B\in\F_p[Y]$, $A(0)B(0)\ne0$; the other coordinates get arbitrary lower-triangular scrambles. With $\delta_c=a_c-a$, $E_1=\prod_{c\ne\hat c}(1-Y/\delta_c)$ and $R_1=(1-Y)A$, the sequence is still not quasi-uniform whenever $R_1E_1$ is squarefree (in particular $a+1$ is not a place). So, whenever $R_1E_1$ is squarefree, a fixed rational multiplier of this kind in the Taylor variable does not help (other rational multipliers and irrational ones are not treated here); the scrambles of Section~\ref{sec:law} change the variable itself, from $z-a_c$ to the uniformizer~$w$.
+\end{remark}
+
+\begin{proof}
+Let $\nu$ be the least common multiple of the multiplicative orders of the roots of $R_1E_1$; then $p\nmid\nu$ and $R_1E_1\mid1-Y^\nu$. Take powers $Q,Q'$ of $p$ with $Q\equiv1\pmod\nu$ and $Q'\ge\nu$, put $L=Q(Q'+1)$ and $H=E_1^{-L}/R_1\in\F_p[[Y]]$. Over $\F_p$, $E_1^{-L}(Y)=E_1^{-(Q'+1)}(Y^Q)$, and $1/R_1=\bigl((1-Y^\nu)/R_1\bigr)/(1-Y^\nu)$ has $\nu$-periodic coefficients. For $(\nu-1)Q\le n<\nu Q$ and $i<\nu$ we have $n-iQ\equiv n-i\pmod\nu$, so $[Y^n]H=[Y^n](T/R_1)$, where $T$ is $E_1^{-(Q'+1)}$ truncated at degree $\nu-1$. Since $Q'\ge\nu$, $T$ is the truncation of $1/E_1$, which is the polynomial $(1-Y^\nu)/E_1$. So $[Y^n]H=[Y^n](1-Y^\nu)/(E_1R_1)=0$, because this is a polynomial of degree less than $(\nu-1)Q$, and $BH$ vanishes on $[(\nu-1)Q+\deg B,\nu Q)$.
+
+Let $\eta=L-\nu Q\ge Q$, let $T_1$ be $BH$ truncated below degree $\nu Q$, and $D=E_1^L\,Y^\eta T_1$. Then $\varrho D\equiv Y^\eta/(1-Y)\pmod{Y^L}$, so the scrambled digits of $D$ in coordinate $\hat c$ are $(0^\eta,1^{L-\eta})$ on the positions below $L$; $D$ is divisible by $(z-a_c)^L$ for $c\ne\hat c$; and $\deg D<m:=sL-Q+\deg B$. Let $V_1$ be the polynomial of degree less than $L$ whose scrambled digits at these positions are $(0^\eta,0,-1,\dots,-1)$, and $V_2=V_1+D$. As in the proof of Lemma~\ref{lem:carrypair} (with tails in $[0,p^{-L}]$), the two points are at distance at most $\sqrt{s+3}\,p^{-L}$, so $\sep{P_m}\le\sqrt{s+3}\,p^{-(Q-\deg B)/s}$, which tends to $0$ along $Q\equiv1\pmod\nu$.
+\end{proof}
+
+\begin{remark}[What escapes]\label{rem:escape}
+Theorem~\ref{thm:nonqu} says nothing when every coordinate is scrambled by a lower-triangular matrix that destroys its radical-inverse structure: then the digits of $D$ in coordinate $\hat c$ would have to be $L_{\hat c}^{-1}$ applied to the carry pattern, which is no longer a run of one digit in base~$b$. Such scrambles can indeed be quasi-uniform: the base-two sequence of Theorem~\ref{thm:B2} is a lower-triangular scramble of both coordinates of the two-dimensional Sobol' sequence, with $\sep{P_{2K}}\ge0.3678$ for every $K$, and the sequences of Sections~\ref{sec:residue}--\ref{sec:frames} are scrambles of every coordinate of a frame. For random scrambles the picture is different. A random nested (Owen) scramble makes every $(t,s)$-sequence almost surely not quasi-uniform \cite{Suz26}, and a random linear (matrix) scramble of a binary digital net with fixed $t$ has mesh ratio $O_P(\log N)$ under a uniform coincidence condition, which holds for instance for the prefixes of Sobol' sequences \cite[Thm.~5.5, Lem.~4.10]{Suz26}; this bound does not decide whether a randomly linearly scrambled Sobol' sequence is quasi-uniform, and we do not know the answer (Section~\ref{sec:open}).
+\end{remark}

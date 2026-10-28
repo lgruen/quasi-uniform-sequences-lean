@@ -1,0 +1,58 @@
+%
+%
+\section{Base Seven in Dimension Three}\label{app:p7}
+At $p=7$ in dimension three the residue sequences give nothing ($7<2^3$). The block-periodic residue sequence of Theorem~\ref{thm:block}(b) certifies $1-2/7$, but only at the levels $m\in9\N$. This appendix gives a bound at every full level of a different kind, in which the admissible own response depends on the current cross responses of its column. It is the only history-aware bound of the paper.
+
+Let $s=3$ and fix any frame of three distinct places in $\F_p$, a scale $\theta$ and constants $\lambda_c$. Indices of coordinates are taken modulo $3$. For a column $c'$ and a carry length $l\ge1$, column $c'$ of $D(l)$ is the triple
+\[
+\mathbf t_{c'}(l)=\bigl(O^{(l)}_{c'};\,\xi_1,\xi_2\bigr),\qquad \xi_1=X^{(l)}_{c'+1\leftarrow c'},\quad \xi_2=X^{(l)}_{c'+2\leftarrow c'}.
+\]
+By Proposition~\ref{prop:LI}(c) and Proposition~\ref{prop:depthdir}, the cross partial sums $X^{(l)}_{c\leftarrow c'}$ contain the cross coefficients up to $x^{l-1}$ and so depend only on $\psi_{c',0},\dots,\psi_{c',l-1}$, while $O^{(l)}_{c'}$ is a function of $\psi_{c',0},\dots,\psi_{c',l-1}$ minus $\theta^l\psi_{c',l}$. So the free digit $\psi_{c',l}$ can give the own response at length $l$ any prescribed value, after the crosses at length $l$ are known.
+
+\begin{definition}[Graph rule]\label{def:graphrule}
+Let $\mathsf w:\F_p^2\to\F_p$. The \emph{graph rule} of $\mathsf w$ chooses, for every column $c'$ and depth $l\ge1$, the unique $\psi_{c',l}$ with
+\[
+O^{(l)}_{c'}=\mathsf w\bigl(X^{(l)}_{c'+1\leftarrow c'},\,X^{(l)}_{c'+2\leftarrow c'}\bigr).
+\]
+The \emph{bound of $\mathsf w$} is
+\[
+\LB(\mathsf w)^2:=\min_e\ \min_{(\xi^{(c')})}\ \sum_c f_1(e_c,\sigma_c)^2,\qquad \sigma_c=\sum_{c'\in\operatorname{supp}e}e_{c'}\,\mathbf t(\xi^{(c')})[c],
+\]
+over the steps $e\in\{-1,0,1\}^3\setminus\{0\}$ up to sign and over one $\xi^{(c')}\in\F_p^2$ for each moving coordinate $c'$, where $\mathbf t(\xi^{(c')})$ is the column with own entry $\mathsf w(\xi^{(c')})$ in row $c'$ and the entries of $\xi^{(c')}$ in rows $c'+1$, $c'+2$.
+\end{definition}
+
+By Proposition~\ref{prop:depthdir} every choice of the digits is realised, so the graph rule defines a self-similar scramble and, by Lemma~\ref{lem:t0}, a digital $(0,3)$-sequence. Every column of every $D(l)$ lies on the graph $\{(\mathsf w(\xi);\xi):\xi\in\F_p^2\}$, whatever the frame. Unlike the window bound of Proposition~\ref{prop:steer}, $\LB(\mathsf w)$ is not a minimum over each row separately: one choice of $\xi^{(c')}$ per moving column feeds all three rows.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The table $\mathsf w(\xi_1,\xi_2)$ over $\F_7$ of Theorem~\ref{thm:p7}: row $\xi_1$, column $\xi_2$, entries in $\{0,\dots,6\}$.}
+\label{tab:p7}
+\begin{tabular}{@{}c|ccccccc@{}}
+$\xi_1\backslash\xi_2$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$\\
+\hline
+$0$ & $0$ & $2$ & $2$ & $6$ & $3$ & $0$ & $0$\\
+$1$ & $5$ & $4$ & $6$ & $6$ & $5$ & $3$ & $0$\\
+$2$ & $0$ & $4$ & $0$ & $1$ & $1$ & $3$ & $2$\\
+$3$ & $0$ & $0$ & $4$ & $1$ & $6$ & $5$ & $0$\\
+$4$ & $2$ & $2$ & $4$ & $3$ & $1$ & $5$ & $2$\\
+$5$ & $2$ & $0$ & $6$ & $6$ & $1$ & $0$ & $5$\\
+$6$ & $4$ & $2$ & $6$ & $4$ & $3$ & $3$ & $5$
+\end{tabular}
+\end{table}
+
+\begin{theorem}[Base seven]\label{thm:p7}
+Let $p=7$ and let $\mathsf w$ be the table of Table~\ref{tab:p7}. For every frame of three distinct places in $\F_7$, every scale and all constants $\lambda_c$, the graph rule of $\mathsf w$ gives a quasi-uniform digital $(0,3)$-sequence over $\F_7$ with
+\[
+\sep{P_{3K}}\ \ge\ \tfrac17\qquad\text{for every }K\ge1 .
+\]
+The proof is computer-assisted.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:cert} with $j=1$ ($7^K\ge4$) gives $\sep{P_{3K}}\ge\min(1,\LBact_K)$. In a step $e$ with carry lengths $l_{c'}$ the change of row $c$ is $\sum_{c'}e_{c'}D(l_{c'})[c][c']$, and column $c'$ of $D(l_{c'})$ is $\mathbf t(\xi^{(c')})$ for $\xi^{(c')}=(X^{(l_{c'})}_{c'+1\leftarrow c'},X^{(l_{c'})}_{c'+2\leftarrow c'})$. So every term of $\LBact_K$ is a term of $\LB(\mathsf w)$, and $\LBact_K\ge\LB(\mathsf w)$. It remains to show $\LB(\mathsf w)\ge\frac17$. By Remark~\ref{rem:onedigit} every value of $f_1$ is a multiple of $\frac1p$, with $f_1(\pm1,\sigma)=0$ only for $\sigma=\pm1$ and $f_1(0,\sigma)=0$ only for $\sigma\in\{-1,0,1\}$. Hence $\LB(\mathsf w)\ge\frac1p$ unless some combination makes every term vanish, and this is a finite statement: up to sign and to the rotation of the coordinates, which maps the graph rule to itself, the steps form five classes, and each step has at most $7^6$ combinations $(\xi^{(c')})$. An exhaustive enumeration finds no vanishing combination, so $\LB(\mathsf w)=\frac17$ (it is attained, for instance, by an axis step with $\xi=(0,1)$). Quasi-uniformity follows from Lemma~\ref{lem:prefix}.
+\end{proof}
+
+The table was found by a SAT solver. The bound does not use the frame, because it covers every pair of cross values, whether it occurs or not; for the same reason it is pessimistic. Three programs confirm the statement (Table~\ref{tab:ca}); for the archived instance (the cube roots of unity as places, $\theta=1$) the bound from the actual responses is $\frac17$ for $4\le K\le140$. On the Faure frame, for one choice of $\theta$ and constants, the exact separations at the first two levels are $\sep{P_3}=0.46$ and $\sep{P_6}=0.33$.
+
+A table over $\F_{13}$ (not archived) certifies $\frac1{13}$ in the same way; for $p\ge11$ the staggered residue sequences (Corollary~\ref{cor:dyadic}) give at least as much. More generally one may replace the graph by any set of admissible triples per column that is closed under the depth step. At $p=5$ a SAT solver reported that no bound of either kind has $\LB>0$, for any frame; no checkable proof was produced, so this is evidence about this class of bounds only (Remark~\ref{rem:base5}).

@@ -1,0 +1,96 @@
+%
+\section{Digital Sequences, Frames and Separation}\label{sec:prelim}
+This section fixes the objects and the conventions. Everything here is classical except for the normalisation of the separation constant and the form of the prefix lemma (Lemma~\ref{lem:prefix}): a bound at the prefixes of one family of sizes, with bounded gaps between consecutive sizes, gives a bound for every number of points.
+
+\subsection{Digital Nets and Sequences}
+Let $q=p^r$ be a prime power and $s\ge1$. Digits live in $\F_q$ and are read through a fixed bijection $\enc\colon\F_q\to\{0,\dots,q-1\}$ with $\enc(0)=0$. For prime $q$ it is the identity on $\{0,\dots,p-1\}$. For a prime power we use the \emph{natural identification} of Niederreiter \cite{Nie92}: fix a basis of $\F_q$ over $\F_p$ that contains~$1$, and read an element with coordinates $(x_0,\dots,x_{r-1})\in\{0,\dots,p-1\}^r$ as the integer $\sum_ix_ip^i$. For $\F_4=\{0,1,\omega,\omega^2\}$ with the basis $(1,\omega)$ this is $0,1,\omega,\omega^2\mapsto0,1,2,3$. We write $\bar y:=\enc^{-1}(q-1)$ for the top digit ($\bar y=-1$ for prime $q$). A point set lives on the torus $[0,1)^s=\R^s/\Z^s$.
+
+An \emph{elementary box} in base~$q$ is a product $\prod_cI_c$ in which $I_c$ is one of the $q^{d_c}$ intervals $[iq^{-d_c},(i+1)q^{-d_c})$, $0\le i<q^{d_c}$, for integers $d_c\ge0$. A set of $q^m$ points is a \emph{$(t,m,s)$-net in base~$q$} if every elementary box of volume $q^{t-m}$ contains exactly $q^t$ points. An infinite sequence of points in $[0,1)^s$ is a \emph{$(t,s)$-sequence in base~$q$} if for all $k\ge0$ and $m\ge t$ its points number $kq^m,\dots,(k+1)q^m-1$ form a $(t,m,s)$-net \cite{Nie87,Nie92,DP10}. The letter $t$ always denotes this quality parameter. A $(t,s)$-sequence has star discrepancy $O((\log N)^s/N)$ \cite{Nie92}, so every sequence of this paper is a low-discrepancy sequence.
+
+\emph{The index.} We never write the index of a point as an integer variable. The point is labelled by its \emph{index polynomial} $V(z)=\sum_kV_kz^k\in\F_q[z]$, whose coefficients $V_k\in\F_q$ are the \emph{index digits} ($V_0$ least significant). The integer index of the point is
+\[
+\ind{V}=\sum_k\enc(V_k)\,q^k,
+\]
+so the $N$-th point of the sequence, counted from $0$, is the point whose index polynomial has $\ind{V}=N$. A \emph{digital sequence} over $\F_q$ is given by $s$ generator matrices $C_0,\dots,C_{s-1}\in\F_q^{\N_0\times\N_0}$; digit~$n$ of coordinate~$c$ of the point $y(V)$ is
+\[
+y_{c,n}(V)=\sum_kC_c[n][k]\,V_k,\qquad y_c(V)=\sum_{n\ge0}\enc\bigl(y_{c,n}(V)\bigr)\,q^{-n-1}.
+\]
+Rows are output digits (row~$0$ is the most significant digit) and columns are index digits. If the digits of $y_c(V)$ are eventually $\bar y$, the point lies on the upper boundary of the elementary box named by its digits; as usual \cite[Section~4.1]{Nie92} we assign it to that box, and the separation bounds below allow this (the jitter in (\ref{eq:cellunits}) may equal $q^{-j}$). We write $Y_c(x)=\sum_ny_{c,n}x^n$ for the digit series of coordinate~$c$. Coordinates are numbered $c=0,\dots,s-1$.
+
+The \emph{prefix} $P_m=\{y(V):\deg V<m\}$ consists of the first $q^m$ points, and $P_{[N]}=\{y(V):\ind{V}<N\}$ of the first $N$ points for general $N$. By Niederreiter's criterion \cite[Thm.~6.1]{Nie87} (the box criterion of \cite{Gru26geo}%
+), $P_m$ is a $(0,m,s)$-net if and only if for every $d=(d_0,\dots,d_{s-1})$ with $\sum_cd_c=m$ the \emph{box matrix}, formed by the first $d_c$ rows of every $C_c$ restricted to the columns $0,\dots,m-1$, is invertible. The points numbered $kq^m,\dots,(k+1)q^m-1$ form a digital shift of $P_m$ (the index digits from $m$ on are fixed), and a digital shift maps every elementary box onto one of the same shape. Hence a digital sequence is a $(t,s)$-sequence if and only if every prefix $P_m$ is a $(t,m,s)$-net.
+
+The prefixes $P_{sK}$ are the \emph{full levels}. At level~$K$ the prefix has $N=q^{sK}$ points, and the elementary boxes with $K$ digits in every coordinate, the \emph{cells}, have side $q^{-K}=N^{-1/s}$; a $(0,sK,s)$-net has exactly one point in each cell. (The companion paper \cite{Gru26geo} calls the level $k$.) Not every result of this paper is about full levels: each one names the set of exponents~$m$ at which it bounds $P_m$ (Section~\ref{sec:levels}).
+
+\subsection{Frames and Scrambles}
+All sequences in this paper are scrambles of one classical family, the generalized Faure sequences of Faure \cite{Fau82}, Niederreiter \cite{Nie87} and Tezuka \cite{Tez93,Tez95}. As in \cite{Gru26geo} we describe them by \emph{places} on the projective line over $\F_q$. Fix distinct elements $a_0,\dots,a_{s-1}\in\F_q$ (so $s\le q$), the places of the coordinates. Coordinate $c$ of the unscrambled point reads the Taylor coefficients of the index polynomial at $a_c$:
+\[
+y_{c,n}(V)=[(z-a_c)^n]\,V,\qquad\text{i.e.}\qquad C_c=\Pas_{a_c},\quad \Pas_a[n][k]=\binom kn a^{k-n}.
+\]
+The index itself is read at the place $\infty$: the prefix $P_m$ is the set of polynomials with a pole of order less than $m$ at $\infty$. We call $(a_0,\dots,a_{s-1};\infty)$ a \emph{frame}. For prime $q=p$ and the \emph{Faure places} $0,1,\dots,s-1$ this is the Faure sequence $(I,\Pas,\Pas^2,\dots,\Pas^{s-1})$, since $\Pas_a=\Pas_1^a$; in dimension two it is $(I,\Pas)$, which for $q=2$ is the two-dimensional Sobol' sequence \cite{Sob67}. Up to a scramble, the frame sequence is the Niederreiter sequence with the linear base polynomials $z-a_c$ \cite{Nie87}. For prime $q$ it is also exactly the Halton-type sequence of Goda, Hofer and Suzuki \cite[Def.~2]{GHS26} with the monic linear bases $z-a_c$: the $(z-a_c)$-adic digits of the index polynomial are its Taylor coefficients at $a_c$, and their index and digit conventions coincide with ours. For $s\ge2$ no such sequence is quasi-uniform (Section~\ref{sec:fail}).
+
+In words: read the digits of the index as a polynomial $V$; coordinate $c$ is the Taylor expansion of $V$ around its own point $a_c$. For example, let $q=3$ and $V=2+z$ (integer index $5=2+1\cdot3$). At $a=0$ the Taylor digits are $(2,1)$; at $a=1$, $V=0+1\cdot(z-1)$ in $\F_3$, so the digits are $(0,1)$. A polynomial of degree less than $2$ is determined by $(V(0),V(1))$, that is, by its cell: this is the net property for $s=2$ and one digit per coordinate, and Lemma~\ref{lem:t0} below is the same statement for every $s$ and every number of digits.
+
+A Taylor coefficient is a residue: $[(z-a)^n]V=\Res_a\bigl(V\,(z-a)^{-n-1}dz\bigr)$, where $\Res_a(F\,dz)$ denotes the coefficient of $(z-a)^{-1}$ in the expansion of $F$ in powers of $z-a$. Section~\ref{sec:law} uses this to write every scramble, and Sections~\ref{sec:residue}--\ref{sec:count} use it to design them.
+
+A \emph{scramble} of coordinate $c$ is an infinite lower-triangular matrix $L_c$ with nonzero diagonal, fixed once and for all (independent of $m$). The scrambled sequence has the generator matrices $C_c=L_c\Pas_{a_c}$: digit $n$ of the scrambled coordinate is a linear combination of the unscrambled digits $0,\dots,n$, with a nonzero coefficient on digit~$n$. Dick, Goda and Suzuki, and Goda, Hofer and Suzuki, number the coordinates from $1$, so $(L_1,L_2\Pas)$ in the notation of \cite{DGS2} is $(L_0,L_1\Pas_1)$ here.
+
+\begin{lemma}[Frames have $t=0$]\label{lem:t0}
+For distinct places $a_0,\dots,a_{s-1}\in\F_q$ and arbitrary scrambles $L_0,\dots,L_{s-1}$, the digital sequence with generator matrices $C_c=L_c\Pas_{a_c}$ is a $(0,s)$-sequence in base~$q$.
+\end{lemma}
+
+\begin{proof}
+Let $m\ge1$ and $\sum_cd_c=m$. For the unscrambled frame, the first $d_c$ digits of coordinate $c$ are the coefficients of $V\bmod(z-a_c)^{d_c}$ in the basis $(z-a_c)^n$. By the Chinese remainder theorem the map $V\mapsto(V\bmod(z-a_c)^{d_c})_c$ is a bijection from the polynomials of degree less than $m$ onto $\prod_c\F_q[z]/((z-a_c)^{d_c})$: both sides have $q^m$ elements, and a polynomial of degree less than $m$ divisible by $\prod_c(z-a_c)^{d_c}$ is zero. So every box matrix is invertible. A lower-triangular $L_c$ replaces the first $d_c$ rows of $C_c$ by an invertible combination of themselves, so every box minor is multiplied by $\prod_c\det L_{c,[d_c]}\ne0$, where $L_{c,[d]}$ is the leading $d\times d$ block (the scrambling identity of \cite{Gru26geo}%
+). Every prefix is therefore a $(0,m,s)$-net.
+\end{proof}
+
+That scrambling preserves $t$ is classical: for nested random scrambles it is due to Owen \cite{Owe95}, and for lower-triangular linear scrambles it underlies the generalized Faure sequences of Tezuka \cite{Tez95} and Matou\v{s}ek's linear scrambling \cite{Mat98}. So $t=0$ comes for free; what the scramble changes, and what this paper is about, is the position of each point inside its cell.
+
+\subsection{Separation and Quasi-Uniformity}
+For $\mathbf y,\mathbf y'\in[0,1)^s$ let $\|\mathbf y-\mathbf y'\|_{\mathrm T}=\min_{\mathbf k\in\Z^s}\|\mathbf y-\mathbf y'+\mathbf k\|$ be the toroidal Euclidean distance. For a finite point set $P$ with $N\ge2$ points, the \emph{separation} is
+\[
+\delta(P)=\min_{\mathbf y\ne\mathbf y'\in P}\|\mathbf y-\mathbf y'\|_{\mathrm T},\qquad\text{and}\qquad \sep{P}=\delta(P)\,N^{1/s}
+\]
+is its \emph{separation constant}. A $(0,sK,s)$-net has one point in each cell of side $N^{-1/s}$, so $\sep{P}$ measures the separation in cell units; $\sep{P}=1$ for the grid $q^{-K}\Z^s$.
+
+The \emph{covering radius} is $h(P)=\sup_{\mathbf y\in[0,1]^s}\min_{\mathbf y'\in P}\|\mathbf y-\mathbf y'\|$, and $h(P)/\delta(P)$ is the \emph{mesh ratio}. A sequence is \emph{quasi-uniform} if the mesh ratio $h(P_{[N]})/\delta(P_{[N]})$ is bounded over all $N\ge2$ \cite{DGLPS1,DGS2}. Since $h(P)\gtrsim N^{-1/s}$ and $\delta(P)\lesssim N^{-1/s}$ for every $N$-point set, this is the same as $h(P_{[N]})\asymp N^{-1/s}$ and $\delta(P_{[N]})\asymp N^{-1/s}$. We state mesh ratios as $h/\delta$; the convention of \cite{DGS2} divides by the separation radius $\delta/2$ and gives twice our value.
+
+\emph{Which distance.} The toroidal distance never exceeds the Euclidean distance in the cube. Our lower bounds on $\delta$ are toroidal, so they hold for the Euclidean separation of \cite{DGLPS1,DGS2,GHS26} as well. Our upper bounds on $\delta$ (the close pairs of Section~\ref{sec:fail}) bound the Euclidean distance in the cube, so they bound the toroidal separation too. Our bounds on $h$ are for the Euclidean distance in the cube. So every statement transfers to both conventions in the direction in which it is used.
+
+\subsection{Level Families}\label{sec:levels}
+For a $(0,s)$-sequence the covering radius is never the problem: the prefixes are nets at every scale. The problem is the separation, and it suffices to control it along one family of prefixes. The general principle, that quasi-uniformity along a subsequence of sizes with bounded ratios implies quasi-uniformity along all $N$, is \cite[Lemma~1.3]{DGLPS1}; we give the toroidal version with explicit constants, for the families of prefixes that occur in this paper.
+
+A \emph{level family} is an infinite set $\Lev\subseteq\N=\{1,2,\dots\}$ of exponents $m$, namely those at which a result certifies a bound on $\sep{P_m}$. Its \emph{largest gap} is
+\[
+\Delta_{\Lev}:=\max\bigl(\min\Lev,\ \sup\{m'-m:\ m<m'\text{ consecutive elements of }\Lev\}\bigr).
+\]
+The families of this paper are $\Lev=s\N$ (all full levels, $\Delta_{\Lev}=s$), $\Lev=s\N-1=\{s-1,2s-1,\dots\}$ ($\Delta_{\Lev}=s$), $\Lev=s^2\N$ ($\Delta_{\Lev}=s^2$), and unions of residue classes of these (Section~\ref{sec:block}).
+
+\begin{lemma}[Prefix lemma]\label{lem:prefix}
+Let $(y(V))$ be a $(0,s)$-sequence in base $q$ and $\Lev$ a level family with $\Delta:=\Delta_{\Lev}<\infty$. Suppose that $\sep{P_m}\ge\LB$ for every $m\in\Lev$, with $\LB>0$. Then for every $N\ge2$
+\[
+\delta(P_{[N]})\ge\LB\,q^{-\Delta/s}\,N^{-1/s},\qquad h(P_{[N]})\le\sqrt s\,q\,N^{-1/s},\qquad \frac{h(P_{[N]})}{\delta(P_{[N]})}\le\frac{\sqrt s\,q^{1+\Delta/s}}{\LB}.
+\]
+In particular the sequence is quasi-uniform.
+\end{lemma}
+
+\begin{proof}
+\emph{Separation.} Let $N\ge2$ and let $m'$ be the least element of $\Lev$ with $q^{m'}\ge N$. Then $P_{[N]}\subseteq P_{m'}$, and a subset has at least the separation of the whole set, so $\delta(P_{[N]})\ge\delta(P_{m'})\ge\LB\,q^{-m'/s}$. It remains to show $q^{m'}\le q^{\Delta}N$. If $m'=\min\Lev$, then $q^{m'}\le q^{\Delta}\le q^{\Delta}N$. Otherwise $m'$ has a predecessor $m''$ in $\Lev$; by the choice of $m'$, $q^{m''}<N$, and $m'-m''\le\Delta$, so $q^{m'}\le q^{\Delta}q^{m''}<q^{\Delta}N$.
+
+\emph{Covering.} Let $m\ge0$ with $q^m\le N<q^{m+1}$, and write $m=sK+j$ with $0\le j<s$. The first $q^m$ points form the prefix $P_m\subseteq P_{[N]}$, which is a $(0,m,s)$-net. Split the cube into the elementary boxes with $K+1$ digits in the first $j$ coordinates and $K$ digits in the others. Each has volume $q^{-m}$, so it contains a point of $P_m$, and its diameter is at most $\sqrt s\,q^{-K}$. Every point of $[0,1]^s$ lies in the closure of one of these boxes, so $h(P_{[N]})\le\sqrt s\,q^{-K}$. Finally $q^{-K}=q^{(j-m)/s}<q^{(j+1)/s}N^{-1/s}\le q\,N^{-1/s}$, since $j+1\le s$.
+
+The bound on the mesh ratio is the quotient of the two bounds.
+\end{proof}
+
+\begin{remark}[The cases used]\label{rem:prefixcases}
+For $\Lev=s\N$ and $\Lev=s\N-1$ the factor is $q^{-\Delta/s}=1/q$: $\delta(P_{[N]})\ge(\LB/q)N^{-1/s}$. For $\Lev=s^2\N$ it is $q^{-s}$. For $\Lev=s\N$ comparing the two intermediate bounds directly gives the sharper mesh ratio $h/\delta\le\sqrt s\,q/\LB$: if $q^{sK}\le N<q^{s(K+1)}$, the covering argument gives $h\le\sqrt s\,q^{-K}$ and the separation argument $\delta\ge\LB\,q^{-K-1}$ (for $K=0$, $h\le\sqrt s$ and $\delta\ge\LB/q$).
+\end{remark}
+
+The lemma loses the factor $q^{-\Delta/s}$ only at the prefixes between two elements of $\Lev$: for consecutive $m''<m<m'$ in $\Lev$ the separation argument gives $\sep{P_m}\ge\LB\,q^{(m-m')/s}$. A construction certified at a denser family therefore has the better bound for all $N$, even when its constant at the certified levels is smaller (Sections~\ref{sec:block} and~\ref{sec:count}).
+
+\subsection{Conventions}\label{sec:conventions}
+Every result names its level family: the exponents $m$ at which it bounds $\sep{P_m}$, for every element of the family at once. The bound for all $N$ then follows from Lemma~\ref{lem:prefix}.
+
+Every result has a written proof. Some proofs end in an exact finite computation: a minimum over an explicitly enumerated finite set, or explicit integer hypotheses checked at each prime of a finite range. We call such a proof \emph{computer-assisted} (c.a.) and state its scope with the result. A proof whose last step is one exact rational evaluation is marked \emph{proof${}^\star$}; the threshold $p_0(s)$ of Section~\ref{sec:antipode} is the infimum of explicit monotone conditions, and an upper estimate of it is certified in this way. Searches only find parameters (multipliers, check vectors, window systems, tables), whose properties are then proved or checked; a value found by a search is a lower bound on an optimum, never a claim of optimality. Exact separations quoted for figures and tables are illustrations. No proof uses a search or an illustration. A statement that a construction fails, or that a kind of certificate cannot do better, is always made with its exact scope (which sequences, which scrambles, which kind of certificate); a finite search is never used as evidence that something does not exist. Appendix~\ref{app:cert} lists the data, the independent re-verification and the parts that are in addition verified in Lean. Table~\ref{tab:glossary} lists the main symbols and terms.
+
+\input{sections/02-glossary}

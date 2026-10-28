@@ -1,0 +1,15 @@
+{
+  "challenge_module": "GeoSeqV99covChallenge",
+  "solution_module": "GeoSeqV99covSolution",
+  "theorem_names": [
+    "GeoSeq.cov_s2",
+    "GeoSeq.coverage_of_parts"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

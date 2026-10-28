@@ -1,0 +1,86 @@
+%
+%
+%
+%
+%
+%
+%
+%
+\section{Practice}\label{sec:practice}
+The sequences of this paper are digital sequences with fixed generator matrices, generated like the Sobol' and Faure sequences. This section says what they cost, how they compare at the numbers of points one can actually use, and how to randomise them without losing the bound.
+
+\subsection{Implementation and Cost}
+A point is a matrix--vector product over $\F_q$ in each coordinate. For the residue sequences of Section~\ref{sec:residue} the matrices are closed forms: each entry is one coefficient of a power series over $\F_p$,
+\[
+C_c[n][i]=v_c^{-1}\theta^{n+1}\,[(z-a_c)^n]\,\frac{z^i}{w_c(z)^{n+1}},
+\]
+computed once by truncated power-series arithmetic; a sequence is given by its places, its scale $\theta$ and its check vector $v$. In base $2$ a digit vector is a machine word and the product is an XOR of columns. The sequence of Theorem~\ref{thm:B2} is therefore the Sobol' algorithm with a different table: the archive (Appendix~\ref{app:archive}) lists $32$-bit direction numbers that replace the first two dimensions of a Sobol' table, Gray-code order permutes points only inside blocks of length $2^m$ and keeps every bound, and the cost is that of the Sobol' sequence. The sequences of Theorems~\ref{thm:K4} and~\ref{thm:S4} over $\F_4$ are binary sequences as well. In a prime base $p$ one stores the multiples of every generator column; a point costs $\lceil\log_pN\rceil$ table lookups and additions per coordinate and one reduction modulo $p$ per digit, whatever the matrices. With random access to the first $2^{23}$ points, a straightforward implementation takes $31$ and $43$ nanoseconds per three-dimensional point in base $31$ and base $13$, against $4$ to $8$ for an XOR sequence (one core of an Apple M4; informal timing, unoptimised code), small next to evaluating an integrand such as a light path. One table serves every number of points.
+
+\subsection{What the Bounds Give at Reachable Sizes}
+In dimension three there is exactly one full level below $2^{23}$ for $17\le p\le203$, and the residue sequences are certified one digit before each full level, at $N=p^2$ and $N=p^5$; for $p=31$ only $N=p^2$ lies below $2^{23}$. What matters in practice is $\sep{P_{[N]}}$ at every $N$. Table~\ref{tab:practice} and Figure~\ref{fig:evidence} report its exact minimum
+\[
+\mathcal J:=\min_{64\le N\le2^{23}}\sep{P_{[N]}}
+\]
+for four residue sequences and for the usual alternatives.
+
+\begin{table}[t]
+\centering
+\small
+\caption{The worst normalised separation $\mathcal J=\min_{64\le N\le2^{23}}\delta(P_{[N]})N^{1/3}$ in dimension three (exact, toroidal), and the certified bounds (truncated). Top: residue sequences $\Rv_v$ (Definition~\ref{def:residue}; data: places, $\theta$, $v$), each the best of $600$ candidates scanned for $\mathcal J$; their certified bound holds at $N=p^{3K-1}$ for every $K$ (Theorem~\ref{thm:residue}), at the full levels only the inclusion bound $\ljit(\Lambda_v)/p$ is certified (Remark~\ref{rem:residuefull}), and for every $N$ the bound is $\LB/p$ (Corollary~\ref{cor:residueQU}). Bottom: alternatives; random linear scrambles are $C_c=L_c\Pas_{a_c}$ with random lower-triangular $L_c$.}
+\label{tab:practice}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l r l c ccc@{}}
+\toprule
+ & & & & \multicolumn{3}{c}{certified $\sep{\cdot}\ge$}\\
+\cmidrule(l){5-7}
+sequence & $p$ & data & $\mathcal J$ & $P_{3K-1}$ & $P_{3K}$ & $P_{[N]}$, all $N$\\
+\midrule
+residue sequence & $13$ & $(2,9,10)$, $12$, $(5,3,6)$ & $0.248$ & $0.425$ & $0.076$ & $0.032$\\
+ & $17$ & $(2,9,6)$, $12$, $(4,10,16)$ & $0.235$ & $0.388$ & $0.058$ & $0.022$\\
+ & $23$ & $(18,22,15)$, $5$, $(4,14,20)$ & $0.251$ & $0.497$ & $0.061$ & $0.021$\\
+ & $31$ & $(8,0,16)$, $9$, $(10,30,7)$ & $0.267$ & $0.636$ & $0.064$ & $0.020$\\
+\midrule
+Faure (best: $p=11$) & $7$--$31$ & & $0.059$--$0.140$ & -- & -- & --\\
+random linear scrambles & $31$ & median / best of $150$ & $0.117$ / $0.217$ & -- & -- & --\\
+Sobol' / Owen-scrambled & $2$ & $3$ seeds (Owen) & $0.035$ / $0.015$--$0.039$ & -- & -- & --\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_evidence3d_v4}
+\caption{Exact $\sep{P_{[N]}}=\delta(P_{[N]})N^{1/3}$ for every $N\le2^{23}$ in dimension three, $p=31$. Blue: the residue sequence of Table~\ref{tab:practice} (places $(8,0,16)$, $\theta=9$, $v=(10,30,7)$); its certified bound $\sep{P_{3K-1}}\ge0.636$ for every $K$ (bar at $N=p^2$; the next certified size $p^5$ lies beyond $2^{23}$), and $\sep{P_{[N]}}\ge0.020$ for every $N$ (dashed; Corollary~\ref{cor:residueQU}). Orange: Faure $(I,\Pas,\Pas^2)$. Grey: Owen-scrambled Sobol', three seeds. Open dots: the minimum over $64\le N\le2^{23}$: $0.267$ at $N=208\,652$, $0.095$ at $N=53\,879$, and $0.015$--$0.039$. Right: a slab one mean spacing $N^{-1/3}$ thick around the closest pair at $N=53\,879$, where the Faure sequence is worst, $7\times7$ mean spacings, grey level $=$ depth in the slab: the new Faure points land next to old ones ($21$ points in the slab instead of about $49$), the residue sequence stays spread ($53$ points, $\sep{P_{[N]}}=0.460$). At its first full level $N=p^3$ the Faure sequence is better ($0.757$ against $0.489$). Minimum distance only; no integration test.} %
+\label{fig:evidence}
+\end{figure}
+
+Against what is used by default the gain is large: $\mathcal J=0.235$ to $0.267$, six to eighteen times the Owen-scrambled Sobol' sequence, whose $\sep{P_{[N]}}$ keeps decaying (Figure~\ref{fig:evidence}), and $1.7$ to $1.9$ times the best plain Faure sequence. Each residue candidate is scored on the full range: per prime $600$ candidates, half with check vectors from the $20$ best classes by $\ljit$, a tenth with Korobov vectors, the rest with random check vectors with $\ljit>0$, each with random places, scale and scaling of $v$. In scans of this kind the best residue sequences also matched or beat the best ordered window systems of an earlier version of this work (certified at every full level there) by $7$ to $12\%$ in $\mathcal J$ (a tie at equal search effort at $p=13$); those systems are in the data archive. Against a searched scramble without a certified bound the gain is of the same size: the best of $150$ random linear scrambles at $p=31$ reaches $0.217$.
+
+Where the minimum is attained is telling: at $p=13$, $17$, $23$ it is just after a certified size or a multiple of one, at $N=13^5+59$, $2\cdot17^5+44$ and $23^5+415$, when the first points of the next, uncertified, block of $p^5$ points arrive. What moved $\mathcal J$ was the choice of places, scale and check vector; the larger certified constant raised the median of the scan a little at $p=31$ and not at $p=23$. The other residue constructions were scanned as well (exact, illustration): the best certified staggered residue sequences reach $\mathcal J=0.191$, $0.209$, $0.212$, $0.246$, and the block-periodic sequence of Theorem~\ref{thm:block}, whose certified sizes $p^{9K}$ all lie beyond $2^{23}$ at these primes, reaches only $0.062$ to $0.146$ in this range. The generator matrices of the four residue sequences are archived (Appendix~\ref{app:cert}). In dimension two the same picture holds for the sequence of Theorem~\ref{thm:B2}: over $N\le2^{22}$, the range of our Owen runs, its smallest $\delta(P_{[N]})\sqrt N$ is above $0.2$ (proved: $0.1839$), against a median of $0.009$ over $8$ seeds of the Owen-scrambled Sobol' sequence.
+
+\subsection{Randomisation}
+Randomised quasi-Monte Carlo and rendering need many independent copies of a sampler and unbiased estimates. Owen scrambling redraws every digit below the stratum independently; it makes every $(t,s)$-sequence almost surely non-quasi-uniform \cite{Suz26}, and it would undo the constructions of this paper. Digital shifts keep the certified bounds. A shift translates the digit vectors, the same translation for every point; it neither repairs a classical sequence (Remark~\ref{rem:randomize}) nor destroys the certificates here.
+
+\begin{lemma}[Digital shifts]\label{lem:shift}
+Let $q$ be prime, or $q=2^r$ with an $\F_2$-linear code $\enc$. Let $(y(V))$ be a digital $(0,s)$-sequence over $\F_q$ and $\varsigma=(\varsigma_{c,n})$ any array of digits in $\F_q$. The sequence with the digits $y_{c,n}(V)+\varsigma_{c,n}$ is a $(0,s)$-sequence, and:
+\begin{enumerate}
+\item[(a)] every bound $\sep{P_{sK}}\ge\min(1,\LB_j)$ that Lemma~\ref{lem:cert} gives for the unshifted sequence holds for the shifted prefix $P_{sK}$;
+\item[(b)] if $q=p$ is prime and the unshifted sequence is a residue sequence $\Rv_v$, then for every $K\ge1$ the fine cells occupied by the shifted prefix $P_{sK-1}$ are the elements $\hat n$ of $[0,p^K)^s$ with $\sum_cv_c\hat n_c\equiv\sum_cv_c\varsigma_{c,K-1}\pmod p$, each holding one point, and $\sep{P_{sK-1}}\ge p^{-1/s}\ljit(\Lambda_v)$.
+\end{enumerate}
+In particular the bounds of Theorems~\ref{thm:residuestar}, \ref{thm:block}, \ref{thm:B2}, \ref{thm:S3}, \ref{thm:K4}, \ref{thm:S4} and~\ref{thm:p7}, of Remark~\ref{rem:B3}, and of the window constructions (all obtained from Lemma~\ref{lem:cert}), and of Theorem~\ref{thm:residue} hold for every digitally shifted copy, at the same levels; and if the unshifted bounds hold for every $K$ with $q^K\ge4$, the bounds of Lemma~\ref{lem:prefix} hold for the shifted sequence for every $N>q^{s(K_0-1)}$, where $K_0$ is the least $K$ with $q^K\ge4$; for $q\ge4$, and for (b), this is every $N\ge2$.
+\end{lemma}
+
+\begin{proof}
+A shift maps every elementary box onto one of the same shape, so nets go to nets.
+
+(a) At level $K$ a point with cell digits $n$ and geometric digits $R$ becomes one with cell digits $n+\varsigma_{\mathrm{cell}}$ and geometric digits $R+\varsigma_{\mathrm{geo}}$, so the shifted offset map is affine with the same linear part. Let the shifted index of coordinate $c'$ step by $+1$ with carry length $l$, stopping at a digit $y'$. The digits below change from $\bar y$ to $0$ and that digit from $y'$ to $y'+\Delta(y')$; since the shift is additive, the unshifted digits change by the same amounts. This is the carry pattern of (\ref{eq:carrychange}) with the digit $y'$, so the geometric digits change by the expression of Lemma~\ref{lem:cert} with $y_{c'}=y'$; the wrap is $l=K$, $y'=\bar y$. Lemma~\ref{lem:cert} minimises over all digits $y_{c'}$, all carry lengths and all positions $R$, among which are the shifted ones.
+
+(b) For a prime base the last base-$p$ digit of the fine-cell index $\hat n_c$ of a point of the shifted prefix is $y_{c,K-1}(V)+\varsigma_{c,K-1}$. By Lemma~\ref{lem:residue-rel}, $\sum_cv_cy_{c,K-1}(V)=0$ for $\deg V\le sK-2$, so $\sum_cv_c\hat n_c\equiv\sum_cv_c\varsigma_{c,K-1}\pmod p$. The shifted prefix is a $(0,sK-1,s)$-net, so, as in the proof of Theorem~\ref{thm:residue}(i), distinct points lie in distinct fine cells; there are $p^{sK-1}$ points and exactly $p^{sK-1}$ fine cells with this residue, so every such cell is occupied. For two points in the fine cells $\hat n$ and $\hat n'$ let $b$ be the representative of $\hat n'-\hat n$ modulo $p^K$ in $(-p^K/2,p^K/2]^s$. The shift cancels in the difference of the last digits, so $\sum_cv_cb_c\equiv0\pmod p$, that is $b\in\Lambda_v$, and $b\ne0$. The rest is the proof of Theorem~\ref{thm:residue}(ii), which uses only $b\in\Lambda_v\setminus\{0\}$ and the fact that each point lies in the closure of its fine cell.
+
+The last statement is Lemma~\ref{lem:prefix}, applied to the shifted sequence, a $(0,s)$-sequence, with $\Lev=\{sK:q^K\ge4\}$ in (a) and $\Lev=s\N-1$ in (b).
+\end{proof}
+
+Part~(a) does not cover Theorem~\ref{thm:corrected}, whose correction terms are not of the form of Lemma~\ref{lem:cert}; we have not checked whether its bound survives a shift. In practice: XOR one random word per coordinate into every point in base $2$ and over $\F_4$; add one random digit vector modulo $p$ in a prime base. The shift must be additive in $\F_q$: digitwise addition modulo $4$ of the codes is not an $\F_4$-shift, and a non-affine permutation of a geometric digit, which still preserves the net property, can break the offset map (it brought the brick wall at $p=5$ down to $\sep{P_6}=0.068$, below its certified bound $0.2$). The lemma keeps the certified bound, not the exact separation, and a typical shift comes close to the bound, which is the worst case over the positions $R$ (for Theorem~\ref{thm:B2}, twelve random shifts all gave $\min_{4\le m\le20,\,m\text{ even}}\sep{P_m}\in[0.3680,0.3681]$, against $0.3678$). A uniformly random digital shift makes each point uniformly distributed (up to the digits used) and gives unbiased estimators \cite{DP10}, with the bound of every copy certified.
+
+\subsection{Limitations}
+A sequence in base $p$ is stratified in base $p$, not in base $2$: renderers that rely on dyadic strata at power-of-two sample counts should use base $2$ or $4$ (Theorems~\ref{thm:B2}, \ref{thm:K4}, \ref{thm:S4}). Within one base, $\sep{P_{[N]}}$ fluctuates with the position of $N$ between the powers of $p$, more so for large $p$; for the residue sequences the certified sizes are $p^{sK-1}$, and the smallest values come just after them. The discrepancy is $O((\log N)^s/N)$ with a constant that grows with $p$ \cite{Nie92}, but separation and integration error are different quantities, and a comparison with Owen-scrambled Sobol' on rendering integrands and smooth test functions is the obvious next experiment. The guarantees concern the geometry of the point sets: they matter where clumping at an unknown, open-ended number of samples must be excluded, as in progressive sampling, in stippling and object placement, and in quasi-uniform designs for kernel interpolation, where the mesh ratio of Lemma~\ref{lem:prefix} enters directly.

@@ -1,0 +1,39 @@
+{
+  "challenge_module": "GeoSeqV1Challenge",
+  "solution_module": "GeoSeqV1Solution",
+  "theorem_names": [
+    "GeoSeq.coeff1_place",
+    "GeoSeq.ownKer_const",
+    "GeoSeq.crossKer_const",
+    "GeoSeq.colVec_dir",
+    "GeoSeq.colVec_rescale",
+    "GeoSeq.stBeta_congr",
+    "GeoSeq.ruleDigit_zero",
+    "GeoSeq.ruleDigit_succ",
+    "GeoSeq.ruleHist_eq",
+    "GeoSeq.steer_a",
+    "GeoSeq.selRule_exists",
+    "GeoSeq.ruleMult_facts",
+    "GeoSeq.colVec_zero_cross",
+    "GeoSeq.resp_colVec",
+    "GeoSeq.win_cert_S",
+    "GeoSeq.depthdir_V1",
+    "GeoSeq.steer",
+    "GeoSeq.steer_every",
+    "GeoSeq.gapNum1_neg",
+    "GeoSeq.sumsetS_neg",
+    "GeoSeq.steer_volume",
+    "GeoSeq.fbar_neg_one",
+    "GeoSeq.antipode_f1",
+    "GeoSeq.antipode_agree",
+    "GeoSeq.antipode_half",
+    "GeoSeq.steer_nonvacuous"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

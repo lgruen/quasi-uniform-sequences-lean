@@ -1,0 +1,15 @@
+PASS lf_s3_p101.cfg:p101#0 s=3 p=101  cover=EEE LB=0.584158 Gamma=42
+## selection_rule/cfg/lf_s3_p101.cfg: 1/1 PASS
+PASS lf_s3_p13.cfg:p13#0 s=3 p=13  cover=EEE LB=0.153846 Gamma=11
+## selection_rule/cfg/lf_s3_p13.cfg: 1/1 PASS
+PASS lf_s3_p31.cfg:p31#0 s=3 p=31  cover=EEE LB=0.322581 Gamma=21
+## selection_rule/cfg/lf_s3_p31.cfg: 1/1 PASS
+PASS lf_s4_p127.cfg:p127#0 s=4 p=127  cover=EEEE LB=0.251969 Gamma=95
+## selection_rule/cfg/lf_s4_p127.cfg: 1/1 PASS
+PASS lf_s4_p47.cfg:p47#0 s=4 p=47  cover=EEEE LB=0.021277 Gamma=46
+## selection_rule/cfg/lf_s4_p47.cfg: 1/1 PASS
+PASS mrA_s3_p101.cfg:p101#0 s=3 p=101  cover=EEE LB=0.277228 Gamma=73
+## selection_rule/cfg/mrA_s3_p101.cfg: 1/1 PASS
+PASS mr_s3_p31.cfg:p31#0 s=3 p=31  cover=EEE LB=0.225806 Gamma=24
+## selection_rule/cfg/mr_s3_p31.cfg: 1/1 PASS
+## TOTAL 7/7 PASS

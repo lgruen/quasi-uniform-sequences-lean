@@ -1,0 +1,28 @@
+{
+  "challenge_module": "GeoSeqV4Challenge",
+  "solution_module": "GeoSeqV4Solution",
+  "theorem_names": [
+    "GeoSeq.frame_roots_exist",
+    "GeoSeq.frame_placeDer",
+    "GeoSeq.lex_sound",
+    "GeoSeq.od_kap",
+    "GeoSeq.od_cover",
+    "GeoSeq.od_sound",
+    "GeoSeq.od_seq",
+    "GeoSeq.ed_kap",
+    "GeoSeq.ed_sound",
+    "GeoSeq.ed_seq",
+    "GeoSeq.lfOK_sound",
+    "GeoSeq.LF_archive_s3",
+    "GeoSeq.LF_a_s3",
+    "GeoSeq.LF_b11",
+    "GeoSeq.LF_b37"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

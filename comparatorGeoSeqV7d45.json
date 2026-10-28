@@ -1,0 +1,16 @@
+{
+  "challenge_module": "GeoSeqV7Challenge",
+  "solution_module": "GeoSeqV7Solution",
+  "theorem_names": [
+    "GeoSeq.edP211_valid",
+    "GeoSeq.dim45_primes",
+    "GeoSeq.dim45_of_small"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

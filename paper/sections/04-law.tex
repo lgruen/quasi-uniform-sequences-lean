@@ -1,0 +1,269 @@
+%
+\section{Residues, Self-Similar Scrambles and Carry Responses}\label{sec:law}
+Every prefix of a $(0,s)$-sequence is a net, so at a full level each cell holds exactly one point (Lemma~\ref{lem:t0}). The separation is decided by where that point sits inside its cell, compared with the points of the neighbouring cells. This section describes that position and how it changes from cell to cell. Section~\ref{sec:fail} showed what goes wrong for the classical sequences; here we see the same failure at the level of the cells: for the Faure sequence the rule that places the points changes with the level. The fix has two parts. First, every scramble can be read through residues of the index polynomial at the places (Lemma~\ref{lem:resform}). Second, for the self-similar scrambles the rule that places the points is the same at every level (Proposition~\ref{prop:law}), so one finite check bounds the separation at all levels (Lemma~\ref{lem:cert}). Sections~\ref{sec:residue}--\ref{sec:count} use exactly this machinery, and Section~\ref{sec:antipode} adds the free digits and windows. The running example is the brick wall $W^-$ in base~$7$, a two-dimensional sequence whose neighbouring columns of points are staggered by half a cell, like the courses of a brick wall.
+
+\subsection{Geometric Digits and the Lattice Image}
+Fix a level $K$ and a point of $P_{sK}$. Its cell is $n=(n_0,\dots,n_{s-1})$, where $n_c=\sum_{i<K}\enc(y_{c,i})\,q^{K-1-i}$; digit $i=0$ is the coarsest and digit $K-1$ the finest. As in \cite{Gru26geo}%
+, the next digit $r_c:=y_{c,K}$, the first digit below the cell, is the \emph{geometric digit}: it locates the point inside its cell up to $1/q$ of the side. The change of the geometric digits under a carry-free step of one cell index is the \emph{geometric layer} of \cite{Gru26geo}; it is the one-digit carry response $D(1)$ defined in the next subsection. More generally, for a depth $j\ge1$ let $R_c\in\F_q^j$ be the vector of the $j$ geometric digits $y_{c,K},\dots,y_{c,K+j-1}$, read as the integer $\enc(R_c)=\sum_{i<j}\enc(y_{c,K+i})\,q^{j-1-i}\in[0,q^j)$. In cell units the point is
+\begin{equation}\label{eq:cellunits}
+q^Ky_c=n_c+\frac{\enc(R_c)}{q^j}+\varepsilon_c,\qquad 0\le\varepsilon_c\le q^{-j},
+\end{equation}
+where the \emph{jitter} $\varepsilon_c$ collects the digits from $K+j$ on. The \emph{lattice image} $n+\enc(R)/q^j$ of \cite{Gru26geo} (there $j=1$) is a point of the grid $q^{-j}\Z^s$, the position predicted by the first $j$ geometric digits; the jitter moves the true point by at most one grid unit.
+
+\begin{example}[Running example]\label{ex:running}
+The brick wall $W^-$ in base $p=7$ is the staggered residue sequence of Section~\ref{sec:residue} with $s=2$, the Faure places $a_0=0$, $a_1=1$, staggered coordinate $1$, scale $\theta=-\frac14$ and constants $\mu=(-4,2)$ (Example~\ref{ex:brickwall}; its residue form is given after Lemma~\ref{lem:resform}). Its generator matrices are $C_0=L_0$ and $C_1=L_1\Pas_1$, with the leading blocks (entries in $\F_7$)
+\[
+C_0=\begin{pmatrix}1&0&0&0\\6&2&0&0\\5&2&4&0\\0&1&5&1\end{pmatrix},\qquad
+C_1=\begin{pmatrix}2&2&2&2\\4&0&3&6\\3&1&0&0\\6&1&2&0\end{pmatrix},\qquad
+L_1=\begin{pmatrix}2&0&0&0\\4&3&0&0\\3&5&1&0\\6&2&6&5\end{pmatrix}.
+\]
+Take the index polynomial $V(z)=3+z$ (integer index $10=3+1\cdot7$). Its digits are $C_0(3,1)^{\mathsf T}=(3,6,3,1)$ in coordinate~$0$ and $C_1(3,1)^{\mathsf T}=(1,5,3,5)$ in coordinate~$1$. At level $K=1$, in the prefix $P_2$ with its $7\times7$ cells, the point lies in the cell $n=(3,1)$, its geometric digits are $(r_0,r_1)=(6,5)$, and its lattice image is $(3+\frac67,1+\frac57)=(3.857,1.714)$. The point itself is at $7y=(3.921,1.792)$: the jitter $(0.064,0.077)$ is less than $\frac17$. With $j=2$ geometric digits the lattice image is $(3+\frac{45}{49},1+\frac{38}{49})=(3.918,1.776)$, within $\frac1{49}$ of the point.
+\end{example}
+
+\subsection{Carries and Carry Responses}
+The map from the cell digits $(y_{c,i})_{c,\,i<K}$ to the geometric digits $(y_{c,K+i})_{c,\,i<j}$ is $\F_q$-linear, since both are linear functions of $V$ and the cell digits determine $V$. We call it the \emph{offset map} of $P_{sK}$. Writing the net as the graph of this map is the graph form of \cite{Gru26geo}%
+\ with depths $(K,\dots,K)$. The offset map has two kinds of entries. The \emph{own} entries say how the geometric digits of coordinate $c$ depend on the cell digits of the same coordinate, the \emph{cross} entries how they depend on the cell digits of another coordinate $c'$. We index them by \emph{carry depth}, counted from the finest digit: own coefficient $n\ge1$ belongs to cell digit $K-n$, cross coefficient $n\ge0$ to cell digit $K-1-n$. The shift by one between the two is chosen so that a carry of length $l$ (defined next) involves exactly the own coefficients $1,\dots,l$ and the cross coefficients $0,\dots,l-1$.
+
+Separation is a question about neighbouring cells, and the step from a cell to its neighbour is a carry. Increasing $n_{c'}$ by one changes its $l$ finest digits, where $l-1$ is the number of trailing digits with code $q-1$; we call $l\in[1,K]$ the \emph{carry length}. For prime $q$ the step adds $1$ to each of these $l$ digits. The toroidal wrap, the step from the last cell $q^K-1$ to the cell $0$, changes all $K$ digits; we count it as a step of carry length $K$.
+
+Let $D_i(l)\in\F_q^{s\times s}$ be the change of the geometric digit $K+i$ of coordinate $c$ (row) when $1\in\F_q$ is added to each of the $l$ finest cell digits of coordinate $c'$ (column), with $D_i(0)=0$; this is the \emph{carry response}. For prime $q$ it is exactly the change caused by a step of $n_{c'}$ by $+1$ with carry length $l$; for $q=4$ see Remark~\ref{rem:F4carry} in Appendix~\ref{app:machinery}. We write $D(l)=D_0(l)$ for the one-digit response, $O_c^{(l)}=D(l)[c][c]$ for the \emph{own response} and $X_{c\leftarrow c'}^{(l)}=D(l)[c][c']$, $c\ne c'$, for the \emph{cross response}. They are partial sums of the coefficients of the offset map: if $O_{c,n}$ and $X_{c\leftarrow c',n}$ are the own and cross coefficients at carry depth $n$, then
+\[
+O_c^{(l)}=\sum_{n=1}^{l}O_{c,n}=\coef{l}\frac{O_c(x)}{1-x},\qquad X_{c\leftarrow c'}^{(l)}=\sum_{n=0}^{l-1}X_{c\leftarrow c',n}=\coef{l-1}\frac{X_{c\leftarrow c'}(x)}{1-x},
+\]
+with $O_c(x)=\sum_{n\ge1}O_{c,n}x^n$ and $X_{c\leftarrow c'}(x)=\sum_{n\ge0}X_{c\leftarrow c',n}x^n$; here $\coef{n}F$ is the coefficient of $x^n$ in a power series $F$. A priori all of these depend on $K$.
+
+In the running example at $K=1$, the right neighbour of the cell $(3,1)$ is the cell $(4,1)$, which holds the point with index polynomial $V=4$; its geometric digits are $(3,2)$. The step changes $(r_0,r_1)$ by $(3,2)-(6,5)=(4,4)$ modulo~$7$, which is the column $(O_0^{(1)},X^{(1)}_{1\leftarrow0})$ of $D(1)$.
+
+\subsection{Sheared Lattices, Slip Planes and Jumps}\label{sec:dislocations}
+Before computing the offset map we describe what it looks like. Consider a patch of cells in which every step is carry-free ($l=1$) and no geometric digit wraps around modulo $q$. There the lattice image of the point in cell $n$ is
+\[
+n+\frac1q\,\tilde D(1)\,n+\text{const},
+\]
+where the entries of the integer matrix $\tilde D(1)$ are the representatives of $D(1)$ realised on the patch. So on such a patch the lattice images form the sheared lattice $(I+\tilde D(1)/q)\Z^s$, and the points are this lattice plus the jitter, as in the nets of \cite{Gru26geo}. Two kinds of defects interrupt it. Where a geometric digit wraps around modulo $q$, the lattice is offset by one cell; these hyperplanes are the \emph{slip planes} of \cite{Gru26geo}. And where a cell index crosses a boundary of carry length $l\ge2$, which happens at every $q^{l-1}$-th boundary of that coordinate, the lattice image changes by the column $D(l)$ instead of $D(1)$; we call this a \emph{jump of depth $l$}. (Jumps are not the faults of \cite{Gru26geo}, which are coefficients of its skeleton digits.) They form a hierarchy: depth-one boundaries everywhere, depth-two boundaries every $q$ cells, depth-three boundaries every $q^2$ cells, and so on up to the toroidal wrap, the jump of depth $K$ (Figure~\ref{fig:hierarchy}). A jump is harmless if it moves the neighbouring point away, and fatal if it moves it onto the point across the boundary. %
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_hierarchy_v4}
+\caption{Jumps in the running example $W^-$ ($p=7$). (a)~Cells $n_0\in[40,54)$, $n_1\in[100,110)$ of the $343\times343$ cells of the prefix $P_6$, with lattice images and jitter. Vertical cell boundaries are shaded by their depth (carry length) $l$: depth $1$ everywhere, depth $2$ at $n_0=42=6\cdot7$, depth $3$ at $n_0=49=7^2$. Along one row the arrows join the lattice images of horizontal neighbours. Every step changes the geometric digits $(r_0,r_1)$ by the column $D(l)$ of its boundary depth: $D(1)=(4,4)$ on the plain boundaries, $D(2)=(1,4)$ at $n_0=42$, $D(3)=(3,4)$ at $n_0=49$; the dashed circles show where a carry-free step would have put the lattice image. Between boundaries of depth $\ge2$ the points form one sheared lattice; at each deeper boundary it jumps by an amount that depends only on $l$. (b)~The responses $l=1,\dots,8$ of $W^-$ (Table~\ref{tab:running}): the cross response $X_{1\leftarrow0}=4=\frac12$ and the own response $O_1=0$ are constant (the brick wall), while $O_0^{(l)}$ and $X_{0\leftarrow1}^{(l)}$ vary with $l$ and are never periodic (Proposition~\ref{prop:N2}). Note $D(2)=(1,4)$: the own shift $+1$ is fatal on its own (Figure~\ref{fig:cert}(b)); the constant cross response $\frac12$ is what keeps the neighbours apart. Exact digits from the generator matrices of Example~\ref{ex:running}.}
+\label{fig:hierarchy}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\small
+\caption{The carry responses of the running example $W^-$ in base~$7$ for carry lengths $l=1,\dots,8$, modulo~$7$. A horizontal step (coordinate~$0$ moves) changes $(r_0,r_1)$ by $(O_0^{(l)},X_{1\leftarrow0}^{(l)})$, a vertical step by $(X_{0\leftarrow1}^{(l)},O_1^{(l)})$. The values are the same at every level $K\ge l$ (exact computation from the generator matrices at $K=8$ and $K=9$; Proposition~\ref{prop:law}).}
+\label{tab:running}
+\begin{tabular}{@{}l*{8}{c}@{}}
+\toprule
+$l$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+$O_0^{(l)}$ (own, horizontal step) & 4 & 1 & 3 & 6 & 6 & 6 & 4 & 5\\
+$X_{1\leftarrow0}^{(l)}$ (cross, horizontal step) & 4 & 4 & 4 & 4 & 4 & 4 & 4 & 4\\
+$O_1^{(l)}$ (own, vertical step) & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+$X_{0\leftarrow1}^{(l)}$ (cross, vertical step) & 1 & 5 & 4 & 4 & 4 & 0 & 2 & 6\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In Table~\ref{tab:running} the jump of depth $l$ is the difference between the columns $D(l)$ and $D(1)$. In $W^-$ two of the four responses are \emph{constant}, that is, they do not depend on the carry length: $X_{1\leftarrow0}^{(l)}=4=\frac12$ and $O_1^{(l)}=0$ for every $l$. The other two keep changing with $l$, so the horizontal positions change at every deeper boundary, while the vertical stagger by half a cell between neighbouring columns stays the same. This is the brick wall; the constant half alone gives a bound at every level (Theorem~\ref{thm:WF}), and the residue form below shows in one line where it comes from.
+
+Refining the level turns every boundary of depth $l$ into one of depth $l+1$ and inserts new boundaries of depth one. For an arbitrary scramble the responses $D(l)$ are new at every level. For the scrambles introduced below they are the partial sums of one fixed series (Proposition~\ref{prop:law}); a refinement then only relabels the jumps, and a bound on the one set $\{D(l):l\ge1\}$ is a bound at every scale.
+
+\subsection{The Faure Baseline}\label{sec:baseline}
+The Faure sequence shows what goes wrong without this property: its offset map changes with the level. Section~\ref{sec:fail} proves that the sequence is not quasi-uniform; the following example shows the failure at the level of carry responses.
+
+\begin{example}[The Faure offset map]\label{ex:faurelaw}
+Let $s=2$ and consider the Faure sequence $(I,\Pas)$ at level $K$. Write $V=A_0+z^KA_1$ with $\deg A_0,\deg A_1<K$. The cell digits of coordinate~$0$ are the coefficients of $A_0$, those of coordinate~$1$ the Taylor coefficients $y_{1,i}=[(z-1)^i]V$, $i<K$, and the geometric digit of coordinate~$0$ is $r_0=A_1(0)$. Since $z^KA_1\equiv V-A_0$ modulo $(z-1)^K$ and $\deg A_1<K$, the polynomial $A_1$ is the residue of $z^{-K}(V-A_0)$ modulo $(z-1)^K$. Expanding $z^{-K}=\sum_{i\ge0}\binom{-K}{i}(z-1)^i$ and evaluating at $z=0$, where $(z-1)^i$ takes the value $(-1)^i$, the coefficient of $y_{1,K-1-n}$ in $r_0$ is
+\[
+\sum_{i=0}^{n}\binom{-K}{i}(-1)^{K-1-n+i}=(-1)^{K-1-n}\sum_{i=0}^{n}\binom{K-1+i}{i}=(-1)^{K-1+n}\binom{K+n}{n}.
+\]
+This is the cross coefficient of coordinate~$0$ at carry depth $n$. It depends on $K$: at depth zero it alternates in sign, and at depth one it is $(-1)^K(K+1)$, which runs through all residues modulo $p$ as $K$ grows.
+\end{example}
+
+\begin{table}[t]
+\centering
+\small
+\caption{The Faure sequence $(I,\Pas)$ in base~$7$ at the levels $K=1,\dots,8$. Row 2: the depth-one cross coefficient $(-1)^K(K+1)$ of Example~\ref{ex:faurelaw} (undefined at $K=1$). Row 3: the exact separation constant of $P_{2K}$, computed for $K\le4$. For comparison, every response of the running example $W^-$ is the same at all levels (Table~\ref{tab:running}).}
+\label{tab:faure}
+\begin{tabular}{@{}l*{8}{c}@{}}
+\toprule
+$K$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+depth-one cross coefficient & -- & 3 & 3 & 5 & 1 & 0 & 6 & 2\\
+$\sep{P_{2K}}$ & .8690 & .3115 & .2463 & .0174 & -- & -- & -- & --\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+So the local picture of the Faure sequence changes at every level (Table~\ref{tab:faure}); at level $K=4$ two of the $7^8$ points are only $0.0174$ cell units apart. The nets of \cite{Gru26geo} conjugate the binomial rows to a fixed shape by a change of scramble that depends on $m$; a sequence cannot, because that would rewrite rows that are already in use. At level $K$ the new freedom of a scramble is row $K$ of each $L_c$, and once chosen it shapes the offset map at every later level. The simplest way to obtain a bound at every level is an offset map that is the same at every level.
+
+\subsection{Self-Similar Scrambles}
+The way out is to use the structure that relates the levels: going one level finer is multiplication of the index by one fixed polynomial~$w$. Fix a frame $(a_0,\dots,a_{s-1};\infty)$ over $\F_q$ and put
+\[
+w=\prod_{c=0}^{s-1}(z-a_c)\in\F_q[z],\qquad w_c=\frac{w}{z-a_c}=\prod_{b\ne c}(z-a_b).
+\]
+Since the places are distinct, $w$ has a simple zero at every $a_c$: it is a \emph{uniformizer} at each place. Let $\deg V<sK$. The first $K$ unscrambled digits of coordinate $c$ are $V\bmod(z-a_c)^K$, and a scramble replaces them by an invertible triangular function of themselves. By the Chinese remainder theorem,
+\[
+\{V:\deg V<sK\}\;\longleftrightarrow\;\prod_c\F_q[z]/\bigl((z-a_c)^K\bigr)\;\cong\;\F_q[z]/(w^K)
+\]
+is a bijection. So the cells of $P_{sK}$ are the elements of the ring $\F_q[z]/(w^K)$, the \emph{cell ring}, and the point in a cell is a function of the cell. Every $V$ of degree less than $sK$ has a unique $w$-adic expansion
+\begin{equation}\label{eq:wadic}
+V=\sum_{k<K}\sum_{b<s}\nu_{k,b}\,z^bw^k,\qquad \nu_b(x)=\sum_{k<K}\nu_{k,b}x^k,
+\end{equation}
+by repeated division by $w$. Passing from level $K$ to level $K+1$ adds one more $w$-adic digit $(\nu_{K,b})_b$ at the top, and the cell ring $\F_q[z]/(w^{K+1})$ contains $w\cdot\F_q[z]/(w^{K+1})\cong\F_q[z]/(w^K)$: \emph{going one level finer is multiplication by $w$}. The place $\infty$ of the index enters only here, through the degree bound $\deg V<sK$.
+
+To compare the places we use one local variable for all of them. Let $x$ stand for $w$. For every $c$ there is a unique power series $z_c(x)\in a_c+x\F_q[[x]]$ with $w(z_c(x))=x$, the \emph{local root} at $a_c$; it exists because $w'(a_c)=w_c(a_c)\ne0$, and $z_c(x)=a_c+x/w'(a_c)+O(x^2)$. The $s$ local roots are the $s$ roots of $w(Z)=x$ in $\F_q[[x]]$, so
+\begin{equation}\label{eq:roots}
+w(Z)-x=\prod_{c}\bigl(Z-z_c(x)\bigr).
+\end{equation}
+Substituting $z=z_c(x)$ into (\ref{eq:wadic}) gives $V(z_c(x))=\sum_bz_c(x)^b\,\nu_b(x)$: at every place the $w$-adic digits of the index become the $x$-adic digits of a power series.
+
+Every scramble can be written in this local variable, one unit series $g_{c,n}$ per row: $y_{c,n}=\coef{n}g_{c,n}(x)V(z_c(\theta x))$, where row $n$ of $L_c$ and the coefficients of $g_{c,n}$ up to $x^n$ determine each other (the Riordan form, Lemma~\ref{lem:riordan} in Appendix~\ref{app:machinery}). Multiplication of the index by $w$ multiplies $V(z_c(\theta x))$ by $\theta x$, since $w(z_c(\theta x))=\theta x$. If all rows of $L_c$ share one series, the digit series therefore transform as $Y_c(wV)=\theta x\,Y_c(V)$: refinement shifts every digit by one place and multiplies it by $\theta$.
+
+\begin{definition}[Self-similar scramble]\label{def:selfsim}
+A scramble $(L_0,\dots,L_{s-1})$ of the frame is \emph{self-similar} with \emph{scale} $\theta\in\F_q^*$ and \emph{multipliers} $g_0,\dots,g_{s-1}$ (unit series) if
+\[
+y_{c,n}=\coef{n}\,g_c(x)\,V\bigl(z_c(\theta x)\bigr)\qquad\text{for all }c,\ n,\ V,
+\]
+with one common $\theta$. Equivalently, $Y_c(x)=g_c(x)\,V(z_c(\theta x))$ for every coordinate, and the generator matrices are $C_c[n][k]=\coef{n}\,g_c(x)\,z_c(\theta x)^k$: column $k$ of $C_c$ is the series $g_c\,z_c(\theta x)^k$.
+\end{definition}
+
+For $\theta=1$ the prefix $P_{sK}$, shrunk by the factor $q$, reappears in the corner box $[0,q^{-1})^s$ of $P_{s(K+1)}$; for general $\theta$ the shrunk copy is in addition multiplied digit by digit by $\theta$. In the running example (Faure frame $w=z^2-z$, $p=7$, scale $\theta=-\frac14=5$) the multipliers and scaled local roots begin
+\[
+g_0=1+6x+5x^2+x^6+\cdots,\quad g_1=2+4x+3x^2+6x^3+\cdots,\quad z_1(\theta x)=1+5x+3x^2+5x^3+4x^4+\cdots,
+\]
+and $z_0(\theta x)=1-z_1(\theta x)$. Column~$0$ of $C_1$ is $g_1$, that is $(2,4,3,6)$, and column~$1$ is $g_1z_1=2+0x+x^2+x^3+\cdots$, as in Example~\ref{ex:running}. One series per coordinate generates every row. The Faure sequence $(I,\Pas)$ is not self-similar for any $\theta$: its offset map depends on $K$, and by Proposition~\ref{prop:law} below a self-similar offset map does not.
+
+\subsection{Residue Form}
+The multipliers $g_c$ are series in the common variable $x$; for the constructions of the following sections it is better to write them at the places themselves, as functions of $z$. A residue does this. Recall that $\Res_a(F\,dz)$ is the coefficient of $(z-a)^{-1}$ in the expansion of $F$ in powers of $z-a$, and that a Taylor digit is a residue, $[(z-a)^k]V=\Res_a(V(z-a)^{-k-1}dz)$ (Section~\ref{sec:prelim}). A \emph{polar differential} at $a$ of pole order $n+1$ is $\sum_{k\le n}\lambda_k(z-a)^{-k-1}dz$ with $\lambda_n\ne0$; its terms are the \emph{principal part} of a function at $a$.
+
+\begin{lemma}[Residue form of a scramble]\label{lem:resform}
+Let $a_0,\dots,a_{s-1}\in\F_q$ be distinct places and $w=\prod_c(z-a_c)$.
+\begin{enumerate}
+\item[(a)] For every scramble $(L_c)$ of the frame,
+\[
+y_{c,n}(V)=\Res_{a_c}\bigl(V\,\eta_{c,n}\bigr),\qquad \eta_{c,n}=\sum_{k\le n}L_c[n][k]\,(z-a_c)^{-k-1}dz,
+\]
+a polar differential at $a_c$ of exact pole order $n+1$. Conversely, every family of polar differentials $\eta_{c,n}$ at $a_c$ of pole orders $n+1$ ($n\ge0$) defines a scramble in this way.
+\item[(b)] The scramble is self-similar with scale $\theta$ (Definition~\ref{def:selfsim}) if and only if there are unit power series $\varphi_c$ in $z-a_c$, the \emph{local multipliers}, with
+\[
+y_{c,n}(V)=\Res_{a_c}\Bigl(V\,\varphi_c\Bigl(\frac\theta w\Bigr)^{n+1}dz\Bigr)\qquad\text{for all }c,\ n,\ V.
+\]
+The multipliers and the local multipliers determine each other by
+\[
+g_c(x)=\theta\,\varphi_c\bigl(z_c(\theta x)\bigr)\,z_c'(\theta x),\qquad \varphi_c(z)=\theta^{-1}g_c\bigl(w(z)/\theta\bigr)\,w'(z).
+\]
+\item[(c)] \textup{(Residue theorem.)} Let $F\in\F_q(z)$ be a rational function with no poles outside $\{a_0,\dots,a_{s-1},\infty\}$, and let $[z^{-1}]F$ be the coefficient of $z^{-1}$ in its expansion in powers of $1/z$ at $\infty$. Then
+\[
+\sum_{c}\Res_{a_c}(F\,dz)=[z^{-1}]F .
+\]
+In particular the sum vanishes when $F=O(z^{-2})$ at $\infty$, that is, when the degree of the numerator of $F$ is at most the degree of its denominator minus $2$.
+\end{enumerate}
+\end{lemma}
+
+The proof is in Appendix~\ref{app:resform}; part~(b) is a change of variable $u=w$ in the residue, and part~(c) is partial fractions. In (b) only $\varphi_c$ up to $(z-a_c)^n$ enters row~$n$, just as row~$n$ of a Riordan form depends on $g_c$ up to $x^n$. Since $V$ is a polynomial, a part of $\eta_{c,n}$ or of $\varphi_c(\theta/w)^{n+1}dz$ that is regular at $a_c$ contributes nothing: a scramble is a family of principal parts, one at each place for each digit. In complex analysis (c) is the statement that the residues of a rational differential on the projective line add up to zero, $\sum_c\Res_{a_c}(F\,dz)+\Res_\infty(F\,dz)=0$; over $\F_q$ we need only the elementary form above.
+
+\emph{Function fields.} Part~(a) is the genus-$0$ case of the construction of digital sequences from differentials by Mayor and Niederreiter \cite{MN07}. On the rational function field $\F_q(z)$ take as their expansion place the place $\infty$ of the index, with local parameter $1/z$, as their divisor $D=-2P_0$, where $P_0$ is the zero of $z$, and as their places the points $a_c$. For row $n$ of coordinate $c$ take the differential $\omega=-z^{-2}\eta_{c,n}$. It has a pole of order $n+1$ at $a_c$, at most a double pole at $0$ (one of order $n+3$ if $a_c=0$), no other pole, and it is regular at $\infty$, so it is an admissible basis element of their chain $\Omega(D)\subset\Omega(D-P_c)\subset\cdots$. By the residue theorem, in its expansion at $\infty$ the coefficient of $z^{-k-1}\,d(1/z)$ is $\Res_{a_c}(z^k\eta_{c,n})=C_c[n][k]$, and every admissible choice there is of this form. So every scramble of a frame, and hence every sequence of this paper, is a sequence of \cite{MN07} in genus~$0$, and their Theorem~3.1 gives $t=0$ (Lemma~\ref{lem:t0}). Niederreiter and \"Ozbudak \cite{NO07} read all coordinates of a point as residues of one differential, at all places, against powers of a local parameter, and use the residue theorem over all places to prove a duality and bound the quality parameter. In their language a self-similar scramble reads the differential $V\,dz$ with one local parameter $w/\theta$ at every place; their sequences are not of this form, since their index differentials have their pole at a place of degree two. Both papers aim at the quality parameter. What is new here is the choice of the differentials, a common local parameter and simple local multipliers, such that the residue theorem gives relations with one digit of each coordinate and constant coefficients at every level of a level family, and the use of these relations for the separation (Sections~\ref{sec:residue} and~\ref{sec:block}).
+
+\emph{Why residues.} The running example is defined by residues (Example~\ref{ex:brickwall}):
+\[
+y_{0,n}(V)=-4\Res_0\Bigl(\frac{V\,dz}{(z-1)(w/\theta)^{n+1}}\Bigr),\qquad y_{1,n}(V)=2\Res_1\Bigl(\frac{V\,dz}{(z-1)(w/\theta)^{n}}\Bigr).
+\]
+In the notation of (b) its local multipliers are $\varphi_0=-4/(z-1)$ and $\varphi_1=-8z$, and (b) gives the multipliers $g_0$, $g_1$ quoted above. Take $\deg V<2K$ and $F=V/((z-1)(w/\theta)^K)$. It has poles only at $0$, $1$ and $\infty$, and $F=O(z^{-2})$ at $\infty$, so by (c) its residues at $0$ and $1$ add up to zero. The residue at $0$ is $y_{0,K-1}(V)/(-4)$ and the residue at $1$ is $y_{1,K}(V)/2$. Hence
+\[
+y_{1,K}(V)=2\,y_{0,K-1}(V)/4=\tfrac12\,y_{0,K-1}(V)\qquad\text{for every }K\ge1\text{ and }\deg V<2K:
+\]
+the geometric digit of coordinate~$1$ is half the finest cell digit of coordinate~$0$, and it does not depend on the cell digits of coordinate~$1$. A step of $n_0$ with any carry length, the toroidal wrap included, adds $1$ to the finest digit and so moves $r_1$ by $\frac12=4$; a step of $n_1$ does not move it. These are the two constant rows of Table~\ref{tab:running}. The coordinates are read at different places, and the residue theorem ties them together at every level. Sections~\ref{sec:residue}--\ref{sec:count} build on this one identity.
+
+\subsection{The Same Offset Map at Every Level}
+For a self-similar scramble the offset map is the same at every level. In words: write the multipliers and the local roots into one $s\times s$ matrix series $\FM(x)$; the response to a carry of length $l$ is the $l$-th partial sum of the single matrix series $I-\FM(0)\FM(x)^{-1}$, and the level $K$ does not appear, because level $K+1$ is level $K$ with one more digit on top. Precisely, define the \emph{frame matrix} $\FM$ and its inverse $G$,
+\[
+\FM(x)[c][b]=g_c(x)\,z_c(\theta x)^b\quad(0\le c,b<s),\qquad G=\FM^{-1},\qquad \hat G=\frac G{1-x},
+\]
+with the coefficients $\FM_a=\coef{a}\FM$, $\hat G_a=\coef{a}\hat G$ and $\FM_{>i}=\FM-\sum_{a\le i}\FM_ax^a$. The proposition describes all $j$ geometric digits; on a first reading one can take $i=0$, where $\FM_{>0}G=I-\FM(0)G$.
+
+\begin{proposition}[Multi-digit offset map]\label{prop:law}
+Let the scramble be self-similar with scale $\theta$ and multipliers $g_c$. Then for every $K\ge1$, $i\ge0$ and $1\le l\le K$, the carry response is
+\[
+D_i(l)=\coef{l+i}\,\FM_{>i}(x)\,\hat G(x)=I-\sum_{a\le i}\FM_a\,\hat G_{l+i-a}.
+\]
+More precisely, the coefficient of cell digit $K-1-d$ of coordinate $c'$ in the geometric digit $K+i$ of coordinate $c$ is $\coef{d}\,x^{-i-1}\FM_{>i}G\,[c][c']$. In particular the offset map does not depend on $K$, and the one-digit offset map is the expansion of the matrix series
+\[
+\mathcal D(x):=I-\FM(0)\,G(x),\qquad D(l)=\coef{l}\frac{\mathcal D(x)}{1-x},
+\]
+that is, $O_c(x)=\mathcal D(x)[c][c]$ and $X_{c\leftarrow c'}(x)=x^{-1}\mathcal D(x)[c][c']$ for $c'\ne c$.
+\end{proposition}
+
+\begin{proof}
+$\FM(0)[c][b]=g_c(0)a_c^b$ is a Vandermonde matrix with nonzero row factors, so $G$ exists. By (\ref{eq:wadic}) and $w(z_c(\theta x))=\theta x$, the digit series are $Y=\FM(x)\tilde\nu(x)$ with $\tilde\nu_b(x)=\nu_b(\theta x)$, a vector of polynomials of degree less than $K$. The cell digits are $Y\bmod x^K$, so $\tilde\nu=(G\,(Y\bmod x^K))\bmod x^K$. Change the cell digits by $x^a \mathbf 1_{c'}$ (one unit at digit $a$ of coordinate $c'$, where $\mathbf 1_{c'}$ is the indicator vector of $c'$). Then $\tilde\nu$ changes by $x^aG_{<K-a}\mathbf 1_{c'}$, and $Y$ by
+\[
+\FM\,x^aG_{<K-a}\mathbf 1_{c'}=x^a\mathbf 1_{c'}-x^a\FM\,G_{\ge K-a}\mathbf 1_{c'},
+\]
+using $\FM G=I$. The first term changes only cell digits. The coefficient of $x^{K+i}$ in the second is $-\sum_{b\le i}\FM_bG_{d+1+i-b}\mathbf 1_{c'}$ with $d=K-1-a$, and this equals $\coef{d+1+i}\FM_{>i}G\,\mathbf 1_{c'}$ because $\coef{d+1+i}\FM G=0$. Summing over the $l$ finest digits $a=K-l,\dots,K-1$, i.e. $d=0,\dots,l-1$, gives $\coef{l-1}x^{-i-1}\FM_{>i}G/(1-x)=\coef{l+i}\FM_{>i}\hat G$, and $\coef{l+i}\FM\hat G=1$ gives the second form. For $i=0$, $\FM_{>0}G=I-\FM(0)G$; the own coefficient $n$ sits at $d=n-1$ and the cross coefficient $n$ at $d=n$, which gives the formulas for $O_c$, $X_{c\leftarrow c'}$ and $D(l)$.
+\end{proof}
+
+The proposition holds in every characteristic and for every frame. The torus wrap $l=K$ is not special: it is the coefficient of $x^K$ of the same series.
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_idea_v4}
+\caption{Self-similarity of the running example $W^-$ in base~$7$. First three panels: $P_2$ with its $7\times7$ cells; the $49$ points of $P_4$ in the marked cell; the $49$ points of $P_6$ in the marked subcell (cell indices printed along the edges). The panels are not copies of one another; what repeats is the offset map. Inside one parent cell every step has carry length $1$, and in every panel a step to the right changes the geometric digits $(r_0,r_1)$ by $(4,4)$ and a step up by $(1,0)$ modulo~$7$ (printed on two arrows). From one panel to the next all first geometric digits shift by $(3,0)$ modulo~$7$, as the marked cell shows ($(4,6)\to(0,6)\to(3,6)$). Right: a step across a boundary of carry length $2$ ($n_0=27\to28=4\cdot7$) changes the digits by $D(2)=(1,4)$ instead of $(4,4)$; the dashed circle is where a carry-free step would have put the lattice image (Figure~\ref{fig:hierarchy}).}
+\label{fig:idea}
+\end{figure}
+
+In the running example the series $\mathcal D(x)/(1-x)$ of Proposition~\ref{prop:law} reproduces Table~\ref{tab:running}, and the table is the same at every level; this is what Figure~\ref{fig:idea} shows in three nested zooms.
+
+The responses of a self-similar scramble cannot all be constant. Two responses of one column (the own and the cross response for $s=2$, two cross responses for $s\ge3$) are never both rational series, so they are never both eventually periodic (Proposition~\ref{prop:N2} in Appendix~\ref{app:machinery}); and in dimension two, with the places $0$ and $1$, no scramble has an offset map that depends only on the finest cell digits, a sheared lattice without jumps, at two consecutive levels $K,K+1\ge2$ (Corollary~\ref{cor:N1}). Apart from a few constant responses, as in the brick wall, the responses keep changing with the carry length. Section~\ref{sec:count} counts how many exact relations of this kind a sequence can carry, and Section~\ref{sec:antipode} keeps the remaining responses in fixed sets of allowed values.
+
+\subsection{Digit Relaxation}
+We now turn the offset map into a lower bound on the separation. The picture is that of \cite{Gru26geo}. Two points in cells that are two or more cells apart in some coordinate are at least one cell side apart. So only neighbouring cells matter, and for neighbours the distance is the cell step plus the change of the lattice image, up to the jitter. The change of the lattice image is given by the offset map, through the carry responses of the coordinates that move.
+
+\emph{The bound in one coordinate.} A point sits at the fractional position $\enc(R)/q^j$ plus a jitter in its cell; its neighbour one cell to the right sits at $\enc(R\oplus\sigma)/q^j$ plus its own jitter, where $\sigma$ is the change of the geometric digits given by the offset map. The worst case over the position $R$ is the closest the two can come; from it we subtract one grid unit for the two jitters (Figure~\ref{fig:cert}(a)). For a step $e_c\in\{-1,0,1\}$ and a change $\sigma\in\F_q^j$ of the $j$ geometric digits of one coordinate, put
+\[
+f_j(e_c,\sigma)=\frac1{q^j}\max\Bigl(0,\ \min_{R\in\F_q^j}\bigl|e_cq^j+\enc(R\oplus\sigma)-\enc(R)\bigr|-1\Bigr),
+\]
+where $\oplus$ is digitwise addition in $\F_q$. It is the smallest possible gap, in cell units, between the two points in that coordinate; we call it the \emph{guaranteed gap}. For $q=7$ and $j=1$: a backward shift $\sigma=-3$ of the neighbour gives $f_1(1,-3)=\frac37$, while the forward shift $\sigma=+1$ gives $f_1(1,1)=0$, since the point at the right edge of its cell and the neighbour at the left edge of the next cell can touch. A coordinate that does not move ($e_c=0$) is safe when $\sigma$ is near $\frac12$, half a cell (Figure~\ref{fig:cert}(b)).
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_cert_v4}
+\caption{The digit relaxation (Lemma~\ref{lem:cert}) for one geometric digit, $q=7$ (schematic with exact values). (a)~Two neighbouring cells, each split into $7$ sub-intervals. A point sits at $R/7$ plus a jitter of at most $1/7$ (shaded); its neighbour in the next cell sits at $(R\oplus\sigma)/7$ plus its own jitter. The worst case puts the first point at the right end of its jitter and the neighbour at the left end. For $\sigma=-3$ (a backward shift) the gap is at least $f_1(1,-3)=3/7$ for every $R$; for $\sigma=+1$ (forward by one sub-interval) the point at the right edge of its cell and the neighbour at the left edge of the next cell can touch: $f_1(1,1)=0$. (b)~The guaranteed gap $f_1(e,\sigma)$ over $\sigma\in\F_7$ for a coordinate that moves to the next cell ($e=1$, own response) and for one that stays ($e=0$, cross response). Own responses must point backward; cross responses must stay near $\pm\frac12$, half a cell. (c)~In the plane the coordinate gaps add in squares: a diagonal step with $\sigma=(-3,-2)$ keeps the neighbour outside the disc of radius $\sqrt{(3/7)^2+(4/7)^2}=5/7$ around the point. The bound is the minimum of these numbers over all steps and all carry lengths.}
+\label{fig:cert}
+\end{figure}
+
+\begin{lemma}[Digit relaxation]\label{lem:cert}
+Let $P_{sK}$ be a $(0,sK,s)$-net in base $q$ with $q^K\ge4$ and carry responses $D_i(l)$, and let $j\ge1$. For a step $e\in\{-1,0,1\}^s\setminus\{0\}$, carry lengths $l_{c'}\in[1,K]$ and digits $y_{c'}\in\F_q$ for the moving coordinates ($e_{c'}\ne0$), let $\sigma_c\in\F_q^j$ have the entries
+\[
+\sigma_{c,i}=\sum_{c':\,e_{c'}\ne0}e_{c'}\,\delta_i(l_{c'},y_{c'})[c][c'],\qquad i<j,
+\]
+with $\delta_i(l,y)=D_i(l)$ for prime $q$ and $\delta_i(l,y)$ as in (\ref{eq:carrychange}) in general. Then
+\[
+\sep{P_{sK}}\ \ge\ \min\bigl(1,\LB_j\bigr),\qquad \LB_j:=\min\Bigl(\sum_cf_j(e_c,\sigma_c)^2\Bigr)^{1/2},
+\]
+the minimum over all steps $e$ up to sign, all carry lengths and (for non-prime $q$) all digits $y_{c'}$ of the moving coordinates.
+\end{lemma}
+
+\begin{proof}
+Let two points lie in the cells $n$ and $n'$. Represent $n'-n$ modulo $q^K$ with entries in $(-q^K/2,q^K/2]$. If some entry has absolute value at least $2$, the points are at least one cell side apart in that coordinate, which gives the $1$. Otherwise $n'=n+e$ on the torus with $e\in\{-1,0,1\}^s\setminus\{0\}$, as each cell holds one point; swapping the points we may replace $e$ by $-e$. By (\ref{eq:cellunits}) the difference in coordinate $c$, in cell units, is
+\[
+e_c+\frac{\enc(R'_c)-\enc(R_c)}{q^j}+\varepsilon'_c-\varepsilon_c,\qquad|\varepsilon'_c-\varepsilon_c|\le q^{-j}.
+\]
+Its absolute value is at most $2\le q^K/2$, so it is the toroidal difference. The offset map is $\F_q$-linear in the cell digits, and only the cell indices of the moving coordinates change, each by a carry of its own length $l_{c'}$, stopping at a digit with some value $y_{c'}$; by (\ref{eq:carrychange}) this gives $R'_c=R_c\oplus\sigma_c$ for a step $+1$, and a step $-1$ is the reverse of a step $+1$ from the lower cell, which gives $-\sigma_c$. The absolute value is therefore at least $f_j(e_c,\sigma_c)$, and summing the squares over $c$ bounds the distance in cell units. Finally $\delta(P_{sK})\,N^{1/s}=\delta(P_{sK})\,q^K$ is the distance in cell units.
+\end{proof}
+
+The case $j=1$ is the one-digit relaxation of \cite{Gru26geo}%
+, which under its hypothesis (H2) on the deeper digits in addition gives a coordinate that moves alone no jitter; here the deeper digits are always counted as jitter. Taking the minimum over all carry lengths $l\ge1$ instead of $l\le K$ only enlarges the set, so for an offset map that does not depend on $K$, such as that of a self-similar scramble (Proposition~\ref{prop:law}), the value $\LB_j$ computed from all $l\ge1$ bounds $\sep{P_{sK}}$ for every $K$ with $q^K\ge4$. The bound minimises each coordinate separately, over the position and the jitter of that coordinate alone. This coordinatewise relaxation is why it is valid without knowing where the points sit, and also why it can be loose: the worst positions in different coordinates need not occur in the same pair of points.
+
+\begin{remark}[One digit]\label{rem:onedigit}
+For $j=1$ and prime $q=p$, $\sigma$ is a single residue and $f_1$ is explicit:
+\[
+f_1(1,-A)=1-\frac{A+1}{p}\quad(0\le A<p),\qquad f_1(1,1)=0,\qquad f_1(-1,\sigma)=f_1(1,-\sigma).
+\]
+So a backward shift of the neighbour's geometric digit is harmless, and the forward shift by one unit is fatal: the point at the right edge of its cell and the neighbour at the left edge of the next cell can come arbitrarily close. An own response $+1$ together with vanishing cross responses is the configuration behind the close pairs of Section~\ref{sec:fail}. In dimension two the terms of the bound are $\bigl(f_1(1,O_c^{(l)})^2+f_1(0,X_{1-c\leftarrow c}^{(l)})^2\bigr)^{1/2}$ for the axis steps of coordinate $c$, and
+\[
+\Bigl(f_1\bigl(1,O_0^{(l_0)}\pm X_{0\leftarrow1}^{(l_1)}\bigr)^2+f_1\bigl(\pm1,X_{1\leftarrow0}^{(l_0)}\pm O_1^{(l_1)}\bigr)^2\Bigr)^{1/2}
+\]
+for the diagonal ($+$) and antidiagonal ($-$) steps. In the running example (Table~\ref{tab:running}) the horizontal step with $l=1$ has $\sigma=(4,4)=(-3,\frac12)$ and the term $\sqrt{(3/7)^2+(2/7)^2}=0.515$; the step with $l=2$ has the fatal own shift $1$ and keeps only its cross term $f_1(0,\frac12)=\frac27=0.2857$, which is the bound of Theorem~\ref{thm:WF} at $p=7$.
+\end{remark}
+
+What remains is to choose a self-similar scramble whose infinitely many responses $D(l)$ all stay away from the configurations that bring neighbours together. The residue form makes some of them constant by design (Sections~\ref{sec:residue}--\ref{sec:block}); the rest are kept in windows (Section~\ref{sec:antipode}).

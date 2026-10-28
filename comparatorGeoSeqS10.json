@@ -1,0 +1,36 @@
+{
+  "challenge_module": "GeoSeqS10Challenge",
+  "solution_module": "GeoSeqS10Solution",
+  "theorem_names": [
+    "GeoSeq.box_existsUnique",
+    "GeoSeq.N1_general",
+    "GeoSeq.N1",
+    "GeoSeq.isRat_partial",
+    "GeoSeq.evPeriodic_isRat",
+    "GeoSeq.no_rat_root",
+    "GeoSeq.N2a",
+    "GeoSeq.N2a_periodic",
+    "GeoSeq.N2b",
+    "GeoSeq.N2b_periodic",
+    "GeoSeq.frame_factor",
+    "GeoSeq.frame_factor_F",
+    "GeoSeq.freeSer_const",
+    "GeoSeq.coeff_dir",
+    "GeoSeq.LI_c",
+    "GeoSeq.depthdir",
+    "GeoSeq.freeSer_free",
+    "GeoSeq.freeSer_row",
+    "GeoSeq.LI_d",
+    "GeoSeq.cover",
+    "GeoSeq.law_coef_exists",
+    "GeoSeq.rank2",
+    "GeoSeq.rank2_indep"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

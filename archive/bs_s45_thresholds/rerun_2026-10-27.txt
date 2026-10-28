@@ -1,0 +1,8 @@
+14300000000000021 T=315 Mb=31913 M={1: 3878666229, 2: 593907552517, 3: 90893164782415} exact window LB^2*p^2 == (p-Mb)^2: True, step=(1, 0, 0, 0), LemmaW binding brick axis: True
+real 0.14
+user 0.11
+sys 0.02
+1980000000000000000019 T=345 Mb=2719574398 M={0: 11829697816983, 1: 1177046463022459, 2: 117700389987566157, 3: 12000660172209579323} exact window LB^2*p^2 == (p-Mb)^2: True, step=(0, 0, 0, 0, 1), LemmaW binding brick axis: True
+real 0.14
+user 0.11
+sys 0.02

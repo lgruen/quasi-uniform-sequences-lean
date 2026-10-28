@@ -1,0 +1,295 @@
+%
+%
+%
+%
+%
+%
+\section{Residue Sequences}\label{sec:residue}
+Section~\ref{sec:fail} located the failure of the classical sequences in one place: each coordinate reads the index at its own place, and a carry in the last digits of one coordinate is invisible to the leading digits of all the others. Two points on either side of a cell boundary of one coordinate can then agree in every other coordinate. The repair must tie the coordinates together, and it must do so with one fixed scramble, the same for all numbers of points.
+
+Section~\ref{sec:law} found the tool. Every scramble reads digit~$n$ of coordinate~$c$ as a residue of the index polynomial at the place $a_c$ (Lemma~\ref{lem:resform}), and the residues of one rational function at all the places add up to its coefficient at infinity (Lemma~\ref{lem:resform}(c)). If the coordinates read their digits from one common rational differential, this identity is a linear relation between digits of different coordinates, and it holds at every level. For the brick wall it says that the height of a point in coordinate~$1$ is half the finest cell digit of coordinate~$0$ (Section~\ref{sec:law}).
+
+This section turns that observation into two constructions. The \emph{staggered residue sequence} (Section~\ref{sec:brickwall}) uses the identity at the full levels: one coordinate is staggered by a rank-1 lattice rule in the cell indices of the others. This is the brick wall in every dimension, certified at every full level for every prime $p>2^s$, but with a constant of about $2^{1-s}$, because the other coordinates are not controlled inside their cells. The \emph{residue sequence} (Section~\ref{sec:residueseq}) deletes one factor of the differential. The same kind of relation then holds one digit earlier, at the prefixes $P_{sK-1}$, in all coordinates alike, and these prefixes become exactly the lattice image plus jitter of the nets of \cite{Gru26geo}, with constants that tend to~$1$ and exceed~$1$ at moderate primes. Section~\ref{sec:block} carries all $s$ geometric digits of the nets at every $s$-th full level, Section~\ref{sec:count} explains why a frame scramble cannot carry more exact relations of bounded depth, and Section~\ref{sec:practice} compares the residue sequence with the window constructions in practice. Throughout this section $p$ is a prime, the places $a_0,\dots,a_{s-1}\in\F_p$ are distinct (so $p\ge s$), $w=\prod_c(z-a_c)$ and $w_c=w/(z-a_c)$.
+
+\subsection{The Residue Theorem as a Design Tool}\label{sec:restool}
+By Lemma~\ref{lem:resform}(b) a self-similar scramble with scale $\theta$ reads digit $n$ of coordinate $c$ as
+\[
+y_{c,n}(V)=\Res_{a_c}\Bigl(V\,\varphi_c\Bigl(\frac\theta w\Bigr)^{n+1}dz\Bigr),
+\]
+with a local multiplier $\varphi_c$ at each place. Take a rational function $\Phi$ whose finite poles lie at the places, and suppose that at every place $a_c$ the differential $\Phi(\theta/w)^{T+1}dz$ is a constant multiple of the differential that reads one digit of coordinate~$c$. Then for $\deg V<m$ the residue of $F=V\Phi(\theta/w)^{T+1}$ at $a_c$ is a multiple of that digit, and by Lemma~\ref{lem:resform}(c) the residues add up to $[z^{-1}]F$, which is $0$ as soon as $F=O(z^{-2})$ at $\infty$. That is a linear relation among one digit of each coordinate on the prefix $P_m$, the same at every level $T$, with no carries anywhere: an \emph{exact digit relation} (Section~\ref{sec:count}). The residue theorem over all places also gives the duality of Niederreiter and \"Ozbudak \cite{NO07}, where the relations bound the quality parameter (Section~\ref{sec:law}). Here $w/\theta$ is a local parameter at every place at once, so $(\theta/w)^{T+1}$ is a single power of the local parameter at each place, and each relation involves one digit of each coordinate. The design question is which $\Phi$ and which local multipliers make this relation useful for the separation. The two simplest choices are $\Phi=1/(z-a_{\cstar})$, which reads digit $T$ of every coordinate except one, $\cstar$, and digit $T+1$ of $\cstar$ (Section~\ref{sec:brickwall}), and $\Phi=1$, which reads digit $T$ of every coordinate (Section~\ref{sec:residueseq}).
+
+\subsection{Staggered Residue Sequences}\label{sec:brickwall}
+Fix a coordinate $\cstar$, the \emph{staggered coordinate}, and let $C=\{c\ne\cstar\}$ be the others.
+
+\begin{definition}[Staggered residue sequence]\label{def:residuestar}
+Let $s\ge2$, let $\theta,\mu_\star\in\F_p^*$, and let $k=(k_c)_{c\in C}\in(\F_p^*)^{s-1}$ be the \emph{weights}; put $\mu_c=-\mu_\star/k_c$ for $c\in C$. The \emph{staggered residue sequence} $\Rstar_v$ with check vector $v=(v_c)$, $v_c=k_c$ for $c\in C$ and $v_{\cstar}=-1$, is the digital sequence over $\F_p$ with the digits
+\[
+y_{c,n}(V)=\mu_c\Res_{a_c}\Bigl(\frac{V\,dz}{(z-a_{\cstar})(w/\theta)^{n+1}}\Bigr)\quad(c\in C),\qquad y_{\cstar,n}(V)=\mu_\star\Res_{a_{\cstar}}\Bigl(\frac{V\,dz}{(z-a_{\cstar})(w/\theta)^{n}}\Bigr).
+\]
+Its generator matrices have the entries (row $n$, column $i$, i.e.\ the coefficient of the index digit $V_i$)
+\[
+\begin{aligned}
+C_c[n][i]&=\mu_c\theta^{n+1}\,[(z-a_c)^n]\,\frac{z^i}{(z-a_{\cstar})\,w_c(z)^{n+1}}\quad(c\in C),\\
+C_{\cstar}[n][i]&=\mu_\star\theta^{n}\,[(z-a_{\cstar})^n]\,\frac{z^i}{w_{\cstar}(z)^{n}}.
+\end{aligned}
+\]
+\end{definition}
+
+The matrix formula is the residue written out: at $a_c$ the denominator is $(z-a_c)^{n+1}$ times the unit $(z-a_{\cstar})w_c^{n+1}$, so the residue is the coefficient of $(z-a_c)^n$ in $V$ divided by that unit. Each entry is one coefficient of a power series, computed by truncated power-series arithmetic over $\F_p$. In the notation of Lemma~\ref{lem:resform}(b) the local multipliers are
+\[
+\varphi_c=\frac{\mu_c}{z-a_{\cstar}}\quad(c\in C),\qquad \varphi_{\cstar}=\frac{\mu_\star\,w_{\cstar}}{\theta},
+\]
+both units at their places, since $w_{\cstar}(a_{\cstar})=w'(a_{\cstar})\ne0$. So $\Rstar_v$ is a self-similar scramble, and Proposition~\ref{prop:law} applies to it.
+
+\begin{lemma}[Staggered residue sequences have $t=0$]\label{lem:residuestar-t0}
+$C_c=L_c\Pas_{a_c}$ with a fixed lower-triangular matrix $L_c$ whose diagonal entries are $L_c[n][n]=\mu_c\theta^{n+1}/\bigl((a_c-a_{\cstar})\,w'(a_c)^{n+1}\bigr)$ for $c\in C$ and $L_{\cstar}[n][n]=\mu_\star\theta^n/w'(a_{\cstar})^n$. Hence $\Rstar_v$ is a digital $(0,s)$-sequence over $\F_p$.
+\end{lemma}
+
+\begin{proof}
+At $a_c$, $c\in C$, the differential $dz/((z-a_{\cstar})(w/\theta)^{n+1})$ is $(z-a_c)^{-n-1}$ times a unit power series with constant term $\theta^{n+1}/((a_c-a_{\cstar})w'(a_c)^{n+1})$; at $a_{\cstar}$ the differential $dz/((z-a_{\cstar})(w/\theta)^n)$ is $(z-a_{\cstar})^{-n-1}$ times a unit with constant term $\theta^n/w'(a_{\cstar})^n$. So the digit $n$ of each coordinate is the residue of $V$ against a polar differential of exact pole order $n+1$ at its place, and Lemma~\ref{lem:resform}(a) gives $C_c=L_c\Pas_{a_c}$ with lower-triangular $L_c$; its diagonal is the constant term of the unit times $\mu_c$ (resp.\ $\mu_\star$). Nothing depends on a level, and Lemma~\ref{lem:t0} gives $t=0$.
+\end{proof}
+
+\begin{lemma}[The staggered digit is a rank-1 lattice rule]\label{lem:residuestar-rel}
+For every $K\ge1$ and every $V$ with $\deg V<sK$,
+\[
+y_{\cstar,K}(V)=\sum_{c\in C}k_c\,y_{c,K-1}(V),\qquad\text{more generally}\qquad y_{\cstar,K+i}(V)=\sum_{c\in C}k_c\,y_{c,K-1+i}(V)\ \ (i\ge0).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $F=\theta^KV/((z-a_{\cstar})w^K)$. Its finite poles are at the places, and its numerator has degree at most $sK-1$, two less than the degree $sK+1$ of its denominator; so $F=O(z^{-2})$ at $\infty$, and Lemma~\ref{lem:resform}(c) gives $\sum_c\Res_{a_c}(F\,dz)=0$. By Definition~\ref{def:residuestar}, $\Res_{a_{\cstar}}(F\,dz)=y_{\cstar,K}(V)/\mu_\star$ and $\Res_{a_c}(F\,dz)=y_{c,K-1}(V)/\mu_c$ for $c\in C$. Multiplying by $\mu_\star$ and using $-\mu_\star/\mu_c=k_c$ gives the first identity. The second is the first at level $K+i$, since $\deg V<sK\le s(K+i)$.
+\end{proof}
+
+For a prime base the finest cell digit $y_{c,K-1}$ of coordinate $c$ at level $K$ is the cell index $n_c$ modulo $p$, so the geometric digit of the staggered coordinate is
+\[
+r_{\cstar}\equiv\sum_{c\in C}k_c\,n_c\pmod p,
+\]
+a rank-1 lattice rule in the cell indices of the other coordinates. A step of $n_c$ by $+1$ adds $1$ to the finest digit whatever the carry length, the toroidal wrap included, so it moves $r_{\cstar}$ by exactly $k_c$; a step of $n_{\cstar}$ does not move it. In the language of Section~\ref{sec:law}: the cross responses $X^{(l)}_{\cstar\leftarrow c}=k_c$ and the own response $O^{(l)}_{\cstar}=0$ are constant, for every carry length~$l$.
+
+So a step in a coordinate of $C$ offsets the neighbour in coordinate $\cstar$ by a fixed amount, and the theorem below measures how far from $0$ these offsets stay. For $x\in\F_p$ we write $\cabs x\in[0,p/2]$ for its \emph{centred absolute value}, the absolute value of its representative in $(-p/2,p/2)$.
+
+\begin{theorem}[Staggered residue sequences]\label{thm:residuestar}
+Let $p\ge5$ and put
+\[
+\beta(k)=\min_{e'\in\{-1,0,1\}^{C}\setminus\{0\}}\frac{\cabs{k\cdot e'}-1}{p},\qquad k\cdot e'=\sum_{c\in C}k_ce'_c\in\F_p .
+\]
+Then $\sep{P_{sK}}\ge\beta(k)$ for every $K\ge1$. If $\beta(k)>0$, the sequence is quasi-uniform, with $\delta(P_{[N]})\ge(\beta(k)/p)N^{-1/s}$ for every $N\ge2$ and $h/\delta\le\sqrt s\,p/\beta(k)$.
+\end{theorem}
+
+\begin{proof}
+We apply the digit relaxation (Lemma~\ref{lem:cert}) with $j=1$ and keep only the term of coordinate $\cstar$. For a step $e$ with any carry lengths, the change of $r_{\cstar}$ is $\sigma_{\cstar}=k\cdot e'$, where $e'$ is the restriction of $e$ to $C$ (the constant responses above). If $e'=0$, then $e_{\cstar}=\pm1$, $\sigma_{\cstar}=0$, and the term is $f_1(\pm1,0)=(p-1)/p$. If $e'\ne0$ and $e_{\cstar}=0$, the term is $f_1(0,\sigma)=(\cabs{\sigma}-1)/p$: the two positions $\enc(R)$ and $\enc(R+\sigma)$ differ by $\hat\sigma$ or $p-\hat\sigma$, where $\hat\sigma\in[1,p-1]$ represents $\sigma$, and the smaller is $\cabs{\sigma}$. If $e'\ne0$ and $e_{\cstar}=\pm1$, then $f_1(1,\sigma)=(\hat\sigma-1)/p$ and $f_1(-1,\sigma)=(p-\hat\sigma-1)/p$ are both at least $(\cabs{\sigma}-1)/p$. Since $\cabs\sigma\le p/2$, the minimum over all steps is $\min(1,\beta(k),(p-1)/p)=\beta(k)$, and Lemma~\ref{lem:cert} (with $p^K\ge5$) gives $\sep{P_{sK}}\ge\beta(k)$. The last statement is Lemma~\ref{lem:prefix} with $\Lev=s\N$ and Remark~\ref{rem:prefixcases}.
+\end{proof}
+
+\emph{What the theorem sees.} Take integer representatives $\tilde k_c$ of the weights and put $\tilde k_{\cstar}=0$. In cell units, the height of the point in cell $n$ in coordinate $\cstar$ is $n_{\cstar}+\operatorname{frac}(\tilde k\cdot n/p)$ up to a jitter of $1/p$. Reducing modulo $p$ only subtracts integer multiples of the unit vector $\mathbf 1_{\cstar}$, so these heights form, globally and at every level, the lattice $(I+\mathbf 1_{\cstar}\tilde k^{\mathsf T}/p)\Z^s$ in the coordinate $\cstar$: a wrap of $r_{\cstar}$ is a translation of this lattice, so there are no slip planes and no jumps in that coordinate. The other $s-1$ coordinates are not designed. Inside its cell a point can sit anywhere in them, a jitter of a whole cell; two points in neighbouring cells may agree in every coordinate except $\cstar$, and only the gap $(\cabs{k\cdot e'}-1)/p$ in coordinate $\cstar$ is left. That is what $\beta(k)$ measures.
+
+\begin{corollary}[Dyadic weights]\label{cor:dyadic}
+Let $p$ be an odd prime, order $C$ as $c_1,\dots,c_{s-1}$ and put $k_{c_i}=2^{i-s}\in\F_p$. Then
+\[
+\beta(k)=\frac{\lfloor p/2^{s-1}\rfloor-1}{p},
+\]
+and no weights $k\in(\F_p^*)^{s-1}$ give a larger value of $\beta$. In particular, for every $s\ge2$ and every prime $p>2^s$ the staggered residue sequence with dyadic weights is a quasi-uniform digital $(0,s)$-sequence with $\sep{P_{sK}}\ge(\lfloor p/2^{s-1}\rfloor-1)/p$ for every $K\ge1$; and $\beta(k)>0$ for some $k$ only if $p>2^s$.
+\end{corollary}
+
+\begin{proof}
+For $e'\in\{-1,0,1\}^{s-1}\setminus\{0\}$ we have $k\cdot e'=A/2^{s-1}$ with the integer $A=\sum_ie'_i2^{i-1}$, and $0<|A|\le2^{s-1}-1$ ($A\ne0$ because the term of the largest $i$ with $e'_i\ne0$ exceeds the sum of the others in absolute value). Let $x$ be the centred representative of $A/2^{s-1}$. Then $2^{s-1}x-A$ is an integer multiple of $p$, and it is nonzero, since otherwise $2^{s-1}$ would divide $A$. Hence $2^{s-1}|x|\ge p-|A|\ge p-2^{s-1}+1$, and as $|x|$ is an integer, $|x|\ge\lceil(p+1)/2^{s-1}\rceil-1=\lfloor p/2^{s-1}\rfloor$. So $\beta(k)\ge(\lfloor p/2^{s-1}\rfloor-1)/p$.
+
+Conversely, let $k$ be any weights and consider the $2^{s-1}$ subset sums $S_A=\sum_{c\in A}k_c\in\F_p$, $A\subseteq C$. The difference of two of them is $k\cdot e'$ with $e'=\mathbf 1_A-\mathbf 1_B\in\{-1,0,1\}^C\setminus\{0\}$. If all these differences have centred absolute value at least $d\ge1$, the $2^{s-1}$ sums are distinct points of the cycle $\Z/p\Z$ at mutual distance at least $d$, so $2^{s-1}d\le p$. Hence $\min_{e'}\cabs{k\cdot e'}\le\lfloor p/2^{s-1}\rfloor$ and $\beta(k)\le(\lfloor p/2^{s-1}\rfloor-1)/p$, with equality for the dyadic weights by the first part. Finally $\lfloor p/2^{s-1}\rfloor\ge2$ if and only if $p\ge2^s$, that is $p>2^s$; then $p\ge5$ and $p\ge s$, and Theorem~\ref{thm:residuestar} applies.
+\end{proof}
+
+The dyadic weights stagger the coordinate $\cstar$ by multiples of $2^{1-s}$ of a cell: half a cell for one other coordinate, quarters for two, and so on. Their value tends to $2^{1-s}$, and the corollary shows that no other weights do better \emph{for this bound}. The cap is a property of the certificate, not of the sequence: the argument of the second part uses only the steps with $e_{\cstar}=0$ and carry length $1$, so it caps every one-digit relaxation that keeps only the term of a single coordinate. The separation itself is larger. For instance, the exact values of $\sep{P_s}$ ($K=1$) computed for $s=4$ and $s=5$ lie between $0.1985$ and $0.4837$ (for instance, with the Faure places, $\cstar=s-1$ and $\theta=1$, $0.3678$ for $s=4$, $p=17$, and $0.4837$ for $s=5$, $p=37$), against $\beta=1/17$ and $1/37$; whether such values persist for all $K$ is open. For $p=11$, $37$ and $211$ in dimension $3$, $4$ and $5$ the corollary gives $1/11$, $3/37$ and $12/211$; in dimension three it gives $9/41$, $24/101$ and $251/1009$ at $p=41$, $101$ and $1009$.
+
+\begin{example}[The brick wall]\label{ex:brickwall}
+Let $s=2$, with the Faure places $a_0=0$, $a_1=1$ (so $w=z^2-z$, $w_0=z-1$, $w_1=z$), staggered coordinate $\cstar=1$, scale $\theta=-\frac14$ and constants $\mu=(\mu_0,\mu_\star)=(-4,2)$. The weight is $k_0=-\mu_\star/\mu_0=\frac12$, the dyadic weight for $s=2$. The digits are
+\[
+y_{0,n}(V)=-4\Res_0\Bigl(\frac{V\,dz}{(z-1)(w/\theta)^{n+1}}\Bigr),\qquad y_{1,n}(V)=2\Res_1\Bigl(\frac{V\,dz}{(z-1)(w/\theta)^{n}}\Bigr),
+\]
+and the local multipliers are $\varphi_0=-4/(z-1)$ and $\varphi_1=2z/\theta=-8z$. For $p=7$ the generator matrices are those of Example~\ref{ex:running} (a direct check of the $4\times4$ blocks). By Lemma~\ref{lem:residuestar-rel}, $r_1\equiv\frac12n_0\pmod p$: the height of a point in coordinate~$1$ moves by half a cell from one column of cells to the next and stays fixed along a column, at every level and every carry length. These are the constant responses $X^{(l)}_{1\leftarrow0}=\frac12$ and $O_1^{(l)}=0$ of Table~\ref{tab:running}.
+\end{example}
+
+\begin{definition}[Brick wall]\label{def:WF}
+For an odd prime $p$, the \emph{brick wall} $W^-$ is the staggered residue sequence of Example~\ref{ex:brickwall} over $\F_p$.
+\end{definition}
+
+In the multiplier form of Definition~\ref{def:selfsim}, Lemma~\ref{lem:resform}(b) turns the local multipliers into $g_0=2/\bigl(\sqrt{1-x}\,(1+\sqrt{1-x})\bigr)$ and $g_1=(1+\sqrt{1-x})/\sqrt{1-x}$, where $\sqrt{1-x}\in\F_p[[x]]$ has constant term~$1$ (the scaled local roots are $z_{0,1}(\theta x)=(1\mp\sqrt{1-x})/2$). In that form the two constant responses need a computation with the frame matrix; the residue form gives them in one line.
+
+\begin{theorem}[Brick wall]\label{thm:WF}
+For every prime $p\ge5$ the brick wall is a digital $(0,2)$-sequence over $\F_p$ with
+\[
+\sep{P_{2K}}\ \ge\ \frac{p-3}{2p}\qquad\text{for every }K\ge1,
+\]
+and it is quasi-uniform.
+\end{theorem}
+
+\begin{proof}
+This is Corollary~\ref{cor:dyadic} with $s=2$: $\lfloor p/2\rfloor-1=(p-3)/2$.
+\end{proof}
+
+The proof uses one coordinate and one geometric digit. Coordinate~$0$ is left to the frame: two points in neighbouring columns of cells can sit at almost the same horizontal position, and then they are only about half a cell apart (Figure~\ref{fig:residue}(a)). To do better in the full levels the horizontal positions must be controlled as well; then, in a self-similar scramble, the half can no longer be kept exactly (Proposition~\ref{prop:N2}) and has to be kept in a window, which is the hexagonal brick wall of Section~\ref{sec:antipode}. The next construction instead reads one relation of the same kind in all coordinates alike.
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_residue}
+\caption{The two residue constructions, exact points from the generator matrices (\texttt{paper/v4/figs/b3\_figs.py}). (a)~The brick wall $W^-$ (staggered residue sequence, $s=2$) for $p=13$, the full level $P_2$ with its $13\times13$ cells. In each cell the blue segment is the designed height of the point in coordinate~$1$, $n_1+r_1/13$ with $r_1\equiv\frac12n_0$ (Lemma~\ref{lem:residuestar-rel}): it is constant along a column and moves by half a cell from one column to the next. The horizontal position is not designed. The circled closest pair sits in neighbouring columns at almost the same horizontal position; exact $\sep{P_2}=0.4726$ (also at $m=4,6$), certified bound $5/13=0.3846$ (Theorem~\ref{thm:WF}). (b)~The residue sequence $\Rv_v$, $s=2$, $p=11$, places $(0,1)$, $\theta=1$, $v=(3,-1)$ (the Korobov vector, $\rho=3$), the prefix $P_3$ (level $K=2$, fine cells of side $11^{-2}$). (c)~Zoom on the marked $13\times13$ fine cells. The shaded fine cells are those of the lattice $\Lambda_v=\{b:3b_0-b_1\equiv0\pmod{11}\}$, spanned by $(1,3)$ and $(-3,2)$; each holds exactly one point, and no other fine cell holds one (Theorem~\ref{thm:residue}(i)). The lattice image of a point is the corner of its fine cell, and the jitter moves it by less than one fine cell. Exact $\sep{P_3}=0.7651$ ($0.6238$ at $m=5$ and $m=7$), certified bound $\ljit(\Lambda_v)\,p^{-1/2}=2/\sqrt{11}=0.6030$ for every $P_{2K-1}$.}
+\label{fig:residue}
+\end{figure}
+
+\subsection{Residue Sequences}\label{sec:residueseq}
+The staggered residue sequence reads its relation at two scales: the coordinates of $C$ at the scale of the cells (their finest cell digit $y_{c,K-1}$), the coordinate $\cstar$ one digit deeper (its geometric digit $y_{\cstar,K}$). That is why the coordinates of $C$ keep a jitter of a whole cell. The remedy is to read the relation at one common scale in all coordinates. Deleting the factor $1/(z-a_{\cstar})$ from the differential does exactly this: every coordinate then reads the same differential $V\,dz$, and the residue theorem relates the digits $y_{c,K-1}$ of all coordinates, at the prefixes $P_{sK-1}$, one digit before the full level.
+
+\begin{definition}[Residue sequence]\label{def:residue}
+Let $s\ge2$, $\theta\in\F_p^*$ and let $v=(v_0,\dots,v_{s-1})\in(\F_p^*)^s$ be a \emph{check vector}. The \emph{residue sequence} $\Rv_v$ is the digital sequence over $\F_p$ with the digits
+\[
+y_{c,n}(V)=v_c^{-1}\Res_{a_c}\Bigl(V\Bigl(\frac\theta w\Bigr)^{n+1}dz\Bigr),\qquad C_c[n][i]=v_c^{-1}\theta^{n+1}\,[(z-a_c)^n]\,\frac{z^i}{w_c(z)^{n+1}} .
+\]
+\end{definition}
+
+Its local multipliers are the constants $\varphi_c=v_c^{-1}$, and by Lemma~\ref{lem:resform}(b) its multipliers are $g_c(x)=\theta z_c'(\theta x)/v_c$: in the common uniformizer $w$, every coordinate reads the $w$-adic digits of the differential $V\,dz$ at its own place, where the classical frame reads those of the function~$V$.
+
+\begin{lemma}[Residue sequences have $t=0$]\label{lem:residue-t0}
+$C_c=L_c\Pas_{a_c}$ with a fixed lower-triangular $L_c$, $L_c[n][n]=v_c^{-1}\theta^{n+1}/w'(a_c)^{n+1}$. Hence $\Rv_v$ is a self-similar digital $(0,s)$-sequence over $\F_p$.
+\end{lemma}
+
+\begin{proof}
+At $a_c$, $(\theta/w)^{n+1}dz$ is $(z-a_c)^{-n-1}$ times a unit with constant term $\theta^{n+1}/w'(a_c)^{n+1}$; Lemma~\ref{lem:resform}(a) and Lemma~\ref{lem:t0} conclude as in Lemma~\ref{lem:residuestar-t0}.
+\end{proof}
+
+\begin{lemma}[The skeleton relation]\label{lem:residue-rel}
+For every $K\ge1$,
+\[
+\sum_cv_c\,y_{c,K-1}(V)=\begin{cases}0,&\deg V\le sK-2,\\ \theta^K\,[z^{sK-1}]\,V,&\deg V=sK-1.\end{cases}
+\]
+Moreover $\sum_cv_c\,y_{c,K-1+i}(V)=0$ for every $i\ge0$ and every $V$ with $\deg V\le sK-2$.
+\end{lemma}
+
+\begin{proof}
+Let $F=\theta^KV/w^K$. Then $v_cy_{c,K-1}(V)=\Res_{a_c}(F\,dz)$, and by Lemma~\ref{lem:resform}(c) the sum is $[z^{-1}]F$. As $w^K=z^{sK}+\dots$, we have $F=\theta^K[z^{sK-1}]V\cdot z^{-1}+O(z^{-2})$ at $\infty$ when $\deg V\le sK-1$, which gives both cases. The second statement is the first at level $K+i$.
+\end{proof}
+
+\emph{Skeleton coordinates and fine cells.} The prefix $P_{sK-1}$ has $N=p^{sK-1}$ points, one digit fewer than a full level. Choose one coordinate $c_0$ and give it $K-1$ cell digits and every other coordinate $K$; the boxes with these depths have volume $p^{-(sK-1)}$, so each holds exactly one point (Lemma~\ref{lem:residue-t0}). In the language of \cite{Gru26geo}, $c_0$ is a \emph{skeleton coordinate}, and its next digit $y_{c_0,K-1}$, the \emph{skeleton digit}, is fixed by Lemma~\ref{lem:residue-rel}: $y_{c_0,K-1}=-v_{c_0}^{-1}\sum_{c\ne c_0}v_cy_{c,K-1}$, a rank-1 lattice rule in the finest cell digits of the other coordinates. Every coordinate can play this role; the relation $\sum_cv_cy_{c,K-1}=0$ is symmetric, and we call it the \emph{skeleton relation}.
+
+\emph{Fine cells and the lattice.} Giving every coordinate $K$ digits instead turns the skeleton relation into a statement about cubes. The \emph{fine cells} of $P_{sK-1}$ are the cubes of side $p^{-K}$, and the fine cell of a point is $\hat n=(\hat n_c)$, $\hat n_c=\sum_{i<K}y_{c,i}\,p^{K-1-i}\in[0,p^K)$ (this is $\lfloor p^Ky_c\rfloor$ unless the digits of $y_c$ end in $p-1$). The skeleton relation is a relation among the last digits of the fine-cell indices, so it describes a lattice. For a check vector $v$ let
+\[
+\Lambda_v=\Bigl\{b\in\Z^s:\ \sum_cv_cb_c\equiv0\pmod p\Bigr\},\qquad \ljit(\Lambda)=\min_{0\ne b\in\Lambda}\bigl\|(|b|-\mathbf 1)_+\bigr\|_2,
+\]
+where $|b|$ and $(\cdot)_+$ are taken coordinatewise. $\Lambda_v$ is the Construction-A lattice of the linear code with parity-check vector $v$ \cite[Ch.~5]{CS99}, of index $p$ in $\Z^s$; $\ljit(\Lambda)$ is the length of its shortest nonzero vector after one unit of jitter is subtracted in every coordinate \cite{Gru26geo}%
+.
+
+\begin{theorem}[Residue sequences]\label{thm:residue}
+Let $s\ge2$ and let $v$ be a check vector. For every $K\ge1$, with $N=p^{sK-1}$:
+\begin{enumerate}
+\item[(i)] the fine cells occupied by the points of $P_{sK-1}$ are exactly the elements of $\Lambda_v\cap[0,p^K)^s$, each holding one point;
+\item[(ii)] $\sep{P_{sK-1}}\ \ge\ p^{-1/s}\,\ljit(\Lambda_v)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) The fine cell $\hat n$ of a point determines its first $K$ digits in every coordinate, and $\hat n_c\equiv y_{c,K-1}\pmod p$ (for a prime base the $K$-th digit is the last base-$p$ digit of $\hat n_c$). By Lemma~\ref{lem:residue-rel}, $\sum_cv_c\hat n_c\equiv0\pmod p$, so $\hat n\in\Lambda_v$. The fine cell determines the box of depths $(K,\dots,K,K-1,K,\dots,K)$ of any skeleton coordinate, which holds one point, so distinct points lie in distinct fine cells. The $p^{sK-1}$ points therefore occupy $p^{sK-1}$ distinct elements of $\Lambda_v\cap[0,p^K)^s$. This set has exactly $p^{sK-1}$ elements: $\Lambda_v$ contains $p^K\Z^s$, and it is the union of $p^{sK}/p$ classes modulo $p^K$, one element of $[0,p^K)^s$ each. So every element is occupied.
+
+(ii) Let two points lie in the fine cells $\hat n$ and $\hat n'$, and let $b_c$ be the representative of $\hat n'_c-\hat n_c$ modulo $p^K$ in $(-p^K/2,p^K/2]$. Then $b\equiv\hat n'-\hat n\pmod p$, so $b\in\Lambda_v$, and $b\ne0$ by (i). In units of the fine-cell side $p^{-K}$, coordinate $c$ of the two points differs by $b_c+zp^K+\epsilon$ on the torus, with $z\in\Z$ and $|\epsilon|\le1$ (each point lies in the closure of its fine cell). For $z\ne0$ the absolute value is at least $p^K-|b_c|-1\ge|b_c|-1$, and for $z=0$ it is at least $|b_c|-1$. So the toroidal distance is at least $p^{-K}\|(|b|-\mathbf 1)_+\|_2\ge p^{-K}\ljit(\Lambda_v)$, and $p^{-K}N^{1/s}=p^{-1/s}$.
+\end{proof}
+
+\emph{The link to the nets: lattice image and jitter.} Part~(i) says that $P_{sK-1}$ is, in the words of \cite{Gru26geo}, a lattice image plus jitter. The lattice image of a point is the corner $\hat n\,p^{-K}$ of its fine cell; these corners are all of $p^{-K}\Lambda_v$ on the torus, one global lattice with no slip planes and no shifts of the lattice between neighbouring cells of $P_{sK-1}$ (no \emph{faults} in the sense of \cite{Gru26geo}); and the jitter moves each point by less than one fine cell in every coordinate (Figure~\ref{fig:residue}(b),(c)). This is the net with one skeleton coordinate of \cite{Gru26geo}%
+, whose skeleton digit is a rank-1 lattice rule in the last cell digits of the other coordinates, and part~(ii) is its Euclidean bound \cite{Gru26geo}%
+. There are two differences. First, the nets of \cite{Gru26geo} are built for one size $m=sK-1$ at a time, by a scramble chosen for that $m$%
+; here one fixed scramble of a frame with finite places gives the lattice image at every $m\equiv-1\pmod s$ at once, because the skeleton relation comes from the residue theorem and does not depend on $K$. Second, the bound of \cite{Gru26geo} is stated for $s\ge3$; the proof above is self-contained and covers $s=2$ as well. Compared with the staggered residue sequence, the relation is the same kind of rank-1 rule, now read in the last cell digit of every coordinate: the jitter shrinks from a whole cell to one fine cell, and the constant is no longer capped.
+
+\begin{corollary}[Korobov check vectors]\label{cor:korobov}
+Let $p>2^s$, $\rho=\lfloor p^{1/s}\rfloor$ and $v=(\rho,\rho^2,\dots,\rho^{s-1},-1)$. Then $\ljit(\Lambda_v)\ge\rho-1$, so for every $K\ge1$
+\[
+\sep{P_{sK-1}}\ \ge\ (\rho-1)\,p^{-1/s}\ >\ \max\Bigl(1-2p^{-1/s},\ \frac{\rho-1}{\rho+1}\Bigr).
+\]
+In particular $\sep{P_{sK-1}}>1/3$ for every prime $p>2^s$ and $>1/2$ for every prime $p>3^s$.
+\end{corollary}
+
+\begin{proof}
+We show that every $0\ne b\in\Lambda_v$ has a coordinate with $|b_c|\ge\rho$ (as in \cite{Gru26geo}%
+); then $\|(|b|-\mathbf 1)_+\|_2\ge\rho-1$. Suppose $|b_c|\le\rho-1$ for all $c$. The integer $T=\sum_{c<s-1}\rho^{c+1}b_c-b_{s-1}$ is divisible by $p$, and $|T|\le(\rho-1)(1+\rho+\dots+\rho^{s-1})=\rho^s-1<p$, since $\rho^s\le p$ and $p$ is not an $s$-th power. So $T=0$. Reading $T=0$ modulo $\rho$ gives $\rho\mid b_{s-1}$, hence $b_{s-1}=0$; dividing by $\rho$ and repeating gives $b_0=\dots=b_{s-2}=0$, a contradiction. Finally $p^{1/s}<\rho+1$ gives $(\rho-1)p^{-1/s}>1-2p^{-1/s}$ and $>(\rho-1)/(\rho+1)$; and $\rho\ge2$ if and only if $p>2^s$, $\rho\ge3$ if and only if $p>3^s$.
+\end{proof}
+
+The constant $2$ in $1-2p^{-1/s}$ is the same in every dimension. At small primes the first form is much stronger: for $s=4$ and $p=17$ it is $0.492$, while $1-2\cdot17^{-1/4}=0.0150$.
+
+\begin{corollary}[Quasi-uniformity]\label{cor:residueQU}
+Let $\LB=p^{-1/s}\ljit(\Lambda_v)>0$. Then $\delta(P_{[N]})\ge(\LB/p)\,N^{-1/s}$ for every $N\ge2$, $h/\delta\le\sqrt s\,p^2/\LB$, and $\Rv_v$ is quasi-uniform. A check vector with $\ljit(\Lambda_v)>0$ exists if and only if $p>2^s$, and then the Korobov vector of Corollary~\ref{cor:korobov} is one.
+\end{corollary}
+
+\begin{proof}
+The first part is Lemma~\ref{lem:prefix} with the level family $\Lev=s\N-1$, whose largest gap is $s$ (Remark~\ref{rem:prefixcases}). $\ljit(\Lambda_v)=0$ means that $\Lambda_v$ contains a nonzero vector $e\in\{-1,0,1\}^s$. If $p<2^s$, two of the $2^s$ subset sums $\sum_{c\in A}v_c$ agree modulo $p$, and their difference is such a vector; $p=2^s$ is impossible. For $p>2^s$ the Korobov vector has $\ljit\ge\rho-1\ge1$.
+\end{proof}
+
+For the primes $s\le p<2^s$ the bound is empty, and whether residue sequences are quasi-uniform there is not addressed here (Section~\ref{sec:open}). The smallest primes above $2^s$ are $5$, $11$, $17$, $37$, $67$, $131$ and $257$ for $s=2,\dots,8$.
+
+\emph{Better check vectors.} Theorem~\ref{thm:residue} holds for every check vector, and the Korobov vector \cite{Kor59,SJ94} is not the best one in the Euclidean norm. (Sakai and Goda \cite{SG26} also choose Korobov generating vectors for separation, by lattice basis reduction, for lattice point sets.) Scaling $v$ does not change $\Lambda_v$, so every check vector can be written as $v=(x,-1)$ with $x\in(\F_p^*)^{s-1}$, and $\ljit(\Lambda_v)^2$ is an integer computed exactly by enumerating the vectors of $\Lambda_v$ in a box (any vector with a coordinate larger than $B$ in absolute value has $\ljit^2\ge B^2$). Table~\ref{tab:residue} lists the best vectors found, exhaustively over all $x$ where that is feasible. Each entry is a proof of the stated bound for the listed $v$, by Theorem~\ref{thm:residue} and the exact value of $\ljit^2$; a value found by a random search is only a lower bound on the best possible one. In dimension two the bound exceeds~$1$ at $p=1009$, and in dimension three at $p=10007$. At $s=4$, $p=1009$ the vector of the table improves the value $0.813$ of the searched skeleton nets of \cite{Gru26geo}%
+; the same vector serves there. The best values appear to tend to $\sqrt{\gamma_s}$, the square root of the Hermite constant ($1.122$, $1.189$, $1.231$ for $s=3,4,5$); this is the open limit discussed in \cite{Gru26geo}%
+, and it would transfer to residue sequences verbatim.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Certified bounds $\sep{P_{sK-1}}\ge p^{-1/s}\ljit(\Lambda_v)$ for every $K\ge1$ (Theorem~\ref{thm:residue}), truncated to three digits, for the check vectors $v$ listed and, in the last column, for the Korobov vector $(\rho,\dots,\rho^{s-1},-1)$, $\rho=\lfloor p^{1/s}\rfloor$ (Corollary~\ref{cor:korobov}; there $\ljit=\rho-1$ in every row). $\ljit^2$ is exact. Search: E = exhaustive over all check vectors $(x,-1)$; R = random search over $3\cdot10^6$ vectors $x$, so the value is a lower bound on the best possible one. Computed with an exact enumeration program, each run under one minute (Appendix~\ref{app:cert}).}
+\label{tab:residue}
+\begin{tabular}{@{}rr l r r c r@{}}
+\toprule
+$s$ & $p$ & best $v$ found & $\ljit^2$ & bound & search & Korobov\\
+\midrule
+2 & 11 & $(3,-1)$ & 4 & .603 & E & .603\\
+ & 17 & $(4,-1)$ & 9 & .727 & E & .727\\
+ & 37 & $(6,-1)$ & 25 & .821 & E & .821\\
+ & 101 & $(30,-1)$ & 85 & .917 & E & .895\\
+ & 1009 & $(122,-1)$ & 1060 & 1.024 & E & .944\\
+\addlinespace
+3 & 11 & $(9,4,-1)$ & 1 & .449 & E & .449\\
+ & 17 & $(6,2,-1)$ & 1 & .388 & E & .388\\
+ & 37 & $(9,3,-1)$ & 4 & .600 & E & .600\\
+ & 101 & $(35,13,-1)$ & 13 & .774 & E & .644\\
+ & 1009 & $(105,11,-1)$ & 89 & .940 & E & .897\\
+ & 10007 & $(7775,9087,-1)$ & 498 & 1.035 & R & .928\\
+\addlinespace
+4 & 17 & $(9,15,4,-1)$ & 1 & .492 & E & .492\\
+ & 37 & $(14,4,2,-1)$ & 1 & .405 & E & .405\\
+ & 101 & $(27,9,3,-1)$ & 4 & .630 & E & .630\\
+ & 1009 & $(443,201,758,-1)$ & 25 & .887 & R & .709\\
+\addlinespace
+5 & 37 & $(16,8,4,2,-1)$ & 1 & .485 & E & .485\\
+ & 101 & $(2,4,8,16,-1)$ & 1 & .397 & R & .397\\
+ & 1009 & $(560,313,92,858,-1)$ & 9 & .752 & R & .501\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}[Exact separations]\label{rem:residueexact}
+The exact separations at the certified sizes are above the bound and approach it as $K$ grows (exact computations, illustration only). For $s=3$, $p=11$, $v=(9,4,-1)$: $\sep{P_2}=0.7686$ and $\sep{P_5}=0.6144$, against $0.4496$; for $s=3$, $p=1009$ and the Korobov vector: $\sep{P_2}=0.9484$ against $0.8973$; for $s=4$, $p=257$, $v=(4,16,64,-1)$: $\sep{P_3}=0.7638$ against $0.7493$. All $27$ cases computed respect the bound.
+\end{remark}
+
+\begin{remark}[Full levels]\label{rem:residuefull}
+At the full levels the residue sequence has only the \emph{inclusion bound}: $P_{sK}\subset P_{s(K+1)-1}$ and Theorem~\ref{thm:residue} give $\sep{P_{sK}}\ge\ljit(\Lambda_v)/p$, smaller by the factor $p^{1/s-1}$. At $P_{sK}$ the geometric digits of every point satisfy $\sum_cv_cr_c=0$ (Lemma~\ref{lem:residue-rel} at level $K+1$), which constrains the position of a point inside its cell but not its position relative to the neighbours. The digit relaxation does not do better: its one-digit form applied to the offset map of $\Rv_v$ gives exactly $\ljit(\Lambda_v)/p$ in all $13$ parameter sets computed ($s=2$ and $s=3$, primes up to $101$, several places and scales; exact computation). This is a statement about that bound, not an upper bound on the separation. The measured full-level separations do decrease with $K$, for instance from $0.367$ ($m=2,\dots,8$) to $0.246$ ($m=10$) for $s=2$, $p=5$, and from $0.444$ ($m=3$) to $0.172$ ($m=6$) for $s=3$, $p=11$ (evidence, not a claim). A self-similar scramble carries only one level-independent exact relation of this kind (Proposition~\ref{prop:onerel}), so it cannot have both the skeleton relation of $\Rv_v$ and the staggered relation of $\Rstar_v$; Section~\ref{sec:count} makes this precise, and Section~\ref{sec:block} certifies a sparser family of full levels with constants close to~$1$.
+\end{remark}
+
+\subsection{Comparison}\label{sec:residuecmp}
+The two residue constructions certify different level families: $\Rstar_v$ every full level $P_{sK}$, $\Rv_v$ every prefix $P_{sK-1}$. For the number of points that matters in practice, every $N$, Lemma~\ref{lem:prefix} puts them on the same footing: both families have largest gap $s$, so $\delta(P_{[N]})N^{1/s}\ge\LB/p$ in both cases. Table~\ref{tab:residuecmp} compares them; in this all-$N$ measure the residue sequence has the larger certified constant in every case listed. At every full level, on the other hand, only the window constructions of Section~\ref{sec:antipode} have constants tending to~$1$, from large primes on. Section~\ref{sec:practice} (Table~\ref{tab:practice}) measures the separation of every prefix up to $2^{23}$ points in dimension three.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Certified constants for every $K$ at the level families stated, and the resulting bound for every $N$, $\delta(P_{[N]})N^{1/s}\ge\LB/p$ (Lemma~\ref{lem:prefix}), in units of $10^{-3}$; all values truncated. $\Rstar_v$: dyadic weights (Corollary~\ref{cor:dyadic}). $\Rv_v$: Korobov vector (Corollary~\ref{cor:korobov}) and the best vector of Table~\ref{tab:residue}.}
+\label{tab:residuecmp}
+\begin{tabular}{@{}rr ccc cc@{}}
+\toprule
+ & & \multicolumn{3}{c}{$\sep{P_m}\ge$} & \multicolumn{2}{c}{all $N$: $\LB/p$, $\times10^{-3}$}\\
+\cmidrule(lr){3-5}\cmidrule(l){6-7}
+ & & $\Rstar_v$ & \multicolumn{2}{c}{$\Rv_v$, $m\equiv-1$} & $\Rstar_v$ & $\Rv_v$\\
+$s$ & $p$ & $m\equiv0$ & Korobov & best $v$ & & best $v$\\
+\midrule
+3 & 37 & .216 & .600 & .600 & 5.84 & 16.22\\
+ & 101 & .237 & .644 & .774 & 2.35 & 7.66\\
+ & 1009 & .248 & .897 & .940 & 0.24 & 0.93\\
+\addlinespace
+4 & 37 & .081 & .405 & .405 & 2.19 & 10.95\\
+ & 101 & .108 & .630 & .630 & 1.07 & 6.24\\
+ & 1009 & .123 & .709 & .887 & 0.12 & 0.87\\
+\addlinespace
+5 & 37 & .027 & .485 & .485 & 0.73 & 13.12\\
+ & 101 & .049 & .397 & .397 & 0.49 & 3.93\\
+ & 1009 & .061 & .501 & .752 & 0.06 & 0.74\\
+\bottomrule
+\end{tabular}
+\end{table}

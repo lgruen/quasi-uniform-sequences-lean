@@ -1,0 +1,15 @@
+{
+  "challenge_module": "GeoSeqV4s5Challenge",
+  "solution_module": "GeoSeqV4s5Solution",
+  "theorem_names": [
+    "GeoSeq.LF_archive_s5",
+    "GeoSeq.LF_a_s5"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

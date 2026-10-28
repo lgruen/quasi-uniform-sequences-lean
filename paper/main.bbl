@@ -1,0 +1,218 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{AW21}
+Abdalla G.~M. Ahmed and Peter Wonka, \emph{Optimizing dyadic nets}, ACM Trans.
+  Graph. \textbf{40} (2021), no.~4, 141:1--141:17.
+
+\bibitem{AS79}
+I.~A. Antonov and V.~M. Saleev, \emph{An economic method of computing
+  {$LP_\tau$}-sequences}, USSR Comput. Math. Math. Phys. \textbf{19} (1979),
+  no.~1, 252--256.
+
+\bibitem{BCO26}
+Nicolas Bonneel, David Coeurjolly, and Victor Ostromoukhov, \emph{Perfectly
+  equidistributed quasi-{M}onte {C}arlo sequences from {A}rtin--{S}chreier
+  polynomials}, 2026, arXiv:2607.15141.
+
+\bibitem{BF88}
+Paul Bratley and Bennett~L. Fox, \emph{Algorithm 659: Implementing {S}obol's
+  quasirandom sequence generator}, ACM Trans. Math. Software \textbf{14}
+  (1988), no.~1, 88--100.
+
+\bibitem{CKK18}
+Per Christensen, Andrew Kensler, and Charlie Kilpatrick, \emph{Progressive
+  multi-jittered sample sequences}, Comput. Graph. Forum \textbf{37} (2018),
+  no.~4, 21--33, Proc. EGSR 2018.
+
+\bibitem{Chr79}
+Gilles Christol, \emph{Ensembles presque p\'eriodiques $k$-reconnaissables},
+  Theoret. Comput. Sci. \textbf{9} (1979), no.~1, 141--145.
+
+\bibitem{CKMR80}
+Gilles Christol, Teturo Kamae, Michel Mend\`es~France, and G\'erard Rauzy,
+  \emph{Suites alg\'ebriques, automates et substitutions}, Bull. Soc. Math.
+  France \textbf{108} (1980), 401--419.
+
+\bibitem{CS99}
+John~H. Conway and Neil J.~A. Sloane, \emph{Sphere packings, lattices and
+  groups}, 3 ed., Springer, 1999.
+
+\bibitem{DGLPS1}
+Josef Dick, Takashi Goda, Gerhard Larcher, Friedrich Pillichshammer, and Kosuke
+  Suzuki, \emph{On the quasi-uniformity properties of quasi-{M}onte {C}arlo
+  point sets and sequences, {P}art {I}: lattices and {K}ronecker sequences},
+  Math. Comp. (2026), Published online; arXiv:2502.06202 (theorem numbers cited
+  from arXiv v2).
+
+\bibitem{DGS2}
+Josef Dick, Takashi Goda, and Kosuke Suzuki, \emph{On the quasi-uniformity
+  properties of quasi-{M}onte {C}arlo point sets and sequences, {P}art {II}:
+  digital nets and sequences}, Math. Comp. (2026), Published online;
+  arXiv:2501.18226 (theorem numbers cited from arXiv v2).
+
+\bibitem{DP10}
+Josef Dick and Friedrich Pillichshammer, \emph{Digital nets and sequences:
+  Discrepancy theory and quasi-{M}onte {C}arlo integration}, Cambridge Univ.
+  Press, 2010.
+
+\bibitem{Fau82}
+Henri Faure, \emph{Discr\'epance de suites associ\'ees \`a un syst\`eme de
+  num\'eration (en dimension $s$)}, Acta Arith. \textbf{41} (1982), 337--351.
+
+\bibitem{FT02}
+Henri Faure and Shu Tezuka, \emph{Another random scrambling of digital
+  $(t,s)$-sequences}, Monte {C}arlo and Quasi-{M}onte {C}arlo Methods 2000
+  (Kai-Tai Fang, Harald Niederreiter, and Fred~J. Hickernell, eds.), Springer,
+  Berlin, 2002, pp.~242--256.
+
+\bibitem{Goda23}
+Takashi Goda, \emph{The {S}obol' sequence is not quasi-uniform in dimension 2},
+  Proc. Amer. Math. Soc. \textbf{152} (2024), no.~8, 3209--3213,
+  arXiv:2311.05830.
+
+\bibitem{Goda26}
+\bysame, \emph{Algebraic constructions of point sequences with quasi-uniform
+  two-dimensional projections}, 2026, arXiv:2608.12690.
+
+\bibitem{GHS26}
+Takashi Goda, Roswitha Hofer, and Kosuke Suzuki, \emph{Disproving the
+  quasi-uniformity of the {H}alton sequences and of some {H}alton-type
+  sequences}, J. Complexity \textbf{95} (2026), 102047, arXiv:2511.21153
+  (theorem numbers cited from arXiv v2).
+
+\bibitem{GX26}
+Takashi Goda and Hengjun Xu, \emph{Quasi-uniform designs from random
+  candidates: optimal candidate complexity and farthest-point sampling}, 2026,
+  arXiv:2609.05986.
+
+\bibitem{Gru26geo}
+Leonhard Gruenschloss, \emph{Low-discrepancy quasi-uniform digital nets in
+  every dimension}, Hexagon preprint hexagon:2610.00217v1, 2026, Version~1,
+  2026-10-13; manuscript, Lean formalization and blueprint deposited at Zenodo,
+  doi:10.5281/zenodo.23327748; Lean entry in the Palomar registry,
+  PALOMAR-2026-10-13-000011.
+
+\bibitem{GHSK08}
+Leonhard Gr\"unschlo{\ss}, Johannes Hanika, Ronnie Schwede, and Alexander
+  Keller, \emph{$(t,m,s)$-nets and maximized minimum distance}, Monte Carlo and
+  Quasi-Monte Carlo Methods 2006 (Alexander Keller, Stefan Heinrich, and Harald
+  Niederreiter, eds.), Springer, 2008, pp.~397--412.
+
+\bibitem{GK09}
+Leonhard Gr\"unschlo{\ss} and Alexander Keller, \emph{$(t,m,s)$-nets and
+  maximized minimum distance, {P}art {II}}, Monte Carlo and Quasi-Monte Carlo
+  Methods 2008 (Pierre L'Ecuyer and Art~B. Owen, eds.), Springer, 2009,
+  pp.~395--409.
+
+\bibitem{HCK21}
+Andrew Helmer, Per Christensen, and Andrew Kensler, \emph{Stochastic generation
+  of $(t,s)$ sample sequences}, Eurographics Symposium on Rendering -- DL-only
+  Track (Adrien Bousseau and Morgan McGuire, eds.), The Eurographics
+  Association, 2021, pp.~21--33.
+
+\bibitem{Hof13}
+Roswitha Hofer, \emph{A construction of low-discrepancy sequences involving
+  finite-row digital $(t,s)$-sequences}, Monatsh. Math. \textbf{171} (2013),
+  no.~1, 77--89.
+
+\bibitem{Hof18}
+\bysame, \emph{Halton-type sequences in rational bases in the ring of rational
+  integers and in the ring of polynomials over a finite field}, Math. Comput.
+  Simulation \textbf{143} (2018), 78--88.
+
+\bibitem{HS19}
+Roswitha Hofer and Kosuke Suzuki, \emph{A complete classification of digital
+  $(0,m,3)$-nets and digital $(0,2)$-sequences in base $2$}, Unif. Distrib.
+  Theory \textbf{14} (2019), 43--52, arXiv:1807.04383.
+
+\bibitem{JK08}
+Stephen Joe and Frances~Y. Kuo, \emph{Constructing {S}obol sequences with
+  better two-dimensional projections}, SIAM J. Sci. Comput. \textbf{30} (2008),
+  no.~5, 2635--2654.
+
+\bibitem{Kor59}
+N.~M. Korobov, \emph{The approximate computation of multiple integrals}, Dokl.
+  Akad. Nauk SSSR \textbf{124} (1959), 1207--1210.
+
+\bibitem{LP01}
+Gerhard Larcher and Friedrich Pillichshammer, \emph{Walsh series analysis of
+  the {$L_2$}-discrepancy of symmetrisized point sets}, Monatsh. Math.
+  \textbf{132} (2001), no.~1, 1--18.
+
+\bibitem{Mat98}
+Ji\v{r}\'{\i} Matou\v{s}ek, \emph{On the {$L_2$}-discrepancy for anchored
+  boxes}, J. Complexity \textbf{14} (1998), 527--556.
+
+\bibitem{MN07}
+David J.~S. Mayor and Harald Niederreiter, \emph{A new construction of
+  $(t,s)$-sequences and some improved bounds on their quality parameter}, Acta
+  Arith. \textbf{128} (2007), no.~2, 177--191.
+
+\bibitem{Nie87}
+Harald Niederreiter, \emph{Point sets and sequences with small discrepancy},
+  Monatsh. Math. \textbf{104} (1987), 273--337.
+
+\bibitem{Nie92}
+\bysame, \emph{Random number generation and quasi-{M}onte {C}arlo methods},
+  CBMS-NSF Regional Conf. Ser. in Appl. Math., vol.~63, SIAM, Philadelphia,
+  1992.
+
+\bibitem{NO07}
+Harald Niederreiter and Ferruh {\"O}zbudak, \emph{Low-discrepancy sequences
+  using duality and global function fields}, Acta Arith. \textbf{130} (2007),
+  no.~1, 79--97.
+
+\bibitem{Owe95}
+Art~B. Owen, \emph{Randomly permuted $(t,m,s)$-nets and $(t,s)$-sequences},
+  Monte Carlo and Quasi-Monte Carlo Methods in Scientific Computing (Harald
+  Niederreiter and Peter Jau-Shyong Shiue, eds.), Lecture Notes in Statist.,
+  vol. 106, Springer, 1995, pp.~299--317.
+
+\bibitem{PZ23}
+Luc Pronzato and Anatoly Zhigljavsky, \emph{Quasi-uniform designs with optimal
+  and near-optimal uniformity constant}, J. Approx. Theory \textbf{294} (2023),
+  105931, arXiv:2112.10401.
+
+\bibitem{SG26}
+Naoki Sakai and Takashi Goda, \emph{Space-filling lattice designs for computer
+  experiments}, 2026, arXiv:2602.15390.
+
+\bibitem{SJ94}
+Ian~H. Sloan and Stephen Joe, \emph{Lattice methods for multiple integration},
+  Oxford Univ. Press, 1994.
+
+\bibitem{SS07}
+I.~M. Sobol' and B.~V. Shukhman, \emph{Quasi-random points keep their
+  distance}, Math. Comput. Simulation \textbf{75} (2007), no.~3--4, 80--86.
+
+\bibitem{Sob67}
+Ilya~M. Sobol', \emph{On the distribution of points in a cube and the
+  approximate evaluation of integrals}, Zh. Vychisl. Mat. Mat. Fiz. \textbf{7}
+  (1967), 784--802, English transl. USSR Comput. Math. Math. Phys. 7 (1967)
+  86--112, doi:10.1016/0041-5553(67)90144-9.
+
+\bibitem{Suz26}
+Kosuke Suzuki, \emph{Separation properties of scrambled digital nets and
+  related random point sets}, 2026, arXiv:2607.29063.
+
+\bibitem{Suz25}
+\bysame, \emph{Exact $\ell^\infty$-separation radius of the {S}obol' sequence
+  in dimension~$2$}, J. Approx. Theory \textbf{321--322} (2027), 106356,
+  arXiv:2508.14803 (titled ``\dots{} of {S}obol' sequences in dimension~2''
+  there).
+
+\bibitem{Tez93}
+Shu Tezuka, \emph{Polynomial arithmetic analogue of {H}alton sequences}, ACM
+  Trans. Model. Comput. Simul. \textbf{3} (1993), 99--107.
+
+\bibitem{Tez95}
+\bysame, \emph{Uniform random numbers: Theory and practice}, Kluwer, 1995.
+
+\end{thebibliography}

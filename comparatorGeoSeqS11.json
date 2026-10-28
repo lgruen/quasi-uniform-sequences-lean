@@ -1,0 +1,14 @@
+{
+  "challenge_module": "GeoSeqS11Challenge",
+  "solution_module": "GeoSeqS11Solution",
+  "theorem_names": [
+    "GeoSeq.scrGen_eq_ssGen_iff"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

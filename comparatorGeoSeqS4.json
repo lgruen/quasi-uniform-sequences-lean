@@ -1,0 +1,40 @@
+{
+  "challenge_module": "GeoSeqS4Challenge",
+  "solution_module": "GeoSeqS4Solution",
+  "theorem_names": [
+    "GeoSeq.S4_frames_char",
+    "GeoSeq.cartier_stepU",
+    "GeoSeq.reach_AU",
+    "GeoSeq.reach_BU",
+    "GeoSeq.lawD_conj",
+    "GeoSeq.S4_frame_inv",
+    "GeoSeq.S4_law",
+    "GeoSeq.S4_net",
+    "GeoSeq.S4_M",
+    "GeoSeq.S4_ghat",
+    "GeoSeq.S4_rot",
+    "GeoSeq.esemU_init",
+    "GeoSeq.S4_init",
+    "GeoSeq.S4_init1",
+    "GeoSeq.s4_closeA",
+    "GeoSeq.s4_read",
+    "GeoSeq.s4_wit",
+    "GeoSeq.s4_distinct",
+    "GeoSeq.S4_resp",
+    "GeoSeq.S4_resp_occurs",
+    "GeoSeq.S4_resp_card",
+    "GeoSeq.S4_change",
+    "GeoSeq.s4_full",
+    "GeoSeq.S4_cert_lb",
+    "GeoSeq.S4_sep",
+    "GeoSeq.S4_allN",
+    "GeoSeq.S4_mesh"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

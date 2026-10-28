@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certifying Separation</title>
+<meta name="description" content="Interactive companion to the paper on quasi-uniform digital sequences: geometric digits, carry responses, jumps and the digit relaxation that bounds the separation at every level.">
+<style>/* Shared style of the geoseq explainers (inlined into every page by build_page.py).
+   Same visual language as the explainers of the nets paper: one reading column for prose, figure rows with a plot left and an
+   instrument panel right, stacking to one column on phones. System font stacks only (no network). */
+:root {
+  --bg: #f5f6f8; --surface: #ffffff; --ink: #15191f; --muted: #586271; --rule: #d5dae1;
+  --grid: #e3e7ec; --grid-strong: #aeb7c3; --accent: #2b6cb0; --accent-soft: rgba(43, 108, 176, 0.13);
+  --on-accent: #ffffff; --warm: #c0561d; --warm-soft: rgba(192, 86, 29, 0.14); --jit: #8792a2; --chip: #eef1f5;
+  --good: #2d7a4c; --bad: #b83a3a; --band: rgba(135, 146, 162, 0.22);
+  --s1: #2b6cb0; --s2: #c0561d; --s3: #2d7a4c; --s4: #8a5cb8; --s5: #9a6a00; --s6: #6c737c;
+  --serif: 'Iowan Old Style', 'Charter', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1116; --surface: #151a21; --ink: #e4e8ee; --muted: #98a3b2; --rule: #2a313c;
+    --grid: #1f262f; --grid-strong: #46515f; --accent: #6aa8ea; --accent-soft: rgba(106, 168, 234, 0.17);
+    --on-accent: #0b1220; --warm: #f09a52; --warm-soft: rgba(240, 154, 82, 0.18); --jit: #6d7888; --chip: #1f2630;
+    --good: #58b47c; --bad: #e46b6b; --band: rgba(109, 120, 136, 0.30);
+    --s1: #6aa8ea; --s2: #f09a52; --s3: #58b47c; --s4: #b48ae0; --s5: #d4a53a; --s6: #98a3b2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1116; --surface: #151a21; --ink: #e4e8ee; --muted: #98a3b2; --rule: #2a313c;
+  --grid: #1f262f; --grid-strong: #46515f; --accent: #6aa8ea; --accent-soft: rgba(106, 168, 234, 0.17);
+  --on-accent: #0b1220; --warm: #f09a52; --warm-soft: rgba(240, 154, 82, 0.18); --jit: #6d7888; --chip: #1f2630;
+  --good: #58b47c; --bad: #e46b6b; --band: rgba(109, 120, 136, 0.30);
+  --s1: #6aa8ea; --s2: #f09a52; --s3: #58b47c; --s4: #b48ae0; --s5: #d4a53a; --s6: #98a3b2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.58; margin: 0; overflow-x: hidden; }
+.page { max-width: 1100px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 22px 72px; }
+.prose { max-width: 68ch; }
+p { margin-block: 0 0.85em; }
+i, .m { font-style: italic; }
+sub, sup { font-size: 0.72em; line-height: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+nav.top { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--sans); font-size: 14px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 34px; }
+nav.top a { text-decoration: none; color: var(--muted); }
+nav.top a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+nav.top .sp { flex: 1; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+h1 { font-weight: 600; font-size: clamp(2rem, 5.2vw, 3rem); line-height: 1.08; letter-spacing: -0.012em; margin: 0 0 14px; text-wrap: balance; }
+h2 { font-weight: 600; font-size: clamp(1.4rem, 3.2vw, 1.8rem); line-height: 1.2; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.lede { font-size: 1.12rem; }
+section { margin-top: 64px; }
+.sechead { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+.secno { font-family: var(--mono); font-size: 15px; color: var(--accent); border: 1px solid var(--accent); border-radius: 3px; padding: 1px 7px; flex: none; }
+.refs { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 2px 0 0; font-family: var(--sans); font-size: 13px; color: var(--muted); align-items: baseline; }
+.ref { font-family: var(--mono); font-size: 12px; color: var(--ink); background: var(--chip); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 6px; white-space: nowrap; }
+.ref span { font-family: var(--sans); color: var(--muted); margin-left: 4px; }
+.fig { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, 320px); gap: 24px; align-items: start; margin-block: 22px 6px; }
+.fig.wide { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 860px) { .fig { grid-template-columns: minmax(0, 1fr); } }
+.plot { position: relative; width: 100%; max-width: 100%; aspect-ratio: 1 / 1; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.plot.wide { aspect-ratio: 16 / 9; }
+.plot.strip { aspect-ratio: auto; }
+.plot canvas { display: block; width: 100%; height: 100%; max-width: 100%; touch-action: manipulation; }
+.plot .hint { position: absolute; right: 8px; top: 8px; font-family: var(--sans); font-size: 12px; color: var(--muted); pointer-events: none; background: var(--surface); padding: 1px 4px; border-radius: 3px; }
+.panel { font-family: var(--sans); font-size: 14px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.ctl { display: flex; flex-direction: column; gap: 6px; }
+.ctl .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.ctl .val { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+input[type=range] { width: 100%; accent-color: var(--accent); margin: 0; min-height: 24px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.btn { font: 500 13px/1.2 var(--sans); padding: 7px 10px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 4px; cursor: pointer; min-height: 32px; }
+.btn:hover { border-color: var(--grid-strong); }
+.btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.btn:disabled { color: var(--muted); cursor: default; opacity: 0.6; }
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+select { font: 14px var(--sans); color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 6px 8px; width: 100%; }
+.checks { display: flex; flex-direction: column; gap: 7px; }
+.checks label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.checks input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+dl.read { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 12px; margin: 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+dl.read dt { color: var(--muted); min-width: 0; }
+dl.read dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+dl.read dd.em { color: var(--accent); font-weight: 600; }
+dl.read dd.bad { color: var(--bad); font-weight: 600; }
+dl.read dd.good { color: var(--good); font-weight: 600; }
+.note { font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--sans); font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px; }
+.chartwrap { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 8px 6px 4px; }
+.chartwrap svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.scrollx { overflow-x: auto; max-width: 100%; }
+table.t { border-collapse: collapse; font-family: var(--sans); font-size: 13px; }
+table.t th, table.t td { padding: 3px 7px; text-align: center; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+table.t td { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+table.t th { font-weight: 500; color: var(--muted); }
+table.t th:first-child { text-align: left; }
+table.t td.hot { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+table.t td.warm { background: var(--warm-soft); color: var(--warm); font-weight: 600; }
+table.t td.frz { color: var(--good); font-weight: 600; }
+.callout { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; margin: 18px 0; max-width: 68ch; }
+.callout.warm { border-color: var(--warm); }
+.verdict { font-family: var(--sans); font-size: 14px; padding: 10px 12px; border-radius: 4px; background: var(--chip); border: 1px solid var(--rule); }
+.verdict.good { border-color: var(--good); }
+.verdict.bad { border-color: var(--bad); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.bits { font-family: var(--mono); letter-spacing: 0.08em; overflow-wrap: anywhere; }
+.bits b { color: var(--accent); }
+.kbd { font-family: var(--mono); font-size: 12px; border: 1px solid var(--rule); border-radius: 3px; padding: 0 4px; background: var(--chip); }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-block: 18px; }
+@media (max-width: 760px) { .three { grid-template-columns: minmax(0, 1fr); } }
+.card { border-top: 3px solid var(--accent); padding-top: 10px; font-size: 15.5px; min-width: 0; }
+.card.c2 { border-color: var(--warm); }
+.card.c3 { border-color: var(--good); }
+.card b { font-family: var(--sans); font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px; }
+footer { margin-top: 72px; padding-top: 14px; border-top: 1px solid var(--rule); font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 600px) { .chartwrap svg g[font-size="12"], .chartwrap svg g[font-size="13"] { font-size: 17px; } }
+.prior { border-left: 3px solid var(--grid-strong); padding: 4px 0 4px 14px; margin: 16px 0; max-width: 68ch; font-size: 15.5px; }
+.prior b:first-child { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+a.cite { text-decoration: none; border-bottom: 1px dotted var(--accent); }
+section.credits { margin-top: 72px; }
+section.credits .prose p { font-size: 15.5px; }
+ol.bib { font-family: var(--sans); font-size: 13.5px; line-height: 1.5; padding-left: 1.6em; margin: 14px 0 0; max-width: 88ch; }
+ol.bib li { margin-bottom: 6px; overflow-wrap: anywhere; }
+ol.bib li:target { background: var(--accent-soft); outline: 1px solid var(--accent); border-radius: 2px; }
+
+.digrow { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; font-family: var(--mono); font-size: 13px; }
+.digrow .lab { min-width: 6.5em; color: var(--muted); font-family: var(--sans); }
+.d { display: inline-block; min-width: 1.6em; text-align: center; padding: 1px 3px; border-radius: 3px; background: var(--chip); }
+.d.cell { background: var(--chip); }
+.d.geo { background: var(--accent); color: var(--on-accent); }
+.d.jit { background: transparent; color: var(--muted); outline: 1px dashed var(--rule); outline-offset: -1px; }
+.lsel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.mask { font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; overflow-wrap: anywhere; }
+.mask .one { color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+<nav class="top" aria-label="Explainer pages">
+  <a href="index.html">1 · Why classical sequences cut corners</a>
+  <a href="residue.html">2 · One scramble that fixes it</a>
+  <a href="limits.html">3 · What exact rules can and cannot do</a>
+  <a href="certificate.html" aria-current="page">4 · How separation is certified</a>
+  <a href="practice.html">5 · In practice</a>
+  <span class="sp"></span><a href="#credits">Credits</a>
+</nav>
+<header class="prose">
+  <p class="eyebrow">Interactive companion · the digit relaxation</p>
+  <h1>How separation is certified</h1>
+  <p class="lede">A (0,2)-sequence puts one point in every cell at every full level. Separation is decided inside the cells: where each point sits, and how that position changes from a cell to its neighbour. This page shows how the paper turns that into a lower bound that holds at every level at once, following its running example, the brick wall W⁻ in base 7, and then the base-2 sequence of <span class="mono">thm:B2</span>.</p>
+</header>
+
+<!-- ===================================================== 1. geometric digits -->
+<section id="digits" aria-labelledby="h-digits">
+  <div class="sechead"><span class="secno">1</span><h2 id="h-digits">Geometric digits and jitter</h2></div>
+  <div class="prose">
+    <p>At level <i>K</i> the first <i>K</i> digits of each coordinate name the cell. The next digit, the <em>geometric digit</em> <i>r<sub>c</sub></i>, says in which seventh of the cell the point lies; the remaining digits, the <em>jitter</em>, move it by less than one seventh. The position predicted by the geometric digits alone is the <em>lattice image</em>. (Cells, geometric digits, jitter and lattice image are the notions of the <a class="cite" href="#ref-Gru26geo">companion nets paper</a>.) Click a cell of <i>P</i><sub>2</sub> (49 points, level 1) to read its point; the default is the paper's worked example, the index polynomial <i>V</i> = 3 + <i>z</i> (integer index 10).</p>
+  </div>
+  <div class="fig">
+    <div class="plot"><canvas id="cD" tabindex="0" role="img" aria-label="P_2 of the brick wall in base 7 with the selected cell enlarged"></canvas></div>
+    <div class="panel">
+      <div id="digOut"></div>
+      <p class="note">Arrow keys move the selected cell when the picture has focus.</p>
+    </div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">eq:cellunits</span><span class="ref">ex:running<span>running example</span></span><span class="ref">def:WF<span>brick wall</span></span></div>
+</section>
+
+<!-- ===================================================== 2. jumps -->
+<section id="disloc" aria-labelledby="h-disloc">
+  <div class="sechead"><span class="secno">2</span><h2 id="h-disloc">Carries and jumps</h2></div>
+  <div class="prose">
+    <p>Step from a cell to its right neighbour. The cell index <i>n</i><sub>0</sub> goes up by one, and its last <i>l</i> digits change, where <i>l</i> − 1 trailing digits were 6: the <em>carry length</em>. The geometric digits change by the <em>carry response</em> <i>D</i>(<i>l</i>), one column of residues per carry length. Where all steps have <i>l</i> = 1 the points form one sheared lattice. At a boundary of depth <i>l</i> ≥ 2 (every 7<sup><i>l</i>−1</sup>-th boundary) the lattice image changes by <i>D</i>(<i>l</i>) instead of <i>D</i>(1): a <em>jump of depth l</em>. Where a geometric digit wraps around modulo 7 the lattice is offset by a cell: a <em>slip plane</em>. For a self-similar scramble the responses do not depend on the level (<span class="mono">prop:law</span>), so the whole hierarchy repeats at every scale.</p>
+  </div>
+  <div class="fig wide">
+    <div class="plot wide" id="plotH"><canvas id="cH" role="img" aria-label="A window of cells of P_6 with boundaries shaded by depth and the steps along one row"></canvas></div>
+  </div>
+  <div class="panel" style="flex-direction:row;flex-wrap:wrap;gap:14px 28px;margin-top:12px">
+    <div class="ctl" style="min-width:240px;flex:1"><div class="row"><label for="hx">Window start <i>n</i><sub>0</sub></label><span class="val" id="hxv"></span></div><input type="range" id="hx" min="0" max="329" value="40"></div>
+    <div class="ctl" style="min-width:240px;flex:1"><div class="row"><label for="hy">Row <i>n</i><sub>1</sub> of the arrows</label><span class="val" id="hyv"></span></div><input type="range" id="hy" min="1" max="341" value="104"></div>
+  </div>
+  <div class="legend" aria-hidden="true">
+    <span><i class="sw" style="background:var(--grid-strong);width:3px"></i>depth 1</span>
+    <span><i class="sw" style="background:var(--warm);width:3px"></i>depth 2</span>
+    <span><i class="sw" style="background:var(--bad);width:4px"></i>depth ≥ 3</span>
+    <span><i class="sw" style="border:1.5px dashed var(--warm);border-radius:50%;width:10px;height:10px"></i>where a carry-free step would have put the lattice image</span>
+  </div>
+  <div class="scrollx" style="margin-top:16px"><table class="t" id="tabRun"></table></div>
+  <p class="note" style="max-width:68ch">The carry responses of W⁻ for <i>l</i> = 1, …, 18, computed in your browser at level 19 from the generator matrices (and in <span class="mono">gen_data.py</span> at levels 19 and 20, which agree). Green: the two <em>constant</em> responses, the same for every <i>l</i> (the half of the brick wall, from the residue theorem, page 2). The other two are never eventually periodic (<span class="mono">prop:N2</span>).</p>
+  <div class="refs">In the paper: <span class="ref">sec:dislocations</span><span class="ref">fig:hierarchy</span><span class="ref">tab:running</span><span class="ref">prop:law</span></div>
+</section>
+
+<!-- ===================================================== 3. one coordinate -->
+<section id="gap" aria-labelledby="h-gap">
+  <div class="sechead"><span class="secno">3</span><h2 id="h-gap">The guaranteed gap in one coordinate</h2></div>
+  <div class="prose">
+    <p>Take one coordinate. The point sits at <i>R</i>/7 plus a jitter below 1/7; its neighbour sits at <i>e</i> + (<i>R</i> + <i>σ</i>)/7 plus its own jitter, where <i>e</i> = 1 if this coordinate moves to the next cell and <i>e</i> = 0 if it stays, and <i>σ</i> is the change of the geometric digit given by the carry response. We do not know <i>R</i>, so we take the worst one and subtract one seventh for the two jitters: that is the <em>guaranteed gap</em> <i>f</i><sub>1</sub>(<i>e</i>, <i>σ</i>). A backward shift of a moving coordinate is harmless; the forward shift by one is fatal (the two points can touch); a coordinate that stays is safe only when <i>σ</i> is near ±½.</p>
+  </div>
+  <div class="fig">
+    <div>
+      <div class="plot strip" style="height:170px"><canvas id="cG" role="img" aria-label="Two jitter bands on one coordinate axis and the gap between them"></canvas></div>
+      <div class="chartwrap" style="margin-top:12px"><svg id="barG" viewBox="0 0 640 210" role="img" aria-label="Guaranteed gap f_1 for every residue sigma, moving and staying coordinate"></svg></div>
+    </div>
+    <div class="panel">
+      <div class="ctl"><span id="eLab">This coordinate</span>
+        <div class="seg" role="group" aria-labelledby="eLab" id="eSeg">
+          <button class="btn" type="button" data-v="1" aria-pressed="true">moves (<i>e</i> = 1, own)</button>
+          <button class="btn" type="button" data-v="0" aria-pressed="false">stays (<i>e</i> = 0, cross)</button>
+        </div></div>
+      <div class="ctl"><div class="row"><label for="sg">Shift <i>σ</i> (mod 7)</label><span class="val" id="sgv"></span></div><input type="range" id="sg" min="-3" max="3" value="-3"></div>
+      <div class="ctl"><div class="row"><label for="rg">Position <i>R</i> of the point</label><span class="val" id="rgv"></span></div><input type="range" id="rg" min="0" max="6" value="3"></div>
+      <dl class="read" id="readG"></dl>
+    </div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">lem:cert<span>digit relaxation</span></span><span class="ref">rem:onedigit</span><span class="ref">fig:cert</span></div>
+</section>
+
+<!-- ===================================================== 4. neighbours: the digit relaxation -->
+<section id="cert" aria-labelledby="h-cert">
+  <div class="sechead"><span class="secno">4</span><h2 id="h-cert">Neighbours in the plane: the digit relaxation</h2></div>
+  <div class="prose">
+    <p>Two points two or more cells apart in some coordinate are at least one cell apart. So only the eight neighbours matter, four up to sign: right, up, diagonal and antidiagonal. For a step, each moving coordinate crosses a boundary of some carry length, the carry responses give the change <i>σ</i> of both geometric digits, and the two coordinate gaps add in squares. The bound LB<sub><i>j</i></sub> of the <em>digit relaxation</em> (<span class="mono">lem:cert</span>) is the minimum over all steps and all carry lengths. For a self-similar scramble the responses are the same at every level, so this one minimum bounds sep(<i>P</i><sub>2<i>K</i></sub>) for every <i>K</i> at once.</p>
+    <p>Choose a step and carry lengths. The picture shows the worst case in cell units: the point's jitter square at its worst position, the neighbour's jitter square shifted by the step and by <i>σ</i>, and the guaranteed gap. The panel also samples real neighbour pairs of the actual prefix with exactly these carry lengths and reports their smallest distance, which can never fall below the guarantee.</p>
+  </div>
+  <div class="fig">
+    <div>
+      <div class="plot"><canvas id="cC" role="img" aria-label="Worst case of the chosen step: two jitter squares and the guaranteed gap"></canvas></div>
+      <div class="legend" aria-hidden="true">
+        <span><i class="sw" style="background:var(--band);border:1px solid var(--jit)"></i>jitter square (point within it)</span>
+        <span><i class="sw" style="border:1.5px solid var(--accent);border-radius:50%;width:10px;height:10px"></i>lattice image</span>
+        <span><i class="sw" style="background:var(--warm);height:3px"></i>guaranteed gap</span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ctl"><span id="ncLab">Sequence</span>
+        <div class="seg" role="group" aria-labelledby="ncLab" id="ncSeg">
+          <button class="btn" type="button" data-v="wf7" aria-pressed="true">W⁻, <i>p</i> = 7 (<i>j</i> = 1)</button>
+          <button class="btn" type="button" data-v="b2" aria-pressed="false">base 2, <span class="mono">thm:B2</span> (<i>j</i> = 12)</button>
+        </div></div>
+      <div class="ctl"><span id="stLab">Step <i>e</i></span>
+        <div class="seg" role="group" aria-labelledby="stLab" id="stSeg">
+          <button class="btn" type="button" data-v="1,0" aria-pressed="true">→ (1, 0)</button>
+          <button class="btn" type="button" data-v="0,1" aria-pressed="false">↑ (0, 1)</button>
+          <button class="btn" type="button" data-v="1,1" aria-pressed="false">↗ (1, 1)</button>
+          <button class="btn" type="button" data-v="1,-1" aria-pressed="false">↘ (1, −1)</button>
+        </div></div>
+      <div class="lsel">
+        <div class="ctl"><div class="row"><label for="l0">carry <i>l</i><sub>0</sub></label><span class="val" id="l0v"></span></div><input type="range" id="l0" min="1" max="18" value="2"></div>
+        <div class="ctl"><div class="row"><label for="l1">carry <i>l</i><sub>1</sub></label><span class="val" id="l1v"></span></div><input type="range" id="l1" min="1" max="18" value="1"></div>
+      </div>
+      <dl class="read" id="readC"></dl>
+      <div id="realC" class="note"></div>
+    </div>
+  </div>
+  <h3 style="margin-top:26px">Every term, every carry length</h3>
+  <div class="scrollx"><table class="t" id="tabC"></table></div>
+  <p class="note" id="noteC" style="max-width:68ch"></p>
+  <div class="refs">In the paper: <span class="ref">lem:cert</span><span class="ref">rem:onedigit</span><span class="ref">thm:WF</span><span class="ref">thm:B2</span></div>
+</section>
+
+<!-- ===================================================== 5. B2: finitely many patterns -->
+<section id="octave" aria-labelledby="h-oct">
+  <div class="sechead"><span class="secno">5</span><h2 id="h-oct">Base 2: finitely many carry patterns</h2></div>
+  <div class="prose">
+    <p>In base 2 a response is not a small shift but a 12-bit mask XORed onto the geometric digits. Infinitely many carry lengths could give infinitely many masks; for the sequence of <span class="mono">thm:B2</span> they do not. The response to a carry of length <i>l</i> depends only on the <em>pattern</em> of <i>l</i>: its parity and the bits ⌊log<sub>2</sub> <i>n</i>⌋ mod 2 for <i>l</i> ≤ <i>n</i> ≤ <i>l</i> + 12. Every <i>l</i> ≥ 64 has the pattern of a smaller one, in a lower octave: long carries repeat short ones (<span class="mono">lem:octave</span>). So 63 carry lengths give all masks, 35 distinct 12-digit tuples, and the digit relaxation is one finite minimum. This sequence is a scramble of both coordinates of the two-dimensional Sobol' sequence (<a class="cite" href="#ref-Sob67">Sobol'</a>), with sep(<i>P</i><sub>2<i>K</i></sub>) ≥ 0.3678 for every <i>K</i> (computer-assisted). It answers a question of Dick, Goda and Suzuki (<a class="cite" href="#ref-DGS2">Part II</a>, Section 4.2): it is well-separated in their sense (their Def. 3.8). Both coordinates have to be scrambled: they showed that the scrambles (<i>L</i>, <i>P</i>) and (<i>I</i>, <i>LP</i>) in base 2 are not quasi-uniform (their Thm. 4.2), and <span class="mono">cor:unscrambled</span> extends this: while one coordinate stays a radical inverse up to a scalar, no fixed lower-triangular scramble of the others helps (page 1).</p>
+  </div>
+  <div class="fig">
+    <div class="panel">
+      <div class="ctl"><div class="row"><label for="lo">Carry length <i>l</i></label><span class="val" id="lov"></span></div><input type="range" id="lo" min="1" max="148" value="100"></div>
+      <div id="octOut"></div>
+    </div>
+    <div class="panel">
+      <button class="btn primary" type="button" id="runCert">Run the full base-2 bound (35 + 35 + 2 · 35² cases)</button>
+      <div id="certOut" class="verdict" aria-live="polite">Not run yet.</div>
+    </div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">lem:octave<span>long carries repeat short ones</span></span><span class="ref">thm:B2</span><span class="ref">fig:B2</span><span class="ref">fig:automaton</span></div>
+</section>
+
+<!-- ===================================================== 6. summary -->
+<section id="sum" aria-labelledby="h-sum">
+  <div class="sechead"><span class="secno">6</span><h2 id="h-sum">What remains</h2></div>
+  <div class="prose">
+    <p>The digit relaxation takes the worst position in each coordinate separately, so it is a valid lower bound without knowing where the points are, and it can be loose (base 2: certified 0.3678, exact sep(<i>P</i><sub>12</sub>) = 0.3968). Its only infinite input is the set of responses {<i>D</i>(<i>l</i>) : <i>l</i> ≥ 1}. Two responses of one column are never both eventually periodic (<span class="mono">prop:N2</span>), and in dimension two no scramble of the frame (0, 1; ∞) has a sheared lattice without jumps at two consecutive levels (<span class="mono">cor:N1</span>). The paper keeps the responses harmless in three ways: make a few of them constant by the residue theorem (<a href="residue.html">page 2</a>); keep the rest in windows of allowed values (<a href="limits.html">page 3</a>); or, in the smallest bases, choose frames whose responses take finitely many values, as in section 5 (<span class="mono">sec:frames</span>).</p>
+  </div>
+</section>
+<section class="credits" id="credits" aria-labelledby="h-credits">
+  <div class="sechead"><h2 id="h-credits">Credits and references</h2></div>
+  <div class="prose">
+    <p>Companion to L. Gruenschloss, <i>Low-discrepancy quasi-uniform digital sequences in every dimension</i> (draft v4, 2026), cited by its <span class="mono">\label</span> names. Results without a credit are from that paper. Where these pages call a statement new, it means: not found in the literature we searched (through October 2026).</p>
+    <p>On this page: cells, geometric digits, jitter and the lattice image come from the <a class="cite" href="#ref-Gru26geo">companion nets paper</a>; the question answered by the base-2 sequence is that of <a class="cite" href="#ref-DGS2">Dick, Goda and Suzuki</a> (Section 4.2), and the earlier base-2 negative result is their Theorem 4.2. The Sobol' sequence is due to <a class="cite" href="#ref-Sob67">Sobol'</a>.</p>
+  </div>
+  <ol class="bib">
+<li id="ref-DGS2">J. Dick, T. Goda, K. Suzuki. <i>On the quasi-uniformity properties of quasi-Monte Carlo point sets and sequences, Part II: digital nets and sequences</i>. Math. Comp., published online, 2026. <a href="https://doi.org/10.1090/mcom/4263">doi:10.1090/mcom/4263</a>, <a href="https://arxiv.org/abs/2501.18226">arXiv:2501.18226</a>. Theorem numbers as in arXiv v2.</li>
+<li id="ref-Gru26geo">L. Gruenschloss. <i>Low-discrepancy quasi-uniform digital nets in every dimension</i>. Hexagon preprint hexagon:2610.00217v1 (the companion nets paper), 2026. <a href="https://doi.org/10.5281/zenodo.23327748">doi:10.5281/zenodo.23327748</a>. The DOI is the Zenodo deposit (manuscript, Lean formalization, blueprint).</li>
+<li id="ref-Sob67">I. M. Sobol'. <i>On the distribution of points in a cube and the approximate evaluation of integrals</i>. Zh. Vychisl. Mat. Mat. Fiz. 7, 784–802; English transl. USSR Comput. Math. Math. Phys. 7, 86–112, 1967. <a href="https://doi.org/10.1016/0041-5553(67)90144-9">doi:10.1016/0041-5553(67)90144-9</a>.</li>
+</ol>
+</section>
+
+<footer>Points, responses and bounds on this page are computed in the browser from the generator matrices exported by <span class="mono">gen_data.py</span> (the brick wall from the residue formula of <span class="mono">paper/v4/figs/b3_gen.py</span>, identical to the builder <span class="mono">wbuild</span>; the base-2 sequence from <span class="mono">b2core</span>); its responses for <i>l</i> ≤ 160 come from the closed-form series of <span class="mono">prop:law</span> and agree with the generator matrices for <i>l</i> ≤ 70. Bounds are truncated.</footer>
+</div>
+<script>window.__SQDATA = {"nets":{"wf7":{"q":7,"s":2,"D":18,"M":16,"label":"brick wall W\u207b, base 7","C":[[[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[6,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[5,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,5,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,5,2,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],[4,0,5,3,1,6,4,2,0,0,0,0,0,0,0,0],[3,1,0,0,4,5,3,5,4,0,0,0,0,0,0,0],[6,1,2,0,0,0,6,3,4,1,0,0,0,0,0,0],[0,4,6,4,0,0,0,0,2,3,2,0,0,0,0,0],[0,0,0,6,1,0,0,0,0,0,3,4,0,0,0,0],[0,0,0,0,0,2,0,0,0,0,0,0,1,0,0,0],[6,6,6,6,6,6,6,2,2,2,2,2,2,2,0,0],[3,0,2,4,6,1,3,5,0,3,6,2,5,1,4,0],[4,6,0,0,3,2,4,2,3,0,0,1,3,6,3,1],[1,6,5,0,0,0,1,4,3,6,0,0,0,5,6,1],[0,3,1,3,0,0,0,0,5,4,5,0,0,0,0,4]],[[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],[4,0,3,6,2,5,1,4,0,3,6,2,5,1,4,0],[3,1,0,0,1,3,6,3,1,0,0,1,3,6,3,1],[6,1,2,0,0,0,5,6,1,2,0,0,0,5,6,1],[0,4,6,4,0,0,0,0,4,6,4,0,0,0,0,4],[0,0,0,6,1,0,0,0,0,0,6,1,0,0,0,0],[0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0],[4,4,4,4,4,4,4,0,0,0,0,0,0,0,3,3],[2,0,6,5,4,3,2,1,0,0,0,0,0,0,0,0],[5,4,0,0,2,6,5,6,2,0,0,0,0,0,0,0],[3,4,1,0,0,0,3,5,2,4,0,0,0,0,0,0],[0,2,3,2,0,0,0,0,1,5,1,0,0,0,0,0],[0,0,0,3,4,0,0,0,0,0,5,2,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,4,0,0,0],[3,3,3,3,3,3,3,1,1,1,1,1,1,1,0,0],[5,0,1,2,3,4,5,6,0,5,3,1,6,4,2,0],[2,3,0,0,5,1,2,1,5,0,0,4,5,3,5,4],[4,3,6,0,0,0,4,2,5,3,0,0,0,6,3,4]]]},"faure7":{"q":7,"s":2,"D":18,"M":12,"label":"Faure (I, P), base 7","C":[[[1,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0],[0,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]],[[1,1,1,1,1,1,1,1,1,1,1,1],[0,1,2,3,4,5,6,0,1,2,3,4],[0,0,1,3,6,3,1,0,0,1,3,6],[0,0,0,1,4,3,6,0,0,0,1,4],[0,0,0,0,1,5,1,0,0,0,0,1],[0,0,0,0,0,1,6,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,1,1],[0,0,0,0,0,0,0,0,1,2,3,4],[0,0,0,0,0,0,0,0,0,1,3,6],[0,0,0,0,0,0,0,0,0,0,1,4],[0,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]]]},"b2":{"q":2,"s":2,"D":32,"M":20,"label":"base-2 sequence of thm:B2","C":[[[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0],[1,0,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,1,1,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0],[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,0],[0,0,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0],[0,0,0,0,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1],[0,0,0,0,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],[0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,0,1,0,1,1],[0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],[0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1],[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],[0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1],[0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0],[0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0],[1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0],[0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1],[0,0,0,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],[0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],[0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],[0,0,0,0,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1],[0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]]},"block3":{"q":3,"s":2,"D":32,"M":8,"label":"block-periodic residue sequence, base 3","C":[[[1,0,0,0,0,0,0,0],[0,2,0,0,0,0,0,0],[0,0,1,0,0,0,0,0],[1,0,1,2,0,0,0,0],[1,2,0,2,1,0,0,0],[0,0,0,2,2,2,0,0],[0,0,0,0,1,1,1,0],[0,0,0,0,0,0,0,2],[0,0,0,0,0,0,0,0],[1,0,1,2,0,1,2,0],[1,2,0,2,1,0,2,1],[1,1,1,0,0,0,1,1],[1,2,2,2,0,0,0,2],[0,2,0,0,1,0,0,0],[0,0,1,0,0,2,0,0],[0,0,0,0,0,2,1,0],[0,0,0,0,0,0,1,2],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[1,0,1,2,0,1,2,0],[1,2,0,2,1,0,2,1],[1,1,1,0,0,0,1,1],[1,2,2,2,0,0,0,2],[0,2,0,0,1,0,0,0]],[[1,1,1,1,1,1,1,1],[0,2,1,0,2,1,0,2],[0,2,2,0,2,2,0,2],[2,2,1,1,1,0,0,0],[0,1,1,0,2,0,0,0],[0,0,0,2,0,0,1,0],[0,0,0,2,1,1,2,0],[0,0,0,0,0,0,0,2],[0,0,0,0,0,0,0,2],[2,2,1,1,1,1,1,1],[0,1,1,0,2,1,0,2],[2,0,0,2,0,0,1,0],[0,2,2,1,0,0,1,2],[0,2,1,0,1,2,0,0],[0,2,2,0,1,1,0,0],[0,0,0,0,0,2,2,2],[0,0,0,0,0,2,0,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[2,2,1,1,1,1,1,1],[0,1,1,0,2,1,0,2],[2,0,0,2,0,0,1,0],[0,2,2,1,0,0,1,2],[0,2,1,0,1,2,0,0]]],"LB":0.33333333333333337},"block5":{"q":5,"s":2,"D":22,"M":8,"label":"block-periodic residue sequence, base 5","C":[[[1,0,0,0,0,0,0,0],[2,4,0,0,0,0,0,0],[1,3,1,0,0,0,0,0],[0,0,0,4,0,0,0,0],[0,0,0,0,1,0,0,0],[3,0,1,2,3,4,0,0],[4,2,0,4,3,2,1,0],[0,2,3,0,0,0,1,4],[0,0,3,2,0,0,0,4],[2,2,2,2,2,4,4,4],[1,3,3,3,3,3,1,1],[2,4,0,0,2,1,2,0],[1,3,1,0,0,3,4,3],[0,0,0,4,0,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,4],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]],[[1,1,1,1,1,1,1,1],[3,2,1,0,4,3,2,1],[0,4,4,0,2,0,4,4],[0,0,0,4,1,0,0,0],[0,0,0,2,4,0,0,0],[2,2,1,1,1,1,1,0],[0,3,3,2,1,0,4,0],[0,2,1,2,0,0,1,3],[0,1,1,3,0,0,3,3],[3,0,0,0,0,2,0,0],[0,3,3,3,3,4,1,1],[3,2,1,0,2,4,1,3],[0,4,4,0,1,0,2,2],[0,0,0,4,1,0,0,0],[0,0,0,2,4,0,0,0],[0,0,0,0,0,0,0,4],[0,0,0,0,0,0,0,2],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]]],"LB":0.6},"block7":{"q":7,"s":2,"D":18,"M":8,"label":"block-periodic residue sequence, base 7","C":[[[1,0,0,0,0,0,0,0],[4,6,0,0,0,0,0,0],[6,3,1,0,0,0,0,0],[0,6,2,6,0,0,0,0],[0,0,1,5,1,0,0,0],[0,0,0,0,0,6,0,0],[0,0,0,0,0,0,1,0],[5,0,1,2,3,4,5,6],[4,2,0,6,5,4,3,2],[1,6,5,0,0,0,1,4],[5,6,1,2,0,0,0,6],[0,0,0,2,5,0,0,0],[0,0,0,0,5,2,0,0],[4,4,4,4,4,4,4,6],[6,3,3,3,3,3,3,3],[3,1,0,0,4,5,3,5],[1,4,6,0,0,3,2,4],[0,1,5,1,0,0,0,0]],[[1,1,1,1,1,1,1,1],[3,2,1,0,6,5,4,3],[0,6,6,0,2,5,2,0],[0,6,3,4,1,0,0,0],[0,2,2,4,6,0,0,0],[0,0,0,0,0,6,1,0],[0,0,0,0,0,2,6,0],[2,2,1,1,1,1,1,1],[0,5,5,4,3,2,1,0],[6,5,6,2,0,0,1,3],[0,3,3,5,0,0,5,0],[0,0,0,2,3,2,0,0],[0,0,0,3,6,5,0,0],[3,0,0,0,0,0,0,2],[0,3,3,3,3,3,3,6],[4,5,6,0,4,1,5,2],[0,1,1,0,6,1,6,0],[0,1,4,3,6,0,0,0]]],"LB":0.7142857142857143},"hb401":{"q":401,"s":2,"D":6,"M":4,"label":"hexagonal brick wall, base 401","C":[[[1,0,0,0],[368,390,0,0],[264,83,121,0],[89,65,162,273],[269,338,114,27],[396,344,95,204]],[[200,200,200,200],[7,202,397,191],[2,340,16,233],[372,221,243,374],[176,115,197,222],[345,184,115,177]]],"LB":0.9054052040886986}},"law":{"wf7":[[[[4,1],[4,0]]],[[[1,5],[4,0]]],[[[3,4],[4,0]]],[[[6,4],[4,0]]],[[[6,4],[4,0]]],[[[6,0],[4,0]]],[[[4,2],[4,0]]],[[[5,6],[4,0]]],[[[0,1],[4,0]]],[[[1,4],[4,0]]],[[[6,4],[4,0]]],[[[6,4],[4,0]]],[[[6,1],[4,0]]],[[[1,6],[4,0]]],[[[0,2],[4,0]]],[[[5,0],[4,0]]],[[[4,4],[4,0]]],[[[6,4],[4,0]]]],"faure7":{"1":[[[[6,1],[6,1]]]],"2":[[[[5,6],[1,2]]],[[[2,2],[4,6]]]],"3":[[[[4,1],[6,3]]],[[[5,4],[2,4]]],[[[2,0],[6,0]]]],"4":[[[[3,6],[1,4]]],[[[0,4],[6,1]]],[[[1,3],[0,0]]],[[[1,3],[0,0]]]],"5":[[[[2,1],[6,5]]],[[[1,2],[0,4]]],[[[1,2],[0,4]]],[[[1,2],[0,4]]],[[[1,2],[0,4]]]],"6":[[[[1,6],[1,6]]],[[[1,6],[1,6]]],[[[1,6],[1,6]]],[[[1,6],[1,6]]],[[[1,6],[1,6]]],[[[1,6],[1,6]]]],"7":[[[[0,1],[6,0]]],[[[0,0],[5,0]]],[[[0,1],[4,0]]],[[[0,0],[3,0]]],[[[0,1],[2,0]]],[[[0,0],[1,0]]],[[[6,1],[0,1]]]],"8":[[[[6,6],[1,1]]],[[[5,1],[3,0]]],[[[4,5],[6,1]]],[[[3,2],[3,0]]],[[[2,4],[1,1]]],[[[1,3],[0,0]]],[[[6,3],[0,2]]],[[[4,5],[2,0]]]]},"b2":[[[[1,1],[1,0]],[[1,1],[0,0]],[[1,0],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[1,0]],[[1,1],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]]],[[[1,1],[1,0]],[[1,1],[0,0]],[[1,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,1]],[[0,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[1,0]],[[1,1],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,0]],[[1,1],[0,0]],[[1,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,1]],[[0,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[1,0]],[[1,1],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,0]],[[1,1],[0,0]],[[1,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]]]},"checks":{"J":{"res31":[0.267357,208652],"fa31":[0.094891,53879],"sob1":[0.020901,3885715],"sob2":[0.038551,541765],"sob3":[0.014516,6633620]}},"sep":{"wf13_m2":[0.472625,117,14],"wf13_m4":[0.472615,18108,3288],"faure7_m2":0.868966,"faure7_m4":0.311517,"faure7_m6":0.2463,"faure5_m5":[0.073756,3122,3],"res11_m3":[0.76509,176,1177],"res11_m5":[0.623825,48078,16],"res311_m2":[0.7685932718831439,4,78],"res311_m5":[0.614387,135157,147338],"block3_m4":[0.572982,35,17],"block3_m8":[0.386182,954,1764],"block5_m4":[0.623729,166,66],"block5_m6":[0.158501,13256,9476],"block5_m8":[0.623725,166775,126775],"block7_m4":[0.761295,879,928],"block7_m6":[0.111741,26625,2804],"block7_m8":[0.741574,1085326,4241291],"hb401_m2":[0.992244,100651,99849]},"levels_p5":[[1,0.5208,0.6672,0.2885],[2,0.3672,0.4916,0.3677],[3,0.5617,0.4602,0.3658],[4,0.3672,0.4803,0.6237],[5,0.5215,0.2324,0.2764],[6,0.3672,0.4374,0.1585],[7,0.5215,0.2324,0.3544],[8,0.3672,0.4373,0.6237],[9,0.5215,0.2113,0.092],[10,0.246,0.4373,0.1585]],"sobolpairs":[{"s":2,"Q":1,"L":3,"m":5,"nu":2,"k":2,"V1":"4","V2":"26","dscaled":1.9039432764659772,"sep":1.3462912017836262,"bound":1.5811388300841898},{"s":2,"Q":2,"L":6,"m":10,"nu":2,"k":2,"V1":"56","V2":"964","dscaled":1.9625398085134478,"sep":0.9812699042567239,"bound":1.118033988749895},{"s":2,"Q":4,"L":12,"m":20,"nu":2,"k":2,"V1":"4064","V2":"1044496","dscaled":1.9971980494753456,"sep":0.4992995123688364,"bound":0.5590169943749475},{"s":2,"Q":8,"L":24,"m":40,"nu":2,"k":2,"V1":"16776704","V2":"1099494850816","dscaled":1.9999885857943698,"sep":0.12499928661214811,"bound":0.13975424859373686},{"s":3,"Q":1,"L":34,"m":98,"nu":12,"k":16,"V1":"17171480576","V2":"316840113327289977531315257344","dscaled":1.10751771676261,"sep":0.43951869716559566,"bound":0.9720806486198328}],"practice":{"res31":[[2,0.32819349321308167],[13,0.30764535150739064],[15,0.29316253710091733],[21,0.29301525778695264],[24,0.2930147183033081],[32,0.14094573787238177],[33,0.13958833692533776],[34,0.13517031906069144],[63,0.07788095769722957],[73,0.07732865749575432],[86,0.07732757348013952],[111,0.07695492954206598],[193,0.07695492933962321],[323,0.0769223873725452],[863,0.0769223871700169],[962,0.05031674194178404],[963,0.04913694185305398],[982,0.04911446385139568],[989,0.04911446385139561],[993,0.0489214866597605],[1011,0.04892147939141027],[1024,0.030407729911301754],[1026,0.03005697856687629],[1044,0.03004654410250498],[1050,0.029740631978467352],[1123,0.02943499012254904],[1361,0.02910520255912124],[1447,0.02910491000684568],[10580,0.016826582243911592],[10583,0.01679691205907178],[10593,0.01679691152194354],[10601,0.016780904507273025],[10621,0.016694743454133798],[10764,0.015905432758448558],[10820,0.015773236701038845],[12268,0.015773236701038838],[26477,0.015773236701038834],[29792,0.013028517369351105],[29940,0.013028517369351076],[30230,0.012208702333419025],[30449,0.012190765321580735],[30936,0.012190765321580671],[59585,0.011781333679488692],[59586,0.01178073782784816],[59588,0.011762894593108229],[59592,0.011241787077497997],[59603,0.011241506762343024],[59628,0.008735981769322821],[61045,0.008735981769322807],[66270,0.00873598176932279],[87059,0.008735981769322738],[179337,0.00813877044230467],[179824,0.008138770442304663],[181241,0.008138770442304606],[205838,0.008138770442304594],[208570,0.006360853406312266],[208652,0.004507649846766129],[208848,0.004507427755553109],[212169,0.004507427755553093],[214073,0.004507427755553088],[220210,0.004507427755553082],[238469,0.004506794247998955],[243663,0.00450679424799895],[328035,0.004501023120201776],[329908,0.004501023120201733],[333229,0.00450102312020169],[357625,0.0039895626343553455],[359073,0.003989562634355283],[387442,0.003958656994852829],[388890,0.003958656994852694],[923523,0.003738676021655708],[923526,0.003713801041104579],[923533,0.0037131969544085468],[923698,0.0032931279574149423],[923917,0.0032931275729974666],[924440,0.002984639014487629],[924896,0.0029846390144876176],[926313,0.0029846390144875074],[1221456,0.0029812295996623378],[1936707,0.002523891018884375],[1947582,0.002523891018884289],[1966328,0.0025194867807024728],[1971978,0.0025194867807024667],[1988534,0.0025194867807024584],[3218323,0.002516162243788778],[3218779,0.0025161622437887736],[3220196,0.0025161622437887207],[3220683,0.0025161622437887155],[3226333,0.0025161622437886717],[3247913,0.0025100568470756194],[3248369,0.0025100568470755253],[3277516,0.0025098534881204154],[3284614,0.0025098534881204115],[3295976,0.002509853488120367],[6464657,0.0025094376515274117],[6464661,0.0024953470650416875],[6464671,0.0024953331487334793],[6465179,0.0024936427104273315],[6465666,0.0024936427104273245],[6468987,0.0024936427104273223],[6470404,0.0024936427104273002],[6472764,0.0024936427104272755],[6494783,0.002465741894744772],[6494790,0.0024652280556073654],[6496207,0.002465228055607364],[6496694,0.0024652280556073203],[6498111,0.0024652280556073172],[6584040,0.0024635336944019938],[7001177,0.0024634841185659966],[7003081,0.0024634841185659792],[7006402,0.002463484118565974],[7657235,0.0024629004160931912],[7657691,0.002462900416093166],[7661012,0.002462900416093152],[7672830,0.0024629004160931466],[7678024,0.0024629004160931422],[7685609,0.0024629004160931197]],"fa31":[[2,0.05587260669577023],[11,0.05587260669577019],[32,0.04565538182826286],[33,0.045655381828262856],[34,0.04565538182826285],[38,0.04565538182826284],[48,0.04565538182826283],[49,0.045655381828262814],[92,0.045655381828262814],[106,0.04565538182826278],[171,0.04565538182826274],[962,0.03235866160792796],[965,0.03235866160792795],[968,0.03235866160792792],[979,0.03235866160792789],[1036,0.032358661607927885],[1277,0.032358661607927885],[1799,0.03028441004571231],[1800,0.030284410045712286],[1802,0.030284410045712272],[1807,0.030284410045712255],[1825,0.0302844100457122],[1829,0.03028441004571219],[13548,0.02831182601579665],[13556,0.028311826015796623],[13600,0.02831182601579662],[13604,0.028311826015796602],[13608,0.028311826015796602],[13620,0.0283118260157966],[14416,0.027984726563570372],[14417,0.027984726563570338],[14420,0.027984726563570306],[14421,0.027984726563570296],[14425,0.027984726563570282],[14434,0.027984726563570265],[14447,0.02794600679913219],[14448,0.027946006799132117],[14449,0.02794600679913211],[14461,0.027946006799132082],[14478,0.027416027659755222],[14482,0.027416027659755215],[14497,0.027416027659755208],[14591,0.02741602765975519],[14750,0.027416027659755187],[14869,0.027416027659755156],[15377,0.026738132675769105],[15389,0.026738132675769098],[15396,0.026738132675769084],[15400,0.026738132675769067],[16276,0.026146337552040606],[16277,0.026146337552040568],[17126,0.026146337552040554],[19190,0.025167622133493918],[19193,0.02516762213349391],[19194,0.02516762213349388],[19203,0.025167622133493866],[20461,0.02443169962971161],[20462,0.024431699629711576],[20470,0.024431699629711548],[20475,0.024431699629711517],[20479,0.024431699629711482],[20490,0.024431699629711465],[21360,0.02443169962971145],[24356,0.02443169962971142],[29854,0.0031260769906986388],[29855,0.003126076990698635],[29859,0.003126076990698578],[30036,0.00312607699069857],[30039,0.0031260769906985607],[53879,0.0025123873135842155],[53895,0.0025123873135841778],[56628,0.002512387313584165],[127769,0.002512387313584152],[896614,0.002485062266620051],[896618,0.0024850622666200456],[896622,0.002485062266620025],[896629,0.0024850622666200235],[896630,0.00248506226661998],[896779,0.002485062266619976],[896855,0.002485062266619974],[896941,0.0024850622666199324],[930249,0.0022691981736631113],[930250,0.0022691981736630822],[930252,0.0022691981736630523],[930256,0.0022691981736630415],[930274,0.0022691981736630298],[930299,0.0022691981736630154],[930303,0.002269198173663],[930487,0.0022691981736629703],[931050,0.0022691981736629695],[1631810,0.0022514367773677334],[1631811,0.002251436777367732],[1631814,0.002251436777367722],[1631815,0.0022514367773677204],[1631819,0.0022514367773676966],[1631823,0.002251436777367694],[1631825,0.0022514367773676905],[1631826,0.00225143677736765],[1631870,0.0022514367773676493],[1631899,0.002251436777367591],[1781695,0.0022409035019458003],[1781714,0.0022409035019457834],[1781725,0.0022409035019457825],[1830225,0.0022409035019457665],[4592620,0.0022229160389365178],[4592621,0.002222916038936513],[4592624,0.0022229160389365013],[4592630,0.0022229160389364904],[4592644,0.0022229160389364865],[4592681,0.002222916038936472],[4592714,0.00222291603893646],[4592833,0.0022229160389364423],[4593001,0.002222916038936442],[5544010,0.0019682565340665044],[5544011,0.0019682565340664775],[5544013,0.001968256534066473],[5544015,0.0019682565340664706],[5544016,0.001968256534066423],[5544028,0.0019682565340664077],[5587255,0.0011960503425718855],[6464648,0.0007576157864202344],[6464649,0.0007576157864201865],[6464666,0.0007576157864201816],[8252108,0.0007534303604602589],[8252109,0.0007534303604601801],[8252117,0.000753430360460179]],"sob1":[[2,0.6799740858045872],[3,0.4050390079988934],[5,0.25743447931224006],[10,0.2557548826339635],[11,0.1768877905361119],[22,0.13106631542853847],[37,0.1236130409330127],[40,0.09755377027774781],[74,0.09267911314468673],[75,0.08632752365086183],[77,0.05677582145051602],[122,0.0509700485180621],[219,0.05022754660143815],[261,0.0438382459592876],[309,0.027083448642318285],[412,0.02700550296599194],[430,0.020115771224070187],[1126,0.01761435896205978],[1249,0.017475882976008338],[1306,0.016945532767123943],[2264,0.015587742653106931],[2498,0.01530360812099772],[2587,0.012114857603628017],[2911,0.011660044971502234],[3920,0.008223419608566518],[6090,0.007939884924797544],[9407,0.005982235533437433],[9620,0.0059024083397356784],[13986,0.005358376233387817],[16555,0.004044963423309557],[18156,0.003930131870871421],[26348,0.003561104942546245],[51531,0.0021670931507766196],[69572,0.002055865659180618],[129141,0.0019766072349238738],[141602,0.0019066143563475737],[150229,0.0018007023729853808],[206030,0.0017388283529804613],[253536,0.0016022699131865077],[262317,0.0014313975051780867],[262593,0.0012174876286411517],[353776,0.0011717775724793475],[379102,0.0010678144367165178],[396088,0.0010119318531742955],[447860,0.0009501257826417709],[576253,0.00088132469370228],[778300,0.0008680666547166327],[871165,0.0007193935429742314],[1048819,0.000594448507617416],[1108764,0.0004234543444830154],[1569390,0.0003915280557953809],[1846831,0.00029013853994550254],[3885715,0.00013294476590353487]],"sob2":[[2,0.5759258879132629],[3,0.5561163370120189],[4,0.48964224325493316],[5,0.39814150235281415],[6,0.3755583157222718],[7,0.3069385341469981],[8,0.2972325006415676],[9,0.2554064991012659],[10,0.18367170605145605],[18,0.175735180658046],[24,0.15253385070049336],[30,0.14047579524845707],[38,0.12301920806398961],[39,0.11633841928872155],[78,0.10659024963140912],[81,0.1065074697328565],[87,0.1008290560236476],[107,0.0910030412423616],[112,0.07603233541194572],[144,0.06698196596776157],[162,0.05258865127958191],[285,0.051185142037182635],[349,0.04747856523586024],[388,0.0421741272270997],[535,0.038982701105956474],[587,0.03340068568805218],[606,0.033189122323758355],[729,0.03041316474434307],[843,0.01677949923924775],[2077,0.016413824419511065],[2145,0.012616687976270156],[2787,0.010917677155645155],[5176,0.009564524022316877],[5480,0.006799650091690511],[8597,0.005674374630082207],[10131,0.005358973841970157],[17546,0.005358559641035238],[22209,0.003806517215920675],[31218,0.003512475630523853],[45882,0.0026528767825472993],[53280,0.0018714420757365972],[73033,0.0018565915963603995],[91065,0.0016431720352644518],[99135,0.0011079962165080268],[240503,0.0008917776211572755],[541765,0.00047289740678809004],[1332100,0.0004461266781870835],[2013866,0.000376052570668312],[2213698,0.00031006987473503023],[6803898,0.00025149743815653806]],"sob3":[[2,0.6058693520856923],[3,0.4961120949964439],[4,0.3045286243594016],[6,0.22362137049416697],[17,0.2154437907039625],[19,0.21444156915694748],[20,0.17803537189883437],[26,0.1738080595850915],[37,0.13047345396304622],[55,0.08428296669158744],[59,0.053595030045568356],[154,0.05337487759378267],[169,0.04641238593424892],[229,0.044669284936117826],[274,0.044399713549642554],[298,0.02750683479263268],[931,0.021978945171467264],[1433,0.015243765911068127],[2214,0.013561917801905837],[3034,0.010506437031795756],[4331,0.009001417890359223],[6607,0.008961619766339874],[7027,0.008033053402952472],[8392,0.007626699149257701],[8811,0.005766548269072455],[12534,0.0044406689466405845],[28150,0.004166634553725025],[30286,0.003264673172978222],[36931,0.0030996801989359524],[66166,0.0027027957654934104],[66819,0.002692253280313352],[68763,0.002326979496300804],[73641,0.0021652220513687145],[73642,0.001778843682296528],[85694,0.0016935890250554338],[97260,0.0015522790096244021],[103705,0.0013395811244708265],[267083,0.0011577054429037744],[277327,0.001062389067753331],[314612,0.0006683354289936861],[981991,0.00046731767095838187],[1453388,0.0003956510538856682],[2621640,0.0003567245579134328],[3195717,0.00028214879288700374],[5467576,0.00025257927262367207],[6633620,7.72578091688453e-05]]}};</script>
+<script>
+/* core.js -- shared math + drawing helpers of the geoseq explainers (inlined into every page by build_page.py).
+   Point sets are rebuilt here from generator matrices: digit n of coordinate c of the point with index digits v_k is
+   y_{c,n} = sum_k C_c[n][k] v_k (mod q), and y_c = sum_n y_{c,n} q^{-n-1} (prime q). Some matrices are exported by
+   gen_data.py from the paper's builders; the residue, staggered-residue and Faure matrices are generated here by a port
+   of paper/v4/figs/b3_gen.py (checked entry by entry against it by check/crosscheck.mjs). Distances are toroidal.
+   No DOM access at load time except window listeners, so node can run the math (check/crosscheck.mjs). */
+const SQ = (() => {
+  const DATA = (typeof window !== 'undefined' && window.__SQDATA) || {};
+  const nets = DATA.nets || {};
+
+  // ------------------------------------------------------------------ F_p arithmetic and truncated power series
+  const mod = (x, p) => ((x % p) + p) % p;
+  function inv(x, p) { x = mod(x, p); let r = 1, b = x, e = p - 2; while (e > 0) { if (e & 1) r = r * b % p; b = b * b % p; e >>= 1; } return r; }
+  function smul(A, B, R, p) {
+    const C = new Array(R).fill(0);
+    for (let i = 0; i < Math.min(R, A.length); i++) { const a = A[i]; if (!a) continue; for (let j = 0; j < Math.min(B.length, R - i); j++) C[i + j] = (C[i + j] + a * B[j]) % p; }
+    return C;
+  }
+  function sinv(A, R, p) {
+    const i0 = inv(A[0], p), B = new Array(R).fill(0); B[0] = i0;
+    for (let n = 1; n < R; n++) { let s = 0; for (let k = 1; k <= Math.min(n, A.length - 1); k++) s += A[k] * B[n - k]; B[n] = mod(-(s % p) * i0, p); }
+    return B;
+  }
+  function Wc(a, c, R, p) {                               // w_c(z) = prod_{b != c}(z - a_b) as a series in t = z - a_c
+    let W = [1].concat(new Array(R - 1).fill(0));
+    for (let b = 0; b < a.length; b++) if (b !== c) W = smul(W, [mod(a[c] - a[b], p), 1], R, p);
+    return W;
+  }
+  // Definition def:residue (kind 'U') and def:residuestar (kind 'R'), exactly as paper/v4/figs/b3_gen.py:
+  //   R_v : C_c[n][i] = v_c^{-1} th^{n+1} [t^n] (t+a_c)^i / W_c(t)^{n+1}
+  //   R*_v: C_c[n][i] = mu_c th^{n+1} [t^n] (t+a_c)^i / ((t+a_c-a_*) W_c(t)^{n+1}) (c != c*),  C_*[n][i] = mu_* th^n [t^n] (t+a_*)^i / W_*(t)^n
+  function residueMatrices(kind, p, a, theta, rows, cols, opt) {
+    const s = a.length, R = rows, th = mod(theta, p), C = [];
+    for (let c = 0; c < s; c++) {
+      const Winv = sinv(Wc(a, c, R, p), R, p), lin = [mod(a[c], p), 1];
+      const colS = [[1].concat(new Array(R - 1).fill(0))];
+      for (let i = 1; i < cols; i++) colS.push(smul(colS[i - 1], lin, R, p));
+      const M = Array.from({ length: rows }, () => new Array(cols).fill(0));
+      let ker = [1].concat(new Array(R - 1).fill(0)), extra = null, base;
+      if (kind === 'U') base = 1;
+      else if (c === opt.cstar) base = 0;
+      else { extra = sinv([mod(a[c] - a[opt.cstar], p), 1], R, p); base = 1; }
+      for (let e = 0; e < base; e++) ker = smul(ker, Winv, R, p);
+      let thp = 1; for (let e = 0; e < base; e++) thp = thp * th % p;
+      const sc = kind === 'U' ? inv(opt.v[c], p) : mod(opt.mu[c], p);
+      for (let n = 0; n < rows; n++) {
+        const kk = extra ? smul(ker, extra, R, p) : ker, f = sc * thp % p;
+        for (let i = 0; i < cols; i++) { const col = colS[i]; let acc = 0; for (let j = 0; j <= n; j++) if (col[j] && kk[n - j]) acc += col[j] * kk[n - j]; M[n][i] = f * (acc % p) % p; }
+        ker = smul(ker, Winv, R, p); thp = thp * th % p;
+      }
+      C.push(M);
+    }
+    return C;
+  }
+  const residue = (p, a, theta, v, rows, cols) => residueMatrices('U', p, a, theta, rows, cols, { v });
+  const staggered = (p, a, theta, cstar, mu, rows, cols) => residueMatrices('R', p, a, theta, rows, cols, { cstar, mu });
+  function brickwall(p, rows, cols) { return staggered(p, [0, 1], mod(-inv(4, p), p), 1, [mod(-4, p), 2], rows, cols); }
+  function pascal(a, p, rows, cols) {                     // Pas_a[n][k] = binom(k, n) a^{k-n}
+    const M = Array.from({ length: rows }, () => new Array(cols).fill(0));
+    const B = [[1]]; for (let k = 1; k < cols; k++) { const r = [1]; for (let n = 1; n < k; n++) r.push((B[k - 1][n - 1] + B[k - 1][n]) % p); r.push(1); B.push(r); }
+    for (let n = 0; n < rows; n++) for (let k = n; k < cols; k++) { let x = B[k][n]; for (let e = 0; e < k - n; e++) x = x * mod(a, p) % p; M[n][k] = x; }
+    return M;
+  }
+  const faure = (p, s, rows, cols) => Array.from({ length: s }, (_, c) => pascal(c, p, rows, cols));
+  const Dfor = q => Math.floor(52 / Math.log2(q));       // digits kept per coordinate: q^D < 2^52 (exact in float64)
+
+  // ------------------------------------------------------------------ nets: register, generate points
+  function addNet(key, obj) { nets[key] = Object.assign({ s: obj.C ? obj.C.length : obj.s }, obj); delete cache[key]; delete evCache[key]; return nets[key]; }
+  function mulberry(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function hash32(a, b, c, d) {                          // integer hash (for the Owen scramble)
+    let h = Math.imul(a ^ 0x9e3779b9, 0x85ebca6b) ^ Math.imul(b + 0x7f4a7c15, 0xc2b2ae35) ^ Math.imul(c + 0x165667b1, 0x27d4eb2f) ^ Math.imul(d + 0x61c88647, 0x9e3779b1);
+    h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16; return h >>> 0;
+  }
+  function sobolDirs(poly, init, K) {                    // eq:sobrec, poly = [1, a_1, .., a_{e-1}, 1]; returns u_1..u_K (index 1..K)
+    const e = poly.length - 1, u = [0].concat(init);
+    for (let k = e + 1; k <= K; k++) { let x = u[k - e] ^ (u[k - e] * Math.pow(2, e)); for (let i = 1; i < e; i++) if (poly[i]) x ^= u[k - i] * Math.pow(2, i); u.push(x); }
+    return u;
+  }
+  function sobol3Matrices(D) {                           // van der Corput, z+1, z^2+z+1 (Joe-Kuo init 1, 3): C[n][k] = bit n of 2^{-(k+1)} u_{k+1}
+    const dirs = [null, sobolDirs([1, 1], [1], D), sobolDirs([1, 1, 1], [1, 3], D)];
+    return [0, 1, 2].map(c => Array.from({ length: D }, (_, n) => Array.from({ length: D }, (_, k) => {
+      if (c === 0) return +(n === k);
+      const u = dirs[c][k + 1]; const sh = k - n; return sh < 0 ? 0 : (Math.floor(u / Math.pow(2, sh)) & 1);
+    })));
+  }
+  const cache = {};
+  function points(key, N) {
+    const c0 = cache[key]; if (c0 && c0.N >= N) return c0;
+    const nt = nets[key], s = nt.s, X = Array.from({ length: s }, () => new Float64Array(N));
+    if (nt.kind === 'random') {
+      const rnd = mulberry(nt.seed || 1); for (let i = 0; i < N; i++) for (let c = 0; c < s; c++) X[c][i] = rnd();
+    } else if (nt.kind === 'halton') {
+      for (let c = 0; c < s; c++) { const b = nt.bases[c]; for (let i = 0; i < N; i++) { let v = i, f = 1 / b, x = 0; while (v > 0) { x += (v % b) * f; v = Math.floor(v / b); f /= b; } X[c][i] = x; } }
+    } else {                                              // digital over F_q (prime q), optional Owen scramble (q = 2)
+      const q = nt.q, D = nt.D, C = nt.C;
+      let m = 1; while (Math.pow(q, m) < N) m++;
+      if (m > nt.M) throw new Error(key + ': prefix too long for exported columns');
+      const S = C.map(Cc => Cc.slice(0, D).map(row => { const r = new Int32Array(m); let a = 0; for (let k = 0; k < m; k++) { a = (a + row[k]) % q; r[k] = a; } return r; }));
+      const y = Array.from({ length: s }, () => new Int32Array(D)), vd = new Int32Array(m + 1);
+      const pw = new Float64Array(D); pw[0] = 1 / q; for (let n = 1; n < D; n++) pw[n] = pw[n - 1] / q;
+      const owen = nt.owen != null;
+      for (let v = 0; v < N; v++) {
+        if (v > 0) { let k = 0; while (vd[k] === q - 1) { vd[k] = 0; k++; } vd[k]++; for (let c = 0; c < s; c++) { const Sc = S[c], yc = y[c]; for (let n = 0; n < D; n++) { const t = yc[n] + Sc[n][k]; yc[n] = t >= q ? t - q : t; } } }
+        for (let c = 0; c < s; c++) {
+          const yc = y[c]; let val = 0;
+          if (owen) { let pre = 1; for (let n = 0; n < D; n++) { const b = yc[n] ^ (hash32(nt.owen, c, n, pre) & 1); pre = (pre * 2 + yc[n]) >>> 0; if (b) val += pw[n]; } }
+          else if (nt.shift) { const sh = nt.shift[c]; for (let n = 0; n < D; n++) { const t = (yc[n] + sh[n]) % q; if (t) val += t * pw[n]; } }
+          else for (let n = 0; n < D; n++) if (yc[n]) val += yc[n] * pw[n];
+          X[c][v] = val;
+        }
+      }
+    }
+    return (cache[key] = { N, X, s, x: X[0], y: X[1], z: X[2] });
+  }
+  function td2(P, i, j) { let d2 = 0; for (let c = 0; c < P.s; c++) { let d = Math.abs(P.X[c][i] - P.X[c][j]); if (d > 0.5) d = 1 - d; d2 += d * d; } return d2; }
+
+  // ------------------------------------------------------------------ exact delta of EVERY prefix (incremental cell list, s = 2, 3)
+  // delta(P_[N]) = min(delta(P_[N-1]), distance of point N-1 to its nearest predecessor); only the drops are stored.
+  const evCache = {};
+  function sepEvents(key, N) {
+    const e0 = evCache[key]; if (e0 && e0.N >= N) return e0;
+    const P = points(key, N), s = P.s, X = P.X;
+    const G = Math.max(3, Math.floor(s === 2 ? Math.sqrt(N) / 1.5 : Math.cbrt(N) / 1.3)), Gs = Math.pow(G, s);
+    const head = new Int32Array(Gs).fill(-1), next = new Int32Array(N).fill(-1);
+    const bin = (i, c) => Math.min(G - 1, Math.floor(X[c][i] * G));
+    const cellOf = i => { let id = 0; for (let c = 0; c < s; c++) id = id * G + bin(i, c); return id; };
+    const evN = [], evD = [], evI = [], evJ = [];
+    let best = Infinity;
+    const ins = i => { const b = cellOf(i); next[i] = head[b]; head[b] = i; };
+    ins(0);
+    const cc = new Int32Array(s);
+    for (let i = 1; i < N; i++) {
+      const r = isFinite(best) ? Math.ceil(Math.sqrt(best) * G) + 1 : G;
+      let nb = best, nj = -1;
+      if (2 * r + 1 >= G) { for (let j = 0; j < i; j++) { const d = td2(P, i, j); if (d < nb) { nb = d; nj = j; } } }
+      else {
+        for (let c = 0; c < s; c++) cc[c] = bin(i, c);
+        if (s === 2) {
+          for (let a = -r; a <= r; a++) { const gx = ((cc[0] + a) % G + G) % G; for (let b = -r; b <= r; b++) { let j = head[gx * G + ((cc[1] + b) % G + G) % G]; while (j >= 0) { const d = td2(P, i, j); if (d < nb) { nb = d; nj = j; } j = next[j]; } } }
+        } else {
+          for (let a = -r; a <= r; a++) { const gx = ((cc[0] + a) % G + G) % G; for (let b = -r; b <= r; b++) { const gy = ((cc[1] + b) % G + G) % G; for (let e = -r; e <= r; e++) { let j = head[(gx * G + gy) * G + ((cc[2] + e) % G + G) % G]; while (j >= 0) { const d = td2(P, i, j); if (d < nb) { nb = d; nj = j; } j = next[j]; } } } }
+        }
+      }
+      if (nj >= 0) { best = nb; evN.push(i + 1); evD.push(Math.sqrt(nb)); evI.push(nj); evJ.push(i); }
+      ins(i);
+    }
+    return (evCache[key] = { N, evN, evD, evI, evJ, s });
+  }
+  function sepAt(ev, N) {                                  // delta, closest pair and sep = delta N^{1/s} of the first N points
+    let lo = 0, hi = ev.evN.length - 1;
+    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (ev.evN[mid] <= N) lo = mid; else hi = mid - 1; }
+    return { d: ev.evD[lo], i: ev.evI[lo], j: ev.evJ[lo], c: ev.evD[lo] * Math.pow(N, 1 / (ev.s || 2)) };
+  }
+  function minSepRange(ev, N0, N1) {                       // min over N0 <= N <= N1 of sep(P_[N]) (exact: sep rises between drops)
+    const s = ev.s || 2; let best = Infinity, at = 0;
+    for (let k = 0; k < ev.evN.length; k++) {
+      const a = ev.evN[k], b = k + 1 < ev.evN.length ? ev.evN[k + 1] - 1 : Infinity;
+      if (b < N0 || a > N1) continue; const n = Math.max(a, N0), c = ev.evD[k] * Math.pow(n, 1 / s);
+      if (c < best) { best = c; at = n; }
+    }
+    return { c: best, N: at };
+  }
+  // exact closest pair of a static set (first N points of P): cell list with ~1 point per cell, radius grown until exact
+  function closest(P, N) {
+    const s = P.s, X = P.X; let G = Math.max(1, Math.floor(Math.pow(N, 1 / s)));
+    let best = Infinity, bi = 0, bj = 1;
+    for (let pass = 0; pass < 6; pass++) {
+      const r = pass === 0 ? 1 : Math.ceil(Math.sqrt(best) * G);
+      if (2 * r + 1 >= G) {                               // brute force
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) { const d = td2(P, i, j); if (d < best) { best = d; bi = i; bj = j; } }
+        return { d: Math.sqrt(best), i: bi, j: bj };
+      }
+      const Gs = Math.pow(G, s), head = new Int32Array(Gs).fill(-1), next = new Int32Array(N);
+      const cell = new Int32Array(N * s);
+      for (let i = 0; i < N; i++) { let id = 0; for (let c = 0; c < s; c++) { const b = Math.min(G - 1, Math.floor(X[c][i] * G)); cell[i * s + c] = b; id = id * G + b; } next[i] = head[id]; head[id] = i; }
+      const offs = []; const rec = (pre, d) => { if (d === s) { offs.push(pre.slice()); return; } for (let a = -r; a <= r; a++) { pre.push(a); rec(pre, d + 1); pre.pop(); } }; rec([], 0);
+      for (let i = 0; i < N; i++) for (const o of offs) {
+        let id = 0; for (let c = 0; c < s; c++) id = id * G + (((cell[i * s + c] + o[c]) % G) + G) % G;
+        let j = head[id]; while (j >= 0) { if (j > i) { const d = td2(P, i, j); if (d < best) { best = d; bi = i; bj = j; } } j = next[j]; }
+      }
+      if (Math.sqrt(best) * G <= r) return { d: Math.sqrt(best), i: bi, j: bj };
+    }
+    return { d: Math.sqrt(best), i: bi, j: bj };
+  }
+
+  // ------------------------------------------------------------------ F_p linear algebra: graph form of a 2D full level
+  function invMod(A, p) {
+    const n = A.length, M = A.map((r, i) => r.slice().concat(Array.from({ length: n }, (_, j) => +(i === j))));
+    for (let col = 0; col < n; col++) {
+      let piv = col; while (piv < n && M[piv][col] % p === 0) piv++;
+      if (piv === n) throw new Error('singular');
+      [M[col], M[piv]] = [M[piv], M[col]];
+      const f = inv(M[col][col], p); for (let j = 0; j < 2 * n; j++) M[col][j] = M[col][j] * f % p;
+      for (let r = 0; r < n; r++) if (r !== col && M[r][col]) { const g = M[r][col]; for (let j = 0; j < 2 * n; j++) M[r][j] = mod(M[r][j] - g * M[col][j], p); }
+    }
+    return M.map(r => r.slice(n));
+  }
+  const solvers = {};
+  function level(key, K) {                                 // the level-K graph form of a 2D net (prime q): cell -> point
+    const id = key + ':' + K; if (solvers[id]) return solvers[id];
+    const nt = nets[key], q = nt.q, m = 2 * K, C = nt.C;
+    if (m > nt.M || K + 2 > nt.D) throw new Error('level too deep for exported matrices');
+    const B = []; for (let c = 0; c < 2; c++) for (let i = 0; i < K; i++) B.push(C[c][i].slice(0, m));
+    const Binv = invMod(B, q);
+    const pw = []; let t = 1 / q; for (let n = 0; n < nt.D; n++) { pw.push(t); t /= q; }
+    const apply = cell => { const v = []; for (let k = 0; k < m; k++) { let s = 0; for (let r = 0; r < m; r++) s += Binv[k][r] * cell[r]; v.push(s % q); } return v; };
+    const g = Math.pow(q, K);
+    function at(n0, n1) {                                  // the point of P_2K in cell (n0, n1): index, coordinates, digits
+      n0 = mod(n0, g); n1 = mod(n1, g);
+      const cell = []; for (const n of [n0, n1]) for (let i = 0; i < K; i++) cell.push(Math.floor(n / Math.pow(q, K - 1 - i)) % q);
+      const v = apply(cell), y = [0, 0], dig = [[], []];
+      for (let c = 0; c < 2; c++) for (let n = 0; n < nt.D; n++) { let s = 0; for (let k = 0; k < m; k++) s += C[c][n][k] * v[k]; s %= q; dig[c].push(s); y[c] += s * pw[n]; }
+      let idx = 0; for (let k = m - 1; k >= 0; k--) idx = idx * q + v[k];
+      return { v: idx, x: y[0], y: y[1], dig, r: [dig[0][K], dig[1][K]], n: [n0, n1] };
+    }
+    function law(l, cp, j = 1) {                           // carry response D_i(l)[c][cp], i < j, from the matrices
+      const e = new Array(m).fill(0); for (let a = K - l; a < K; a++) e[cp * K + a] = 1;
+      const v = apply(e), out = [[], []];
+      for (let c = 0; c < 2; c++) for (let i = 0; i < j; i++) { let s = 0; for (let k = 0; k < m; k++) s += C[c][K + i][k] * v[k]; out[c].push(s % q); }
+      return out;
+    }
+    return (solvers[id] = { K, q, g, at, law });
+  }
+
+  // ------------------------------------------------------------------ lattices: lambda_jit of the Construction-A lattice Lambda_v
+  // lambda_jit(Lambda)^2 = min over b != 0 in Lambda of ||(|b| - 1)_+||^2 (exact integer; thm:residue). Enumeration in a box
+  // [-B, B]^s grown until every vector outside it (some |b_c| >= B + 1, so value >= B^2) cannot win.
+  function ljit2(v, p) {
+    const s = v.length, last = inv(v[s - 1], p);
+    const val = b => { let t = 0; for (const x of b) { const a = Math.abs(x) - 1; if (a > 0) t += a * a; } return t; };
+    let best = (p - 1) * (p - 1), arg = [p].concat(new Array(s - 1).fill(0));
+    let B = Math.max(2, Math.ceil(2 * Math.pow(p, 1 / s)) + 1);
+    for (;;) {
+      const b = new Array(s).fill(0);
+      const rec = (d, part) => {
+        if (d === s - 1) {
+          let r = mod(-part * last, p); if (r > p / 2) r -= p;
+          for (let x = r - Math.ceil((B + r) / p) * p; x <= B; x += p) {
+            if (x < -B) continue; b[s - 1] = x;
+            if (b.every(z => z === 0)) continue;
+            const t = val(b); if (t < best) { best = t; arg = b.slice(); }
+          }
+          return;
+        }
+        for (let x = -B; x <= B; x++) { b[d] = x; rec(d + 1, (part + v[d] * x) % p); }
+      };
+      rec(0, 0);
+      if (best <= B * B) return { l2: best, b: arg };
+      B = Math.ceil(Math.sqrt(best)) + 1;
+    }
+  }
+
+  // ------------------------------------------------------------------ the digit relaxation in one coordinate (lem:cert, rem:onedigit)
+  const cen = (v, p) => { v = mod(v, p); return v > p / 2 ? v - p : v; };
+  function f1(e, sigma, p) {                               // guaranteed gap in one coordinate, one geometric digit
+    sigma = mod(sigma, p); let best = Infinity;
+    for (let R = 0; R < p; R++) { const d = Math.abs(e * p + ((R + sigma) % p) - R); if (d < best) best = d; }
+    return Math.max(0, best - 1) / p;
+  }
+
+  // ------------------------------------------------------------------ formatting + drawing helpers
+  const fmt = (c, k = 4) => (c < 0 ? '−' : '') + Math.abs(c).toFixed(k);
+  const fmtDown = (c, k = 4) => (Math.floor(c * Math.pow(10, k) + 1e-9) / Math.pow(10, k)).toFixed(k);   // truncate (sec:conventions)
+  const fmtN = N => String(N).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  function fitCanvas(cv) {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+    const w = Math.max(10, Math.round(r.width)), h = Math.max(10, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext('2d');
+    if (!ctx.__safeArc) { const arc0 = ctx.arc; ctx.arc = function (x, y, r, a, b) { return arc0.call(this, x, y, Math.max(0, r), a, b); }; ctx.__safeArc = true; }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    return { ctx, w, h };
+  }
+  const redrawers = [];
+  function onRedraw(fn) { redrawers.push(fn); }
+  let rq = 0, lastW = 0;
+  function redrawAll() { cancelAnimationFrame(rq); rq = requestAnimationFrame(() => redrawers.forEach(f => f())); }
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('resize', () => { if (window.innerWidth !== lastW) { lastW = window.innerWidth; redrawAll(); } });
+    if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', redrawAll);
+  }
+  function seg(el, onPick) {                               // a group of toggle buttons with aria-pressed
+    const bs = [...el.querySelectorAll('button')];
+    bs.forEach(b => b.addEventListener('click', () => { bs.forEach(x => x.setAttribute('aria-pressed', String(x === b))); onPick(b.dataset.v, b); }));
+    return v => bs.forEach(x => x.setAttribute('aria-pressed', String(x.dataset.v === String(v))));
+  }
+  const svgNS = 'http://www.w3.org/2000/svg';
+  function svgEl(tag, attrs, parent) {
+    const e = document.createElementNS(svgNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e); return e;
+  }
+  const later = fn => setTimeout(fn, 0);                   // let the browser paint a "computing" note first
+  return { DATA, nets, mod, inv, smul, sinv, residue, staggered, brickwall, pascal, faure, sobol3Matrices, sobolDirs, Dfor, addNet,
+    mulberry, points, td2, sepEvents, sepAt, minSepRange, closest, invMod, level, ljit2, cen, f1, fmt, fmtDown, fmtN, css, fitCanvas,
+    onRedraw, redrawAll, seg, svgEl, later };
+})();
+if (typeof module !== 'undefined') module.exports = SQ;
+
+</script>
+<script>
+(() => {
+'use strict';
+const { nets, fmt, fmtDown, css, svgEl, DATA } = SQ;
+const P7 = 7;
+const sub = n => String(n).split('').map(d => '₀₁₂₃₄₅₆₇₈₉'[d]).join('');
+
+// ------------------------------------------------------------------ 1. digits of one point (level 1, W^-)
+const ds = { cell: [3, 1] };
+function drawDigits() {
+  const L = SQ.level('wf7', 1), { ctx, w } = SQ.fitCanvas(document.getElementById('cD'));
+  const cs = w / 7, INK = css('--ink'), ACC = css('--accent'), GS = css('--grid-strong'), GR = css('--grid'), JIT = css('--jit');
+  const [a, b] = ds.cell, X = x => x * cs, Y = y => w - y * cs;
+  ctx.fillStyle = css('--accent-soft'); ctx.fillRect(X(a), Y(b + 1), cs, cs);
+  ctx.strokeStyle = GR; ctx.lineWidth = 0.6; ctx.beginPath();
+  for (let t = 1; t < 7; t++) { ctx.moveTo(X(a + t / 7), Y(b)); ctx.lineTo(X(a + t / 7), Y(b + 1)); ctx.moveTo(X(a), Y(b + t / 7)); ctx.lineTo(X(a + 1), Y(b + t / 7)); }
+  ctx.stroke();
+  ctx.strokeStyle = GS; ctx.lineWidth = 1; ctx.beginPath();
+  for (let t = 0; t <= 7; t++) { const u = Math.round(t * cs) + 0.5; ctx.moveTo(u, 0); ctx.lineTo(u, w); ctx.moveTo(0, u); ctx.lineTo(w, u); }
+  ctx.stroke(); ctx.strokeStyle = ACC; ctx.lineWidth = 2; ctx.strokeRect(X(a), Y(b + 1), cs, cs);
+  for (let n0 = 0; n0 < 7; n0++) for (let n1 = 0; n1 < 7; n1++) {
+    const pt = L.at(n0, n1), ix = n0 + pt.r[0] / 7, iy = n1 + pt.r[1] / 7;
+    ctx.strokeStyle = JIT; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(ix), Y(iy)); ctx.lineTo(X(pt.x * 7), Y(pt.y * 7)); ctx.stroke();
+    ctx.beginPath(); ctx.arc(X(ix), Y(iy), 5, 0, 7); ctx.stroke();
+    ctx.fillStyle = INK; ctx.beginPath(); ctx.arc(X(pt.x * 7), Y(pt.y * 7), 3, 0, 7); ctx.fill();
+  }
+  const pt = L.at(a, b), dg = c => pt.dig[c].slice(0, 8).map((d, i) => `<span class="d ${i === 0 ? 'cell' : i === 1 ? 'geo' : 'jit'}">${d}</span>`).join('');
+  const im1 = [a + pt.r[0] / 7, b + pt.r[1] / 7], im2 = [a + (7 * pt.dig[0][1] + pt.dig[0][2]) / 49, b + (7 * pt.dig[1][1] + pt.dig[1][2]) / 49];
+  const v0 = pt.v % 7, v1 = Math.floor(pt.v / 7);
+  document.getElementById('digOut').innerHTML = `
+    <dl class="read" style="border:0;padding:0"><dt>cell n</dt><dd>(${a}, ${b})</dd><dt>index v</dt><dd>${pt.v} = ${v0} + ${v1}·7</dd></dl>
+    <div class="digrow" style="margin-top:10px"><span class="lab">digits of x</span>${dg(0)}</div>
+    <div class="digrow" style="margin-top:4px"><span class="lab">digits of y</span>${dg(1)}</div>
+    <p class="note" style="margin:6px 0 10px">grey: cell digit · blue: geometric digit · dashed: jitter digits</p>
+    <dl class="read"><dt>geometric digits (r₀, r₁)</dt><dd class="em">(${pt.r.join(', ')})</dd>
+    <dt>lattice image n + r/7</dt><dd>(${fmt(im1[0], 3)}, ${fmt(im1[1], 3)})</dd>
+    <dt>point 7y</dt><dd>(${fmt(pt.x * 7, 3)}, ${fmt(pt.y * 7, 3)})</dd>
+    <dt>jitter (below 1/7 = 0.143)</dt><dd>(${fmt(pt.x * 7 - im1[0], 3)}, ${fmt(pt.y * 7 - im1[1], 3)})</dd>
+    <dt>lattice image, two digits</dt><dd>(${fmt(im2[0], 3)}, ${fmt(im2[1], 3)})</dd></dl>`;
+}
+const cD = document.getElementById('cD');
+cD.addEventListener('click', e => { const r = cD.getBoundingClientRect(); ds.cell = [Math.min(6, Math.floor((e.clientX - r.left) / r.width * 7)), Math.min(6, Math.floor((r.bottom - e.clientY) / r.height * 7))]; drawDigits(); });
+cD.addEventListener('keydown', e => { const mv = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] }[e.key]; if (!mv) return; e.preventDefault(); ds.cell = ds.cell.map((v, i) => Math.max(0, Math.min(6, v + mv[i]))); drawDigits(); });
+
+// ------------------------------------------------------------------ 2. dislocation hierarchy (level 3, 343 x 343 cells)
+const hx = document.getElementById('hx'), hy = document.getElementById('hy');
+const carryLen = (n, q, K) => { let l = 1; while (l < K && n % q === q - 1) { n = Math.floor(n / q); l++; } return l; };   // step n -> n+1
+function drawHier() {
+  const K = 3, L = SQ.level('wf7', K), g = L.g, H = 10, x0 = +hx.value, row = +hy.value, y0 = Math.max(0, Math.min(g - H, row - 4));
+  const { ctx, w, h } = SQ.fitCanvas(document.getElementById('cH'));
+  const W = Math.max(6, Math.min(22, Math.floor((w - 30) / ((h - 26) / H)), g - x0));
+  document.getElementById('hxv').textContent = `${x0}–${x0 + W - 1}`; document.getElementById('hyv').textContent = row;
+  const cs = Math.min((w - 30) / W, (h - 26) / H), ox = 26, oy = h - 22, X = x => ox + (x - x0) * cs, Y = y => oy - (y - y0) * cs;
+  const col = l => l === 1 ? css('--grid-strong') : l === 2 ? css('--warm') : css('--bad');
+  for (let a = 0; a <= W; a++) { const l = carryLen((x0 + a - 1 + g) % g, 7, K); ctx.strokeStyle = col(l); ctx.lineWidth = l === 1 ? 0.8 : l === 2 ? 2.5 : 4; ctx.beginPath(); ctx.moveTo(X(x0 + a), Y(y0)); ctx.lineTo(X(x0 + a), Y(y0 + H)); ctx.stroke(); }
+  for (let b = 0; b <= H; b++) { const l = carryLen((y0 + b - 1 + g) % g, 7, K); ctx.strokeStyle = col(l); ctx.lineWidth = l === 1 ? 0.8 : l === 2 ? 2 : 3; ctx.globalAlpha = 0.55; ctx.beginPath(); ctx.moveTo(X(x0), Y(y0 + b)); ctx.lineTo(X(x0 + W), Y(y0 + b)); ctx.stroke(); ctx.globalAlpha = 1; }
+  ctx.fillStyle = css('--muted'); ctx.font = `11px ${css('--sans')}`; ctx.textAlign = 'center';
+  for (let a = 0; a < W; a += 2) ctx.fillText(String(x0 + a), X(x0 + a + 0.5), oy + 15);
+  ctx.textAlign = 'right'; for (let b = 0; b < H; b += 2) ctx.fillText(String(y0 + b), ox - 4, Y(y0 + b + 0.5) + 4); ctx.textAlign = 'left';
+  ctx.fillStyle = css('--accent-soft'); ctx.fillRect(X(x0), Y(row + 1), W * cs, cs);
+  const pts = {}, img = pt => [pt.n[0] + pt.r[0] / 7, pt.n[1] + pt.r[1] / 7];
+  for (let a = 0; a < W; a++) for (let b = 0; b < H; b++) {
+    const pt = L.at(x0 + a, y0 + b); pts[a + ',' + b] = pt; const [ix, iy] = img(pt);
+    ctx.strokeStyle = css('--jit'); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(ix), Y(iy)); ctx.lineTo(X(pt.x * g), Y(pt.y * g)); ctx.stroke();
+    ctx.beginPath(); ctx.arc(X(ix), Y(iy), Math.max(3, cs * 0.09), 0, 7); ctx.stroke();
+    ctx.fillStyle = css('--ink'); ctx.beginPath(); ctx.arc(X(pt.x * g), Y(pt.y * g), Math.max(1.8, cs * 0.05), 0, 7); ctx.fill();
+  }
+  const D1 = L.law(1, 0), b = row - y0, ACC = css('--accent'), WARM = css('--warm');
+  ctx.font = `600 ${Math.max(10, Math.round(cs * 0.24))}px ${css('--sans')}`;
+  for (let a = 0; a + 1 < W; a++) {
+    const u = pts[a + ',' + b], v = pts[(a + 1) + ',' + b], l = carryLen(x0 + a, 7, K), [ax, ay] = img(u), [bx, by] = img(v);
+    const dr = [(v.r[0] - u.r[0] + 7) % 7, (v.r[1] - u.r[1] + 7) % 7];
+    ctx.strokeStyle = l > 1 ? WARM : ACC; ctx.lineWidth = l > 1 ? 2.2 : 1.3; ctx.beginPath(); ctx.moveTo(X(ax), Y(ay)); ctx.lineTo(X(bx), Y(by)); ctx.stroke();
+    ctx.beginPath(); ctx.arc(X(bx), Y(by), 3, 0, 7); ctx.fillStyle = ctx.strokeStyle; ctx.fill();
+    if (l > 1) {
+      const pr = [(u.r[0] + D1[0][0]) % 7, (u.r[1] + D1[1][0]) % 7];
+      ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.arc(X(x0 + a + 1 + pr[0] / 7), Y(row + pr[1] / 7), Math.max(5, cs * 0.14), 0, 7); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = WARM; ctx.fillText(`D(${l}) = (${dr.join(',')})`, X(x0 + a + 0.6), Y(row + 1) - 4);
+    }
+  }
+  ctx.fillStyle = ACC; ctx.fillText(`D(1) = (${D1[0][0]},${D1[1][0]})`, X(x0) + 4, Y(row) + Math.max(12, cs * 0.3) + 2);
+}
+hx.addEventListener('input', drawHier); hy.addEventListener('input', drawHier);
+function runTable() {
+  const W = DATA.law.wf7, rows = [['O₀ own, step →', 0, 0], ['X₁←₀ cross, step →', 1, 0], ['O₁ own, step ↑', 1, 1], ['X₀←₁ cross, step ↑', 0, 1]];
+  const L8 = SQ.level('wf7', 8); let ok = true;
+  for (let l = 1; l <= 8; l++) for (const [, c, cp] of rows) if (L8.law(l, cp)[c][0] !== W[l - 1][0][c][cp]) ok = false;
+  let hd = '<tr><th><i>l</i></th>' + W.map((_, i) => `<th>${i + 1}</th>`).join('') + '</tr>';
+  for (const [lab, c, cp] of rows) {
+    const vals = W.map(t => t[0][c][cp]), frz = vals.every(v => v === vals[0]);
+    hd += `<tr><th>${lab}</th>` + vals.map(v => `<td class="${frz ? 'frz' : ''}">${v}</td>`).join('') + '</tr>';
+  }
+  document.getElementById('tabRun').innerHTML = hd;
+  document.getElementById('tabRun').insertAdjacentHTML('afterend', `<p class="note">Browser check at level 8, <i>l</i> ≤ 8: ${ok ? 'identical to the table' : 'MISMATCH'}.</p>`);
+}
+
+// ------------------------------------------------------------------ 3. the one-coordinate gap f_1
+const gs = { e: 1 }, sg = document.getElementById('sg'), rg = document.getElementById('rg');
+SQ.seg(document.getElementById('eSeg'), v => { gs.e = +v; drawGap(); });
+sg.addEventListener('input', drawGap); rg.addEventListener('input', drawGap);
+function drawGap() {
+  const e = gs.e, s = +sg.value, R = +rg.value, R2 = ((R + s) % 7 + 7) % 7;
+  document.getElementById('sgv').textContent = (s > 0 ? '+' : '') + s + (Math.abs(s) === 3 ? ' (≈ ∓½)' : '');
+  document.getElementById('rgv').textContent = R;
+  const { ctx, w, h } = SQ.fitCanvas(document.getElementById('cG'));
+  const lo = -0.08, hi = 2.08, X = t => 12 + (t - lo) / (hi - lo) * (w - 24), y1 = 36, y2 = 104;
+  ctx.fillStyle = css('--muted'); ctx.font = `12px ${css('--sans')}`;
+  for (let c = 0; c < 2; c++) {
+    ctx.strokeStyle = css('--grid-strong'); ctx.lineWidth = 1.4; ctx.strokeRect(X(c), y1 - 16, X(c + 1) - X(c), y2 - y1 + 34);
+    ctx.strokeStyle = css('--grid'); ctx.lineWidth = 1; ctx.beginPath(); for (let t = 1; t < 7; t++) { ctx.moveTo(X(c + t / 7), y1 - 16); ctx.lineTo(X(c + t / 7), y2 + 18); } ctx.stroke();
+    ctx.fillText(c === 0 ? 'cell of the point' : 'next cell', X(c) + 4, y2 + 34);
+  }
+  const band = (a, y, lab) => { ctx.fillStyle = css('--band'); ctx.fillRect(X(a), y - 9, X(a + 1 / 7) - X(a), 18); ctx.strokeStyle = css('--jit'); ctx.strokeRect(X(a), y - 9, X(a + 1 / 7) - X(a), 18);
+    ctx.strokeStyle = css('--accent'); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(X(a), y, 5, 0, 7); ctx.stroke(); ctx.lineWidth = 1; ctx.fillStyle = css('--ink'); ctx.fillText(lab, X(a) + 8, y - 13); };
+  const A = R / 7, B = e + R2 / 7;
+  band(A, y1, `point: R = ${R}`); band(B, y2, `neighbour: R ⊕ σ = ${R2}`);
+  const gap = Math.max(0, Math.abs(7 * e + R2 - R) - 1) / 7, f = SQ.f1(e, s, 7);
+  const [ga, gb] = B >= A ? [A + 1 / 7, B] : [B + 1 / 7, A];
+  if (gap > 0) { const ym = (y1 + y2) / 2; ctx.strokeStyle = css('--warm'); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(X(ga), ym); ctx.lineTo(X(gb), ym); ctx.stroke(); }
+  let worst = 0, wv = Infinity; for (let r = 0; r < 7; r++) { const v = Math.max(0, Math.abs(7 * e + ((r + s) % 7 + 7) % 7 - r) - 1) / 7; if (v < wv) { wv = v; worst = r; } }
+  document.getElementById('readG').innerHTML = `<dt>gap at this R</dt><dd>${gap === 0 ? '0 (can touch)' : (7 * gap) + '/7'}</dd><dt>worst position R</dt><dd>${worst}</dd><dt>guaranteed gap f₁(${e}, ${s})</dt><dd class="${f === 0 ? 'bad' : 'em'}">${7 * f}/7 = ${fmt(f)}</dd>`;
+  const svg = document.getElementById('barG'); svg.innerHTML = '';
+  const x0 = 50, x1 = 630, yb = 170, yt = 20, Yv = v => yb - (yb - yt) * v / 1, bw = (x1 - x0) / 7;
+  const gg = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12, fill: css('--muted') }, svg);
+  for (const t of [0, 0.5, 1]) { svgEl('line', { x1: x0, x2: x1, y1: Yv(t), y2: Yv(t), stroke: css('--grid') }, gg); svgEl('text', { x: x0 - 6, y: Yv(t) + 4, 'text-anchor': 'end' }, gg).textContent = t; }
+  for (let k = 0; k < 7; k++) {
+    const sv = k - 3, xm = x0 + bw * (k + 0.5);
+    for (const [ee, dx, cl] of [[1, -bw * 0.2, '--accent'], [0, bw * 0.2, '--warm']]) {
+      const v = SQ.f1(ee, sv, 7), cur = ee === e && sv === s;
+      svgEl('rect', { x: xm + dx - bw * 0.17, y: Yv(v), width: bw * 0.34, height: Math.max(1, yb - Yv(v)), fill: css(cl), opacity: cur ? 1 : 0.45, stroke: cur ? css('--ink') : 'none', 'stroke-width': 1.5 }, svg);
+    }
+    svgEl('text', { x: xm, y: yb + 16, 'text-anchor': 'middle' }, gg).textContent = (sv > 0 ? '+' : '') + sv;
+  }
+  svgEl('text', { x: x1, y: yb + 34, 'text-anchor': 'end' }, gg).textContent = 'σ (residue mod 7)';
+  const lg = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12 }, svg);
+  svgEl('rect', { x: x0 + 8, y: 2, width: 10, height: 10, fill: css('--accent') }, lg); svgEl('text', { x: x0 + 22, y: 11, fill: css('--muted') }, lg).textContent = 'moves, e = 1 (own response)';
+  svgEl('rect', { x: x0 + 230, y: 2, width: 10, height: 10, fill: css('--warm') }, lg); svgEl('text', { x: x0 + 244, y: 11, fill: css('--muted') }, lg).textContent = 'stays, e = 0 (cross response)';
+}
+
+// ------------------------------------------------------------------ 4. the certificate for one step
+const NC = {
+  wf7: { q: 7, j: 1, Lmax: 18, Kreal: 8, D: (l, c, cp) => DATA.law.wf7[l - 1][0][c][cp] },
+  b2: { q: 2, j: 12, Lmax: 148, Kreal: 10, D: (l, c, cp) => { let m = 0; const t = DATA.law.b2[l - 1]; for (let i = 0; i < 12; i++) m = 2 * m + t[i][c][cp]; return m; } },
+};
+const cs4 = { key: 'wf7', e: [1, 0] }, l0 = document.getElementById('l0'), l1 = document.getElementById('l1');
+const fCache = {};
+function fj(key, e, s) {                                  // f_j(e, sigma) as an integer numerator over q^j
+  const n = NC[key], Q = Math.pow(n.q, n.j), id = key + e + ':' + s; if (id in fCache) return fCache[id];
+  let best = Infinity, arg = 0;
+  for (let R = 0; R < Q; R++) { const R2 = n.q === 2 ? (R ^ s) : (R + s) % Q, d = Math.abs(e * Q + R2 - R); if (d < best) { best = d; arg = R; } }
+  return (fCache[id] = { F: Math.max(0, best - 1), R: arg });
+}
+function sigma(key, e, la, lb) {                          // change of the geometric digits of coordinates 0, 1
+  const n = NC[key], ls = [la, lb], out = [0, 0];
+  for (let c = 0; c < 2; c++) for (let cp = 0; cp < 2; cp++) if (e[cp]) {
+    const d = n.D(ls[cp], c, cp);
+    out[c] = n.q === 2 ? out[c] ^ d : (((out[c] + e[cp] * d) % n.q) + n.q) % n.q;
+  }
+  return out;
+}
+function term(key, e, la, lb) {
+  const n = NC[key], Q = Math.pow(n.q, n.j), s = sigma(key, e, la, lb), f = [0, 1].map(c => fj(key, e[c], s[c]));
+  return { s, f, F: f.map(x => x.F), Q, v: Math.hypot(f[0].F, f[1].F) / Q };
+}
+const showMask = (m, j) => j === 1 ? String(m) : m.toString(2).padStart(j, '0').split('').map(b => b === '1' ? '<span class="one">1</span>' : '0').join('');
+SQ.seg(document.getElementById('ncSeg'), v => { cs4.key = v; const n = NC[v]; l0.max = l1.max = n.Lmax; l0.value = Math.min(+l0.value, n.Lmax); l1.value = Math.min(+l1.value, n.Lmax); drawCert(); tableCert(); });
+SQ.seg(document.getElementById('stSeg'), v => { cs4.e = v.split(',').map(Number); drawCert(); });
+l0.addEventListener('input', drawCert); l1.addEventListener('input', drawCert);
+function realPairs(key, e, la, lb) {                      // sample actual neighbour pairs with these carry lengths
+  const n = NC[key], q = n.q, K = Math.min(n.Kreal, Math.max(e[0] ? la : 0, e[1] ? lb : 0) + 1);
+  if ((e[0] && la > K) || (e[1] && lb > K) || (e[0] && la >= n.Kreal) || (e[1] && lb >= n.Kreal)) return null;
+  const L = SQ.level(key, K), g = L.g; let seed = 12345, best = Infinity, cnt = 0;
+  const rnd = m => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed % m; };
+  const withCarry = l => l === K ? g - 1 : rnd(Math.pow(q, K - l)) * Math.pow(q, l) + rnd(q - 1) * Math.pow(q, l - 1) + Math.pow(q, l - 1) - 1;
+  for (let t = 0; t < 400; t++) {
+    const n0 = e[0] ? withCarry(la) : rnd(g), m1 = e[1] ? withCarry(lb) : rnd(g);
+    const n1 = e[1] === -1 ? m1 + 1 : m1;                  // a step -1 is the reverse of a +1 step from the lower cell
+    const A = L.at(n0, n1), B = L.at(n0 + e[0], n1 + e[1]);
+    const d = Math.sqrt(SQ.td2(A.x, A.y, B.x, B.y)) * g; if (d < best) best = d; cnt++;
+  }
+  return { K, best, cnt };
+}
+function drawCert() {
+  const key = cs4.key, n = NC[key], e = cs4.e, la = +l0.value, lb = +l1.value;
+  l0.disabled = !e[0]; l1.disabled = !e[1];
+  document.getElementById('l0v').textContent = e[0] ? la : '—'; document.getElementById('l1v').textContent = e[1] ? lb : '—';
+  const T = term(key, e, la, lb), Q = T.Q;
+  const { ctx, w } = SQ.fitCanvas(document.getElementById('cC'));
+  const xs = [Math.min(0, e[0]), Math.max(1, 1 + e[0])], ys = [Math.min(0, e[1]), Math.max(1, 1 + e[1])];
+  const span = Math.max(xs[1] - xs[0], ys[1] - ys[0]) + 0.3, sc = w / span, ox = (span - (xs[1] - xs[0])) / 2 - xs[0], oy = (span - (ys[1] - ys[0])) / 2 - ys[0];
+  const X = x => (x + ox) * sc, Y = y => w - (y + oy) * sc;
+  for (const [a, b] of [[0, 0], [e[0], e[1]]]) {
+    ctx.strokeStyle = css('--grid-strong'); ctx.lineWidth = 1.5; ctx.strokeRect(X(a), Y(b + 1), sc, sc);
+    if (n.q === 7) { ctx.strokeStyle = css('--grid'); ctx.lineWidth = 1; ctx.beginPath(); for (let t = 1; t < 7; t++) { ctx.moveTo(X(a + t / 7), Y(b)); ctx.lineTo(X(a + t / 7), Y(b + 1)); ctx.moveTo(X(a), Y(b + t / 7)); ctx.lineTo(X(a + 1), Y(b + t / 7)); } ctx.stroke(); }
+  }
+  ctx.fillStyle = css('--muted'); ctx.font = `12px ${css('--sans')}`; ctx.fillText('cell of the point', X(0) + 5, Y(0) - 6); ctx.fillText('neighbour cell', X(e[0]) + 5, Y(e[1] + 1) + 15);
+  const R = T.f.map(x => x.R), R2 = [0, 1].map(c => n.q === 2 ? R[c] ^ T.s[c] : (R[c] + T.s[c]) % Q);
+  const A = [R[0] / Q, R[1] / Q], B = [e[0] + R2[0] / Q, e[1] + R2[1] / Q], jw = Math.max(1 / Q, 0.012);
+  for (const P of [A, B]) {
+    ctx.fillStyle = css('--band'); ctx.fillRect(X(P[0]), Y(P[1] + jw), jw * sc, jw * sc); ctx.strokeStyle = css('--jit'); ctx.lineWidth = 1; ctx.strokeRect(X(P[0]), Y(P[1] + jw), jw * sc, jw * sc);
+    ctx.strokeStyle = css('--accent'); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(X(P[0]), Y(P[1]), 6, 0, 7); ctx.stroke();
+  }
+  const gx = [0, 1].map(c => { const lo = Math.min(A[c], B[c]), hi = Math.max(A[c], B[c]); return [lo + 1 / Q, Math.max(lo + 1 / Q, hi)]; });
+  const p1 = [A[0] <= B[0] ? gx[0][0] : gx[0][1], A[1] <= B[1] ? gx[1][0] : gx[1][1]], p2 = [A[0] <= B[0] ? gx[0][1] : gx[0][0], A[1] <= B[1] ? gx[1][1] : gx[1][0]];
+  ctx.strokeStyle = css('--warm'); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(X(p1[0]), Y(p1[1])); ctx.lineTo(X(p2[0]), Y(p2[1])); ctx.stroke();
+  const fs = T.F.map(F => n.q === 7 ? `${F}/7` : `${F}/4096`);
+  const rows = [['carry responses used', e.map((x, c) => x ? `D(${c ? lb : la}) col ${c}` : '').filter(Boolean).join(', ')],
+    ['σ₀ (change of x digits)', showMask(T.s[0], n.j)], ['σ₁ (change of y digits)', showMask(T.s[1], n.j)],
+    [`gap in x, f(${e[0]}, σ₀)`, fs[0]], [`gap in y, f(${e[1]}, σ₁)`, fs[1]]];
+  document.getElementById('readC').innerHTML = rows.map(([a, b]) => `<dt>${a}</dt><dd class="mask">${b}</dd>`).join('') + `<dt>guaranteed distance</dt><dd class="em">${fmtDown(T.v)}</dd>`;
+  const rp = realPairs(key, e, la, lb);
+  document.getElementById('realC').innerHTML = rp ? `Real pairs: ${rp.cnt} neighbour pairs of P<sub>${2 * rp.K}</sub> with these carry lengths, smallest distance <b>${fmt(rp.best)}</b> cells ${rp.best >= T.v - 1e-9 ? '≥' : '<'} ${fmtDown(T.v)}. The worst positions of the two coordinates need not occur in the same pair, so the real minimum is usually larger.`
+    : `Real pairs: sampled only for carry lengths below ${NC[key].Kreal} (the exported matrices reach level ${NC[key].Kreal}); the responses themselves are the same at every level.`;
+}
+function tableCert() {
+  const key = cs4.key, n = NC[key], Lt = Math.min(n.Lmax, key === 'wf7' ? 18 : 20);
+  const steps = [['→ (1, 0)', [1, 0]], ['↑ (0, 1)', [0, 1]], ['↗ (1, 1), min over l₁', [1, 1]], ['↘ (1, −1), min over l₁', [1, -1]]];
+  let html = '<tr><th>step \\ carry length l₀ (or l₁ for ↑)</th>' + Array.from({ length: Lt }, (_, i) => `<th>${i + 1}</th>`).join('') + '</tr>';
+  let gmin = Infinity, garg = '';
+  const cells = steps.map(([lab, e]) => Array.from({ length: Lt }, (_, i) => {
+    const l = i + 1; let v;
+    if (!e[0]) v = term(key, e, 1, l).v; else if (!e[1]) v = term(key, e, l, 1).v;
+    else { v = Infinity; for (let m = 1; m <= Lt; m++) v = Math.min(v, term(key, e, l, m).v); }
+    if (v < gmin - 1e-12) { gmin = v; garg = `step ${lab.split(' ')[0]}, l = ${l}`; }
+    return v;
+  }));
+  steps.forEach(([lab], k) => { html += `<tr><th>${lab}</th>` + cells[k].map(v => `<td class="${Math.abs(v - gmin) < 1e-12 ? 'warm' : ''}">${fmtDown(v, 3)}</td>`).join('') + '</tr>'; });
+  document.getElementById('tabC').innerHTML = html;
+  document.getElementById('noteC').innerHTML = key === 'wf7'
+    ? `Minimum over the carry lengths shown: <b>${fmtDown(gmin)}</b> (${garg}) = 2/7, the bound of <span class="mono">thm:WF</span> at p = 7. At l = 2 the own shift is +1, which is fatal on its own; the constant cross response ½ keeps the neighbours 2/7 apart. The table is finite, but the theorem covers every l by hand: coordinate 1 alone gives at least 2/7 on every step, because its responses are constant (thm:WF).`
+    : `Minimum over the carry lengths shown: <b>${fmtDown(gmin)}</b> (${garg}). The minimum over all l is the finite computation of section 5 below.`;
+}
+
+// ------------------------------------------------------------------ 5. B2: type of l and the octave shift
+const lo = document.getElementById('lo');
+const b2tuple = l => JSON.stringify(DATA.law.b2[l - 1]);
+const bitlog = n => Math.floor(Math.log2(n)) % 2;
+function octaveStep(l) {                                   // Lemma octave: a smaller l' of the same type (j = 12)
+  const k = Math.floor(Math.log2(l));
+  if (l + 12 < Math.pow(2, k + 1)) return Math.pow(2, k - 2) + (l % 2);
+  return l - 3 * Math.pow(2, k - 1);
+}
+function drawOct() {
+  const l = +lo.value; document.getElementById('lov').textContent = l;
+  const chain = [l]; while (chain[chain.length - 1] >= 64) chain.push(octaveStep(chain[chain.length - 1]));
+  const r = chain[chain.length - 1], same = b2tuple(l) === b2tuple(r);
+  const type = x => `parity ${x % 2}, bits ${Array.from({ length: 13 }, (_, i) => bitlog(x + i)).join('')}`;
+  const masks = x => ['O₀', 'X₁←₀', 'O₁', 'X₀←₁'].map((nm, k) => { const [c, cp] = [[0, 0], [1, 0], [1, 1], [0, 1]][k]; return `<div class="digrow"><span class="lab">${nm}</span><span class="mask">${showMask(NC.b2.D(x, c, cp), 12)}</span></div>`; }).join('');
+  let distinct = new Set(); for (let x = 1; x <= 63; x++) distinct.add(b2tuple(x));
+  document.getElementById('octOut').innerHTML = `
+    <dl class="read"><dt>pattern of l</dt><dd class="mask">${type(l)}</dd><dt>octave shifts</dt><dd>${chain.join(' → ')}</dd>
+    <dt>pattern of ${r}</dt><dd class="mask">${type(r)}</dd><dt>12-digit responses equal?</dt><dd class="${same ? 'good' : 'bad'}">${same ? 'yes' : 'no'}</dd>
+    <dt>distinct tuples, l ≤ 63</dt><dd>${distinct.size}</dd></dl>
+    <h3 style="margin-top:12px">Masks D<sub>i</sub>(${l}), digits K … K+11</h3>${masks(l)}`;
+}
+lo.addEventListener('input', drawOct);
+document.getElementById('runCert').addEventListener('click', () => {
+  const out = document.getElementById('certOut'), t0 = performance.now();
+  const reps = []; const seen = new Set(); for (let l = 1; l <= 63; l++) { const t = b2tuple(l); if (!seen.has(t)) { seen.add(t); reps.push(l); } }
+  let best = Infinity, arg = null, cases = 0;
+  const consider = (e, a, b) => { const T = term('b2', e, a, b), v = T.F[0] * T.F[0] + T.F[1] * T.F[1]; cases++; if (v < best) { best = v; arg = { e, a, b, T }; } };
+  for (const a of reps) { consider([1, 0], a, 1); consider([0, 1], 1, a); }
+  for (const a of reps) for (const b of reps) { consider([1, 1], a, b); consider([1, -1], a, b); }
+  const v = Math.sqrt(best) / 4096, T = arg.T;
+  out.className = 'verdict ' + (best === 2269618 ? 'good' : 'bad');
+  out.innerHTML = `${cases} cases in ${Math.round(performance.now() - t0)} ms. Minimum of f₁₂(e₀, σ₀)² + f₁₂(e₁, σ₁)², in units of 4096⁻²: <b>${best}</b>, so LB₁₂ = √${best}/4096 = <b>${fmtDown(v)}</b>${best === 2269618 ? ', as in <span class="mono">thm:B2</span>' : ''}. Binding case: step (${arg.e.join(', ')}) with l = ${arg.e[0] ? arg.a : arg.b}; σ₀ = <span class="mask">${showMask(T.s[0], 12)}</span> (gap ${T.F[0]}/4096), σ₁ = <span class="mask">${showMask(T.s[1], 12)}</span> (gap ${T.F[1]}/4096). The own mask lets the neighbour sit almost straight above or below, but the leading 1 of the cross mask staggers it by about half a cell.`;
+});
+
+drawDigits(); drawHier(); runTable(); drawGap(); drawCert(); tableCert(); drawOct();
+SQ.onRedraw(() => { drawDigits(); drawHier(); drawGap(); drawCert(); });
+})();
+</script>
+</body>
+</html>

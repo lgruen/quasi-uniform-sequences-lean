@@ -1,0 +1,183 @@
+%
+\section{Structure Proofs}\label{app:machinery}
+This appendix collects proofs that would interrupt the main text. Sections~\ref{app:F4carry} and~\ref{app:resform} support Section~\ref{sec:law}: the carry rule for $q=4$ (Remark~\ref{rem:F4carry}), the Riordan form (Lemma~\ref{lem:riordan}) and the proof of the residue form (Lemma~\ref{lem:resform}). Section~\ref{app:responses} collects facts about responses used in Sections~\ref{sec:law} and~\ref{sec:count}. Section~\ref{app:LIproof} proves Proposition~\ref{prop:LI}, Section~\ref{app:HBproof} the results on the hexagonal brick wall (Theorem~\ref{thm:HB}, Corollary~\ref{cor:HB17}), and Section~\ref{app:smallbases} two results of Section~\ref{sec:frames} (Proposition~\ref{prop:automaton}, Lemma~\ref{lem:octave}). The staggered windows at a finite prime are in Appendix~\ref{app:LFdata}.
+
+\subsection{Carries in Base Four}\label{app:F4carry}
+\begin{remark}[Carries for $q=4$]\label{rem:F4carry}
+For a digit $y\in\F_q$ let $\Delta(y):=\enc^{-1}\bigl((\enc(y)+1)\bmod q\bigr)-y\in\F_q^*$ be the change in $\F_q$ when its code goes up by one, and let $\bar y=\enc^{-1}(q-1)$ be the top digit. A step of carry length $l$ adds $\Delta(\bar y)$ to each of the $l-1$ finest digits and $\Delta(y)$ to digit $K-l$, where $y$ is the value of that digit; for $\F_4$, $\Delta(0)=\Delta(\omega)=1$ and $\Delta(1)=\Delta(\omega^2)=\omega^2$. By linearity such a step changes the geometric digit $K+i$ of coordinate $c$ by
+\begin{equation}\label{eq:carrychange}
+\delta_i(l,y)[c][c']:=\Delta(\bar y)\,D_i(l-1)[c][c']+\Delta(y)\bigl(D_i(l)-D_i(l-1)\bigr)[c][c'],
+\end{equation}
+which is $D_i(l)[c][c']$ for prime $q$ and $\omega^2D_i(l)$ or $D_i(l)+\omega D_i(l-1)$ for $\F_4$.
+\end{remark}
+
+\subsection{Riordan Form and Residue Form}\label{app:resform}
+The Riordan form writes each row of a scramble as one series in the common local variable $x$; the self-similar scrambles are those with one series for all rows.
+
+\begin{lemma}[Riordan form]\label{lem:riordan}
+Let $\theta\in\F_q^*$. For every scramble $L_c$ there are unit power series $g_{c,n}\in\F_q[[x]]$, $n\ge0$, such that for every $V$
+\[
+y_{c,n}(V)=\coef{n}\,g_{c,n}(x)\,V\bigl(z_c(\theta x)\bigr).
+\]
+Row $n$ of $L_c$ determines and is determined by the coefficients of $g_{c,n}$ up to $x^n$.
+\end{lemma}
+
+\begin{proof}
+Write $V(z)=\sum_k[(z-a_c)^k]V\,(z-a_c)^k$. Since $z_c(\theta x)-a_c=\theta x/w'(a_c)+O(x^2)$ is $x$ times a unit, $\coef{n}g(x)(z_c(\theta x)-a_c)^k$ vanishes for $k>n$, equals $g(0)(\theta/w'(a_c))^n\ne0$ for $k=n$, and for $k<n$ depends only on $g$ up to $x^{n-k}$, with the coefficient of $x^{n-k}$ entering through the factor $(\theta/w'(a_c))^k\ne0$. So the map from the coefficients of $g$ up to $x^n$ to row $n$ is triangular with nonzero diagonal, hence a bijection onto the rows with nonzero diagonal entry.
+\end{proof}
+
+For the residue form we compute residues in a different local variable. The following change of variable is classical; we include the short proof because it must hold in every characteristic.
+
+\begin{lemma}[Change of variable in a residue]\label{lem:reschange}
+Let $Z$ and $u$ be formal variables and $Z=u\,\mu(u)$ with a unit series $\mu\in\F_q[[u]]$. For every Laurent series $F\in\F_q((Z))$,
+\[
+\Res_Z\bigl(F(Z)\,dZ\bigr)=\Res_u\bigl(F(Z(u))\,Z'(u)\,du\bigr),
+\]
+where $\Res_Z(F\,dZ)$ is the coefficient of $Z^{-1}$ in $F$, and $Z'(u)$ is the formal derivative.
+\end{lemma}
+
+\begin{proof}
+Both sides are linear in $F$. For $k\ge0$ the series $Z^kZ'$ has no negative powers of $u$, so on both sides only the finitely many coefficients of $Z^k$, $k<0$, in $F$ matter, and it suffices to take $F=Z^k$, $k\in\Z$, where the left side is $1$ for $k=-1$ and $0$ otherwise. For $k=-1$ the right side is the residue of $Z'/Z=1/u+\mu'/\mu$, and $\mu'/\mu$ is a power series, so it is $1$. Let $k\ne-1$. Write $\mu=\mu_0+\mu_1u+\mu_2u^2+\cdots$. The coefficient of $u^{-1}$ in $Z^kZ'=u^k\mu^k(\mu+u\mu')$ is a polynomial with integer coefficients in $\mu_0^{-1},\mu_0,\mu_1,\mu_2,\dots$ (finitely many of them), the same polynomial over every field. Over a field of characteristic zero, with the $\mu_i$ independent indeterminates, $Z^kZ'=\frac{d}{du}\bigl(Z^{k+1}/(k+1)\bigr)$ is a derivative, whose coefficient of $u^{-1}$ is zero. So the polynomial is zero, and the right side vanishes over $\F_q$ as well.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:resform}]
+(a) Since $\Res_{a}(V(z-a)^{-k-1}dz)=[(z-a)^k]V$, the right side equals $\sum_{k\le n}L_c[n][k]\,[(z-a_c)^k]V$, which is digit $n$ of the scrambled coordinate $c$ (Section~\ref{sec:prelim}). The coefficient of $(z-a_c)^{-n-1}$ in $\eta_{c,n}$ is $L_c[n][n]\ne0$. Conversely, a family of polar differentials $\eta_{c,n}=\sum_{k\le n}\lambda_{n,k}(z-a_c)^{-k-1}dz$ with $\lambda_{n,n}\ne0$ defines the lower-triangular matrix $L_c[n][k]=\lambda_{n,k}$ with nonzero diagonal, and the same computation gives $y_{c,n}(V)=\Res_{a_c}(V\eta_{c,n})$.
+
+(b) Fix $c$ and expand at $a_c$ in $Z=z-a_c$. Since $w=w'(a_c)\,Z+O(Z^2)$ with $w'(a_c)\ne0$, the series $u=w$ is $Z$ times a unit, and its inverse is $Z=z_c(u)-a_c$, because $w(z_c(u))=u$. Let $\varphi_c$ be a unit series in $Z$. By Lemma~\ref{lem:reschange}, with $dz=dZ$,
+\[
+\Res_{a_c}\Bigl(V\varphi_c\Bigl(\frac\theta w\Bigr)^{n+1}dz\Bigr)=\theta^{n+1}\Res_u\Bigl(V(z_c(u))\,\varphi_c(z_c(u))\,u^{-n-1}z_c'(u)\,du\Bigr)=\theta^{n+1}[u^n]\,H(u),
+\]
+with $H(u)=V(z_c(u))\varphi_c(z_c(u))z_c'(u)$. Substituting $u=\theta x$ turns $[u^n]H(u)$ into $\theta^{-n}\coef{n}H(\theta x)$, so the residue equals
+\[
+\coef{n}\,\theta\,\varphi_c\bigl(z_c(\theta x)\bigr)z_c'(\theta x)\,V\bigl(z_c(\theta x)\bigr)=\coef{n}\,g_c(x)\,V\bigl(z_c(\theta x)\bigr),
+\]
+with $g_c$ as stated. It is a unit series, since $\varphi_c(a_c)\ne0$ and $z_c'(0)=1/w'(a_c)\ne0$. So a family of local multipliers gives a self-similar scramble with scale $\theta$ and multipliers $g_c$. Conversely, let $g_c$ be a unit series in $x$ and put $\varphi_c(z):=\theta^{-1}g_c(w(z)/\theta)\,w'(z)$; since $w(z)/\theta$ has no constant term at $a_c$, this is a power series in $Z$, and a unit because $g_c(0)w'(a_c)\ne0$. Differentiating $w(z_c(u))=u$ gives $w'(z_c(u))\,z_c'(u)=1$, hence
+\[
+\theta\,\varphi_c\bigl(z_c(\theta x)\bigr)\,z_c'(\theta x)=g_c(x)\,w'\bigl(z_c(\theta x)\bigr)\,z_c'(\theta x)=g_c(x).
+\]
+So every self-similar scramble has a residue form, and the two maps $\varphi_c\mapsto g_c$ and $g_c\mapsto\varphi_c$ are mutually inverse: the second composed with the first gives $\varphi_c(z_c(w(z)))=\varphi_c(z)$, because $z_c$ inverts $w$ at $a_c$. The scale $\theta$ is the same on both sides.
+
+(c) Write $F=G+\sum_c\sum_{k\ge1}\alpha_{c,k}(z-a_c)^{-k}$ with a polynomial $G$ and finitely many $\alpha_{c,k}\in\F_q$ (partial fractions; the denominator of $F$ is a product of powers of the $z-a_c$). At $a_c$ the polynomial $G$ and the terms $(z-a_b)^{-k}$, $b\ne c$, are regular, and $(z-a_c)^{-k}$ has residue $1$ for $k=1$ and $0$ for $k\ge2$; so $\Res_{a_c}(F\,dz)=\alpha_{c,1}$. At $\infty$, $G$ contributes no power $z^{-1}$, and $(z-a_c)^{-k}=z^{-k}(1-a_c/z)^{-k}$ contributes to $z^{-1}$ only for $k=1$, with coefficient $1$. Hence $[z^{-1}]F=\sum_c\alpha_{c,1}=\sum_c\Res_{a_c}(F\,dz)$. If $F=O(z^{-2})$ at $\infty$, then $[z^{-1}]F=0$.
+\end{proof}
+
+\subsection{Responses of Self-Similar Scrambles}\label{app:responses}
+This subsection supports Sections~\ref{sec:law} and~\ref{sec:count}: two responses of one column of a self-similar scramble are never both periodic (Proposition~\ref{prop:N2}), the cross responses of every digital $(0,s)$-sequence have full rank (Proposition~\ref{prop:rank2}), and Corollary~\ref{cor:N1} has a direct proof.
+
+\begin{proposition}[No periodic responses]\label{prop:N2}
+Let $s\ge2$, let the frame be arbitrary, and let the scramble be self-similar over $\F_q$. In every column $c'$, at most one of the $s$ series $O_{c'}$ and $X_{c\leftarrow c'}$ ($c\ne c'$) is rational. In particular the own response $O^{(l)}_{c'}$ and a cross response $X^{(l)}_{c\leftarrow c'}$ of one column, as functions of the carry length $l$, are never both eventually periodic, and neither are two cross responses $X^{(l)}_{c_1\leftarrow c'}$, $X^{(l)}_{c_2\leftarrow c'}$. For $s=2$: $O_1$ and $X_{0\leftarrow1}$ are not both rational, and neither are $O_0$ and $X_{1\leftarrow0}$.
+\end{proposition}
+
+\begin{proof}
+Write $y=\theta x$ and $z_c=z_c(y)$. \emph{No local root is rational.} The polynomial $w(Z)-y$ has degree one in $y$ and is primitive in $\F_q[Z][y]$, so it is irreducible in $\F_q[y,Z]$; it is monic of degree $s\ge2$ in $Z$, so by Gauss's lemma it is irreducible in $\F_q(y)[Z]$ and has no root in $\F_q(y)$. Since $z_c\in\F_q[[y]]$ is a root, $z_c\notin\F_q(y)$.
+
+\emph{The responses.} By Proposition~\ref{prop:law}, $O_{c'}=\mathcal D[c'][c']$ and $X_{c\leftarrow c'}=x^{-1}\mathcal D[c][c']$ with $\mathcal D=I-\FM(0)G$. Write $\FM=\diag(g_c)\,\mathrm{Vdm}$ with $\mathrm{Vdm}[c][b]=z_c^b$. Column $c'$ of $\mathrm{Vdm}^{-1}$ holds the coefficients of the Lagrange polynomial $\ell_{c'}(Z)=\prod_{c''\ne c'}(Z-z_{c''})/(z_{c'}-z_{c''})$, and $\FM(0)[c][b]=g_c(0)a_c^b$, so $(\FM(0)G)[c][c']=g_c(0)\,\ell_{c'}(a_c)/g_{c'}(x)$. By (\ref{eq:roots}) with $y$ in place of $x$, $\prod_{c''\ne c'}(Z-z_{c''})=(w(Z)-y)/(Z-z_{c'})$; at $Z=z_{c'}$ this is $w'(z_{c'})$, and at $Z=a_c$ it is $-y/(a_c-z_{c'})$, since $w(a_c)=0$. (The series $a_c-z_{c'}$ is nonzero: its constant term is $a_c-a_{c'}$ for $c\ne c'$, and for $c=c'$ its coefficient of $y$ is $-1/w'(a_{c'})$.) Hence
+\[
+(\FM(0)G)[c][c']=-\frac{g_c(0)}{g_{c'}(x)\,w'(z_{c'})}\cdot\frac{y}{a_c-z_{c'}},
+\]
+so $X_{c\leftarrow c'}=\theta\,g_c(0)/\bigl(g_{c'}(x)\,w'(z_{c'})\,(a_c-z_{c'})\bigr)\ne0$ for $c\ne c'$, and $1-O_{c'}=(\FM(0)G)[c'][c']$. Taking quotients,
+\[
+\frac{1-O_{c'}}{x\,X_{c\leftarrow c'}}=-\frac{g_{c'}(0)}{g_c(0)}\cdot\frac{a_c-z_{c'}}{a_{c'}-z_{c'}},\qquad
+\frac{X_{c_1\leftarrow c'}}{X_{c_2\leftarrow c'}}=\frac{g_{c_1}(0)}{g_{c_2}(0)}\cdot\frac{a_{c_2}-z_{c'}}{a_{c_1}-z_{c'}} .
+\]
+In both cases the right side is a nonzero constant times $\Xi=(b_1-z_{c'})/(b_2-z_{c'})$ for two distinct places $b_1\ne b_2$. If the two series on the left were rational in $x$, then $\Xi$ would be rational in $y$, $\Xi\ne1$, and $z_{c'}=(b_1-b_2\Xi)/(1-\Xi)$ would be rational, a contradiction. Finally, if the responses $O^{(l)}_{c'}=\coef{l}O_{c'}/(1-x)$ are eventually periodic in $l$, their generating function is rational, and so is $O_{c'}$; the same holds for the cross responses.
+\end{proof}
+
+For $s=2$, and for two cross series in dimension $s\ge3$, this is the statement used in Section~\ref{sec:law}; the case of an own and a cross series in dimension $s\ge3$ comes with the same proof. It is why, apart from a few constant responses as in the brick wall, the responses of a self-similar scramble keep changing with the carry length, and why Section~\ref{sec:antipode} keeps them in windows instead.
+
+For an arbitrary digital sequence the offset map of $P_{sK}$ is defined as in Section~\ref{sec:law}: the cell digits determine the index, so every geometric digit is a linear function of the cell digits. If the cross responses of a column moved in lockstep, $X_{c_2\leftarrow c'}=\xi X_{c_1\leftarrow c'}$, the vector $\mathbf u_l$ of Proposition~\ref{prop:depthdir} would stay in a hyperplane and a smaller window would do; this never happens.
+
+\begin{proposition}[Rank of the cross responses]\label{prop:rank2}
+Let $(C_0,\dots,C_{s-1})$ be a digital $(0,s)$-sequence over $\F_q$, $s\ge2$, and $K\ge s-1$. For a coordinate $c'$, let $X_{c'}$ be the $(s-1)\times K$ matrix whose row $c\ne c'$ holds the coefficients of the cell digits $y_{c',0},\dots,y_{c',K-1}$ in the geometric digit $r_c=y_{c,K}$ of $P_{sK}$. Then the minor of $X_{c'}$ on the $s-1$ finest digits $y_{c',K-s+1},\dots,y_{c',K-1}$ is nonzero; in particular $X_{c'}$ has rank $s-1$.
+\end{proposition}
+
+\begin{proof}
+Let $\mathbf B$ be the box matrix of the composition $(K,\dots,K)$: the first $K$ rows of every $C_c$, restricted to the columns $0,\dots,sK-1$. It is invertible because $P_{sK}$ is a $(0,sK,s)$-net. Its rows are indexed by pairs $(c,i)$, $i<K$, and the vector of cell digits is $\mathbf y=\mathbf B\mathbf V$ for the vector $\mathbf V=(V_0,\dots,V_{sK-1})$ of index digits. Let $\mathbf R$ be the $(s-1)\times sK$ matrix of the rows $C_c[K]$, $c\ne c'$, on the same columns. Then $r_c=(\mathbf R\mathbf V)_c=(\mathbf R\mathbf B^{-1}\mathbf y)_c$ for $c\ne c'$, so the rows of $X_{c'}$ are the columns $(c',i)$ of $\mathbf R\mathbf B^{-1}$.
+For a set $S$ of $s-1$ row indices of $\mathbf B$, let $\mathbf B_{S\leftarrow\mathbf R}$ be $\mathbf B$ with the rows in $S$ replaced by the rows of $\mathbf R$. Then $\mathbf B_{S\leftarrow\mathbf R}=E\mathbf B$, where $E$ is the identity with the rows in $S$ replaced by the rows of $\mathbf R\mathbf B^{-1}$, and expanding $\det E$ along the rows outside $S$ shows that the minor of $\mathbf R\mathbf B^{-1}$ on the columns $S$ is $\pm\det\mathbf B_{S\leftarrow\mathbf R}/\det\mathbf B$. Take $S=\{(c',K-s+1),\dots,(c',K-1)\}$. Up to the order of the rows, $\mathbf B_{S\leftarrow\mathbf R}$ consists of the first $K+1$ rows of every $C_c$, $c\ne c'$, and the first $K-s+1$ rows of $C_{c'}$, on the columns below $sK$: the box matrix of the composition $(K+1,\dots,K+1,K-s+1)$ of $sK$, which is invertible since $t=0$.
+\end{proof}
+
+\begin{proof}[Direct proof of Corollary~\ref{cor:N1}]
+Since $a_0=0$, $C_0=L_0$ is lower triangular with nonzero diagonal, and $P_{2K}$, $P_{2K+2}$ are nets (Lemma~\ref{lem:t0}), so the offset maps at the levels $K$ and $K+1$ are defined on the index polynomials of degree less than $2K$ and $2K+2$. Suppose the three conditions hold, and write $X$ and $X'$ for the coefficients of $y_{1,K-1}$ in $y_{0,K}$ at level $K$ and of $y_{1,K}$ in $y_{0,K+1}$ at level $K+1$, the only cross coefficients left.
+Take $V=z^K$. Its digits in coordinate~$0$ are $y_{0,i}=C_0[i][K]=0$ for $i<K$ and $y_{0,K}=C_0[K][K]\ne0$. The own part of $y_{0,K}$ vanishes, so $C_0[K][K]=X\,y_{1,K-1}(z^K)$, and $X\ne0$.
+Take $V=z^{K+1}$, of degree less than $2K$ because $K\ge2$. Now $y_{0,i}=0$ for $i\le K$, so the level-$K$ offset map of coordinate~$0$ gives $0=X\,y_{1,K-1}(z^{K+1})$, hence $y_{1,K-1}(z^{K+1})=0$. The own part of the offset map of coordinate~$1$ involves only $y_{1,K-1}$, and its cross part only the cell digits of coordinate~$0$, which all vanish; so $y_{1,K}(z^{K+1})=0$. Finally the offset map of coordinate~$0$ at level $K+1$ gives $C_0[K+1][K+1]=y_{0,K+1}(z^{K+1})=X'\,y_{1,K}(z^{K+1})=0$, a contradiction.
+\end{proof}
+
+The direct proof uses only that coordinate~$0$ is lower triangular and that $P_{2K}$ and $P_{2K+2}$ are nets, so it holds for every two-dimensional digital sequence with these two properties; the proof in Section~\ref{sec:count} uses the frame, and the same argument works verbatim for any two distinct places $a_0\ne a_1$ in place of $0,1$.
+
+
+\subsection{Proofs for Section~\ref{sec:antipode}}\label{app:LIproof}
+This subsection contains the proofs of the results on free digits, windows and the half-cell stagger (Sections~\ref{sec:steer} and~\ref{sec:staggered}) and of the results on windows and skeleton relations (Section~\ref{sec:joint}).
+
+\begin{proof}[Proof of Proposition~\ref{prop:LI}]
+(a) By Lemma~\ref{lem:resform}(b) the local multiplier $\varphi_c$ is a unit power series at $a_c$, and so is $\theta\varphi_c\hat\varpi_c$, because $\hat\varpi_c(a_c)=a_c-a_{1-c}\ne0$ for $s=2$. Since $w=(z-a_c)\,w_c(z)$ with $w_c(a_c)=w'(a_c)\ne0$, every power series in $z-a_c$ is a power series in $w$; write $\theta\varphi_c\hat\varpi_c=\Omega_c(w)$ with a unit series $\Omega_c$, and put $\lambda_c=\Omega_c(0)$ and $\psi_c=\lambda_c/\Omega_c$. Conversely, for any $\lambda_c\in\F_q^*$ and unit series $\psi_c$ with $\psi_c(0)=1$, $\varphi_c:=\lambda_c/\bigl(\theta\hat\varpi_c\,\psi_c(w)\bigr)$ is a unit power series at $a_c$. By Lemma~\ref{lem:resform}(b), $g_c(x)=\theta\varphi_c(z_c(\theta x))\,z_c'(\theta x)$, and $z_c'=1/w'(z_c)$ (differentiate $w(z_c(u))=u$); at $z=z_c(\theta x)$ we have $w(z)=\theta x$, which gives the formula for $g_c$.
+
+(b) This is Proposition~\ref{prop:law}.
+
+(c) By Proposition~\ref{prop:law}, $O_{c'}=\mathcal D[c'][c']$ and $X_{c\leftarrow c'}=x^{-1}\mathcal D[c][c']$ with $\mathcal D=I-\FM(0)G$. Write $y=\theta x$ and $\FM=\diag(g_c)\,\mathrm{Vdm}$ with $\mathrm{Vdm}[c][b]=z_c(y)^b$. As in the proof of Proposition~\ref{prop:N2},
+\[
+(\FM(0)G)[c][c']=\frac{g_c(0)}{g_{c'}(x)}\cdot\frac{y}{(z_{c'}(y)-a_c)\,w'(z_{c'}(y))} .
+\]
+By (a) with $\hat\varpi=1$, $g_{c'}(x)\,w'(z_{c'}(y))=\lambda_{c'}/\psi_{c'}(y)$ and $g_c(0)=\lambda_c/w'(a_c)$. For $c=c'$, $y=w(z_{c'}(y))=(z_{c'}(y)-a_{c'})\,w_{c'}(z_{c'}(y))$, so $y/(z_{c'}(y)-a_{c'})=w'(a_{c'})\,\hat w_{c'}(z_{c'}(y))$ and $(\FM(0)G)[c'][c']=[\hat w_{c'}\psi_{c'}](y)$, which gives $O_{c'}$. For $c\ne c'$, $y/(z_{c'}(y)-a_c)=y\,\check w_{cc'}(z_{c'}(y))/(a_{c'}-a_c)$; dividing by $x=y/\theta$ gives $X_{c\leftarrow c'}$ with the stated $\kappa_{c\leftarrow c'}$. The kernels are evaluated at the point $z_{c'}(y)$ of the local root, that is, as series in $w$ at $a_{c'}$ evaluated at $w=y$.
+
+(d) The displayed formula for $(\FM(0)G)[c][c']$ does not use $s\ge3$. In the frame $(0,1;\infty)$, $w=z^2-z$, $w'=2z-1$, and $z_0+z_1=1$, $z_0z_1=-y$. Column $1$: $\hat\varpi_1=z$, so (a) gives $g_1(x)w'(z_1)=\lambda_1/(\psi_1(y)z_1)$, $g_1(0)=\lambda_1$ and $g_0(0)=\lambda_0/(\hat\varpi_0(0)w'(0))=\lambda_0$. With $y/(z_1-1)=z_1$ and $y/(z_1-0)=z_1-1$ the formula gives $(\FM(0)G)[1][1]=z_1^2\psi_1(y)$ and $(\FM(0)G)[0][1]=(\lambda_0/\lambda_1)\,y\,\psi_1(y)$, hence $O_1$ and $X_{0\leftarrow1}$ with $\kappa_{0\leftarrow1}=\theta\lambda_0/\lambda_1$. Column $0$ is the same computation with $\hat\varpi_0=z-1$, $y/(z_0-0)=z_0-1=-z_1$ and $y/(z_0-1)=z_0$: $(\FM(0)G)[0][0]=(z_0-1)^2\psi_0(y)=z_1^2\psi_0(y)$ and $(\FM(0)G)[1][0]=(\lambda_1/\lambda_0)\,y\,\psi_0(y)$. The product $\kappa_{0\leftarrow1}\kappa_{1\leftarrow0}=\theta^2$ is immediate.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:depthdir}]
+Both kernels of column $c'$ take the value $1$ at $w=0$ (Proposition~\ref{prop:LI}(c); for $s=2$ the kernels of (d) are $z_1^2$ and $1$). So $\psi_{c',l}$ enters the coefficient of $x^n$ of $O_{c'}$ and of $X_{c\leftarrow c'}$ only for $n\ge l$, and at $n=l$ with the coefficients $-\theta^l$ and $-\kappa_{c\leftarrow c'}\theta^l$. The partial sum $O_{c'}^{(l)}$ contains the own coefficients up to $x^l$, and $X^{(l+1)}_{c\leftarrow c'}$ the cross coefficients up to $x^l$. Freeness is Proposition~\ref{prop:LI}(a): the coefficient of $x^n$ of $g_{c'}$ depends only on $\psi_{c',0},\dots,\psi_{c',n}$, and by Lemma~\ref{lem:riordan} so does row $n$ of $L_{c'}$.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:steer}]
+(a) By (ii) the line $\beta_l+\F_p\alpha_{c'}$ contains a point $\beta_l+t\alpha_{c'}$ of $W^{(c')}$, which gives the admissible digit $\psi=-t/\theta^l$. (b) By Proposition~\ref{prop:depthdir} the chosen digits define one unit series $\psi_c$ per coordinate, hence a self-similar scramble; Lemma~\ref{lem:t0} applies. (c) The offset map is the same at every level (Proposition~\ref{prop:LI}(b)); $X^{(1)}=-\kappa$ lies in its window by (i), and the admissible choice at depth $l$ puts $\mathbf u_l$ into $W^{(c')}$. (d) Lemma~\ref{lem:cert} with $j=1$ gives the first inequality. For a step $e$ with carry lengths $l_{c'}$, the change of the geometric digit of coordinate $c$ is $\sum_{c'}e_{c'}D(l_{c'})[c][c']$, which lies in $S_c(e)$ by (c); hence $\LBact_K\ge\LB(W)$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:volume}]
+The $q^{s-1}$ lines of direction $\alpha$ partition $\F_q^s$, and each of them contains a point of $W$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:antipode}]
+Let $\hat\sigma\in[0,p)$ represent $\sigma$. As $R$ runs through $\F_p$, $\enc(R\oplus\sigma)-\enc(R)$ takes the value $\hat\sigma$, and also $\hat\sigma-p$ if $\hat\sigma\ge1$ (when the neighbour's digit wraps around). For $e=1$ the minimum of $|p+\enc(R\oplus\sigma)-\enc(R)|$ is $\hat\sigma=p\operatorname{frac}(\Phi)$ if $\hat\sigma\ge1$ and $p$ if $\hat\sigma=0$, that is $p\,\bar f(+1,\Phi)$; for $e=0$ it is $p\|\Phi\|$; $e=-1$ is $e=1$ with $-\sigma$. Subtracting the jitter $1/p$ gives the formula. If $\bar f(+1,\Phi)=\bar f(-1,\Phi)$, then $\operatorname{frac}(\Phi)=\operatorname{frac}(-\Phi)$, so $\Phi\in\{0,\frac12\}$; at $0$, $\bar f(\pm1,0)=1\ne0=\bar f(0,0)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:BS}]
+Fix a step $e$, let $E=\operatorname{supp}e$ and $k=|E\cap C|$. (i) A moving coordinate $i\in C$ receives its own response and one cross from each other moving column, so $e_i\Phi_i\in[-a-(|E|-1)\varepsilon,\,-a+(|E|-1)\varepsilon]\subset(-1,0)$, because $a>(s-1)\varepsilon$ and $a+(s-1)\varepsilon<2a<1$ (by (ii)); hence $\bar f(e_i,\Phi_i)\ge1-a-(|E|-1)\varepsilon$. (ii) $k\ge2$: since $1-a-\varepsilon\ge0$, the hypothesis gives $1-a-\varepsilon\ge\sqrt{1-(\frac12-\varepsilon)^2}>\sqrt3/2$, so $a<0.134$, $a+(s-1)\varepsilon<2a<0.268$, and two moving coordinates of $C$ give $\sum_c\bar f(e_c,\Phi_c)^2>2\cdot0.732^2>1$. (iii) $E=\{\cstar\}$: $\bar f(\pm1,0)=1$. (iv) $E=\{i\}$: $\bar f(e_i,\Phi_i)=1-a$, and $\cstar$ does not move and receives $\pm(\half+[-\varepsilon,\varepsilon])$, at distance at least $\frac12-\varepsilon$ from $0$; the sum is at least $(1-a)^2+(\frac12-\varepsilon)^2\ge1$. (v) $E=\{i,\cstar\}$: $\bar f(e_i,\Phi_i)\ge1-a-\varepsilon$ by (i), and $e_\star\Phi_\star\in\pm(\half+[-\varepsilon,\varepsilon])$, where $\bar f(+1,\cdot)\ge\frac12-\varepsilon$; the sum is at least $(1-a-\varepsilon)^2+(\frac12-\varepsilon)^2\ge1$. For the second statement: $\varepsilon\mapsto(1-s\varepsilon)^2+(\frac12-\varepsilon)^2$ decreases on $[0,\varepsilon_s]$ and equals $1$ at $\varepsilon_s$, so for $\varepsilon<\varepsilon_s$ it exceeds $1$ at $a=(s-1)\varepsilon$, and by continuity some $a>(s-1)\varepsilon$ still works.
+\end{proof}
+
+
+
+\emph{Windows and skeleton relations.}\label{app:jointproof}
+\begin{proof}[Proof of Lemma~\ref{lem:corrS}]
+By Lemma~\ref{lem:resform}(b), $v_c\chi_{c,d}\,y_{c,K-1-d}(V)=\theta^K\Res_{a_c}\bigl(V\varphi_c\cdot v_c\chi_{c,d}(w/\theta)^d\cdot w^{-K}dz\bigr)$. Summing over $d<K$ replaces $v_c\chi_{c,d}(w/\theta)^d$ by the truncation of $1/\varphi_c$ below $w^K$. The rest of $1/\varphi_c$ is $O(w^K)$, and times $\varphi_cw^{-K}$ it is regular at $a_c$; so the sum equals $\theta^K\Res_{a_c}(Vw^{-K}dz)$. By Lemma~\ref{lem:resform}(c) the sum over $c$ is $\theta^K[z^{-1}](V/w^K)$, which is $0$ for $\deg V\le sK-2$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:corrected}]
+As in the proof of Theorem~\ref{thm:residue}, distinct points of $P_{sK-1}$ lie in distinct fine cells $\hat n$, and $\hat n_c=\sum_{i<K}y_{c,i}p^{K-1-i}$. Let two points lie in the fine cells $\hat n$, $\hat n'$, and let $a_c$ be the representative of $\hat n'_c-\hat n_c$ modulo $p^K$ in $(-p^K/2,p^K/2]$. As there, the toroidal distance in coordinate $c$ is at least $(|a_c|-1)_+p^{-K}$. If some $|a_c|\ge p$, the distance is at least $(p-1)p^{-K}\ge p^{-K}\ljitB(\Lambda_v)$, since $p\mathbf 1_c\in\Lambda_v$. Otherwise write $\hat n_c=pu_c+y_{c,K-1}$ with the coarse index $u_c$. Adding $a_c$ with $|a_c|<p$ changes $u_c$ modulo $p^{K-1}$ by some $\epsilon_c\in\{-1,0,1\}$, and $\epsilon_c\ne0$ only if $\epsilon_c=\operatorname{sgn}(a_c)$. A change of $u_c$ by $\pm1$ is a carry of some length $j_c\in[1,K-1]$ (the toroidal wrap is $j_c=K-1$), which changes each of the digits $y_{c,K-1-d}$, $1\le d\le j_c$, by $\epsilon_c$ and leaves the coarser digits unchanged; put $j_c=0$ if $\epsilon_c=0$. The digit $y_{c,K-1}$ changes by $a_c$ modulo $p$. Subtracting the relation for the two points gives $\sum_cv_c\bigl(a_c+\epsilon_c\Psi_c(j_c)\bigr)\equiv0$. Let $f_c\in\epsilon_c[0,B]$ be the integer $\epsilon_c$ times the centred representative of $\Psi_c(j_c)$, and $b:=a+f$. Then $b\in\Lambda_v$. Each $f_c$ is $0$ or has the sign of $a_c$, so $|b_c|=|a_c|+|f_c|\le|a_c|+B$, and $b=0$ would force $a=0$, which is excluded. Hence the distance is at least $p^{-K}\|(|a|-\mathbf 1)_+\|_2\ge p^{-K}\|(|b|-(1+B)\mathbf 1)_+\|_2\ge p^{-K}\ljitB(\Lambda_v)$, and $p^{-K}N^{1/s}=p^{-1/s}$. The inequality $\ljitB\ge\ljit-B\sqrt s$ holds because $(|b|-\mathbf 1)_+\le(|b|-(1+B)\mathbf 1)_++B\mathbf 1$ coordinatewise.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:joint}]
+(i) Lemma~\ref{lem:corrS} at level $K+1$ holds on $P_{s(K+1)-1}\supseteq P_{sK}$. For the two points of the step, $y_{c,K}$ changes by $\sigma_c$, the cell digits $y_{c,K-d}$, $1\le d\le l_c$, change by $e_c$ (a carry of length $l$ adds $1$ to each of the $l$ finest digits modulo $p$), and the coarser digits do not change. Subtracting the relation for the two points gives the identity.
+
+(ii) Let $\epsilon\in\F_p$ and $j\ge l$, and replace $\varphi_c$ by $\varphi_c(1+\epsilon w^j)$; the other coordinates are unchanged. By Lemma~\ref{lem:resform}(b) the new digits are $y'_{c,n}=y_{c,n}+\epsilon\theta^jy_{c,n-j}$ for $n\ge j$ and $y'_{c,n}=y_{c,n}$ for $n<j$. The offset map at level $K$ is linear in the cell digits, and a response is its value on the change of the cell digits: for a carry of length $l$ in coordinate $c$ this change is $+1$ in each digit $y_{c,n}$, $K-l\le n\le K-1$, and $0$ in every other cell digit. Take two index polynomials whose new cell digits differ in this way. By induction on $n$ their old cell digits differ in the same way, because the correction $\epsilon\theta^jy_{c,n-j}$ involves only digits with $n-j<K-l$. The geometric digits of the other coordinates are unchanged functions of $V$, so by linearity every $X^{(l)}_{c'\leftarrow c}$ is unchanged. The own geometric digit $y'_{c,K}$ changes by $O_c^{(l)}+\epsilon\theta^j\Delta y_{c,K-j}$, where $\Delta y_{c,K-j}$ is $1$ if $j=l$ and $0$ if $j>l$. On the other side $1/\varphi'_c=(1/\varphi_c)(1-\epsilon w^j+O(w^{j+1}))$ leaves $v_c$ and $\chi_{c,d}$, $d<j$, unchanged and changes $\chi_{c,j}$ by $-\epsilon\theta^j$, so $\Psi_c(l)$ changes by $-\epsilon\theta^l$ if $j=l$ and not at all if $j>l$. In both cases the sum $O_c^{(l)}+\Psi_c(l)$ is unchanged. Any local multiplier with the same $v_c,\chi_{c,1},\dots,\chi_{c,l-1}$ is $\varphi_c$ times a unit $1+O(w^l)$, a product of such factors, and the responses up to depth $l$ depend on finitely many of them.
+
+(iii) By the covering condition, for every column $c$ the set $\Wo^{(c)}+[0,B]$ contains $B+1$. Take the step $e=(1,\dots,1)$ and any $\xi_c\in\sum_{c'\ne c}W_{c\leftarrow c'}$. Then $\omega+\xi_c+t=B+1$ for some $\omega\in\Wo^{(c)}$ and $t\in[0,B]$, so $S_c(e)\ni\sigma_c:=\omega+\xi_c=B+1-t\in[1,B+1]$, and $f_1(1,\sigma_c)=(\sigma_c-1)/p\le B/p$ (Remark~\ref{rem:onedigit}). Summing over $c$ gives $\LB(W)^2\le sB^2/p^2$. For the second statement, $\Lambda_v$ has index $p$ in $\Z^s$, so by Minkowski's theorem it contains $b\ne0$ with $\|b\|_\infty\le p^{1/s}$; if $B+1\ge p^{1/s}$ then $(|b|-(1+B)\mathbf 1)_+=0$ and $\ljitB(\Lambda_v)=0$.
+\end{proof}
+
+\subsection{The Hexagonal Brick Wall}\label{app:HBproof}
+\begin{proof}[Proof of Theorem~\ref{thm:HB}]
+The fixed depth-zero crosses lie in their windows: $-\kappa_{1\leftarrow0}=\nu/2\equiv\half+b$ and $-\kappa_{0\leftarrow1}=k$. Column~$1$ needs only a fast row: Lemma~\ref{lem:ws} with one row, step $k$ and arc $[-k,k]$ gives $N_1=1+\lceil(p-2k-1)/k\rceil=M_B$. Column~$0$ is a doubled column, but a parity argument halves the cost of Lemma~\ref{lem:D}: multiplied by $-2$, the condition $\sigma+o\kappa_{1\leftarrow0}\in\half+[-b,b]$ becomes $o\nu+2\xi\equiv2\sigma-1$ for some $|\xi|\le b$; the even numbers $2\xi$ form a complete residue system modulo the odd number $\nu$, so as $o$ runs over $M_A$ consecutive integers, $o\nu+2\xi$ takes every value in an interval of $\nu M_A-3\nu+3\ge p$ consecutive integers. So Proposition~\ref{prop:steer} applies. The hypotheses give (D) and (N) of Lemma~\ref{lem:W} ($p-1-2b-2M_B$ is even and positive), whose two numbers for $s=2$ (where $T_2$ is absent) are the last two terms, and the first term bounds the axis step of coordinate~$0$ as in the case $E=\{i\}$ of its proof.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:HB17}]
+For $p\ge10^4$ by hand: $\nu\in(p/34-1,p/34+1]$ and $k=2\nu\in(p/17-2,p/17+2]$, so $M_B<17(p-1)/(p-34)<18$ and $M_A<34(p-3)/(p-34)+4<38.2$. Hence $1-(k+M_A)/p\ge16/17-40/p\ge0.937$ and $(p-3-2b)/(2p)\ge33/68-3/(2p)\ge0.485$, whose squares sum to more than $1.11$; $1-(2k+M_A)/p\ge15/17-42/p\ge0.878$ and $\eta\ge33/68-35/(2p)\ge0.483$, whose squares sum to more than $1.004$; and $(1-M_B/p)^2\ge(1-17/p)^2$. The side conditions are immediate. For the $715$ primes $3677<p<10^4$ the formula of Theorem~\ref{thm:HB} was evaluated in exact rational arithmetic, with the two coverings checked as set identities in $\F_p$ (c.a.). Lemma~\ref{lem:prefix} gives quasi-uniformity.
+\end{proof}
+
+\subsection{Small Bases}\label{app:smallbases}
+\begin{proof}[Proof of Proposition~\ref{prop:automaton}]
+All entries of $\vec{\mathcal H}$ lie in $\F_q(x)(\vartheta)=\bigoplus_{b<s'}\F_q(x)\vartheta^b$. Write each as $F=\sum_{b<s'}P_b\vartheta^b/E$ with one common denominator $E\in\F_q[x]$ and unique polynomial numerators $P_b$. Since $E(x)^q=E(x^q)$, inserting the Mahler equation and expanding by the binomial theorem gives
+\[
+\mathcal C_rF=\sum_{a<s'}\frac{\vartheta^a}{E}\,\mathcal C_r\Bigl(\sum_{b\ge a}\tbinom ba A^aB^{b-a}E^{q-1}P_b\Bigr),
+\]
+of the same form with the same $E$. As $\deg\mathcal C_rP\le\deg P/q$, numerators of degree at most $d$ stay of degree at most $d$ once $d\ge\bigl((s'-1)\max(\deg A,\deg B)+(q-1)\deg E\bigr)/(q-1)$. The vectors of such numerators form a finite set stable under all $\mathcal C_r$, and $\coef{0}F$ is linear in them. Finally $\coef{l}\mathcal H_i=D_i(l)$, $\coef{l}x\mathcal H_i=D_i(l-1)$, and (\ref{eq:cartierread}) applies; the words with a nonzero digit are the expansions of the integers $l\ge1$.
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:octave}]
+Put $\hat G=G/(1+x)$. In characteristic two $(1+x)^2=1+x^2$, and for $n\ge1$ the coefficients of $x^n$ in the entries $\frac1{1+x^2}$, $\frac x{1+x}$, $\frac{1+u}{1+x}$ and $\frac u{x(1+x^2)}$ of $\hat G$ are, modulo $2$, $[n\text{ even}]$, $1$, $\lfloor\log_2n\rfloor$, and $1$ or $\lfloor\log_2(n+1)\rfloor$ according as $n+1$ is odd or even. By Proposition~\ref{prop:law}, $(D_i(l))_{i<j}$ involves $\hat G_n$ only for $l\le n\le l+j-1$, and the last entry reads $\lfloor\log_2(n+1)\rfloor$, so it depends only on the \emph{pattern} of $l$: its parity and the bits $\lfloor\log_2n\rfloor\bmod2$ for $l\le n\le l+j$. Every $l\ge64$ has a smaller $l'$ with the same pattern. Let $2^k\le l<2^{k+1}$, so $2^{k-2}\ge j+4$. If $l+j<2^{k+1}$, the range $[l,l+j]$ lies in one octave and the bit is $k\bmod2$ on it; the octave $[2^{k-2},2^{k-1})$ contains ranges of both parities with the same constant bit. Otherwise the range contains exactly one power of two, $2^{k+1}$, and $l'=l-3\cdot2^{k-1}$ has the parity of $l$, its range lies in $[2^{k-2},2^k)$ and contains $2^{k-1}$ at the same relative position, with the bit $k-2\equiv k$ before it and $k-1\equiv k+1$ after it. The count $35$ is a computation over $l\le63$.
+\end{proof}

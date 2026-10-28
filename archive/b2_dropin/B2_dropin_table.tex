@@ -1,0 +1,58 @@
+% B2_dropin_table.tex -- drop-in table for the base-two sequence of Theorem thm:B2 (data archive of the paper;
+% formerly an appendix of a draft). References (Theorem thm:B2, Section sec:practice) point to the paper.
+% Standalone use: \input into any amsart document with booktabs.
+\section{Drop-In Table for the Base-Two Sequence}\label{app:B2table}
+Table~\ref{tab:B2dir} gives the generator matrices of Theorem~\ref{thm:B2} as $32$-bit direction numbers: column $k$ of $C_c$, truncated to its first $32$ digits, is stored as the word
+\[
+M_c[k]=\sum_{n<32}C_c[n][k]\,2^{31-n},
+\]
+so digit $0$ of the output is the most significant bit. For an index $i=\sum_ki_k2^k<2^{32}$ the point is
+\[
+x_c(i)=2^{-32}\bigoplus_{k:\,i_k=1}M_c[k]\qquad(c=0,1),
+\]
+with $\oplus$ the bitwise XOR. This is the format of a Sobol' table, so the two columns replace the first two dimensions of such a table without any other change (Section~\ref{sec:practice}). The table determines the first $32$ digits of the first $2^{32}$ points exactly. Since the $(0,m,2)$-net property of $P_m$ involves only the first $m$ digits of each coordinate, every prefix $P_m$, $m\le32$, of the table is a $(0,m,2)$-net; truncation moves each point by less than $2^{-32}$ per coordinate and so changes $\sep{P_m}$ by less than $2^{m/2-31.5}$, which is below $3\cdot10^{-6}$ for $m\le26$. For more than $2^{32}$ points or more digits, column $k$ is read off the series $(1+x)(1+u)\,u^k$ for $C_0$ and $(u/x)(1+u)^k$ for $C_1$ of Theorem~\ref{thm:B2}.
+
+\begin{table}[t]
+\centering\small\ttfamily
+\caption{Direction numbers (hexadecimal) of the base-$2$ sequence of Theorem~\ref{thm:B2}: $M_c[k]$ is column $k$ of $C_c$, digit $0$ in the most significant bit.}
+\label{tab:B2dir}
+\begin{tabular}{@{}r@{\quad}c@{\quad}c@{\qquad}r@{\quad}c@{\quad}c@{}}
+\toprule
+\rmfamily $k$ & \rmfamily $M_0[k]$ & \rmfamily $M_1[k]$ & \rmfamily $k$ & \rmfamily $M_0[k]$ & \rmfamily $M_1[k]$\\
+\midrule
+0 & 9cc0c000 & d1010001 & 16 & 00009cc0 & d101d100\\
+1 & 60000000 & 80000000 & 17 & 00006000 & 80008000\\
+2 & 2e606000 & e8808000 & 18 & 00002e60 & e8806880\\
+3 & 1e606000 & a8808000 & 19 & 00001e60 & a8802880\\
+4 & 09505000 & dcc0c000 & 20 & 00000950 & dcc01cc0\\
+5 & 06606000 & 88808000 & 21 & 00000660 & 88800880\\
+6 & 02c84800 & e6e0e000 & 22 & 000002c8 & e6e006e0\\
+7 & 01f87800 & a2a0a000 & 23 & 000001f8 & a2a002a0\\
+8 & 009c5c00 & d1d0d000 & 24 & 0000009c & d1d001d0\\
+9 & 00606000 & 80808000 & 25 & 00000060 & 80800080\\
+10 & 002e4e00 & e868e800 & 26 & 0000002e & e8680068\\
+11 & 001e7e00 & a828a800 & 27 & 0000001e & a8280028\\
+12 & 00095900 & dc1cdc00 & 28 & 00000009 & dc1c001c\\
+13 & 00066600 & 88088800 & 29 & 00000006 & 88080008\\
+14 & 0002ca80 & e606e600 & 30 & 00000002 & e6060006\\
+15 & 0001f980 & a202a200 & 31 & 00000001 & a2020002\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A reference implementation in C, with \texttt{M} filled from Table~\ref{tab:B2dir}:
+\begin{verbatim}
+#include <stdint.h>
+extern const uint32_t M[2][32];      /* Table B2dir: M[c][k] */
+/* coordinate c (0 or 1) of point i, as a 32-bit fraction */
+uint32_t b2_point(int c, uint32_t i) {
+    uint32_t r = 0;
+    for (int k = 0; i != 0; k++, i >>= 1)
+        if (i & 1) r ^= M[c][k];
+    return r;                        /* x_c(i) = r * 2^-32 */
+}
+/* Gray code: x <- x ^ M[c][ctz(i+1)] gives the point with the next
+   index in Gray-code order (the same set P_m in every block of 2^m) */
+\end{verbatim}
+
+The table was produced from the series of Theorem~\ref{thm:B2} and rebuilt independently from the formulas; the two agree in all $64$ words, and the table is also checked in Lean. With the table, the snippet and a loop over all elementary intervals confirm that $P_m$ is a $(0,m,2)$-net for every $m\le14$, and a brute-force toroidal minimum distance gives $\sep{P_m}=0.6334$, $0.4589$, $0.3998$, $0.3998$, $0.3998$, $0.3968$ for $m=2,4,\dots,12$, the values of the $62$-digit computation.

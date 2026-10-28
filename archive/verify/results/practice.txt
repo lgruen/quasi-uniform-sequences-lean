@@ -1,0 +1,6 @@
+PASS pp_designs_s3.txt:p13 s=3 p=13  cover=EEE LB=0.153846 Gamma=11
+PASS pp_designs_s3.txt:p17 s=3 p=17  cover=EEE LB=0.117647 Gamma=15
+PASS pp_designs_s3.txt:p23 s=3 p=23  cover=EEE LB=0.173913 Gamma=19
+PASS pp_designs_s3.txt:p31 s=3 p=31  cover=EEE LB=0.354839 Gamma=20
+## practice/pp_designs_s3.txt: 4/4 PASS
+## TOTAL 4/4 PASS

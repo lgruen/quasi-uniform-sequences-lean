@@ -1,0 +1,231 @@
+%
+%
+%
+%
+%
+%
+%
+%
+\section{How Many Exact Relations a Sequence Can Carry}\label{sec:count}
+The nets of \cite{Gru26geo} reach separations $1-O(1/q)$ at the full levels by designing the whole geometric layer: at one prefix, every geometric digit is a prescribed linear function of the last few cell digits%
+. These are $s$ exact linear identities among the digits of the points, and the nets choose them anew for every size. Sections~\ref{sec:residue} and~\ref{sec:block} install such identities in one fixed scramble, by the residue theorem. The staggered residue sequence carries one at every full level, the residue sequence one at every prefix $P_{sK-1}$ (its skeleton relation), the block-periodic residue sequences carry $s$ of them at every $s$-th full level, and the sequences of Theorem~\ref{thm:blocktwo} and Corollary~\ref{cor:gauss} share the levels between two families. In every case this is about one identity per level. Why not $s$ at every full level? That would put the designed lattice of the nets into every full level of one sequence, with constants $1-O(1/p)$ at every full level and the best bound for all $N$ (Lemma~\ref{lem:prefix}).
+
+This section shows that, for exact relations of bounded depth, about one per level is the limit. The reason is a shortage of digits. Without a depth bound every full level carries $s$ exact relations, namely the offset map itself: each geometric digit is a linear function of all the cell digits. A relation of depth at most $J$ at level $T$ uses, in a given coordinate, only the digits $T-J,\dots,T$, and the residue theorem shows that relations at different levels cannot share these digits: each relation needs a digit position of its own. A range of $R+1$ consecutive levels offers $J+R+1$ digit positions in one coordinate, so it carries at most $J+R+1$ independent relations, about one per level (Theorem~\ref{thm:count} and Figure~\ref{fig:count}).
+
+\emph{Scope.} All results of this section are negative, and each holds in exactly this scope. The sequences are the lower-triangular scrambles $C_c=L_c\Pas_{a_c}$ of a frame of $s$ distinct places in $\F_q$, the class of Lemma~\ref{lem:t0}; it contains every sequence of Sections~\ref{sec:law}--\ref{sec:block} and every generalized Faure sequence. The certificates are exact linear identities among the digits, of bounded depth (Definition~\ref{def:exactrel}), whose coefficients may depend on the level. Every statement names its range of levels. Linearity is no restriction for a designed digit: if a geometric digit is a function of the last $J$ cell digits at all, it is a linear one, because the offset map is linear and the cell digits are free. Exactness is a restriction. The windows of Section~\ref{sec:antipode} keep responses in sets of allowed values instead of fixing them; they are not exact relations, and they do certify every full level. Digital sequences that are not frame scrambles (for instance Niederreiter sequences with bases of degree at least two, or sequences with $t>0$) are not covered either.
+
+\subsection{Exact Digit Relations}\label{sec:countdef}
+Fix a frame $(a_0,\dots,a_{s-1};\infty)$ over $\F_q$ with distinct places, $s\ge2$, and a scramble $(L_c)$; put $w=\prod_c(z-a_c)$. By Lemma~\ref{lem:resform}(a) digit $n$ of coordinate $c$ is $y_{c,n}(V)=\Res_{a_c}(V\eta_{c,n})$ with a polar differential $\eta_{c,n}$ at $a_c$ of exact pole order $n+1$; so $\eta_{c,0},\dots,\eta_{c,T}$ are a basis of the polar differentials at $a_c$ of pole order at most $T+1$. For a rational function $F$ we write $\operatorname{pp}_a(F\,dz)$ for the principal part of $F\,dz$ at $a$: the terms $(z-a)^{-k}dz$, $k\ge1$, of its expansion.
+
+\begin{definition}[Exact digit relation]\label{def:exactrel}
+Let $T\ge0$ and $m\ge sT$. An \emph{exact digit relation of top index $T$ on $P_m$} is a family of coefficients $f_{c,n}\in\F_q$ ($0\le c<s$, $0\le n\le T$), not all zero, with
+\[
+\sum_c\sum_{n\le T}f_{c,n}\,y_{c,n}(V)=0\qquad\text{for every }V\text{ with }\deg V<m .
+\]
+It has \emph{depth at most $J$ at coordinate $c$} if $f_{c,n}=0$ for $n<T-J$, and \emph{depth at most $J$} if this holds at every coordinate.
+\end{definition}
+
+A relation on $P_m$ is also a relation on every smaller prefix $P_{m'}$, $sT\le m'\le m$, so the relations of top index $T$ on $P_{sT}$ contain all others; they form a vector space. The examples of this paper:
+\begin{enumerate}
+\item[(1)] A \emph{designed geometric digit} at the full level $P_{sT}$: $y_{i,T}=\sum_c\sum_{n=T-J}^{T-1}f_{c,n}y_{c,n}$, a relation of top index $T$ and depth at most $J$. A design in the sense of \cite{Gru26geo} is one such relation for each of the $s$ coordinates; Theorem~\ref{thm:block}(ii) gives them at $T=sK$ with depth $s-1$.
+\item[(2)] The relation of the staggered residue sequence, $y_{\cstar,T}=\sum_{c\ne\cstar}k_cy_{c,T-1}$ on $P_{sT}$ (Lemma~\ref{lem:residuestar-rel}): top index $T$, depth $1$.
+\item[(3)] The skeleton relation $\sum_cv_cy_{c,T}=0$ on $P_{s(T+1)-1}$ (Lemma~\ref{lem:residue-rel} at level $T+1$): top index $T$, depth $0$.
+\item[(4)] The offset map: at every level $T$, each geometric digit $y_{i,T}$ is a linear function of all cell digits of $P_{sT}$. These are $s$ relations of top index $T$ on $P_{sT}$, of depth $T$.
+\end{enumerate}
+Example (4) shows that relations as such are not scarce; the depth bound is what makes them scarce. The next lemma, the one tool of this section, translates a relation into a single polynomial.
+
+\begin{lemma}[The polynomial of a relation]\label{lem:reltype}
+Let $(f_{c,n})$ be an exact digit relation of top index $T$ on $P_m$, $m\ge sT$. There is a unique polynomial $A\ne0$ of degree at most $s(T+1)-m-1\le s-1$ with
+\[
+\sum_{n\le T}f_{c,n}\,\eta_{c,n}=\operatorname{pp}_{a_c}\bigl(A\,w^{-T-1}dz\bigr)\qquad\text{for every }c .
+\]
+The map from relations to polynomials is linear and injective, and $f_{c,T}\ne0$ exactly for the coordinates $c$ with $A(a_c)\ne0$. Conversely, every nonzero polynomial of degree at most $s(T+1)-m-1$ is the polynomial of exactly one relation of top index $T$ on $P_m$. Hence these relations form a space of dimension $s(T+1)-m$ (if $m\le s(T+1)$): $s$ on the full level $P_{sT}$, and $1$ on $P_{s(T+1)-1}$.
+\end{lemma}
+
+\begin{proof}
+Put $\eta_c=\sum_nf_{c,n}\eta_{c,n}$, a polar differential at $a_c$ of pole order at most $T+1$, and $\eta=\sum_c\eta_c=\Xi\,dz$. The rational function $\Xi$ has poles only at the places, of order at most $T+1$, and vanishes at $\infty$; so $\Xi =A/w^{T+1}$ with a polynomial $A$ of degree less than $s(T+1)$. Since $\eta_{c'}$ is regular at $a_c$ for $c'\ne c$, $\eta_c$ is the principal part of $\Xi\,dz$ at $a_c$. For a polynomial $V$, the differential $V\eta_c$ has the same residue at $a_c$ as $V\Xi\,dz$, so by Lemma~\ref{lem:resform}(c)
+\[
+\sum_c\sum_nf_{c,n}\,y_{c,n}(V)=\sum_c\Res_{a_c}(V\Xi\,dz)=[z^{-1}]\,(V\Xi).
+\]
+This vanishes for all $V$ of degree less than $m$ if and only if the coefficients of $z^{-1},\dots,z^{-m}$ in the expansion of $\Xi$ at $\infty$ vanish, that is, if and only if $A=0$ or $s(T+1)-\deg A\ge m+1$. If $A=0$, then every $\eta_c=\operatorname{pp}_{a_c}(\Xi\,dz)=0$, and all $f_{c,n}=0$ because the $\eta_{c,n}$ are linearly independent; so $A\ne0$ and $\deg A\le s(T+1)-m-1$. Uniqueness and linearity are clear, since $A=\Xi w^{T+1}$, and injectivity is the argument just given. The pole order of $\operatorname{pp}_{a_c}(Aw^{-T-1}dz)$ is $T+1$ exactly when $A(a_c)\ne0$, which is the statement about $f_{c,T}$. Conversely, given $A$, write $\operatorname{pp}_{a_c}(Aw^{-T-1}dz)$ in the basis $\eta_{c,0},\dots,\eta_{c,T}$; the computation above, read backwards, shows that the coefficients form a relation on $P_m$.
+\end{proof}
+
+So on a full level there are exactly the $s$ relations of the offset map, and on $P_{s(T+1)-1}$ exactly one: in the language of Section~\ref{sec:residueseq}, the skeleton digit of a skeleton coordinate is always a linear function of the other digits, and the residue sequence is the case in which this function has depth zero (Lemma~\ref{lem:rigid} below makes this precise). The numerator $A$ also tells which digits a relation involves. A designed geometric digit of coordinate $i$ has $f_{c,T}=0$ for $c\ne i$, so $A$ vanishes at the $s-1$ places $a_c$, $c\ne i$: $A$ is a multiple of $w_i=w/(z-a_i)$. The staggered relation (2) has $A$ a multiple of $w_{\cstar}$, and the skeleton relation (3) has a constant $A$.
+
+\subsection{Counting Exact Digit Relations}\label{sec:countthm}
+We call a range of levels $[K_0,K_0+R]$ \emph{admissible for depth $J$} if
+\[
+K_0\ge J\qquad\text{and}\qquad K_0>(s-1)R+s-2 .
+\]
+Every subrange $[K_0,K_0+R']$, $R'\le R$, of an admissible range is admissible, and for fixed $J$ every level $K_0\ge\max(J,s-1)$ starts an admissible range of length about $K_0/(s-1)$.
+
+\begin{theorem}[Counting exact digit relations]\label{thm:count}
+Let $[K_0,K_0+R]$ be admissible for depth $J$, and fix a coordinate $c$. For every level $T\in[K_0,K_0+R]$ let $r_T$ be the dimension of a space of exact digit relations of top index $T$ on $P_{sT}$ whose depth at coordinate $c$ is at most $J$ (the depth at the other coordinates is arbitrary, and the coefficients may depend on $T$). Then
+\[
+\sum_{T=K_0}^{K_0+R}r_T\ \le\ J+R+1 .
+\]
+More precisely, $\sum_Tr_T$ is at most the number of digit positions $n$ of coordinate $c$ at which at least one of these relations has a nonzero coefficient.
+\end{theorem}
+
+\begin{proof}
+Choose a basis of each of the spaces and let $\mathcal N_c$ be the set of digit positions $n$ of coordinate $c$ used by some basis relation; $\mathcal N_c\subseteq[K_0-J,K_0+R]$, so $|\mathcal N_c|\le J+R+1$. The \emph{place-$c$ part} $\sum_nf_{c,n}\eta_{c,n}$ of each basis relation lies in the span of $\{\eta_{c,n}:n\in\mathcal N_c\}$, which has dimension $|\mathcal N_c|$. It suffices to show that the place-$c$ parts of all $\sum_Tr_T$ basis relations are linearly independent.
+
+Suppose a linear combination of them vanishes. Group it by levels: the part at level $T$ is a relation of top index $T$ on $P_{sT}$ or zero, with a polynomial $A_T$ of degree at most $s-1$ (Lemma~\ref{lem:reltype}; $A_T=0$ if the part is zero), and the vanishing says that $\sum_T\operatorname{pp}_{a_c}(A_Tw^{-T-1}dz)=0$. Put $T^*=K_0+R$. Then
+\[
+\sum_TA_T\,w^{-T-1}=w^{-T^*-1}B,\qquad B=\sum_TA_T\,w^{T^*-T},\qquad \deg B\le sR+s-1,
+\]
+and $w^{-T^*-1}B$ has no principal part at $a_c$. As $w$ is $z-a_c$ times a unit at $a_c$, this means that $(z-a_c)^{T^*+1}$ divides $B$. But $T^*+1=K_0+R+1>sR+s-1\ge\deg B$ by admissibility, so $B=0$. Since $\deg A_T<s=\deg w$, the expansion $B=\sum_TA_Tw^{T^*-T}$ is the $w$-adic expansion of $B$, which is unique; hence every $A_T=0$, and by Lemma~\ref{lem:reltype} every level part is the zero relation. The basis relations at each level are independent, so all coefficients of the combination vanish.
+\end{proof}
+
+The proof uses one place only, and nothing about the scramble beyond its residue form; it holds over every $\F_q$. The admissibility condition cannot be dropped. For $s=2$ and $J=1$, take the range $[1,2]$, which has $K_0=1\ge J$ but violates $K_0>(s-1)R+s-2=1$. At level $1$ every frame scramble has two relations of depth at most $1$, the offset map of $P_2$, since a single cell digit per coordinate is all there is. At level $2$ the block-periodic residue sequence of Theorem~\ref{thm:block}(a) designs both geometric digits of $P_4$ with depth $1$. That is $4>J+R+1=3$ relations. So for $s=2$ and $J=1$ the threshold $K_0\ge2$ is sharp.
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_count}
+\caption{Why exact relations are scarce (Theorem~\ref{thm:count}), for $s=2$ and the range of levels $T=6,\dots,11$, which is admissible for depth $J=1$. Each column is a level $T$; each row is a digit position $n$ of coordinate~$0$. A relation of top index $T$ is drawn as a bar in column $T$ covering the digit positions at which it has nonzero coefficients in coordinate~$0$ (depth $J=1$: positions $T-1$ and $T$). The parts in coordinate~$0$ of all relations of the range are linearly independent (proof of Theorem~\ref{thm:count}), so there are at most as many bars as rows touched (black squares). (a)~The residue sequence: one skeleton relation per level, at position $T$ (Lemma~\ref{lem:residue-rel}). (b)~The block-periodic residue sequence of Theorem~\ref{thm:block}(a): both geometric digits designed at the even levels (Theorem~\ref{thm:block}(ii)); the relation of coordinate~$0$ uses the positions $T-1$ and $T$, that of coordinate~$1$ only $T-1$; no relation at the odd levels. (c)~Both geometric digits designed with depth $1$ at every level would need twelve bars on seven rows; Corollary~\ref{cor:layer}(b) excludes it. Drawn by \texttt{paper/v4/figs/b4\_figs.py}.}
+\label{fig:count}
+\end{figure}
+
+\begin{corollary}[Designed geometric digits]\label{cor:layer}
+Let $J\ge0$, and consider a scramble of a frame of $s\ge2$ distinct places over $\F_q$.
+\begin{enumerate}
+\item[(a)] Let $E$ be the set of levels $T$ at which all $s$ geometric digits of $P_{sT}$ are designed by exact relations of depth at most $J$. Then $|E\cap[K_0,K_0+R]|\le(J+R+1)/s$ for every admissible range, and $\limsup_{X\to\infty}|E\cap[1,X]|/X\le1/s$. Theorem~\ref{thm:block} attains the density $1/s$.
+\item[(b)] Two geometric digits, of coordinates $i\ne i'$, are not both designed with depth at most $J$ at all the levels $K_0,\dots,K_0+J$, if $K_0>(s-1)J+s-2$.
+\item[(c)] A relation of the form $y_{\cstar,T}=\sum_{c\ne\cstar}k_cy_{c,T-1}$ on $P_{sT}$ (as for the staggered residue sequence) and a skeleton relation $\sum_cv_cy_{c,T}=0$ on $P_{s(T+1)-1}$ (as for the residue sequence), with any coefficients, do not both hold at two consecutive levels $T=K_0,K_0+1$ with $K_0\ge2s-2$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(a) The $s$ design relations at a level $T\in E$ are independent, since the relation of coordinate $i$ has the coefficient $1$ at $y_{i,T}$ and $0$ at $y_{i',T}$, $i'\ne i$. Theorem~\ref{thm:count} gives $s|E\cap[K_0,K_0+R]|\le J+R+1$. For the density, cover the levels from $T_1=\max(J,4s)$ to $X$ by consecutive admissible ranges $[T_k,T_k+R_k]$ with $R_k=\lfloor(T_k-s+1)/(s-1)\rfloor$ and $T_{k+1}=T_k+R_k+1$, the last one cut at $X$. Then $(s-1)R_k\le T_k-s+1$ gives admissibility, and $T_k\ge4s$ gives $R_k+1\ge T_k/(2s-2)$, so the ranges grow geometrically and there are $O(s\log X)$ of them. Summing the bound over the ranges, $|E\cap[1,X]|\le T_1+(X+J\cdot O(s\log X))/s$, and the density statement follows. Theorem~\ref{thm:block} designs all geometric digits at the levels $T\in s\N$.
+(b) The two design relations at each level are independent (as in (a)), so the range $[K_0,K_0+J]$, which is admissible, would carry $2(J+1)>2J+1$ relations.
+(c) Both relations have top index $T$ and depth at most $1$, and they are independent: the first has a polynomial $A$ that is a nonzero multiple of $w_{\cstar}$, of degree $s-1\ge1$, and the second a constant one (Lemma~\ref{lem:reltype} and the remark after it). The range $[K_0,K_0+1]$ is admissible for $J=1$ when $K_0>2s-3$, and would carry $4>3$ relations.
+\end{proof}
+
+The case $s=2$, $J=1$ of the one-place form is the obstruction stated in Section~\ref{sec:law}: no scramble of the frame $(0,1;\infty)$ in dimension two has a sheared lattice without jumps at two consecutive levels $K,K+1\ge2$. We state it as a corollary; Appendix~\ref{app:responses} gives a direct proof, which needs even less: only that coordinate~$0$ is lower triangular and that $P_{2K}$ and $P_{2K+2}$ are nets.
+
+\begin{corollary}[No lattice offset map]\label{cor:N1}
+Let $s=2$, $a_0=0$, $a_1=1$, $K\ge2$, and let $(L_0,L_1)$ be any scramble over any $\F_q$. The following three conditions do not hold together: the cross part of the offset map of coordinate~$0$ depends only on the finest cell digit of coordinate~$1$ at level $K$; it does so at level $K+1$; and the own part of the offset map of coordinate~$1$ depends only on the finest cell digit of coordinate~$1$ at level $K$. In particular no scramble of this frame has an offset map that depends only on the finest cell digits (a sheared lattice without jumps) at two consecutive levels $K,K+1\ge2$.
+\end{corollary}
+
+\begin{proof}
+The three conditions are relations of top indices $K$, $K+1$ and $K$, on $P_{2K}$, $P_{2K+2}$ and $P_{2K}$: $y_{0,K}=X\,y_{1,K-1}+(\text{cell digits of coordinate }0)$, $y_{0,K+1}=X'\,y_{1,K}+(\text{cell digits of coordinate }0)$, and $y_{1,K}=O\,y_{1,K-1}+(\text{cell digits of coordinate }0)$. The two relations at level $K$ are independent (one has the coefficient $1$ at $y_{0,K}$ and $0$ at $y_{1,K}$, the other the reverse). In coordinate $1$ the three relations use only the digit positions $K-1$ and $K$, and the range $[K,K+1]$ is admissible for depth $1$ because $K\ge2$. The refined form of Theorem~\ref{thm:count} at coordinate $1$ gives $3\le2$, a contradiction. A finest-digit offset map at the levels $K$ and $K+1$ satisfies all three conditions.
+\end{proof}
+
+\subsection{Self-Similar and Block-Periodic Scrambles}\label{sec:countselfsim}
+For a self-similar scramble the offset map is the same at every level (Proposition~\ref{prop:law}), so a relation is most useful when its coefficients do not depend on the level. Theorem~\ref{thm:count} then allows at most one such relation, and the residue form says which one.
+
+\begin{proposition}[A self-similar scramble carries one exact relation]\label{prop:onerel}
+Let the scramble be self-similar with scale $\theta$ and local multipliers $\varphi_c$ (Lemma~\ref{lem:resform}(b)), and let $J\ge0$. Call a family $\vartheta_{c,i}\in\F_q$ ($0\le c<s$, $0\le i\le J$), not all zero, a \emph{level-independent relation} if there is $T_0\ge J$ with
+\[
+\sum_c\sum_{i=0}^{J}\vartheta_{c,i}\,y_{c,T-i}(V)=0\qquad\text{for every }T\ge T_0\text{ and every }V\text{ with }\deg V<sT,
+\]
+a relation among the geometric digit $y_{c,T}$ and the last $J$ cell digits at every full level from $T_0$ on. Put $\vartheta_c(x)=\sum_i\vartheta_{c,i}x^i$.
+\begin{enumerate}
+\item[(i)] For every level-independent relation there is a polynomial $A\ne0$ of degree at most $s-1$ with $\varphi_c\cdot\vartheta_c(w/\theta)=A$ as power series at every place $a_c$. The level-independent relations form a space of dimension at most one.
+\item[(ii)] If the relation holds on the larger prefixes $P_{sT+i}$ for every $T\ge T_0$, with $1\le i\le s-1$, then $\deg A\le s-1-i$. On the prefixes $P_{s(T+1)-1}$ ($i=s-1$), $A$ is a constant.
+\item[(iii)] Let $q=p$ be prime. The scramble satisfies $y_{\cstar,T}=\sum_{c\ne\cstar}k_cy_{c,T-1}$ on $P_{sT}$ for every $T\ge T_0$ if and only if every $k_c\ne0$ and it is a staggered residue sequence $\Rstar_v$ with these weights (Definition~\ref{def:residuestar}). It satisfies a skeleton relation $\sum_cv_cy_{c,T}=0$ on $P_{s(T+1)-1}$ for every $T\ge T_0$ if and only if it is a residue sequence $\Rv_{v'}$ with scale $\theta$ and a check vector $v'$ proportional to $v$ (Definition~\ref{def:residue}). No self-similar scramble has both relations.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) At level $T$, $y_{c,T-i}(V)=\Res_{a_c}(V\varphi_c(\theta/w)^{T-i+1}dz)$ and $(\theta/w)^{T-i+1}=(w/\theta)^i(\theta/w)^{T+1}$, so the place-$c$ part of the relation is $\operatorname{pp}_{a_c}(\theta^{T+1}\varphi_c\vartheta_c(w/\theta)\,w^{-T-1}dz)$. By Lemma~\ref{lem:reltype} it equals $\operatorname{pp}_{a_c}(A_Tw^{-T-1}dz)$ with a nonzero polynomial $A_T$ of degree at most $s-1$. Two functions $H_1w^{-T-1}$, $H_2w^{-T-1}$ with $H_1,H_2$ regular at $a_c$ have the same principal part there if and only if $H_1\equiv H_2\bmod(z-a_c)^{T+1}$. So $\tilde A_T:=\theta^{-T-1}A_T$ satisfies $\tilde A_T\equiv\varphi_c\vartheta_c(w/\theta)\bmod(z-a_c)^{T+1}$ at every place. Then $\tilde A_T\equiv\tilde A_{T+1}$ modulo every $(z-a_c)^{T+1}$, hence modulo $w^{T+1}$; both have degree less than $s(T+1)$, so $\tilde A_T=\tilde A_{T+1}$. Call this polynomial $A$. It is congruent to $\varphi_c\vartheta_c(w/\theta)$ modulo every power of $z-a_c$, hence equal to it as a power series, and $A\ne0$.
+
+Let $\vartheta'$ be a second level-independent relation, with polynomial $A'$. If $A'=\lambda A$, then $\varphi_c(\vartheta'_c-\lambda\vartheta_c)(w/\theta)=0$ at every place; as $\varphi_c$ is a unit and $w/\theta$ is $z-a_c$ times a unit, $\vartheta'_c=\lambda\vartheta_c$, and the two relations are proportional. Otherwise $A/A'$ is a non-constant rational function whose numerator and denominator have degree at most $s-1$. No $\vartheta'_c$ is zero, since then $A'$ would vanish as a power series at $a_c$. In the Laurent series at $a_c$, $A/A'=\varrho_c(w)$ with $\varrho_c(x)=\vartheta_c(x/\theta)/\vartheta'_c(x/\theta)\in\F_q(x)$. This is an identity of rational functions in $z$, and $x\mapsto w$ is an injective map of fields $\F_q(x)\to\F_q(z)$, so all $\varrho_c$ are one non-constant $\varrho=P_1/P_2$ in lowest terms. Then $P_1(w)$ and $P_2(w)$ are coprime (a common root $\beta$ would make $w(\beta)$ a common root of $P_1$ and $P_2$), so $A/A'=P_1(w)/P_2(w)$ has numerator or denominator of degree $s\max(\deg P_1,\deg P_2)\ge s$. That contradicts the degree bound $s-1$.
+
+(ii) On $P_{sT+i}$, Lemma~\ref{lem:reltype} gives $\deg A_T\le s(T+1)-(sT+i)-1=s-1-i$.
+
+(iii) If $y_{\cstar,T}=\sum_ck_cy_{c,T-1}$, then $\vartheta_{\cstar}=1$ and $\vartheta_c(x)=-k_cx$ for $c\ne\cstar$. By (i), $A=-k_c\varphi_cw/\theta$ at $a_c$, so $k_c\ne0$ (else $A$ would vanish at $a_c$ as a power series) and $A(a_c)=0$ for every $c\ne\cstar$. As $\deg A\le s-1$, $A=\lambda w_{\cstar}$ with $\lambda\ne0$. Hence $\varphi_c=-(\lambda\theta/k_c)/(z-a_{\cstar})$ for $c\ne\cstar$ and $\varphi_{\cstar}=\lambda w_{\cstar}$: these are the local multipliers of $\Rstar_v$ with $\mu_\star=\lambda\theta$ and $\mu_c=-\mu_\star/k_c$ (Section~\ref{sec:brickwall}). If $\sum_cv_cy_{c,T}=0$ on $P_{s(T+1)-1}$, then $\vartheta_c=v_c$ and, by (ii), $A=\alpha$ is a nonzero constant; so every $v_c\ne0$ and $\varphi_c=\alpha/v_c$, the local multipliers of $\Rv_{v/\alpha}$. Conversely both sequences have their relations (Lemmas~\ref{lem:residuestar-rel} and~\ref{lem:residue-rel}). Finally, the skeleton relation on $P_{s(T+1)-1}$ holds in particular on $P_{sT}$, and its polynomial is constant, while the staggered relation has the non-constant polynomial $\lambda w_{\cstar}$; two independent level-independent relations contradict (i).
+\end{proof}
+
+\emph{Scope.} The proposition counts relations whose most significant digit is the geometric digit (or, in (ii), the digit $y_{c,T}$ read on $P_{sT+i}$). Identities among deeper digits are not extra relations: the residue sequence satisfies $\sum_cv_cy_{c,T+i}=0$ on $P_{sT}$ for every $i\ge0$ (Lemma~\ref{lem:residue-rel}), infinitely many independent identities, but for $i\ge1$ each is the skeleton relation of a later level restricted to a smaller prefix; in the sense of Definition~\ref{def:exactrel} it has top index $T+i$ and lives on a prefix smaller than $P_{s(T+i)}$. Part~(iii) explains the two constructions of Section~\ref{sec:residue}: each is the only self-similar scramble with its relation, and the remark on full levels after Theorem~\ref{thm:residue} is the last statement of (iii). Part~(ii) also bounds the nets that a self-similar sequence can imitate. The prefix $P_{s(T+1)-j}$ has $j$ skeleton coordinates, and the nets of \cite{Gru26geo} with $j$ skeleton coordinates prescribe $j$ skeleton digits%
+; a self-similar scramble supplies at most one relation of bounded depth with coefficients independent of the level, so for $j\ge2$ it cannot supply them in this way.
+
+The block-periodic scrambles of Section~\ref{sec:block} escape the count of Proposition~\ref{prop:onerel} by reading their digits in blocks. In general, a \emph{block-periodic scramble of period $\ell$} has digits $y_{c,\ell n+j}(V)=\Res_{a_c}(V\varphi_{c,j}\Omega^{-n-1}dz)$, $0\le j<\ell$, with $\Omega=w^\ell/\theta$ and power series $\varphi_{c,j}$ at $a_c$ that vanish to order exactly $\ell-1-j$; Definition~\ref{def:block} is an instance, and $\ell=1$ is a self-similar scramble. The digit $\ell n+j$ is then the residue against a polar differential of exact order $\ell n+j+1$, so this is a scramble of the frame. Its structure repeats with period $\ell$ in the level, and a relation is level-independent \emph{of class $j$} if its coefficients $\vartheta_{c,i}$ of $y_{c,T-i}$ ($i\le J$) are the same for all $T\equiv j\pmod\ell$, $T\ge T_0$, on $P_{sT}$.
+
+\begin{proposition}[A block-periodic scramble carries $\ell$ exact relations]\label{prop:blockrel}
+For a block-periodic scramble of period $\ell$ and every $J\ge0$, the level-independent relations of all classes $j=0,\dots,\ell-1$ together span a space of dimension at most $\ell$: if $d_j$ is the dimension of the space of level-independent relations of class $j$, then $d_0+\dots+d_{\ell-1}\le\ell$.
+\end{proposition}
+
+\begin{proof}
+Fix a class $j$ and a relation of that class, and let $T=\ell n+j\ge T_0$. Each digit $y_{c,T-i}$ is read by $\varphi_{c,j'}\Omega^{-n'-1}dz$ with $T-i=\ell n'+j'$, and $\Omega^{-n'-1}=\Omega^{n-n'}\Omega^{-n-1}$, where $j'$ and $n-n'$ depend only on $i$ and $j$. So the place-$c$ part of the relation is $\operatorname{pp}_{a_c}(h_c\Omega^{-n-1}dz)$ with
+\[
+h_c=\sum_{j'<\ell}\varphi_{c,j'}\,P_{c,j'}(\Omega),
+\]
+where the polynomials $P_{c,j'}$ collect the coefficients $\vartheta_{c,i}$ and do not depend on $n$. The orders of vanishing of the terms $\varphi_{c,j'}P_{c,j'}(\Omega)$ at $a_c$ are $\equiv\ell-1-j'\pmod\ell$, pairwise different, so $h_c$ determines the $P_{c,j'}$, and $h_c=0$ only for the zero relation. By Lemma~\ref{lem:reltype} the place-$c$ part is also $\operatorname{pp}_{a_c}(A_Tw^{-T-1}dz)$ with $\deg A_T\le s-1$. Since $\Omega^{-n-1}=\theta^{n+1}w^{-T-1}w^{-(\ell-1-j)}$, comparing the two forms as in the proof of Proposition~\ref{prop:onerel} gives $h_c\equiv\hat A_n\bmod(z-a_c)^{\ell(n+1)}$ at every place, with the polynomial $\hat A_n=\theta^{-n-1}A_Tw^{\ell-1-j}$ of degree less than $s(\ell-j)\le s\ell$. As there, $\hat A_n$ does not depend on $n$, and $h_c=\hat A$ as power series at every place for one polynomial
+\[
+\hat A=A\,w^{\ell-1-j},\qquad \deg A\le s-1 .
+\]
+The map from relations (of all classes) to these polynomials $\hat A$ is linear and injective: within a class by the remark on $h_c$, and across classes because $\sum_jA^{(j)}w^{\ell-1-j}=0$ with $\deg A^{(j)}<s$ forces every $A^{(j)}=0$, by the uniqueness of the $w$-adic expansion.
+
+Suppose there were $r>\ell$ independent relations, with polynomials $\hat A^{(1)},\dots,\hat A^{(r)}$, linearly independent over $\F_q$ and of degree less than $s\ell$. At one place $a_c$ write $\hat A^{(k)}=\sum_{j'}\varphi_{c,j'}P^{(k)}_{c,j'}(\Omega)$. The $r\times\ell$ matrix $\bigl(P^{(k)}_{c,j'}(x)\bigr)$ over $\F_q(x)$ has rank at most $\ell<r$, so there are polynomials $\varrho_1(x),\dots,\varrho_r(x)$, not all zero, with $\sum_k\varrho_kP^{(k)}_{c,j'}=0$ for every $j'$. Then the polynomial $\sum_k\varrho_k(\Omega)\hat A^{(k)}$ vanishes as a power series at $a_c$, hence is zero. Writing $\varrho_k=\sum_i\varrho_{k,i}x^i$, it is $\sum_i\Omega^i\sum_k\varrho_{k,i}\hat A^{(k)}$, and since $\deg\Omega=s\ell$ and each $\sum_k\varrho_{k,i}\hat A^{(k)}$ has degree less than $s\ell$, the uniqueness of the $\Omega$-adic expansion gives $\sum_k\varrho_{k,i}\hat A^{(k)}=0$ for every $i$, hence all $\varrho_{k,i}=0$, a contradiction.
+\end{proof}
+
+So a block period $\ell$ buys $\ell$ level-independent relations per $\ell$ levels, again about one per level, in agreement with Theorem~\ref{thm:count}. A full designed layer at one class uses $s$ of them, which is why Theorem~\ref{thm:block} needs $\ell\ge s$ and takes $\ell=s$. The bound is attained by the constructions of Section~\ref{sec:block}: exact computation of the relation spaces class by class gives $2+0$ and $3+0+0$ for Theorem~\ref{thm:block} with $s=2$ and $s=3$, and $2+1+1+0$, $3+1+0+0$, $2+1+0$ for Theorem~\ref{thm:blocktwo} with $(s,\ell)=(2,4)$, $(3,4)$, $(2,3)$.
+
+\subsection{Skeleton Relations and Designs}\label{sec:countskel}
+The residue sequence is certified at every prefix $P_{sK-1}$ with constants that tend to~$1$, the block-periodic sequences at every $s$-th full level with $1-O(1/p)$. One would like both in one sequence. The skeleton relation turns out to be rigid: it fixes the rows of the generator matrices, and then no design fits next to it.
+
+Write $\hat y_{c,n}(V)=\Res_{a_c}(V\,w^{-n-1}dz)$ for the \emph{residue digits}; for $q=p$ they are the digits of the residue sequence $\Rv_v$ with $\theta=1$ and $v=(1,\dots,1)$.
+
+\begin{lemma}[An exact skeleton relation fixes the row]\label{lem:rigid}
+Let $n\ge0$ and $v\in\F_q^s\setminus\{0\}$ with $\sum_cv_c\,y_{c,n}(V)=0$ for every $V$ with $\deg V\le s(n+1)-2$. Then every $v_c\ne0$, and there is $\xi\in\F_q^*$ with
+\[
+y_{c,n}=\frac{\xi}{v_c}\,\hat y_{c,n}\qquad\text{for every }c:
+\]
+row $n$ of every generator matrix is the row of the residue digits, up to one nonzero scalar per coordinate.
+\end{lemma}
+
+\begin{proof}
+The relation has top index $n$, depth $0$, and holds on $P_{s(n+1)-1}$. By Lemma~\ref{lem:reltype} its polynomial is a nonzero constant $\xi$, so $v_c\eta_{c,n}=\xi\operatorname{pp}_{a_c}(w^{-n-1}dz)$ for every $c$. The right side has exact pole order $n+1$, as $w$ is $z-a_c$ times a unit, so $v_c\ne0$, and $y_{c,n}(V)=\Res_{a_c}(V\eta_{c,n})=(\xi/v_c)\Res_{a_c}(Vw^{-n-1}dz)$ because the regular part of $w^{-n-1}dz$ contributes nothing.
+\end{proof}
+
+Row~$0$ is always of this form ($y_{c,0}=L_c[0][0]\,V(a_c)$ and $\hat y_{c,0}=V(a_c)/w'(a_c)$), and the skeleton relation on $P_{s-1}$ holds for every frame scramble, with $v_c=1/(L_c[0][0]\,w'(a_c))$, because $\sum_cV(a_c)/w'(a_c)=0$ for $\deg V\le s-2$. From row~$1$ on the lemma is a real restriction.
+
+\begin{corollary}[Residue rows with level-dependent scalars]\label{cor:residuerows}
+A scramble of the frame satisfies, for every $n\ge n_0$, a skeleton relation $\sum_cu_{c,n}y_{c,n}(V)=0$ on $P_{s(n+1)-1}$ with some $u_n\in\F_q^s\setminus\{0\}$, if and only if for every $n\ge n_0$ there are $\mu_{c,n}\in\F_q^*$ with $y_{c,n}=\mu_{c,n}\hat y_{c,n}$ for all $c$; then $u_n$ is proportional to $(1/\mu_{c,n})_c$. For $q=p$, the self-similar scrambles with this property are exactly the residue sequences $\Rv_v$ (any scale $\theta$ and check vector $v$).
+\end{corollary}
+
+\begin{proof}
+One direction is Lemma~\ref{lem:rigid} at each $n\ge n_0$. Conversely, if $y_{c,n}=\mu_{c,n}\hat y_{c,n}$, then $\sum_c\mu_{c,n}^{-1}y_{c,n}(V)=\sum_c\Res_{a_c}(Vw^{-n-1}dz)=[z^{-1}](V/w^{n+1})$, which vanishes for $\deg V\le s(n+1)-2$ (Lemma~\ref{lem:resform}(c)). A self-similar row $y_{c,n}=\Res_{a_c}(V\varphi_c(\theta/w)^{n+1}dz)$ equals $\mu_{c,n}\hat y_{c,n}$ for all $V$ if and only if $\theta^{n+1}\varphi_c\equiv\mu_{c,n}\bmod(z-a_c)^{n+1}$; for all $n\ge n_0$ this forces $\varphi_c$ to be a constant, $\varphi_c=v_c^{-1}$, which is the residue sequence (Definition~\ref{def:residue}); and $\Rv_v$ has the skeleton relation at every level (Lemma~\ref{lem:residue-rel}).
+\end{proof}
+
+So a scramble with the skeleton relation at every $m\equiv-1\pmod s$ has no freedom left except one vector $u_n$ per level: its direction is the check vector of the skeleton relation at that level (and should be a good one, with $\ljit(\Lambda_{u_n})$ large), its scale is free. The residue sequence is the self-similar member, with $u_n$ proportional to $v$ for every $n$. Next to such rows there is no room for a design.
+
+\begin{corollary}[No designed relation next to skeleton relations]\label{cor:nodesign}
+Let $J\ge0$ and $K\ge\max(s-1,sJ)$, and suppose that the skeleton relations $\sum_cu_{c,n}y_{c,n}=0$ on $P_{s(n+1)-1}$ hold at the $J+1$ levels $n=K-J,\dots,K$. Then every exact digit relation of top index $K$ and depth at most $J$ on $P_{sK}$ is a multiple of $\sum_cu_{c,K}y_{c,K}=0$. In particular the full level $P_{sK}$ has no designed geometric digit of depth at most $J$, and no designed layer.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:rigid}, $\eta_{c,n}$ is a nonzero multiple of $\operatorname{pp}_{a_c}(w^{-n-1}dz)$ for $K-J\le n\le K$. Let a relation have polynomial $A$ (Lemma~\ref{lem:reltype}, $\deg A\le s-1$). Its place-$c$ part $\operatorname{pp}_{a_c}(Aw^{-K-1}dz)$ then lies in the span of $\operatorname{pp}_{a_c}(w^{-n-1}dz)$, $K-J\le n\le K$. Fix a place $a_c$ and expand $A$ in powers of the uniformizer: $A=\sum_{k\ge0}\nu_kw^k$ as power series at $a_c$, $\nu_k\in\F_q$. Then $\operatorname{pp}_{a_c}(Aw^{-K-1}dz)=\sum_{k\le K}\nu_k\operatorname{pp}_{a_c}(w^{k-K-1}dz)$, and these principal parts have the exact pole orders $K+1-k$, so they are independent; hence $\nu_k=0$ for $J<k\le K$. Put $P(X)=\sum_{k\le J}\nu_kX^k$. The polynomial $A-P(w)$ has degree at most $\max(s-1,sJ)$ and a zero of order at least $K+1$ at $a_c$; since $K+1>\max(s-1,sJ)$, $A=P(w)$. As $\deg A<s$, $P$ is constant, and $A$ is a constant $\nu$. So the place-$c$ part is $\nu\operatorname{pp}_{a_c}(w^{-K-1}dz)$, which is $\nu\xi_K^{-1}u_{c,K}\eta_{c,K}$ by Lemma~\ref{lem:rigid} at $n=K$ (with its constant $\xi_K$), at every place. So $f_{c,n}=0$ for $n<K$ and $f_{c,K}=\nu\xi_K^{-1}u_{c,K}$. A designed geometric digit of coordinate $i$ has $f_{c,K}=0$ for $c\ne i$, which forces $\nu=0$, since every $u_{c,K}\ne0$.
+\end{proof}
+
+The relation $\sum_cu_{c,K}y_{c,K}=0$ that survives is the skeleton relation of level $K$ restricted to $P_{sK}$: it puts the geometric digits of each point on a hyperplane, which says where the point sits inside its cell, not where it sits relative to its neighbours (Remark~\ref{rem:residuefull}). The corollary is a local argument and does not use Theorem~\ref{thm:count}. Its hypothesis $K\ge\max(s-1,sJ)$ cannot be weakened to $K\ge J+1$ in general: for $s=4$, the places $0,1,2,3$ over $\F_{11}$, $J=3$ and $K=4$, the relations of top index $4$ and depth at most $3$ on $P_{16}$ among the residue digits form a space of dimension~$2$ (exact computation by two independent methods). At every $K\ge5$ the dimension is $1$ there (exact computation for $5\le K\le11$, the corollary for $K\ge12$), and for $p=13$ and $p=17$ it is $1$ already at $K=4$: the failure depends on the prime.
+
+Combined with Theorem~\ref{thm:count}, the skeleton relations and the designs share one count.
+
+\begin{corollary}[Density bound for exact relations]\label{cor:density}
+Let $J\ge0$, and for a scramble of a frame let $E$ be the set of levels $T$ at which all $s$ geometric digits of $P_{sT}$ are designed by exact relations of depth at most $J$, and $S$ the set of levels $T$ at which $P_{s(T+1)-1}$ satisfies a skeleton relation $\sum_cu_{c,T}y_{c,T}=0$ (with any $u_T\ne0$). Then for every admissible range $I=[K_0,K_0+R]$,
+\[
+|S\cap I|+(s-1)\,|E\cap I|\ \le\ J+R+1,
+\qquad\text{and}\qquad
+\limsup_{X\to\infty}\frac{|S\cap[1,X]|+(s-1)\,|E\cap[1,X]|}X\ \le\ 1 .
+\]
+In particular $d_S+(s-1)d_E\le1$ whenever the densities $d_S$ of $S$ and $d_E$ of $E$ exist, and a skeleton relation at every level of an admissible range leaves room for at most $J/(s-1)$ design levels in it.
+\end{corollary}
+
+\begin{proof}
+A level of $E$ carries $s$ independent relations of top index $T$ (proof of Corollary~\ref{cor:layer}(a)), and a level of $S$ carries one, of depth $0$; a relation on $P_{s(T+1)-1}$ is also one on $P_{sT}$. So $|S\cap I|+(s-1)|E\cap I|\le|(S\setminus E)\cap I|+s|E\cap I|\le\sum_{T\in I}r_T\le J+R+1$ by Theorem~\ref{thm:count}. The density statement follows with the covering of the proof of Corollary~\ref{cor:layer}(a).
+\end{proof}
+
+The bound is attained: the residue sequence has $d_S=1$, and for $s=2$ the sequences of Remark~\ref{rem:gaussfrontier} have $d_E=1/\ell$ and $d_S=(\ell-1)/\ell$. Theorem~\ref{thm:block} has $d_E=1/s$, $d_S=0$, and Theorem~\ref{thm:blocktwo} has $(s-1)/\ell+(\ell-s)/\ell=(\ell-1)/\ell$: one relation per block of $\ell$ levels is left unused.
+
+\begin{remark}[Levels certified by exact relations]\label{rem:exactgaps}
+Call a prefix $P_m$, $m=s(T+1)-j$ with $1\le j\le s$, \emph{certified by exact relations} if its certificate uses $j$ independent exact digit relations of top index $T$ on $P_m$, of depth at most $J$; by Lemma~\ref{lem:reltype} $P_m$ has exactly $j$ relations of top index $T$, and the certificate asks all of them to have bounded depth. For $j=1$ this is the skeleton relation, for $j=s$ a design at the full level $P_{sT}$, and for $1<j<s$ the $j$ skeleton digits of the nets of \cite{Gru26geo} with $j$ skeleton coordinates. If several prefixes with the same $T$ are certified, the one with the largest $j$ alone uses at least as many independent relations of top index $T$ as there are such prefixes. Hence in an admissible range at most $J+R+1$ of the $s(R+1)$ exponents $sK_0\le m<s(K_0+R+1)$ are certified (Theorem~\ref{thm:count}). If all gaps between consecutive certified exponents there were at most $s-1$, at least $s(R+1)/(s-1)-1$ of them would be certified, more than $J+R+1$ as soon as $R+1>(s-1)(J+1)$. Admissible ranges with $R+1>(s-1)(J+1)$ start at every level of order $(s-1)^2(J+1)$ and beyond, so gaps of at least $s$ between certified exponents occur arbitrarily far out: no certificate by exact relations of bounded depth covers every prefix, and in Lemma~\ref{lem:prefix} such certificates give at best the factor $q^{-1}$ for all $N$, which the residue sequence already attains. This concerns the exponent of the bound for all $N$, not its constant. Gaps of at most $s$ need a certified exponent at every level, and at a cost of about one relation per level this forces, at all but at most $J$ levels of every admissible range, a relation of depth at most $J$ on $P_{s(T+1)-1}$, whose polynomial is constant: a skeleton relation, with correction terms if its depth is positive. With depth $0$ these are the rows of Corollary~\ref{cor:residuerows}, and their certificate, Theorem~\ref{thm:residue} with a check vector per level, gives at best the constant of the residue sequence; with corrections the certificate is Theorem~\ref{thm:corrected}, whose bound is smaller. A sharper analysis of these sequences than these certificates is not excluded.
+\end{remark}
+
+\begin{remark}[An exhaustive search]\label{rem:skelsearch}
+Can the scrambles of Corollary~\ref{cor:residuerows}, which keep the skeleton relation at every $m\equiv-1\pmod2$ with the best check directions, be certified at the full levels better than by the inclusion bound $\ljit(\Lambda)/p$ of Remark~\ref{rem:residuefull}? Their full-level responses are explicit in the vectors $u_n$, so for $s=2$ and $p=11$, $13$, $17$ we enumerated all of them by an exhaustive branch-and-bound search: every sequence $u_0,\dots,u_{K_{\max}}$ in which $u_1,\dots,u_{K_{\max}-1}$ have the largest possible $\ljit(\Lambda_{u_n})$ ($u_0$ and $u_{K_{\max}}$ arbitrary), maximising the smallest one-digit relaxation (Lemma~\ref{lem:cert}, $j=1$) of the actual responses over the full levels $K\le K_{\max}$. For $K_{\max}=10$, $8$ and $11$ respectively the maximum equals the inclusion bound $0.1818$, $0.1720$, $0.1765$ of the best check direction. This is an exhaustive result in exactly this scope: $s=2$, these three primes, these $K_{\max}$, the best check directions, and the one-digit relaxation. The actual separations of these sequences can be larger than the certificate, and nothing is claimed for other primes, other dimensions, weaker check directions or multi-digit certificates.
+\end{remark}
+
+\subsection{What Is Excluded, and What Is Open}\label{sec:countsummary}
+In summary: in the class of lower-triangular scrambles of a frame of $s$ distinct finite places over $\F_q$, exact digit relations of bounded depth are limited to about one per level in every admissible range of levels (Theorem~\ref{thm:count}). Consequently, all $s$ geometric digits can be designed on at most a fraction $1/s$ of the full levels (Corollary~\ref{cor:layer}; attained by Theorem~\ref{thm:block}); skeleton relations and designs together obey $d_S+(s-1)d_E\le1$ (Corollary~\ref{cor:density}; attained); a self-similar scramble carries one level-independent relation and a block-periodic one $\ell$ (Propositions~\ref{prop:onerel} and~\ref{prop:blockrel}); an exact skeleton relation fixes the row it lives in (Lemma~\ref{lem:rigid}), and no design of depth at most $J$ fits at a full level next to $J+1$ such relations (Corollary~\ref{cor:nodesign}); and certificates by such relations leave gaps of at least $s$ between certified sizes (Remark~\ref{rem:exactgaps}). In particular, no sequence in this class is certified by exact relations of bounded depth both at every prefix $P_{sK-1}$ by skeleton relations and at every full level by designs. Outside this scope these questions are open: windows, which are not exact and do certify every full level (Section~\ref{sec:antipode}; whether windows can be combined with skeleton relations is the subject of Section~\ref{sec:joint}); certificates that use several digits or the exact positions instead of the one-digit relaxation; choices of free digits that look at later digits; relations of unbounded depth; and digital sequences that are not scrambles of such a frame (places of higher degree, $t>0$). No digital sequence is known to us that is certified both at every $m\equiv-1\pmod s$ with the constants of Theorem~\ref{thm:residue} and at every full level with $1-O(1/p)$. For exact designed relations of bounded depth next to exact skeleton relations this is excluded (Corollary~\ref{cor:nodesign}); for windows chosen together with a corrected skeleton relation in a self-similar scramble, Proposition~\ref{prop:joint} excludes it in the scope stated there; in general it is open.

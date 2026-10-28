@@ -1,0 +1,291 @@
+%
+%
+%
+%
+%
+%
+%
+\section{Small Bases and Coverage by Dimension}\label{sec:frames}
+The constructions of Sections~\ref{sec:residue}--\ref{sec:antipode} need room in the base. A residue sequence needs a check vector with $\ljit(\Lambda_v)>0$, which exists only for $p>2^s$ (Corollary~\ref{cor:residueQU}); the staggered residue sequence has a positive bound only for $p>2^s$ (Corollary~\ref{cor:dyadic}); the block-periodic sequences start at $p=3$, $5$, $7$, $19$ for $s=2,3,4,5$ (Theorem~\ref{thm:block}); window constructions need several residues per window. In the bases $2$, $3$ and $4$ none of them gives anything at every full level: base $2$ is too small for all of them, and in base $3$ the brick-wall bound $(p-3)/(2p)$ is $0$.
+
+This section takes a different route for the smallest bases. Instead of choosing responses, it chooses frames and multipliers for which the map $l\mapsto D_i(l)$ is computed by a small finite automaton reading the base-$q$ digits of $l$. The set of all responses is then finite and known exactly, and the digit relaxation at every level is one finite minimum. This gives closed forms in base~$2$ in dimension two (Theorem~\ref{thm:B2}, which answers a question of Dick, Goda and Suzuki), base~$3$ in dimensions two and three, and base~$4$ in dimensions three and four. The price is that nothing is chosen digit by digit, and the constants fall quickly with the dimension. Section~\ref{sec:primepower} reads the staggered residue sequence over prime-power fields, and Section~\ref{sec:coverage} collects, dimension by dimension, which bases are covered and for which level family.
+
+\subsection{Lacunary Roots and Exact Response Sets}\label{sec:automata}
+The responses are coefficients of power series built from the local roots (Proposition~\ref{prop:law}), so their structure is that of the roots (Figure~\ref{fig:automaton}(a)). In the Faure frame of an odd base the root $1+u$, $u+u^2=x$, has the signed Catalan numbers as coefficients, with no visible pattern. In characteristic two the same equation $u^2+u=x$ is solved by the lacunary series $u=\sum_kx^{2^k}$, whose coefficients can be read off the binary digits of the exponent. Every algebraic power series over $\F_q$ is $q$-automatic by Christol's theorem \cite{Chr79,CKMR80}, so automata exist for every algebraic scramble; what a usable bound needs is that they are explicit and small. We use two families of frames whose roots are lacunary. In both, the places form one orbit of a group of affine maps $z\mapsto\alpha z+\beta$ that fix $w$ and $\infty$, so every place looks like every other.
+
+\emph{Artin--Schreier frames.} Let $H\subseteq\F_q$ be an additive subgroup with $|H|=s$ and let the places be the elements of~$H$. Then $w=\wp_H(z)=\prod_{h\in H}(z-h)=\sum_i\wp_{H,i}\,z^{p^i}$ is an additive polynomial, with $\wp_{H,0}\ne0$, and the translations by $H$ fix it. For $H=\F_p$ these are the places $0,\dots,p-1$ of the Faure sequence in dimension $s=p$.
+
+\emph{Kummer frames.} Let $s=q-1$ and let the places be the unit group, $a_c=\zeta^c$ for a generator $\zeta$ of $\F_q^*$, with $w=z^{q-1}-1$; the multiplications by $\zeta$ fix it. For $q=3$ the places are $\pm1$, and $y=2z-1$ carries the Faure places $\{0,1\}$ onto these ($y^2-1=4(z^2-z)$ in $\F_3$).
+
+\begin{lemma}[Lacunary roots]\label{lem:frames}
+Let $q$ be a power of the prime $p$.
+\begin{enumerate}
+\item[(a)] In the Artin--Schreier frame of $H$ the local roots are $z_c=a_c+U$, where $U\in x\F_q[[x]]$ is the solution of $\wp_H(U)=x$. It is supported on the powers of $p$ and satisfies $U(x)=U(x^q)-\wp^\flat_H(x)$, where $\wp^\flat_H$ is the additive polynomial with $\wp^\flat_H(\wp_H(z))=z^q-z$. For $H=\F_q$, $U=-\sum_{k\ge0}x^{q^k}$.
+\item[(b)] In the Kummer frame the local roots are $z_c=a_c\tau$, where $\tau^{q-1}=1+x$, $\tau(0)=1$, and
+\[
+\tau^{-1}=\prod_{i\ge0}\bigl(1+x^{q^i}\bigr),\qquad \tau^{-1}(x)=(1+x)\,\tau^{-1}(x^q);
+\]
+$\coef{n}\tau^{-1}=1$ if every base-$q$ digit of $n$ is $0$ or $1$, and $0$ otherwise.
+\end{enumerate}
+In both cases the root has degree $s$ over $\F_q(x)$.
+\end{lemma}
+
+\begin{proof}
+(a) $\wp_H(a_c+U)=\wp_H(U)=x$, so $a_c+U$ is the local root at $a_c$. The recursion $U=\wp_{H,0}^{-1}\bigl(x-\sum_{i\ge1}\wp_{H,i}U^{p^i}\bigr)$ preserves support in the powers of $p$. Since $\wp^\flat_H\circ\wp_H$ is monic of degree $q$ and vanishes on $\F_q$, it is $z^q-z$; hence $U^q-U=\wp^\flat_H(x)$, and $U^q=U(x^q)$. (b) $T=\prod_i(1+x^{q^i})$ satisfies $T(x)^q=T(x^q)=T(x)/(1+x)$, so $\tau=T^{-1}$ solves $\tau^{q-1}=1+x$, and $(a_c\tau)^{q-1}=\tau^{q-1}$. Expanding the product, $x^n$ occurs once for each way of writing $n$ as a sum of distinct powers of $q$. The degree: $\wp_H(Z)-x$ is linear in $x$, and $Z^{q-1}-(1+x)$ is Eisenstein at $1+x$.
+\end{proof}
+
+Both relations are \emph{Mahler equations}: the root at $x$ is an affine function of the root at $x^q$, additive for translations and multiplicative for rotations. We take $\theta=1$ and multipliers that are rational functions of the root, $g_c\in\F_q(x)(U)$ resp.\ $\F_q(x)(\tau)$. A scramble of these frames is \emph{symmetric} if all coordinates use the same multiplier $g_c=g$; then $V(z)\mapsto V(z+h)$ (resp.\ $V(\zeta z)$) permutes the coordinates of every point and preserves every prefix.
+
+To read a coefficient digit by digit we use the \emph{Cartier operators} $\mathcal C_r\bigl(\sum_nc_nx^n\bigr)=\sum_nc_{qn+r}x^n$, $0\le r<q$. They satisfy $\mathcal C_r\bigl(A(x^q)F\bigr)=A\,\mathcal C_rF$ and
+\begin{equation}\label{eq:cartierread}
+\coef{l}F=\coef{0}\,\mathcal C_{l_k}\cdots\mathcal C_{l_1}\mathcal C_{l_0}F\qquad\text{for }l=\textstyle\sum_{i\le k}l_iq^i.
+\end{equation}
+For example, $q=3$ and $F=\tau^{-1}$: by Lemma~\ref{lem:frames}(b), $\mathcal C_r\tau^{-1}=\mathcal C_r(1+x)\cdot\tau^{-1}=[r\le1]\,\tau^{-1}$, so reading the digits of $n$ visits two states, $\tau^{-1}$ and $0$, and a digit $2$ kills the coefficient (Figure~\ref{fig:automaton}(c)). The responses behave in the same way. By Proposition~\ref{prop:law}, $D_i(l)=\coef{l}\mathcal H_i$ with
+\[
+\mathcal H_i:=x^{-i}\FM_{>i}\hat G=\frac{x^{-i}\bigl(I-\FM_{\le i}G\bigr)}{1-x},\qquad \FM_{\le i}=\textstyle\sum_{a\le i}\FM_ax^a .
+\]
+
+\begin{proposition}[Exact response sets]\label{prop:automaton}
+Let a self-similar scramble have a frame matrix $\FM(x)$ with entries in $\F_q(x)(\vartheta)$, where $\vartheta\in\F_q[[x]]$ has degree $s'$ over $\F_q(x)$ and $\vartheta(x)=A(x)\,\vartheta(x^q)+B(x)$ with $A,B\in\F_q[x]$. Fix $j\ge1$ and let $\vec{\mathcal H}$ be the vector of the series $\mathcal H_i$ and $x\mathcal H_i$, $i<j$. There is a finite set $\mathcal S$ of such vectors, containing $\vec{\mathcal H}$ and stable under every $\mathcal C_r$, with
+\[
+\bigl(D_i(l),\,D_i(l-1)\bigr)_{i<j}=\coef{0}\,\mathcal C_{l_k}\cdots\mathcal C_{l_0}\vec{\mathcal H}\qquad(l\ge1).
+\]
+So the set $\{(D_i(l),D_i(l-1))_{i<j}:l\ge1\}$ is exactly the set of values $\coef{0}S$ over the states $S\in\mathcal S$ reached from $\vec{\mathcal H}$ by a digit word with a nonzero digit, and a finite breadth-first search computes it.
+\end{proposition}
+
+The proof (Appendix~\ref{app:smallbases}) writes every series over one common denominator and shows that the Cartier operators keep the degrees of the numerators bounded.
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_automaton_v4}
+\caption{Finite carry patterns. (a)~Coefficients $\coef{n}$, $n\le80$, of three local roots (blank $=0$): the Faure root $u$, $u+u^2=x$, over $\F_7$ (signed Catalan numbers modulo $7$), the base-$2$ root $u=\sum_kx^{2^k}$, and the Kummer root $\tau^{-1}$ over $\F_3$, whose coefficient is $1$ exactly when $n$ has no base-$3$ digit $2$. All three are automatic by Christol's theorem; only the lacunary ones have a digit rule small enough for an explicit bound. (b)~Long carries repeat short ones for the base-$2$ sequence (Lemma~\ref{lem:octave}, $j=12$): the responses depend only on the parity of $l$ and the bits $\lfloor\log_2n\rfloor\bmod2$ on $[l,l+12]$. A range crossing a power of two, $[250,262]\ni256$, has the partner $l-3\cdot2^{k-1}=58$, which crosses $64$ at the same relative position; a range inside one octave, $[150,162]$, has a partner $[40,52]$ in an octave of the same parity. (c)~The two-state automaton that reads the base-$3$ digits of $n$ and outputs $\coef{n}\tau^{-1}$ over $\F_3$.}
+\label{fig:automaton}
+\end{figure}
+
+The proposition applies to the Artin--Schreier frames with $\vartheta=U$, $A=1$, $B=-\wp^\flat_H$, and to the Kummer frames with $\vartheta=\tau^{-1}$, $A=1+x$, $B=0$ (Lemma~\ref{lem:frames}). The pairs $(D_i(l),D_i(l-1))$ are what Lemma~\ref{lem:cert} needs for $q=4$, through (\ref{eq:carrychange}). With all $l\ge1$ in place of $l\le K$, Lemma~\ref{lem:cert} then gives one bound for every level with $q^K\ge4$. The point of the proposition is exactness, not finiteness (which Christol's theorem gives): a screen over carry lengths up to some bound can miss binding responses. For the base-$3$ sequence of Remark~\ref{rem:B3}, the last of its $84$ response tuples first appears at $l=2469$.
+
+\subsection{Dimension Two}\label{sec:smalltwo}
+In base two every digital $(0,2)$-sequence is, up to a reordering inside each prefix, a scramble $(L_0,L_1\Pas_1)$ of the Sobol' sequence \cite{HS19}. Dick, Goda and Suzuki prove that neither one-sided choice, $(L,\Pas_1)$ or $(\Pas_0,L\Pas_1)$, is well separated, and ask whether a two-sided pair is \cite[Section~4.2]{DGS2}; random linear scrambles of binary digital nets with fixed $t$ have mesh ratio $O_P(\log N)$ under a uniform coincidence condition, which the Sobol' prefixes satisfy \cite[Thm.~5.5, Lem.~4.10]{Suz26}. The one-sided failure is an instance of Corollary~\ref{cor:unscrambled}: a coordinate that is left a radical inverse up to a scalar forces close pairs. The following explicit pair, which scrambles both coordinates, answers the question positively.
+
+\begin{theorem}[Base 2]\label{thm:B2}
+Let $u=\sum_{k\ge0}x^{2^k}\in\F_2[[x]]$, so that $u^2+u=x$, and let the digital sequence over $\F_2$ have the digits
+\[
+y_{0,n}(V)=\coef{n}\,(1+x)(1+u)\,V(u),\qquad y_{1,n}(V)=\coef{n}\,\frac ux\,V(1+u),
+\]
+that is, $C_0=L_0$ and $C_1=L_1\Pas_1$ with $L_0[n][k]=\coef{n}(1+x)(1+u)u^k$ and $L_1[n][k]=\coef{n+1}u^{k+1}$. It is a $(0,2)$-sequence in base~$2$, and for every $K\ge1$
+\[
+\sep{P_{2K}}\ \ge\ \frac{\sqrt{2269618}}{4096}=0.36780\ldots
+\]
+Consequently $\delta(P_{[N]})\ge0.1839\,N^{-1/2}$ for every $N\ge2$, $h/\delta\le7.7$ along all $N$ ($15.4$ in the convention of \cite{DGS2}), and every prefix $P_m$ is $k_m$-separated in the sense of \cite{DGS2} (their $\kappa_m$) with $k_m=\lceil m/2\rceil+3$. In particular the sequence is quasi-uniform.
+\end{theorem}
+
+This is the Faure frame in base $2$ ($w=z^2+z$, roots $z_0=u$, $z_1=1+u$, $\theta=1$) with $g_0=(1+x)(1+u)$ and $g_1=u/x=1/(1+u)$, an algebraic but not symmetric scramble of the Artin--Schreier frame $H=\F_2$. The multipliers are chosen so that one row of the inverse frame matrix is rational and the other lacunary:
+\begin{equation}\label{eq:B2G}
+\FM=\begin{pmatrix}g_0&g_0u\\ g_1&g_1(1+u)\end{pmatrix},\qquad G=\FM^{-1}=\begin{pmatrix}\frac1{1+x}&x\\[2pt] \frac u{x(1+x)}&1+u\end{pmatrix}.
+\end{equation}
+The one-digit responses are $O_0^{(l)}=l\bmod2$, $X_{0\leftarrow1}^{(l)}=1$, $O_1^{(l)}=\lfloor\log_2l\rfloor\bmod2$ and $X_{1\leftarrow0}^{(l)}=\sum_{n<l}\lfloor\log_2(n+2)\rfloor\bmod2$. In base two the automaton of Proposition~\ref{prop:automaton} can be replaced by a hand argument: long carries repeat the patterns of short ones.
+
+\begin{lemma}[Long carries repeat short ones]\label{lem:octave}
+For the sequence of Theorem~\ref{thm:B2} and $j\le12$, the tuples $(D_i(l))_{i<j}$, $l\ge1$, take the same values as for $1\le l\le63$; for $j=12$ there are $35$ of them.
+\end{lemma}
+
+The proof (Appendix~\ref{app:smallbases}) reads the entries of $\hat G$ off the binary digits and maps every carry length $l\ge64$ to a smaller one with the same responses.
+
+\begin{proof}[Proof of Theorem~\ref{thm:B2}]
+The sequence is a self-similar scramble of the Faure frame, so it is a $(0,2)$-sequence (Lemma~\ref{lem:t0}) whose offset map is the same at every level (Proposition~\ref{prop:law}). By Lemma~\ref{lem:octave}, Lemma~\ref{lem:cert} with $j=12$ is a minimum over $35+35+2\cdot35^2$ cases (axis steps with one carry length, diagonal and antidiagonal steps with two). This exact computation (computer-assisted) gives $\LB_{12}=\sqrt{2269618}/4096$, attained at the horizontal step with $l=1$: the own change $\sigma_0=111110011000$ and the cross change $\sigma_1=101000100000$ give $f_{12}(1,\sigma_0)=103/4096$ and $f_{12}(0,\sigma_1)=1503/4096$. This covers $K\ge2$; for $K=1$, $\sep{P_2}=0.6334$. Lemma~\ref{lem:prefix} with $q=2$ and Remark~\ref{rem:prefixcases} give $\delta(P_{[N]})\ge(\LB_{12}/2)N^{-1/2}$ and $h/\delta\le2\sqrt2/\LB_{12}<7.7$. Finally two points in a square of side $2^{-k_m}$ are less than $\sqrt2\cdot2^{-k_m}$ apart, and $\sqrt2\cdot2^{-\lceil m/2\rceil-3}<0.1839\cdot2^{-m/2}\le\delta(P_m)$.
+\end{proof}
+
+Since $k_m\le m/2+4$ and $\delta$ is measured on the torus, the sequence is well-separated, and toroidally well-separated, in the sense of \cite[Def.~3.8]{DGS2}, which is the property asked for in \cite[Section~4.2]{DGS2}.
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_B2_v4}
+\caption{XOR staggering in base~$2$ (Theorem~\ref{thm:B2}). (a)~$12\times12$ of the $64\times64$ cells of $P_{12}$, with lattice images and jitter; cell boundaries shaded by carry length. The closest pair is a horizontal neighbour pair across a boundary of carry length $1$, staggered vertically by the cross mask. (b)~The masks $D_i(l)$ XORed onto the first six geometric digits (rows, worth $2^{-1},\dots,2^{-6}$ of a cell) for $l\le64$; the strips on top give the pattern of $l$ (Lemma~\ref{lem:octave}). Boxed: the binding case, a horizontal step with $l=1$, with the $12$-digit masks $\sigma_0=111110011000$ (own) and $\sigma_1=101000100000$ (cross). (c)~The guaranteed distance across a boundary of carry length $l$ (Lemma~\ref{lem:cert}, $j=12$); the minimum $0.3678$ is the horizontal step with $l=1$. Exact $\sep{P_{12}}=0.3968$.}
+\label{fig:B2}
+\end{figure}
+
+\emph{Why it works.} The offset map of a base-two sequence does not shift points by small real amounts: what is fixed per carry length is an $\F_2$-mask XORed onto the geometric digits (Figure~\ref{fig:B2}(b)). At the most common boundary, $l=1$ in coordinate~$0$, the own mask can pull the neighbour almost onto the vertical line through the point. But the cross mask has a leading~$1$: the vertical offsets differ in their first digit, by $\pm\frac12$ of a cell, corrected by the lower digits by at most $\frac18+\frac1{128}$ plus the jitter, so the two points stay at least $1503/4096>0.366$ of a cell apart vertically. Likewise every step of coordinate~$1$ flips the leading horizontal digit ($X_{0\leftarrow1}^{(l)}=1$). This is the brick wall of Example~\ref{ex:brickwall} in XOR form: where the own mask could close the gap, the cross mask forces a stagger of about half a cell. The true separation is somewhat larger: $\sep{P_m}=0.3968$ for every even $m$ from $12$ to $26$, against $0.0442$ for the Sobol' sequence at $m=12$ and $0.0007$ at $m=24$ (exact). The generator data, as a drop-in table of $32$-bit direction numbers with a reference implementation, are in the archive (Appendix~\ref{app:archive}).
+
+\begin{remark}[Base 3]\label{rem:B3}
+In base three the Faure frame is the Kummer frame $\{\pm1\}$, with the lacunary root $\tau=\sqrt{1+x}$ of Lemma~\ref{lem:frames}(b), and Proposition~\ref{prop:automaton} handles it as well. Take the roots $z_0=\tau-1$, $z_1=2-\tau$ of $z^2-z=x$, $\theta=1$ and the multipliers $g_0=-(1+x)(1-x+\tau)/(1-x)$, $g_1=-(1+\tau)/\tau$. This self-similar scramble $(L_0\Pas_0,L_1\Pas_1)$ of the Faure sequence in base $3$ is a $(0,2)$-sequence (Lemma~\ref{lem:t0}), and Proposition~\ref{prop:automaton} with $\vartheta=\tau^{-1}$, $A=1+x$, $B=0$, $j=6$ (a search of $190$ states) gives exactly $84$ response tuples; Lemma~\ref{lem:cert} over all steps and pairs of tuples gives $\LB_6=0.266926$, attained at an antidiagonal step (computer-assisted). With $\sep{P_2}=0.5828$ this gives $\sep{P_{2K}}\ge0.2669$ for every $K\ge1$: base three in dimension two at every full level, where Theorem~\ref{thm:block}(a) gives $\sep{P_{4K}}\ge1/3$ on the sparser level family $4\N$. The unscrambled Faure sequence in base~$3$ is not quasi-uniform \cite{GHS26} (Corollary~\ref{cor:faure}); its separation falls to $0.016$ at $m=9$, while that of this scramble stays at $0.298$ or more for even $m\le14$ (exact).
+\end{remark}
+
+\begin{corollary}[Every prime base, dimension two]\label{cor:allprimes}
+For every prime $p$ there is an explicit closed-form scramble $(L_0\Pas_0,L_1\Pas_1)$ of the Faure sequence in base $p$ that is a quasi-uniform $(0,2)$-sequence with a bound at every full level: Theorem~\ref{thm:B2} for $p=2$, Remark~\ref{rem:B3} for $p=3$ and the brick wall (Theorem~\ref{thm:WF}) for $p\ge5$, with $\sep{P_{2K}}\ge0.3678$, $0.2669$ and $(p-3)/(2p)$, respectively, for every $K$.
+\end{corollary}
+
+For large primes the hexagonal brick wall improves the constant at every full level to $1-17/p$ (Corollary~\ref{cor:HB17}, $p>3677$), and for every prime $p\ge3$ the block-periodic residue sequence reaches $1-2/p$ at every level $m\in4\N$ (Theorem~\ref{thm:block}(a)).
+
+\subsection{Dimensions Three and Four, Small Bases}\label{sec:smallthree}
+The same method works with symmetric scrambles of the Artin--Schreier frames $H=\F_3$ and $H=\F_4$ and of the Kummer frame $\F_4^*$. In each case the multiplier is a short rational function of the root, found by an exhaustive screen over small families of such functions; the proofs are identical, and their finite parts are collected in Table~\ref{tab:frames}.
+
+\begin{theorem}[Base 3, dimension 3]\label{thm:S3}
+Let $U=-\sum_{k\ge0}x^{3^k}\in\F_3[[x]]$, so that $U^3-U=x$, and $g=(1+x-U)/(1-x)$. The digital sequence over $\F_3$ with the digits $y_{c,n}(V)=\coef{n}\,g(x)\,V\bigl(c+U(x)\bigr)$, $c\in\F_3$, is a scramble of the Faure sequence $(\Pas_0,\Pas_1,\Pas_2)$ in base~$3$ and a $(0,3)$-sequence, and $\sep{P_{3K}}\ge0.05598$ for every $K\ge1$. Consequently $\delta(P_{[N]})\ge0.0186\,N^{-1/3}$ for all $N\ge2$ and $h/\delta<93$.
+\end{theorem}
+
+\begin{theorem}[Base 4, dimension 3]\label{thm:K4}
+Let $\F_4=\{0,1,\omega,\omega^2\}$, let $\tau^{-1}=\prod_{i\ge0}(1+x^{4^i})\in\F_4[[x]]$, so that $\tau^3=1+x$, and
+\[
+g=\frac{\omega^2(\tau+\omega)}{\tau+\omega^2}=1+x+\omega x^2+\omega^2x^3+\omega^2x^5+\cdots.
+\]
+The digital sequence over $\F_4$ with the digits $y_{c,n}(V)=\coef{n}\,g(x)\,V(\omega^c\tau(x))$, $c=0,1,2$, is a $(0,3)$-sequence in base~$4$, and $\sep{P_{3K}}\ge0.11293$ for every $K\ge1$. Consequently $\delta(P_{[N]})\ge0.0282\,N^{-1/3}$ for all $N\ge2$ and $h/\delta<61.4$. With the binary code of $\F_4$ it is a binary digital sequence, generated by XOR like the Sobol' sequence.
+\end{theorem}
+
+\begin{theorem}[Base 4, dimension 4]\label{thm:S4}
+Let $U=\sum_{k\ge0}x^{4^k}\in\F_4[[x]]$, so that $U^4+U=x$, and $g=1+\omega U+U^2$. The digital sequence over $\F_4$ with the digits $y_{c,n}(V)=\coef{n}\,g(x)\,V(c+U(x))$, $c\in\F_4$, is a $(0,4)$-sequence in base~$4$ and a binary digital sequence, and $\sep{P_{4K}}\ge0.03013$ for every $K\ge1$. Consequently $\delta(P_{[N]})\ge0.0075\,N^{-1/4}$ for all $N\ge2$ and $h/\delta<266$.
+\end{theorem}
+
+\begin{proof}[Proof of Theorems~\ref{thm:S3}, \ref{thm:K4} and~\ref{thm:S4}]
+By Lemma~\ref{lem:frames} the frames are the Artin--Schreier frames $H=\F_3$ ($w=z^3-z$) and $H=\F_4$ ($w=z^4+z$) with roots $c+U$, and the Kummer frame $\F_4^*$ ($w=z^3-1$) with roots $\omega^c\tau$; the multiplier is the same rational function of the root in every coordinate. (For Theorem~\ref{thm:K4}, coordinate $c$ reads $V(z)\,\omega^2(z-a_{c+1})/(z-a_{c+2})$ at $a_c=\omega^c$, indices modulo $3$: the multiplier has its zero and its pole at the two other places.) So $t=0$ by Lemma~\ref{lem:t0}, and Proposition~\ref{prop:automaton} gives the exact response sets of Table~\ref{tab:frames}, with the carry correction (\ref{eq:carrychange}) for $q=4$. Lemma~\ref{lem:cert} over all steps and all combinations of response columns gives the values $\LB_j$ of the table (computer-assisted). For $q=4$ this covers every $K\ge1$; for $q=3$ it covers $K\ge2$, and $\sep{P_3}=0.4887$. Lemma~\ref{lem:prefix} gives the rest. With $\F_4=\F_2\oplus\F_2\omega$, multiplication by an element of $\F_4$ is an $\F_2$-linear $2\times2$ block and addition is XOR of the codes, which gives the binary form.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\small
+\caption{The finite parts of the small-base theorems: depth $j$, number of distinct responses (per moving coordinate; in brackets the change columns after the $\F_4$ carry correction), bound $\LB_j$ for every level, the step attaining it (up to the symmetry of the frame), and the exact separation at the largest level we computed. All entries are exact computations; the responses are exact sets by Proposition~\ref{prop:automaton} (Lemma~\ref{lem:octave} for base~$2$). Level family: all full levels, $\Lev=s\N$.}
+\label{tab:frames}
+\begin{tabular}{@{}lllclll@{}}
+\toprule
+result & base, $s$ & frame & $j$ & responses & $\LB_j$ & minimising step; exact $\sep{P_m}$\\
+\midrule
+\ref{thm:B2} & $2$, $2$ & Faure ($H=\F_2$) & $12$ & $35$ tuples & $0.367804$ & $(1,0)$, $l=1$; $0.3968$ ($m\le26$)\\
+\ref{rem:B3} & $3$, $2$ & Faure ($\F_3^*$) & $6$ & $84$ tuples & $0.266926$ & antidiagonal; $0.298$ ($m=14$)\\
+\ref{thm:S3} & $3$, $3$ & $H=\F_3$ & $8$ & $85$ & $0.055983$ & $(1,-1,-1)$; $0.129$ ($m=15$)\\
+\ref{thm:K4} & $4$, $3$ & $\F_4^*$ & $8$ & $32$ ($67$) & $0.112930$ & $(0,1,1)$; $0.168$ ($m=12$)\\
+\ref{thm:S4} & $4$, $4$ & $H=\F_4$ & $5$ & $64$ ($120$) & $0.030131$ & all four move; $0.101$ ($m=12$)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Dick, Goda and Suzuki prove that the Faure sequence in base~$3$ is not quasi-uniform \cite{DGS2}, and Goda, Hofer and Suzuki extend this to scrambles $(\Pas_0,L_1\Pas_1,L_2\Pas_2)$ that leave the first coordinate unscrambled, and likewise in every prime base $p$ in dimension $p$ \cite[Rem.~3]{GHS26} (Corollary~\ref{cor:unscrambled} contains both). Theorem~\ref{thm:S3} scrambles all three coordinates ($g$ is not constant), so it is outside the scope of these results and consistent with them.
+
+The certified bounds in dimensions three and four are far below the exact separations of Table~\ref{tab:frames} because the binding steps involve long carries that the computable prefixes do not contain; explicit close pairs of points bracket the true infimum closely (Appendix~\ref{app:sharp}, which also explains why these bases work, Remark~\ref{rem:height}).
+
+\emph{Base seven.} At $p=7$ in dimension three the residue sequences give nothing ($7<2^3$), and the block-periodic residue sequence covers only the levels $m\in9\N$ (Theorem~\ref{thm:block}(b), $1-2/7$). Every full level is covered by a bound of a different kind, in which the admissible own response depends on the current cross responses of its column; it is given in Appendix~\ref{app:p7} (Theorem~\ref{thm:p7}: $\sep{P_{3K}}\ge1/7$ for every $K$, computer-assisted).
+
+\subsection{Prime-Power Bases}\label{sec:primepower}
+Apart from $q=4$, the constructions above live over prime fields. The staggered residue sequence does not need this: its two lemmas use only the residue theorem, which holds over every field. What changes over $\F_q$, $q=p^r$ with $r\ge2$, is the carry. Adding $1$ to the integer cell index changes the finest digit by an element $\Delta(y)$ that depends on the digit (Remark~\ref{rem:F4carry}), not by the constant~$1$, so the rank-1 rule of the staggered coordinate is read with several possible increments. The resulting bound is a small finite minimum, and it depends on how the digits of $\F_q$ are encoded as integers.
+
+Write $\F_q=\F_p[x]/(f)$ for a monic irreducible $f$ of degree $r$, and encode $\sum_{i<r}c_ix^i$ ($0\le c_i<p$) as the integer $\sum_ic_ip^i$ (the power-basis encoding of $f$, a natural identification in the sense of Section~\ref{sec:prelim}). With this encoding $\Delta(y)$ is one of the $r$ elements $1$, $1+x$, \dots, $1+x+\dots+x^{r-1}$, according to the number of trailing digits $p-1$ of the code of $y$; let $\mathcal D_f$ be this set. For weights $k\in(\F_q^*)^{s-1}$ put
+\[
+\beta_q(k)=\min\ f_1\Bigl(e_{\cstar},\ \sum_{c\in C}e_c\,k_c\,\Delta_c\Bigr),
+\]
+the minimum over all steps $e\in\{-1,0,1\}^s\setminus\{0\}$ and all $\Delta_c\in\mathcal D_f$ for the moving coordinates $c\in C$, with $f_1$ the one-digit function of Lemma~\ref{lem:cert} for this encoding.
+
+\begin{proposition}[Prime-power bases]\label{prop:primepower}
+Let $(s,q,f,k)$ be a row of Table~\ref{tab:primepower}. Read Definition~\ref{def:residuestar} over $\F_q$ (any $s$ distinct places in $\F_q$, any $\theta,\mu_\star\in\F_q^*$, the weights $k$), with the power-basis encoding of $f$. The result is a digital $(0,s)$-sequence over $\F_q$ with
+\[
+\sep{P_{sK}}\ \ge\ \beta_q(k)\qquad\text{for every }K\ge1,
+\]
+with the value of the table; it is quasi-uniform, with $\delta(P_{[N]})\ge(\beta_q(k)/q)\,N^{-1/s}$ for every $N\ge2$. The evaluation of $\beta_q(k)$ is computer-assisted.
+\end{proposition}
+
+\begin{proof}
+The proofs of Lemmas~\ref{lem:residuestar-t0} and~\ref{lem:residuestar-rel} use Lemma~\ref{lem:resform} and Lemma~\ref{lem:t0}, which hold over every finite field; so the sequence is a digital $(0,s)$-sequence over $\F_q$, and $y_{\cstar,K}=\sum_{c\in C}k_c\,y_{c,K-1}$ on $P_{sK}$ for every $K$. In the language of Section~\ref{sec:law} the responses of the staggered coordinate are constant, $D(l)[\cstar][c]=k_c$ and $D(l)[\cstar][\cstar]=0$ for every $l\ge1$. By (\ref{eq:carrychange}) a step of coordinate $c$ with carry length $l$, stopping at the digit $y$, therefore changes $r_{\cstar}$ by $\Delta(\bar y)k_c$ if $l\ge2$ (the wrap included) and by $\Delta(y)k_c$ if $l=1$; in both cases by $\Delta_ck_c$ with $\Delta_c\in\mathcal D_f$. Lemma~\ref{lem:cert} with $j=1$, keeping only the term of coordinate $\cstar$, gives $\sep{P_{sK}}\ge\min(1,\beta_q(k))=\beta_q(k)$ for every $K$ with $q^K\ge4$, which is every $K\ge1$ since $q\ge8$. The value $\beta_q(k)$ is a minimum over at most $3^s\,r^{s-1}$ terms, each a minimum over the $q$ positions of $\enc$ differences, evaluated exactly (computer-assisted). The last statement is Lemma~\ref{lem:prefix} with $\Lev=s\N$.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Proposition~\ref{prop:primepower}: the staggered residue sequence over $\F_q$, $q=p^r$, with the power-basis encoding of the monic irreducible polynomial $f$ (for every $q$ except $32$ the smallest one, ordered by the codes of the coefficients below the leading one). Weights $k$ are given by their codes; $\beta_q$ is the best value over all weights for this encoding (exhaustive), certified for every $K$ at every full level ($\Lev=s\N$). Last column: exact $\sep{P_3}$ for the places with codes $0,1,2$, $\cstar=2$, $\theta=1$ (illustration). The value $\beta_q$ depends on the encoding: for $q=25$, $s=2$ it ranges from $5/25$ ($x^2+2$) to $8/25$ ($x^2+3$) over the irreducible quadratics, and for $q=32$, $s=3$ it is positive for $2$ of the $6$ irreducible quintics (here $x^5+x^3+x^2+x+1$).}
+\label{tab:primepower}
+\begin{tabular}{@{}cr l l r c@{}}
+\toprule
+$s$ & $q$ & $f$ & weights $k$ & $\beta_q$ & exact $\sep{P_3}$\\
+\midrule
+2 & 8 & $x^3+x+1$ & $(2)$ & $1/8$ & --\\
+ & 9 & $x^2+1$ & $(3)$ & $1/9$ & --\\
+ & 16 & $x^4+x+1$ & $(2)$ & $1/16$ & --\\
+ & 25 & $x^2+2$ & $(10)$ & $5/25$ & --\\
+ & 27 & $x^3+2x+1$ & $(11)$ & $3/27$ & --\\
+ & 49 & $x^2+1$ & $(21)$ & $17/49$ & --\\
+\addlinespace
+3 & 25 & $x^2+2$ & $(7,2)$ & $1/25$ & $0.1885$\\
+ & 32 & $x^5+x^3+x^2+x+1$ & $(12,2)$ & $1/32$ & --\\
+ & 49 & $x^2+1$ & $(21,7)$ & $5/49$ & $0.3565$\\
+ & 64 & $x^6+x+1$ & $(42,23)$ & $2/64$ & $0.1781$\\
+ & 81 & $x^4+x+2$ & $(17,3)$ & $1/81$ & $0.1546$\\
+ & 121 & $x^2+1$ & $(55,22)$ & $19/121$ & $0.3277$\\
+ & 125 & $x^3+x+1$ & $(35,26)$ & $8/125$ & $0.1684$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The bound uses one coordinate and one digit, as in Corollary~\ref{cor:dyadic}, and it is small; the exact separations are several times larger (last column of Table~\ref{tab:primepower}; for $s=3$ the smallest $\sep{P_{[N]}}$ over all $N$ up to about $10^7$ is between $0.0256$ ($q=64$) and $0.1618$ ($q=121$), above $\beta_q/q$ in every case). A zero is a zero of this bound for this encoding, not a statement about the base: for $q=8$, $9$, $16$ and $27$ in dimension three every power-basis encoding gives $\beta_q=0$ for every choice of weights (exact computation); other encodings, other constructions and deeper certificates are untried there.
+
+\subsection{Coverage by Dimension}\label{sec:coverage}
+Which bases admit a quasi-uniform digital $(0,s)$-sequence with a certified bound, and on which level family? The answer collects the results of Sections~\ref{sec:residue}--\ref{sec:frames}. The level family matters: every family of this paper gives quasi-uniformity, but a denser family gives the better bound for every $N$ (Lemma~\ref{lem:prefix}), and the full levels $\Lev=s\N$ are the classical choice. Table~\ref{tab:coverage} and Figure~\ref{fig:dim3} give the details.
+
+\begin{theorem}[Coverage]\label{thm:coverage}
+In each of the following cases there is an explicit digital $(0,s)$-sequence over $\F_q$ with a positive lower bound on $\sep{P_m}$ for every $m$ in the stated level family $\Lev$, and hence, by Lemma~\ref{lem:prefix}, a quasi-uniform one.
+\begin{enumerate}
+\item[(a)] $s=2$: every prime $p$, with $\Lev=2\N$; the prime powers $q=8,9,16,25,27,49$, with $\Lev=2\N$.
+\item[(b)] $s=3$: $q=3$, $q=4$, $q=7$ and every prime $p\ge11$, with $\Lev=3\N$; every prime $p\ge5$, with $\Lev=9\N$; the prime powers $q=25,32,49,64,81,121,125$, with $\Lev=3\N$. In particular every prime base $p\ge3$ is covered; $p=5$ only with $\Lev=9\N$.
+\item[(c)] $s=4$: $q=4$ and every prime $p\ge17$, with $\Lev=4\N$; every prime $p\ge7$, with $\Lev=16\N$.
+\item[(d)] $s=5$: every prime $p\ge37$, with $\Lev=5\N$; every prime $p\ge19$, with $\Lev=25\N$.
+\item[(e)] every $s\ge2$: every prime $p>2^s$, with $\Lev=s\N$ and, by a second sequence, with $\Lev=s\N-1$; both are closed forms with written proofs.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Each case is a cited result; Table~\ref{tab:coverage} lists the construction, the bound and the kind of proof for each.
+(e) Corollary~\ref{cor:dyadic} (staggered residue sequence, $\Lev=s\N$) and Corollary~\ref{cor:korobov} with Corollary~\ref{cor:residueQU} (residue sequence, $\Lev=s\N-1$), both for every prime $p>2^s$.
+(a) $p=2$: Theorem~\ref{thm:B2}; $p=3$: Remark~\ref{rem:B3} (computer-assisted), and Theorem~\ref{thm:block}(a) with $\Lev=4\N$ (proof); $p\ge5$: Theorem~\ref{thm:WF}. The prime powers: Proposition~\ref{prop:primepower}.
+(b) $q=3$: Theorem~\ref{thm:S3}; $q=4$: Theorem~\ref{thm:K4}; $q=7$: Theorem~\ref{thm:p7}; $p\ge11$: case (e), since $11>2^3$. $\Lev=9\N$: Theorem~\ref{thm:block}(b), for every prime $p\ge5$. The prime powers: Proposition~\ref{prop:primepower}.
+(c) $q=4$: Theorem~\ref{thm:S4}; $p\ge17$: case (e). $\Lev=16\N$: Theorem~\ref{thm:block}(c); its written proof covers every prime $p\ge5a^*_4+4=29$, and the exact evaluation of $\LB(F)$ covers every prime $7\le p\le109$. The two ranges overlap, so together they cover every prime $p\ge7$.
+(d) $p\ge37$: case (e), since $37$ is the least prime above $2^5$. $\Lev=25\N$: Theorem~\ref{thm:block}(c); the written proof covers every prime $p\ge5a^*_5+4=84$, and the exact evaluation covers every prime $19\le p\le109$; together, every prime $p\ge19$.
+\end{proof}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Coverage by dimension (Theorem~\ref{thm:coverage}): base, construction, level family $\Lev$ (the exponents $m$ with a certified bound on $\sep{P_m}$), the bound, and the kind of proof (``c.a.'': computer-assisted, with the scope stated in the cited result). The bound for every $N$ is $\LB\,q^{-\Delta_{\Lev}/s}$ with $\Delta_{\Lev}=s$ for $\Lev=s\N$ and $s\N-1$ and $\Delta_{\Lev}=s^2$ for $\Lev=s^2\N$ (Lemma~\ref{lem:prefix}). $\rho=\lfloor p^{1/s}\rfloor$. Constructions certified at every full level with constants tending to $1$ from large primes on (staggered windows, Section~\ref{sec:antipode}) are not repeated here.}
+\label{tab:coverage}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}c l l l l l@{}}
+\toprule
+$s$ & base & construction & $\Lev$ & $\sep{P_m}\ge$ & proof\\
+\midrule
+2 & $q=2$ & Thm.~\ref{thm:B2} & $2\N$ & $0.3678$ & c.a.\\
+ & $q=3$ & Rem.~\ref{rem:B3} & $2\N$ & $0.2669$ & c.a.\\
+ & $p\ge5$ & brick wall, Thm.~\ref{thm:WF} & $2\N$ & $(p-3)/(2p)$ & proof\\
+ & $p\ge5$ & residue seq., Cor.~\ref{cor:korobov} & $2\N-1$ & $(\rho-1)p^{-1/2}$ & proof\\
+ & $p\ge3$ & block-periodic, Thm.~\ref{thm:block}(a) & $4\N$ & $1-2/p$ & proof\\
+ & $q=8,9,16,25,27,49$ & Prop.~\ref{prop:primepower} & $2\N$ & Tab.~\ref{tab:primepower} & c.a.\\
+\addlinespace
+3 & $q=3$ & Thm.~\ref{thm:S3} & $3\N$ & $0.05598$ & c.a.\\
+ & $q=4$ & Thm.~\ref{thm:K4} & $3\N$ & $0.11293$ & c.a.\\
+ & $p=7$ & Thm.~\ref{thm:p7} & $3\N$ & $1/7$ & c.a.\\
+ & $p\ge11$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $3\N$ & $(\lfloor p/4\rfloor-1)/p$ & proof\\
+ & $p\ge11$ & residue seq., Cor.~\ref{cor:korobov} & $3\N-1$ & $(\rho-1)p^{-1/3}$ & proof\\
+ & $p\ge5$ & block-periodic, Thm.~\ref{thm:block}(b) & $9\N$ & $1-2/p$ & proof\\
+ & $q=25,32,\dots,125$ & Prop.~\ref{prop:primepower} & $3\N$ & Tab.~\ref{tab:primepower} & c.a.\\
+\addlinespace
+4 & $q=4$ & Thm.~\ref{thm:S4} & $4\N$ & $0.03013$ & c.a.\\
+ & $p\ge17$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $4\N$ & $(\lfloor p/8\rfloor-1)/p$ & proof\\
+ & $p\ge17$ & residue seq., Cor.~\ref{cor:korobov} & $4\N-1$ & $(\rho-1)p^{-1/4}$ & proof\\
+ & $p\ge7$ & block-periodic, Thm.~\ref{thm:block}(c) & $16\N$ & $1-6/p$ & proof $p\ge29$, c.a.\ $7$--$109$\\
+\addlinespace
+5 & $p\ge37$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $5\N$ & $(\lfloor p/16\rfloor-1)/p$ & proof\\
+ & $p\ge37$ & residue seq., Cor.~\ref{cor:korobov} & $5\N-1$ & $(\rho-1)p^{-1/5}$ & proof\\
+ & $p\ge19$ & block-periodic, Thm.~\ref{thm:block}(c) & $25\N$ & $1-17/p$ & proof $p\ge84$, c.a.\ $19$--$109$\\
+\addlinespace
+$s$ & $p>2^s$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $s\N$ & $(\lfloor p/2^{s-1}\rfloor-1)/p$ & proof\\
+ & $p>2^s$ & residue seq., Cor.~\ref{cor:korobov} & $s\N-1$ & $(\rho-1)p^{-1/s}$ & proof\\
+ & $p\ge5a^*_s+4$ & block-periodic, Thm.~\ref{thm:block}(c) & $s^2\N$ & $1-(a^*_s+1)/p$ & proof ($s\ge4$)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_coverage}
+\caption{Coverage for $s=2,\dots,5$ (Theorem~\ref{thm:coverage}). Each row is a level family: all full levels $s\N$, the prefixes $s\N-1$ one digit before them, and every $s$-th full level $s^2\N$ (which is contained in $s\N$, so every base covered in the first row is covered in the third). Dark: a written proof covers this base; light: computer-assisted only (the small-base theorems of this section, Theorem~\ref{thm:p7}, and the exact evaluations of Theorem~\ref{thm:block}(c) below its proof range); hatched: no $(0,s)$-sequence exists in base $q<s$. Every prime above $113$ is covered as in the last column. Base $5$ in dimension three is certified only on $9\N$.}
+\label{fig:dim3}
+\end{figure}
+
+\emph{What is not covered.} Bases $q<s$ are impossible: a $(0,s)$-sequence in base $q$ exists only for $s\le q$ \cite{Nie92}. Among the possible bases the following are not covered by this paper, and we do not claim that they cannot be: in dimension two, the prime powers other than $8,9,16,25,27,49$; in dimension three, base $5$ at every full level (Remark~\ref{rem:base5}), and the prime powers $q=8,9,16,27$ (the bound of Proposition~\ref{prop:primepower} is $0$ for every power-basis encoding; nothing else was tried) and the prime powers above $125$; in dimension four, $p=5$, the primes $7\le p\le13$ at every full level (they are covered with $\Lev=16\N$), and the prime powers other than $4$; in dimension five, the primes $5\le p\le17$, the primes $19\le p\le31$ at every full level (covered with $\Lev=25\N$), and all prime powers that are not prime; in dimension $s\ge6$, the prime powers that are not prime and the primes $s\le p<2^s$, apart from those where the proof range $p\ge5a^*_s+4$ of Theorem~\ref{thm:block}(c) starts below $2^s$. For $s=6$ and $s=7$ it starts at $219$ and $854$, above $2^s$, and exact evaluations of $\LB(F)$ for single primes have not been done. Whether residue sequences are quasi-uniform for $s\le p<2^s$ is not addressed (Section~\ref{sec:open}).
+
+\begin{remark}[Base five in dimension three]\label{rem:base5}
+For $p=5$ and $s=3$, Theorem~\ref{thm:block}(b) gives $\sep{P_{9K}}\ge3/5$ for every $K$ (exact $\sep{P_9}=0.6211$), and hence $\delta(P_{[N]})\ge(3/5)\,5^{-3}N^{-1/3}$ for every $N$. A certificate at every full level is open. What was tried: (i) the ordered windows of an earlier version of this work (shown there to give no positive bound at $p=5$); (ii) the symmetric frames of this section have no three-dimensional instance over $\F_5$, since three places cannot form one orbit of a subgroup of the affine group of $\F_5$, whose order $20$ is prime to $3$; (iii) the staggered residue sequences have $\beta(k)\le0$ at $p=5$ (Corollary~\ref{cor:dyadic}), and among all their parameters up to the affine symmetries of $\F_5$ ($128$ choices of $\cstar$, $\theta$ and the weights) the best keeps $\sep{P_{3K}}\ge0.30$ for $K\le4$ (exact), but at deeper levels there are explicit close pairs: $\sep{P_{216}}\le0.0047$ for the choice that is best at $K\le4$, and $\sep{P_{300}}\le2.9\cdot10^{-6}$ for another (exact computations of the two points; whether any of them is quasi-uniform is open); (iv) for one-digit certificates that cover every possible cross response (the graph rule of Appendix~\ref{app:p7} and window coverings), and for several classes of two-digit certificates (ordered product windows as in (i) on $192$ relaxed instances, two further window classes on single instances, a frame-independent two-digit graph rule), a SAT solver reported that no positive bound exists in the instances solved; no independently checked certificate of these results was produced, so they are evidence about these classes only. General two-digit windows, certificates with more digits, and other constructions remain unexplored.
+\end{remark}

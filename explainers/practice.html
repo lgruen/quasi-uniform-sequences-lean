@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every N in Practice</title>
+<meta name="description" content="Interactive companion to the paper on quasi-uniform digital sequences: the smallest separation over every number of points up to 2^23 in dimension three, residue sequences against Owen-scrambled Sobol' and Faure, and digital shifts.">
+<style>/* Shared style of the geoseq explainers (inlined into every page by build_page.py).
+   Same visual language as the explainers of the nets paper: one reading column for prose, figure rows with a plot left and an
+   instrument panel right, stacking to one column on phones. System font stacks only (no network). */
+:root {
+  --bg: #f5f6f8; --surface: #ffffff; --ink: #15191f; --muted: #586271; --rule: #d5dae1;
+  --grid: #e3e7ec; --grid-strong: #aeb7c3; --accent: #2b6cb0; --accent-soft: rgba(43, 108, 176, 0.13);
+  --on-accent: #ffffff; --warm: #c0561d; --warm-soft: rgba(192, 86, 29, 0.14); --jit: #8792a2; --chip: #eef1f5;
+  --good: #2d7a4c; --bad: #b83a3a; --band: rgba(135, 146, 162, 0.22);
+  --s1: #2b6cb0; --s2: #c0561d; --s3: #2d7a4c; --s4: #8a5cb8; --s5: #9a6a00; --s6: #6c737c;
+  --serif: 'Iowan Old Style', 'Charter', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1116; --surface: #151a21; --ink: #e4e8ee; --muted: #98a3b2; --rule: #2a313c;
+    --grid: #1f262f; --grid-strong: #46515f; --accent: #6aa8ea; --accent-soft: rgba(106, 168, 234, 0.17);
+    --on-accent: #0b1220; --warm: #f09a52; --warm-soft: rgba(240, 154, 82, 0.18); --jit: #6d7888; --chip: #1f2630;
+    --good: #58b47c; --bad: #e46b6b; --band: rgba(109, 120, 136, 0.30);
+    --s1: #6aa8ea; --s2: #f09a52; --s3: #58b47c; --s4: #b48ae0; --s5: #d4a53a; --s6: #98a3b2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1116; --surface: #151a21; --ink: #e4e8ee; --muted: #98a3b2; --rule: #2a313c;
+  --grid: #1f262f; --grid-strong: #46515f; --accent: #6aa8ea; --accent-soft: rgba(106, 168, 234, 0.17);
+  --on-accent: #0b1220; --warm: #f09a52; --warm-soft: rgba(240, 154, 82, 0.18); --jit: #6d7888; --chip: #1f2630;
+  --good: #58b47c; --bad: #e46b6b; --band: rgba(109, 120, 136, 0.30);
+  --s1: #6aa8ea; --s2: #f09a52; --s3: #58b47c; --s4: #b48ae0; --s5: #d4a53a; --s6: #98a3b2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.58; margin: 0; overflow-x: hidden; }
+.page { max-width: 1100px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 22px 72px; }
+.prose { max-width: 68ch; }
+p { margin-block: 0 0.85em; }
+i, .m { font-style: italic; }
+sub, sup { font-size: 0.72em; line-height: 0; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+nav.top { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--sans); font-size: 14px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 34px; }
+nav.top a { text-decoration: none; color: var(--muted); }
+nav.top a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+nav.top .sp { flex: 1; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+h1 { font-weight: 600; font-size: clamp(2rem, 5.2vw, 3rem); line-height: 1.08; letter-spacing: -0.012em; margin: 0 0 14px; text-wrap: balance; }
+h2 { font-weight: 600; font-size: clamp(1.4rem, 3.2vw, 1.8rem); line-height: 1.2; margin: 0; text-wrap: balance; }
+h3 { font-family: var(--sans); font-weight: 600; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+.lede { font-size: 1.12rem; }
+section { margin-top: 64px; }
+.sechead { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+.secno { font-family: var(--mono); font-size: 15px; color: var(--accent); border: 1px solid var(--accent); border-radius: 3px; padding: 1px 7px; flex: none; }
+.refs { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 2px 0 0; font-family: var(--sans); font-size: 13px; color: var(--muted); align-items: baseline; }
+.ref { font-family: var(--mono); font-size: 12px; color: var(--ink); background: var(--chip); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 6px; white-space: nowrap; }
+.ref span { font-family: var(--sans); color: var(--muted); margin-left: 4px; }
+.fig { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, 320px); gap: 24px; align-items: start; margin-block: 22px 6px; }
+.fig.wide { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 860px) { .fig { grid-template-columns: minmax(0, 1fr); } }
+.plot { position: relative; width: 100%; max-width: 100%; aspect-ratio: 1 / 1; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.plot.wide { aspect-ratio: 16 / 9; }
+.plot.strip { aspect-ratio: auto; }
+.plot canvas { display: block; width: 100%; height: 100%; max-width: 100%; touch-action: manipulation; }
+.plot .hint { position: absolute; right: 8px; top: 8px; font-family: var(--sans); font-size: 12px; color: var(--muted); pointer-events: none; background: var(--surface); padding: 1px 4px; border-radius: 3px; }
+.panel { font-family: var(--sans); font-size: 14px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.ctl { display: flex; flex-direction: column; gap: 6px; }
+.ctl .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.ctl .val { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+input[type=range] { width: 100%; accent-color: var(--accent); margin: 0; min-height: 24px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.btn { font: 500 13px/1.2 var(--sans); padding: 7px 10px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 4px; cursor: pointer; min-height: 32px; }
+.btn:hover { border-color: var(--grid-strong); }
+.btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.btn:disabled { color: var(--muted); cursor: default; opacity: 0.6; }
+.btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+select { font: 14px var(--sans); color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 6px 8px; width: 100%; }
+.checks { display: flex; flex-direction: column; gap: 7px; }
+.checks label { display: flex; gap: 8px; align-items: center; cursor: pointer; }
+.checks input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+dl.read { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 12px; margin: 0; padding-top: 12px; border-top: 1px solid var(--rule); }
+dl.read dt { color: var(--muted); min-width: 0; }
+dl.read dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+dl.read dd.em { color: var(--accent); font-weight: 600; }
+dl.read dd.bad { color: var(--bad); font-weight: 600; }
+dl.read dd.good { color: var(--good); font-weight: 600; }
+.note { font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--sans); font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px; }
+.chartwrap { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; padding: 8px 6px 4px; }
+.chartwrap svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.scrollx { overflow-x: auto; max-width: 100%; }
+table.t { border-collapse: collapse; font-family: var(--sans); font-size: 13px; }
+table.t th, table.t td { padding: 3px 7px; text-align: center; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+table.t td { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+table.t th { font-weight: 500; color: var(--muted); }
+table.t th:first-child { text-align: left; }
+table.t td.hot { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+table.t td.warm { background: var(--warm-soft); color: var(--warm); font-weight: 600; }
+table.t td.frz { color: var(--good); font-weight: 600; }
+.callout { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; margin: 18px 0; max-width: 68ch; }
+.callout.warm { border-color: var(--warm); }
+.verdict { font-family: var(--sans); font-size: 14px; padding: 10px 12px; border-radius: 4px; background: var(--chip); border: 1px solid var(--rule); }
+.verdict.good { border-color: var(--good); }
+.verdict.bad { border-color: var(--bad); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.bits { font-family: var(--mono); letter-spacing: 0.08em; overflow-wrap: anywhere; }
+.bits b { color: var(--accent); }
+.kbd { font-family: var(--mono); font-size: 12px; border: 1px solid var(--rule); border-radius: 3px; padding: 0 4px; background: var(--chip); }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-block: 18px; }
+@media (max-width: 760px) { .three { grid-template-columns: minmax(0, 1fr); } }
+.card { border-top: 3px solid var(--accent); padding-top: 10px; font-size: 15.5px; min-width: 0; }
+.card.c2 { border-color: var(--warm); }
+.card.c3 { border-color: var(--good); }
+.card b { font-family: var(--sans); font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px; }
+footer { margin-top: 72px; padding-top: 14px; border-top: 1px solid var(--rule); font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 600px) { .chartwrap svg g[font-size="12"], .chartwrap svg g[font-size="13"] { font-size: 17px; } }
+.prior { border-left: 3px solid var(--grid-strong); padding: 4px 0 4px 14px; margin: 16px 0; max-width: 68ch; font-size: 15.5px; }
+.prior b:first-child { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+a.cite { text-decoration: none; border-bottom: 1px dotted var(--accent); }
+section.credits { margin-top: 72px; }
+section.credits .prose p { font-size: 15.5px; }
+ol.bib { font-family: var(--sans); font-size: 13.5px; line-height: 1.5; padding-left: 1.6em; margin: 14px 0 0; max-width: 88ch; }
+ol.bib li { margin-bottom: 6px; overflow-wrap: anywhere; }
+ol.bib li:target { background: var(--accent-soft); outline: 1px solid var(--accent); border-radius: 2px; }
+
+.nrow { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.formula { font-family: var(--serif); font-size: 1.05rem; text-align: center; margin: 14px 0; overflow-x: auto; }
+table.t td.l { text-align: left; font-family: var(--sans); white-space: normal; }
+</style>
+</head>
+<body>
+<div class="page">
+<nav class="top" aria-label="Explainer pages">
+  <a href="index.html">1 · Why classical sequences cut corners</a>
+  <a href="residue.html">2 · One scramble that fixes it</a>
+  <a href="limits.html">3 · What exact rules can and cannot do</a>
+  <a href="certificate.html">4 · How separation is certified</a>
+  <a href="practice.html" aria-current="page">5 · In practice</a>
+  <span class="sp"></span><a href="#credits">Credits</a>
+</nav>
+
+<header class="prose">
+  <p class="eyebrow">Interactive companion · practice</p>
+  <h1>In practice: every number of points</h1>
+  <p class="lede">The theorems certify separation at special sizes and, through the prefix lemma, a weaker floor for every <i>N</i>. In practice one stops wherever one likes. This page measures the worst separation over every prefix up to 2<sup>23</sup> points in dimension three, compares the residue sequences with the usual alternatives, and shows how to randomise them without losing the bound.</p>
+  <p class="note">Measured values are exact separations of the plotted point sets (toroidal) and are illustrations, not theorems. Separation is not integration error; the paper does not test integration.</p>
+</header>
+
+<!-- ===================================================== 1. J -->
+<section id="J" aria-labelledby="h-J">
+  <div class="sechead"><span class="secno">1</span><h2 id="h-J">The worst prefix</h2></div>
+  <div class="prose">
+    <p>Progressive rendering, stippling or adaptive sampling add points until some criterion says stop, so the number of points is not known in advance. The relevant quantity is the separation of every prefix, and the paper reports its worst value over a practical range,</p>
+    <p class="formula">𝒥 = min over 64 ≤ <i>N</i> ≤ 2<sup>23</sup> of sep(<i>P</i><sub>[<i>N</i>]</sub>) = δ(<i>P</i><sub>[<i>N</i>]</sub>)·<i>N</i><sup>1/3</sup>,</p>
+    <p>exact, in dimension three. It is easy to read: a sequence with 𝒥 = 0.25 never puts two of its first <i>N</i> points closer than a quarter of the grid spacing, for any <i>N</i> in the range. The curves below are drawn exactly from the prefix sizes at which δ drops (between drops, δ is constant and sep rises like <i>N</i><sup>1/3</sup>).</p>
+  </div>
+  <div class="chartwrap" style="margin-top:12px"><svg id="svgE" viewBox="0 0 900 300" role="img" aria-label="Exact separation of every prefix up to 2^23, dimension three, p = 31"></svg></div>
+  <div class="legend" aria-hidden="true" id="legE"></div>
+  <p class="note" style="max-width:76ch">Exact sep(<i>P</i><sub>[<i>N</i>]</sub>) for every <i>N</i> ≤ 2<sup>23</sup>, dimension three (<span class="mono">fig:evidence</span>): the residue sequence of <span class="mono">tab:practice</span> at <i>p</i> = 31 (places (8, 0, 16), θ = 9, <i>v</i> = (10, 30, 7)), with its certified bound 0.636 at <i>N</i> = <i>p</i><sup>2</sup> (bar; the next certified size <i>p</i><sup>5</sup> lies beyond 2<sup>23</sup>) and 0.020 for every <i>N</i> (dotted); Faure (<i>I</i>, <i>P</i>, <i>P</i><sup>2</sup>) in base 31; Owen-scrambled Sobol', three seeds. Open dots: the minima over 64 ≤ <i>N</i> ≤ 2<sup>23</sup>.</p>
+  <div class="scrollx" style="margin-top:16px"><table class="t" id="tabP">
+    <tr><th>sequence</th><th><i>p</i></th><th>data</th><th>𝒥</th><th>certified <i>P</i><sub>3<i>K</i>−1</sub></th><th><i>P</i><sub>3<i>K</i></sub></th><th>all <i>N</i></th></tr>
+    <tr><td class="l">residue sequence</td><td>13</td><td>(2, 9, 10), 12, (5, 3, 6)</td><td class="hot">0.248</td><td>0.425</td><td>0.076</td><td>0.032</td></tr>
+    <tr><td></td><td>17</td><td>(2, 9, 6), 12, (4, 10, 16)</td><td class="hot">0.235</td><td>0.388</td><td>0.058</td><td>0.022</td></tr>
+    <tr><td></td><td>23</td><td>(18, 22, 15), 5, (4, 14, 20)</td><td class="hot">0.251</td><td>0.497</td><td>0.061</td><td>0.021</td></tr>
+    <tr><td></td><td>31</td><td>(8, 0, 16), 9, (10, 30, 7)</td><td class="hot">0.267</td><td>0.636</td><td>0.064</td><td>0.020</td></tr>
+    <tr><td class="l">Faure (best: <i>p</i> = 11)</td><td>7–31</td><td></td><td>0.059–0.140</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td class="l">random linear scrambles</td><td>31</td><td>median / best of 150</td><td>0.117 / 0.217</td><td>–</td><td>–</td><td>–</td></tr>
+    <tr><td class="l">Sobol' / Owen-scrambled</td><td>2</td><td>3 seeds (Owen)</td><td>0.035 / 0.015–0.039</td><td>–</td><td>–</td><td>–</td></tr>
+  </table></div>
+  <p class="note" style="max-width:76ch"><span class="mono">tab:practice</span>. Data of a residue sequence: places, scale θ, check vector <i>v</i>; each is the best of 600 candidates scanned for 𝒥. Certified (truncated): at <i>N</i> = <i>p</i><sup>3<i>K</i>−1</sup> for every <i>K</i> (<span class="mono">thm:residue</span>), the inclusion bound at the full levels (<span class="mono">rem:residuefull</span>), and the bound for every <i>N</i> (<span class="mono">cor:residueQU</span>). The residue sequences reach six to eighteen times the 𝒥 of Owen-scrambled Sobol', whose separation keeps decaying, and 1.7 to 1.9 times the best plain Faure sequence. At its first full level <i>N</i> = <i>p</i><sup>3</sup> the Faure sequence is better (0.757 against 0.489 at <i>p</i> = 31).</p>
+  <div class="refs">In the paper: <span class="ref">tab:practice</span><span class="ref">fig:evidence</span><span class="ref">sec:practice</span></div>
+</section>
+
+<!-- ===================================================== 2. live -->
+<section id="live" aria-labelledby="h-live">
+  <div class="sechead"><span class="secno">2</span><h2 id="h-live">Try it: a shorter range in your browser</h2></div>
+  <div class="prose">
+    <p>The same measurement over a shorter range, computed here from the generator matrices: the residue sequences of the table (built from their data by the formula of <span class="mono">def:residue</span>), the Faure sequence in the same base, Owen-scrambled Sobol' with a seed of your choice (Joe–Kuo direction numbers; the nested scramble is driven by a hash of the digits above), and independent random points. The minimum over a shorter range is larger than over 2<sup>23</sup>, since fewer prefixes are tested.</p>
+  </div>
+  <div class="panel" style="flex-direction:row;flex-wrap:wrap;gap:14px 28px;align-items:flex-end">
+    <div class="ctl"><span id="lpLab">Base of the residue and Faure sequences</span>
+      <div class="seg" role="group" aria-labelledby="lpLab" id="lpSeg">
+        <button class="btn" type="button" data-v="13" aria-pressed="false">13</button><button class="btn" type="button" data-v="17" aria-pressed="false">17</button><button class="btn" type="button" data-v="23" aria-pressed="false">23</button><button class="btn" type="button" data-v="31" aria-pressed="true">31</button>
+      </div></div>
+    <div class="ctl"><span id="lnLab">Range up to</span>
+      <div class="seg" role="group" aria-labelledby="lnLab" id="lnSeg">
+        <button class="btn" type="button" data-v="16384" aria-pressed="false">2<sup>14</sup></button><button class="btn" type="button" data-v="65536" aria-pressed="true">2<sup>16</sup></button><button class="btn" type="button" data-v="131072" aria-pressed="false">2<sup>17</sup></button>
+      </div></div>
+    <button class="btn" type="button" id="reseed">new Owen seed</button>
+  </div>
+  <div class="chartwrap" style="margin-top:12px"><svg id="svgLv" viewBox="0 0 900 280" role="img" aria-label="Exact separation of every prefix, computed in the browser"></svg></div>
+  <div class="legend" aria-hidden="true" id="legLv"></div>
+  <div class="scrollx" style="margin-top:12px"><table class="t" id="tabLv"></table></div>
+  <p class="note" id="noteLv" aria-live="polite"></p>
+  <div class="refs">In the paper: <span class="ref">tab:practice</span><span class="ref">def:residue</span></div>
+</section>
+
+<!-- ===================================================== 3. shifts -->
+<section id="shift" aria-labelledby="h-shift">
+  <div class="sechead"><span class="secno">3</span><h2 id="h-shift">Randomising without losing the bound</h2></div>
+  <div class="prose">
+    <p>Randomised quasi-Monte Carlo needs many independent copies of a sampler. Owen scrambling redraws every digit below the stratum at random; it makes every (<i>t</i>, <i>s</i>)-sequence almost surely non-quasi-uniform (<a class="cite" href="#ref-Suz26">Suzuki</a>) and would undo the constructions here. A <em>digital shift</em> adds one fixed random digit vector to every point, digit by digit modulo <i>p</i>. It keeps every certified bound (<span class="mono">lem:shift</span>): for the residue sequence the shifted prefix <i>P</i><sub><i>sK</i>−1</sub> again occupies one coset of the lattice Λ<sub><i>v</i></sub>, one point per fine cell, so the bound is the same. A uniformly random shift makes each point uniform and gives unbiased estimators.</p>
+  </div>
+  <div class="fig">
+    <div class="panel">
+      <button class="btn primary" type="button" id="shiftBtn">Draw a random digital shift</button>
+      <button class="btn" type="button" id="shift0">Unshifted</button>
+      <dl class="read" id="readSh"></dl>
+      <p class="note" id="noteSh"></p>
+    </div>
+    <div class="panel"><p class="note" style="font-size:14px">The residue sequence of the table at <i>p</i> = 13. A shift must be additive in 𝔽<sub><i>p</i></sub>: a non-affine permutation of a geometric digit keeps the net property but can break the offset map (it brought the brick wall at <i>p</i> = 5 down to sep(<i>P</i><sub>6</sub>) = 0.068, below its certified 0.2). The lemma keeps the certified bound, not the exact separation.</p></div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">lem:shift<span>digital shifts</span></span><span class="ref">rem:randomize</span></div>
+</section>
+
+<!-- ===================================================== 4. limitations -->
+<section id="lim" aria-labelledby="h-lim">
+  <div class="sechead"><span class="secno">4</span><h2 id="h-lim">Limitations</h2></div>
+  <div class="prose">
+    <p>A sequence in base <i>p</i> is stratified in base <i>p</i>, not in base 2: renderers that rely on dyadic strata at power-of-two sample counts should use base 2 or 4 (<span class="mono">thm:B2</span>, <span class="mono">thm:K4</span>, <span class="mono">thm:S4</span>). Within one base, sep(<i>P</i><sub>[<i>N</i>]</sub>) fluctuates with the position of <i>N</i> between powers of <i>p</i>, more so for large <i>p</i>; for the residue sequences the smallest values come just after the certified sizes, when the first points of the next block arrive. A point costs ⌈log<sub><i>p</i></sub> <i>N</i>⌉ table lookups and additions per coordinate. The guarantees concern the geometry of the point sets: they matter where clumping at an unknown, open-ended number of samples must be excluded. Separation and integration error are different quantities, and a comparison on rendering integrands is the obvious next experiment.</p>
+  </div>
+  <div class="refs">In the paper: <span class="ref">sec:practice</span></div>
+</section>
+
+<section class="credits" id="credits" aria-labelledby="h-credits">
+  <div class="sechead"><h2 id="h-credits">Credits and references</h2></div>
+  <div class="prose">
+    <p>Companion to L. Gruenschloss, <i>Low-discrepancy quasi-uniform digital sequences in every dimension</i> (draft v4, 2026), cited by its <span class="mono">\label</span> names. Results without a credit are from that paper. Where these pages call a statement new, it means: not found in the literature we searched (through October 2026).</p>
+    <p>On this page: Owen scrambling is due to <a class="cite" href="#ref-Owe95">Owen</a>, and the almost-sure failure of quasi-uniformity of Owen-scrambled (<i>t</i>, <i>s</i>)-sequences to <a class="cite" href="#ref-Suz26">Suzuki</a>; the Sobol' sequence to <a class="cite" href="#ref-Sob67">Sobol'</a>, with the direction numbers of <a class="cite" href="#ref-JK08">Joe and Kuo</a>; the Faure sequence to <a class="cite" href="#ref-Fau82">Faure</a>. In computer graphics, separation is an explicit design goal: nets with large minimum distance, a new net for each size (<a class="cite" href="#ref-GHSK08">Grünschloß, Hanika, Schwede and Keller</a>; <a class="cite" href="#ref-GK09">Grünschloß and Keller</a>), optimised dyadic nets (<a class="cite" href="#ref-AW21">Ahmed and Wonka</a>), and sequences built by randomised best-candidate choices with empirical separation (<a class="cite" href="#ref-CKK18">Christensen, Kensler and Kilpatrick</a>; <a class="cite" href="#ref-HCK21">Helmer, Christensen and Kensler</a>).</p>
+  </div>
+  <ol class="bib">
+<li id="ref-AW21">A. G. M. Ahmed, P. Wonka. <i>Optimizing dyadic nets</i>. ACM Trans. Graph. 40(4), 141:1–141:17, 2021. <a href="https://doi.org/10.1145/3450626.3459880">doi:10.1145/3450626.3459880</a>.</li>
+<li id="ref-CKK18">P. Christensen, A. Kensler, C. Kilpatrick. <i>Progressive multi-jittered sample sequences</i>. Comput. Graph. Forum 37(4), 21–33 (Proc. EGSR 2018), 2018. <a href="https://doi.org/10.1111/cgf.13472">doi:10.1111/cgf.13472</a>.</li>
+<li id="ref-Fau82">H. Faure. <i>Discrépance de suites associées à un système de numération (en dimension s)</i>. Acta Arith. 41, 337–351, 1982. <a href="https://doi.org/10.4064/aa-41-4-337-351">doi:10.4064/aa-41-4-337-351</a>.</li>
+<li id="ref-GHSK08">L. Grünschloß, J. Hanika, R. Schwede, A. Keller. <i>(t,m,s)-nets and maximized minimum distance</i>. Monte Carlo and Quasi-Monte Carlo Methods 2006, Springer, 397–412, 2008. <a href="https://doi.org/10.1007/978-3-540-74496-2_23">doi:10.1007/978-3-540-74496-2_23</a>.</li>
+<li id="ref-GK09">L. Grünschloß, A. Keller. <i>(t,m,s)-nets and maximized minimum distance, Part II</i>. Monte Carlo and Quasi-Monte Carlo Methods 2008, Springer, 395–409, 2009. <a href="https://doi.org/10.1007/978-3-642-04107-5_25">doi:10.1007/978-3-642-04107-5_25</a>.</li>
+<li id="ref-HCK21">A. Helmer, P. Christensen, A. Kensler. <i>Stochastic generation of (t,s) sample sequences</i>. Eurographics Symposium on Rendering, DL-only Track, 21–33, 2021. <a href="https://doi.org/10.2312/sr.20211287">doi:10.2312/sr.20211287</a>.</li>
+<li id="ref-JK08">S. Joe, F. Y. Kuo. <i>Constructing Sobol sequences with better two-dimensional projections</i>. SIAM J. Sci. Comput. 30(5), 2635–2654, 2008. <a href="https://doi.org/10.1137/070709359">doi:10.1137/070709359</a>.</li>
+<li id="ref-Owe95">A. B. Owen. <i>Randomly permuted (t,m,s)-nets and (t,s)-sequences</i>. Monte Carlo and Quasi-Monte Carlo Methods in Scientific Computing, Lecture Notes in Statist. 106, Springer, 299–317, 1995. <a href="https://doi.org/10.1007/978-1-4612-2552-2_19">doi:10.1007/978-1-4612-2552-2_19</a>.</li>
+<li id="ref-Sob67">I. M. Sobol'. <i>On the distribution of points in a cube and the approximate evaluation of integrals</i>. Zh. Vychisl. Mat. Mat. Fiz. 7, 784–802; English transl. USSR Comput. Math. Math. Phys. 7, 86–112, 1967. <a href="https://doi.org/10.1016/0041-5553(67)90144-9">doi:10.1016/0041-5553(67)90144-9</a>.</li>
+<li id="ref-Suz26">K. Suzuki. <i>Separation properties of scrambled digital nets and related random point sets</i>. preprint, 2026. <a href="https://arxiv.org/abs/2607.29063">arXiv:2607.29063</a>.</li>
+</ol>
+</section>
+
+<footer>Data: the long-range drop events are the paper's figure data (<span class="mono">paper/figs/data/drops_res31.txt</span>, <span class="mono">figs_bs/data/drops_fa31.txt</span>, <span class="mono">drops_sob1–3.txt</span>), embedded by <span class="mono">gen_data.py</span>, which checks 𝒥 = 0.267 at <i>N</i> = 208 652 (residue), 0.095 at 53 879 (Faure) and 0.015–0.039 (Owen) against <span class="mono">tab:practice</span>. The live section computes everything in the browser; the residue matrices are generated by the port of <span class="mono">paper/v4/figs/b3_gen.py</span> and their certified bounds (0.425, 0.388, 0.497, 0.636) are re-derived by <span class="mono">check/crosscheck.cjs</span>.</footer>
+</div>
+<script>window.__SQDATA = {"nets":{"wf7":{"q":7,"s":2,"D":18,"M":16,"label":"brick wall W\u207b, base 7","C":[[[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[6,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[5,2,4,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,5,1,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,5,2,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],[4,0,5,3,1,6,4,2,0,0,0,0,0,0,0,0],[3,1,0,0,4,5,3,5,4,0,0,0,0,0,0,0],[6,1,2,0,0,0,6,3,4,1,0,0,0,0,0,0],[0,4,6,4,0,0,0,0,2,3,2,0,0,0,0,0],[0,0,0,6,1,0,0,0,0,0,3,4,0,0,0,0],[0,0,0,0,0,2,0,0,0,0,0,0,1,0,0,0],[6,6,6,6,6,6,6,2,2,2,2,2,2,2,0,0],[3,0,2,4,6,1,3,5,0,3,6,2,5,1,4,0],[4,6,0,0,3,2,4,2,3,0,0,1,3,6,3,1],[1,6,5,0,0,0,1,4,3,6,0,0,0,5,6,1],[0,3,1,3,0,0,0,0,5,4,5,0,0,0,0,4]],[[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],[4,0,3,6,2,5,1,4,0,3,6,2,5,1,4,0],[3,1,0,0,1,3,6,3,1,0,0,1,3,6,3,1],[6,1,2,0,0,0,5,6,1,2,0,0,0,5,6,1],[0,4,6,4,0,0,0,0,4,6,4,0,0,0,0,4],[0,0,0,6,1,0,0,0,0,0,6,1,0,0,0,0],[0,0,0,0,0,2,0,0,0,0,0,0,2,0,0,0],[4,4,4,4,4,4,4,0,0,0,0,0,0,0,3,3],[2,0,6,5,4,3,2,1,0,0,0,0,0,0,0,0],[5,4,0,0,2,6,5,6,2,0,0,0,0,0,0,0],[3,4,1,0,0,0,3,5,2,4,0,0,0,0,0,0],[0,2,3,2,0,0,0,0,1,5,1,0,0,0,0,0],[0,0,0,3,4,0,0,0,0,0,5,2,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0,4,0,0,0],[3,3,3,3,3,3,3,1,1,1,1,1,1,1,0,0],[5,0,1,2,3,4,5,6,0,5,3,1,6,4,2,0],[2,3,0,0,5,1,2,1,5,0,0,4,5,3,5,4],[4,3,6,0,0,0,4,2,5,3,0,0,0,6,3,4]]]},"faure7":{"q":7,"s":2,"D":18,"M":12,"label":"Faure (I, P), base 7","C":[[[1,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0],[0,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]],[[1,1,1,1,1,1,1,1,1,1,1,1],[0,1,2,3,4,5,6,0,1,2,3,4],[0,0,1,3,6,3,1,0,0,1,3,6],[0,0,0,1,4,3,6,0,0,0,1,4],[0,0,0,0,1,5,1,0,0,0,0,1],[0,0,0,0,0,1,6,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,1,1],[0,0,0,0,0,0,0,0,1,2,3,4],[0,0,0,0,0,0,0,0,0,1,3,6],[0,0,0,0,0,0,0,0,0,0,1,4],[0,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]]]},"b2":{"q":2,"s":2,"D":32,"M":20,"label":"base-2 sequence of thm:B2","C":[[[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0],[1,0,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0],[0,0,1,1,0,1,0,1,0,1,1,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,1,1,0,1,1,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0],[1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,0],[0,0,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0],[0,0,0,0,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1],[0,0,0,0,0,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1],[0,0,0,0,0,0,0,0,1,0,1,1,0,1,0,0,1,0,1,1],[0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],[[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],[0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1],[1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],[0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1],[0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0],[0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0],[1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0],[0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1],[0,0,0,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],[0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0],[0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],[0,0,0,0,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1],[0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]]},"block3":{"q":3,"s":2,"D":32,"M":8,"label":"block-periodic residue sequence, base 3","C":[[[1,0,0,0,0,0,0,0],[0,2,0,0,0,0,0,0],[0,0,1,0,0,0,0,0],[1,0,1,2,0,0,0,0],[1,2,0,2,1,0,0,0],[0,0,0,2,2,2,0,0],[0,0,0,0,1,1,1,0],[0,0,0,0,0,0,0,2],[0,0,0,0,0,0,0,0],[1,0,1,2,0,1,2,0],[1,2,0,2,1,0,2,1],[1,1,1,0,0,0,1,1],[1,2,2,2,0,0,0,2],[0,2,0,0,1,0,0,0],[0,0,1,0,0,2,0,0],[0,0,0,0,0,2,1,0],[0,0,0,0,0,0,1,2],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[1,0,1,2,0,1,2,0],[1,2,0,2,1,0,2,1],[1,1,1,0,0,0,1,1],[1,2,2,2,0,0,0,2],[0,2,0,0,1,0,0,0]],[[1,1,1,1,1,1,1,1],[0,2,1,0,2,1,0,2],[0,2,2,0,2,2,0,2],[2,2,1,1,1,0,0,0],[0,1,1,0,2,0,0,0],[0,0,0,2,0,0,1,0],[0,0,0,2,1,1,2,0],[0,0,0,0,0,0,0,2],[0,0,0,0,0,0,0,2],[2,2,1,1,1,1,1,1],[0,1,1,0,2,1,0,2],[2,0,0,2,0,0,1,0],[0,2,2,1,0,0,1,2],[0,2,1,0,1,2,0,0],[0,2,2,0,1,1,0,0],[0,0,0,0,0,2,2,2],[0,0,0,0,0,2,0,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[2,2,1,1,1,1,1,1],[0,1,1,0,2,1,0,2],[2,0,0,2,0,0,1,0],[0,2,2,1,0,0,1,2],[0,2,1,0,1,2,0,0]]],"LB":0.33333333333333337},"block5":{"q":5,"s":2,"D":22,"M":8,"label":"block-periodic residue sequence, base 5","C":[[[1,0,0,0,0,0,0,0],[2,4,0,0,0,0,0,0],[1,3,1,0,0,0,0,0],[0,0,0,4,0,0,0,0],[0,0,0,0,1,0,0,0],[3,0,1,2,3,4,0,0],[4,2,0,4,3,2,1,0],[0,2,3,0,0,0,1,4],[0,0,3,2,0,0,0,4],[2,2,2,2,2,4,4,4],[1,3,3,3,3,3,1,1],[2,4,0,0,2,1,2,0],[1,3,1,0,0,3,4,3],[0,0,0,4,0,0,0,0],[0,0,0,0,1,0,0,0],[0,0,0,0,0,0,0,4],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]],[[1,1,1,1,1,1,1,1],[3,2,1,0,4,3,2,1],[0,4,4,0,2,0,4,4],[0,0,0,4,1,0,0,0],[0,0,0,2,4,0,0,0],[2,2,1,1,1,1,1,0],[0,3,3,2,1,0,4,0],[0,2,1,2,0,0,1,3],[0,1,1,3,0,0,3,3],[3,0,0,0,0,2,0,0],[0,3,3,3,3,4,1,1],[3,2,1,0,2,4,1,3],[0,4,4,0,1,0,2,2],[0,0,0,4,1,0,0,0],[0,0,0,2,4,0,0,0],[0,0,0,0,0,0,0,4],[0,0,0,0,0,0,0,2],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]]],"LB":0.6},"block7":{"q":7,"s":2,"D":18,"M":8,"label":"block-periodic residue sequence, base 7","C":[[[1,0,0,0,0,0,0,0],[4,6,0,0,0,0,0,0],[6,3,1,0,0,0,0,0],[0,6,2,6,0,0,0,0],[0,0,1,5,1,0,0,0],[0,0,0,0,0,6,0,0],[0,0,0,0,0,0,1,0],[5,0,1,2,3,4,5,6],[4,2,0,6,5,4,3,2],[1,6,5,0,0,0,1,4],[5,6,1,2,0,0,0,6],[0,0,0,2,5,0,0,0],[0,0,0,0,5,2,0,0],[4,4,4,4,4,4,4,6],[6,3,3,3,3,3,3,3],[3,1,0,0,4,5,3,5],[1,4,6,0,0,3,2,4],[0,1,5,1,0,0,0,0]],[[1,1,1,1,1,1,1,1],[3,2,1,0,6,5,4,3],[0,6,6,0,2,5,2,0],[0,6,3,4,1,0,0,0],[0,2,2,4,6,0,0,0],[0,0,0,0,0,6,1,0],[0,0,0,0,0,2,6,0],[2,2,1,1,1,1,1,1],[0,5,5,4,3,2,1,0],[6,5,6,2,0,0,1,3],[0,3,3,5,0,0,5,0],[0,0,0,2,3,2,0,0],[0,0,0,3,6,5,0,0],[3,0,0,0,0,0,0,2],[0,3,3,3,3,3,3,6],[4,5,6,0,4,1,5,2],[0,1,1,0,6,1,6,0],[0,1,4,3,6,0,0,0]]],"LB":0.7142857142857143},"hb401":{"q":401,"s":2,"D":6,"M":4,"label":"hexagonal brick wall, base 401","C":[[[1,0,0,0],[368,390,0,0],[264,83,121,0],[89,65,162,273],[269,338,114,27],[396,344,95,204]],[[200,200,200,200],[7,202,397,191],[2,340,16,233],[372,221,243,374],[176,115,197,222],[345,184,115,177]]],"LB":0.9054052040886986}},"law":{"wf7":[[[[4,1],[4,0]]],[[[1,5],[4,0]]],[[[3,4],[4,0]]],[[[6,4],[4,0]]],[[[6,4],[4,0]]],[[[6,0],[4,0]]],[[[4,2],[4,0]]],[[[5,6],[4,0]]],[[[0,1],[4,0]]],[[[1,4],[4,0]]],[[[6,4],[4,0]]],[[[6,4],[4,0]]],[[[6,1],[4,0]]],[[[1,6],[4,0]]],[[[0,2],[4,0]]],[[[5,0],[4,0]]],[[[4,4],[4,0]]],[[[6,4],[4,0]]]],"faure7":{"1":[[[[6,1],[6,1]]]],"2":[[[[5,6],[1,2]]],[[[2,2],[4,6]]]],"3":[[[[4,1],[6,3]]],[[[5,4],[2,4]]],[[[2,0],[6,0]]]],"4":[[[[3,6],[1,4]]],[[[0,4],[6,1]]],[[[1,3],[0,0]]],[[[1,3],[0,0]]]],"5":[[[[2,1],[6,5]]],[[[1,2],[0,4]]],[[[1,2],[0,4]]],[[[1,2],[0,4]]],[[[1,2],[0,4]]]],"6":[[[[1,6],[1,6]]],[[[1,6],[1,6]]],[[[1,6],[1,6]]],[[[1,6],[1,6]]],[[[1,6],[1,6]]],[[[1,6],[1,6]]]],"7":[[[[0,1],[6,0]]],[[[0,0],[5,0]]],[[[0,1],[4,0]]],[[[0,0],[3,0]]],[[[0,1],[2,0]]],[[[0,0],[1,0]]],[[[6,1],[0,1]]]],"8":[[[[6,6],[1,1]]],[[[5,1],[3,0]]],[[[4,5],[6,1]]],[[[3,2],[3,0]]],[[[2,4],[1,1]]],[[[1,3],[0,0]]],[[[6,3],[0,2]]],[[[4,5],[2,0]]]]},"b2":[[[[1,1],[1,0]],[[1,1],[0,0]],[[1,0],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[1,0]],[[1,1],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]]],[[[1,1],[1,0]],[[1,1],[0,0]],[[1,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,1]],[[0,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[1,0]],[[1,1],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,0]],[[1,1],[0,0]],[[1,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,1]],[[0,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,1]],[[0,0],[1,0]],[[1,1],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,1]],[[0,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[1,0]],[[1,0],[0,0]],[[1,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,0]],[[1,0],[0,1]],[[1,1],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[1,1]],[[1,0],[0,0]],[[1,1],[1,0]],[[1,0],[0,1]],[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,0]],[[1,1],[0,1]],[[1,1],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,1]],[[0,0],[0,1]],[[0,0],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,0]],[[0,1],[0,1]],[[0,1],[0,0]],[[0,1],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,0]],[[1,1],[0,0]],[[1,0],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[1,1],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,1]],[[0,1],[1,1]],[[1,0],[0,1]],[[1,0],[1,1]],[[1,0],[0,0]],[[1,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]],[[[0,1],[0,1]],[[0,0],[0,0]],[[0,1],[0,0]],[[0,0],[1,1]],[[1,1],[0,1]],[[1,0],[1,1]],[[1,0],[0,1]],[[1,0],[0,0]],[[0,1],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]],[[0,0],[0,0]]]]},"checks":{"J":{"res31":[0.267357,208652],"fa31":[0.094891,53879],"sob1":[0.020901,3885715],"sob2":[0.038551,541765],"sob3":[0.014516,6633620]}},"sep":{"wf13_m2":[0.472625,117,14],"wf13_m4":[0.472615,18108,3288],"faure7_m2":0.868966,"faure7_m4":0.311517,"faure7_m6":0.2463,"faure5_m5":[0.073756,3122,3],"res11_m3":[0.76509,176,1177],"res11_m5":[0.623825,48078,16],"res311_m2":[0.7685932718831439,4,78],"res311_m5":[0.614387,135157,147338],"block3_m4":[0.572982,35,17],"block3_m8":[0.386182,954,1764],"block5_m4":[0.623729,166,66],"block5_m6":[0.158501,13256,9476],"block5_m8":[0.623725,166775,126775],"block7_m4":[0.761295,879,928],"block7_m6":[0.111741,26625,2804],"block7_m8":[0.741574,1085326,4241291],"hb401_m2":[0.992244,100651,99849]},"levels_p5":[[1,0.5208,0.6672,0.2885],[2,0.3672,0.4916,0.3677],[3,0.5617,0.4602,0.3658],[4,0.3672,0.4803,0.6237],[5,0.5215,0.2324,0.2764],[6,0.3672,0.4374,0.1585],[7,0.5215,0.2324,0.3544],[8,0.3672,0.4373,0.6237],[9,0.5215,0.2113,0.092],[10,0.246,0.4373,0.1585]],"sobolpairs":[{"s":2,"Q":1,"L":3,"m":5,"nu":2,"k":2,"V1":"4","V2":"26","dscaled":1.9039432764659772,"sep":1.3462912017836262,"bound":1.5811388300841898},{"s":2,"Q":2,"L":6,"m":10,"nu":2,"k":2,"V1":"56","V2":"964","dscaled":1.9625398085134478,"sep":0.9812699042567239,"bound":1.118033988749895},{"s":2,"Q":4,"L":12,"m":20,"nu":2,"k":2,"V1":"4064","V2":"1044496","dscaled":1.9971980494753456,"sep":0.4992995123688364,"bound":0.5590169943749475},{"s":2,"Q":8,"L":24,"m":40,"nu":2,"k":2,"V1":"16776704","V2":"1099494850816","dscaled":1.9999885857943698,"sep":0.12499928661214811,"bound":0.13975424859373686},{"s":3,"Q":1,"L":34,"m":98,"nu":12,"k":16,"V1":"17171480576","V2":"316840113327289977531315257344","dscaled":1.10751771676261,"sep":0.43951869716559566,"bound":0.9720806486198328}],"practice":{"res31":[[2,0.32819349321308167],[13,0.30764535150739064],[15,0.29316253710091733],[21,0.29301525778695264],[24,0.2930147183033081],[32,0.14094573787238177],[33,0.13958833692533776],[34,0.13517031906069144],[63,0.07788095769722957],[73,0.07732865749575432],[86,0.07732757348013952],[111,0.07695492954206598],[193,0.07695492933962321],[323,0.0769223873725452],[863,0.0769223871700169],[962,0.05031674194178404],[963,0.04913694185305398],[982,0.04911446385139568],[989,0.04911446385139561],[993,0.0489214866597605],[1011,0.04892147939141027],[1024,0.030407729911301754],[1026,0.03005697856687629],[1044,0.03004654410250498],[1050,0.029740631978467352],[1123,0.02943499012254904],[1361,0.02910520255912124],[1447,0.02910491000684568],[10580,0.016826582243911592],[10583,0.01679691205907178],[10593,0.01679691152194354],[10601,0.016780904507273025],[10621,0.016694743454133798],[10764,0.015905432758448558],[10820,0.015773236701038845],[12268,0.015773236701038838],[26477,0.015773236701038834],[29792,0.013028517369351105],[29940,0.013028517369351076],[30230,0.012208702333419025],[30449,0.012190765321580735],[30936,0.012190765321580671],[59585,0.011781333679488692],[59586,0.01178073782784816],[59588,0.011762894593108229],[59592,0.011241787077497997],[59603,0.011241506762343024],[59628,0.008735981769322821],[61045,0.008735981769322807],[66270,0.00873598176932279],[87059,0.008735981769322738],[179337,0.00813877044230467],[179824,0.008138770442304663],[181241,0.008138770442304606],[205838,0.008138770442304594],[208570,0.006360853406312266],[208652,0.004507649846766129],[208848,0.004507427755553109],[212169,0.004507427755553093],[214073,0.004507427755553088],[220210,0.004507427755553082],[238469,0.004506794247998955],[243663,0.00450679424799895],[328035,0.004501023120201776],[329908,0.004501023120201733],[333229,0.00450102312020169],[357625,0.0039895626343553455],[359073,0.003989562634355283],[387442,0.003958656994852829],[388890,0.003958656994852694],[923523,0.003738676021655708],[923526,0.003713801041104579],[923533,0.0037131969544085468],[923698,0.0032931279574149423],[923917,0.0032931275729974666],[924440,0.002984639014487629],[924896,0.0029846390144876176],[926313,0.0029846390144875074],[1221456,0.0029812295996623378],[1936707,0.002523891018884375],[1947582,0.002523891018884289],[1966328,0.0025194867807024728],[1971978,0.0025194867807024667],[1988534,0.0025194867807024584],[3218323,0.002516162243788778],[3218779,0.0025161622437887736],[3220196,0.0025161622437887207],[3220683,0.0025161622437887155],[3226333,0.0025161622437886717],[3247913,0.0025100568470756194],[3248369,0.0025100568470755253],[3277516,0.0025098534881204154],[3284614,0.0025098534881204115],[3295976,0.002509853488120367],[6464657,0.0025094376515274117],[6464661,0.0024953470650416875],[6464671,0.0024953331487334793],[6465179,0.0024936427104273315],[6465666,0.0024936427104273245],[6468987,0.0024936427104273223],[6470404,0.0024936427104273002],[6472764,0.0024936427104272755],[6494783,0.002465741894744772],[6494790,0.0024652280556073654],[6496207,0.002465228055607364],[6496694,0.0024652280556073203],[6498111,0.0024652280556073172],[6584040,0.0024635336944019938],[7001177,0.0024634841185659966],[7003081,0.0024634841185659792],[7006402,0.002463484118565974],[7657235,0.0024629004160931912],[7657691,0.002462900416093166],[7661012,0.002462900416093152],[7672830,0.0024629004160931466],[7678024,0.0024629004160931422],[7685609,0.0024629004160931197]],"fa31":[[2,0.05587260669577023],[11,0.05587260669577019],[32,0.04565538182826286],[33,0.045655381828262856],[34,0.04565538182826285],[38,0.04565538182826284],[48,0.04565538182826283],[49,0.045655381828262814],[92,0.045655381828262814],[106,0.04565538182826278],[171,0.04565538182826274],[962,0.03235866160792796],[965,0.03235866160792795],[968,0.03235866160792792],[979,0.03235866160792789],[1036,0.032358661607927885],[1277,0.032358661607927885],[1799,0.03028441004571231],[1800,0.030284410045712286],[1802,0.030284410045712272],[1807,0.030284410045712255],[1825,0.0302844100457122],[1829,0.03028441004571219],[13548,0.02831182601579665],[13556,0.028311826015796623],[13600,0.02831182601579662],[13604,0.028311826015796602],[13608,0.028311826015796602],[13620,0.0283118260157966],[14416,0.027984726563570372],[14417,0.027984726563570338],[14420,0.027984726563570306],[14421,0.027984726563570296],[14425,0.027984726563570282],[14434,0.027984726563570265],[14447,0.02794600679913219],[14448,0.027946006799132117],[14449,0.02794600679913211],[14461,0.027946006799132082],[14478,0.027416027659755222],[14482,0.027416027659755215],[14497,0.027416027659755208],[14591,0.02741602765975519],[14750,0.027416027659755187],[14869,0.027416027659755156],[15377,0.026738132675769105],[15389,0.026738132675769098],[15396,0.026738132675769084],[15400,0.026738132675769067],[16276,0.026146337552040606],[16277,0.026146337552040568],[17126,0.026146337552040554],[19190,0.025167622133493918],[19193,0.02516762213349391],[19194,0.02516762213349388],[19203,0.025167622133493866],[20461,0.02443169962971161],[20462,0.024431699629711576],[20470,0.024431699629711548],[20475,0.024431699629711517],[20479,0.024431699629711482],[20490,0.024431699629711465],[21360,0.02443169962971145],[24356,0.02443169962971142],[29854,0.0031260769906986388],[29855,0.003126076990698635],[29859,0.003126076990698578],[30036,0.00312607699069857],[30039,0.0031260769906985607],[53879,0.0025123873135842155],[53895,0.0025123873135841778],[56628,0.002512387313584165],[127769,0.002512387313584152],[896614,0.002485062266620051],[896618,0.0024850622666200456],[896622,0.002485062266620025],[896629,0.0024850622666200235],[896630,0.00248506226661998],[896779,0.002485062266619976],[896855,0.002485062266619974],[896941,0.0024850622666199324],[930249,0.0022691981736631113],[930250,0.0022691981736630822],[930252,0.0022691981736630523],[930256,0.0022691981736630415],[930274,0.0022691981736630298],[930299,0.0022691981736630154],[930303,0.002269198173663],[930487,0.0022691981736629703],[931050,0.0022691981736629695],[1631810,0.0022514367773677334],[1631811,0.002251436777367732],[1631814,0.002251436777367722],[1631815,0.0022514367773677204],[1631819,0.0022514367773676966],[1631823,0.002251436777367694],[1631825,0.0022514367773676905],[1631826,0.00225143677736765],[1631870,0.0022514367773676493],[1631899,0.002251436777367591],[1781695,0.0022409035019458003],[1781714,0.0022409035019457834],[1781725,0.0022409035019457825],[1830225,0.0022409035019457665],[4592620,0.0022229160389365178],[4592621,0.002222916038936513],[4592624,0.0022229160389365013],[4592630,0.0022229160389364904],[4592644,0.0022229160389364865],[4592681,0.002222916038936472],[4592714,0.00222291603893646],[4592833,0.0022229160389364423],[4593001,0.002222916038936442],[5544010,0.0019682565340665044],[5544011,0.0019682565340664775],[5544013,0.001968256534066473],[5544015,0.0019682565340664706],[5544016,0.001968256534066423],[5544028,0.0019682565340664077],[5587255,0.0011960503425718855],[6464648,0.0007576157864202344],[6464649,0.0007576157864201865],[6464666,0.0007576157864201816],[8252108,0.0007534303604602589],[8252109,0.0007534303604601801],[8252117,0.000753430360460179]],"sob1":[[2,0.6799740858045872],[3,0.4050390079988934],[5,0.25743447931224006],[10,0.2557548826339635],[11,0.1768877905361119],[22,0.13106631542853847],[37,0.1236130409330127],[40,0.09755377027774781],[74,0.09267911314468673],[75,0.08632752365086183],[77,0.05677582145051602],[122,0.0509700485180621],[219,0.05022754660143815],[261,0.0438382459592876],[309,0.027083448642318285],[412,0.02700550296599194],[430,0.020115771224070187],[1126,0.01761435896205978],[1249,0.017475882976008338],[1306,0.016945532767123943],[2264,0.015587742653106931],[2498,0.01530360812099772],[2587,0.012114857603628017],[2911,0.011660044971502234],[3920,0.008223419608566518],[6090,0.007939884924797544],[9407,0.005982235533437433],[9620,0.0059024083397356784],[13986,0.005358376233387817],[16555,0.004044963423309557],[18156,0.003930131870871421],[26348,0.003561104942546245],[51531,0.0021670931507766196],[69572,0.002055865659180618],[129141,0.0019766072349238738],[141602,0.0019066143563475737],[150229,0.0018007023729853808],[206030,0.0017388283529804613],[253536,0.0016022699131865077],[262317,0.0014313975051780867],[262593,0.0012174876286411517],[353776,0.0011717775724793475],[379102,0.0010678144367165178],[396088,0.0010119318531742955],[447860,0.0009501257826417709],[576253,0.00088132469370228],[778300,0.0008680666547166327],[871165,0.0007193935429742314],[1048819,0.000594448507617416],[1108764,0.0004234543444830154],[1569390,0.0003915280557953809],[1846831,0.00029013853994550254],[3885715,0.00013294476590353487]],"sob2":[[2,0.5759258879132629],[3,0.5561163370120189],[4,0.48964224325493316],[5,0.39814150235281415],[6,0.3755583157222718],[7,0.3069385341469981],[8,0.2972325006415676],[9,0.2554064991012659],[10,0.18367170605145605],[18,0.175735180658046],[24,0.15253385070049336],[30,0.14047579524845707],[38,0.12301920806398961],[39,0.11633841928872155],[78,0.10659024963140912],[81,0.1065074697328565],[87,0.1008290560236476],[107,0.0910030412423616],[112,0.07603233541194572],[144,0.06698196596776157],[162,0.05258865127958191],[285,0.051185142037182635],[349,0.04747856523586024],[388,0.0421741272270997],[535,0.038982701105956474],[587,0.03340068568805218],[606,0.033189122323758355],[729,0.03041316474434307],[843,0.01677949923924775],[2077,0.016413824419511065],[2145,0.012616687976270156],[2787,0.010917677155645155],[5176,0.009564524022316877],[5480,0.006799650091690511],[8597,0.005674374630082207],[10131,0.005358973841970157],[17546,0.005358559641035238],[22209,0.003806517215920675],[31218,0.003512475630523853],[45882,0.0026528767825472993],[53280,0.0018714420757365972],[73033,0.0018565915963603995],[91065,0.0016431720352644518],[99135,0.0011079962165080268],[240503,0.0008917776211572755],[541765,0.00047289740678809004],[1332100,0.0004461266781870835],[2013866,0.000376052570668312],[2213698,0.00031006987473503023],[6803898,0.00025149743815653806]],"sob3":[[2,0.6058693520856923],[3,0.4961120949964439],[4,0.3045286243594016],[6,0.22362137049416697],[17,0.2154437907039625],[19,0.21444156915694748],[20,0.17803537189883437],[26,0.1738080595850915],[37,0.13047345396304622],[55,0.08428296669158744],[59,0.053595030045568356],[154,0.05337487759378267],[169,0.04641238593424892],[229,0.044669284936117826],[274,0.044399713549642554],[298,0.02750683479263268],[931,0.021978945171467264],[1433,0.015243765911068127],[2214,0.013561917801905837],[3034,0.010506437031795756],[4331,0.009001417890359223],[6607,0.008961619766339874],[7027,0.008033053402952472],[8392,0.007626699149257701],[8811,0.005766548269072455],[12534,0.0044406689466405845],[28150,0.004166634553725025],[30286,0.003264673172978222],[36931,0.0030996801989359524],[66166,0.0027027957654934104],[66819,0.002692253280313352],[68763,0.002326979496300804],[73641,0.0021652220513687145],[73642,0.001778843682296528],[85694,0.0016935890250554338],[97260,0.0015522790096244021],[103705,0.0013395811244708265],[267083,0.0011577054429037744],[277327,0.001062389067753331],[314612,0.0006683354289936861],[981991,0.00046731767095838187],[1453388,0.0003956510538856682],[2621640,0.0003567245579134328],[3195717,0.00028214879288700374],[5467576,0.00025257927262367207],[6633620,7.72578091688453e-05]]}};</script>
+<script>
+/* core.js -- shared math + drawing helpers of the geoseq explainers (inlined into every page by build_page.py).
+   Point sets are rebuilt here from generator matrices: digit n of coordinate c of the point with index digits v_k is
+   y_{c,n} = sum_k C_c[n][k] v_k (mod q), and y_c = sum_n y_{c,n} q^{-n-1} (prime q). Some matrices are exported by
+   gen_data.py from the paper's builders; the residue, staggered-residue and Faure matrices are generated here by a port
+   of paper/v4/figs/b3_gen.py (checked entry by entry against it by check/crosscheck.mjs). Distances are toroidal.
+   No DOM access at load time except window listeners, so node can run the math (check/crosscheck.mjs). */
+const SQ = (() => {
+  const DATA = (typeof window !== 'undefined' && window.__SQDATA) || {};
+  const nets = DATA.nets || {};
+
+  // ------------------------------------------------------------------ F_p arithmetic and truncated power series
+  const mod = (x, p) => ((x % p) + p) % p;
+  function inv(x, p) { x = mod(x, p); let r = 1, b = x, e = p - 2; while (e > 0) { if (e & 1) r = r * b % p; b = b * b % p; e >>= 1; } return r; }
+  function smul(A, B, R, p) {
+    const C = new Array(R).fill(0);
+    for (let i = 0; i < Math.min(R, A.length); i++) { const a = A[i]; if (!a) continue; for (let j = 0; j < Math.min(B.length, R - i); j++) C[i + j] = (C[i + j] + a * B[j]) % p; }
+    return C;
+  }
+  function sinv(A, R, p) {
+    const i0 = inv(A[0], p), B = new Array(R).fill(0); B[0] = i0;
+    for (let n = 1; n < R; n++) { let s = 0; for (let k = 1; k <= Math.min(n, A.length - 1); k++) s += A[k] * B[n - k]; B[n] = mod(-(s % p) * i0, p); }
+    return B;
+  }
+  function Wc(a, c, R, p) {                               // w_c(z) = prod_{b != c}(z - a_b) as a series in t = z - a_c
+    let W = [1].concat(new Array(R - 1).fill(0));
+    for (let b = 0; b < a.length; b++) if (b !== c) W = smul(W, [mod(a[c] - a[b], p), 1], R, p);
+    return W;
+  }
+  // Definition def:residue (kind 'U') and def:residuestar (kind 'R'), exactly as paper/v4/figs/b3_gen.py:
+  //   R_v : C_c[n][i] = v_c^{-1} th^{n+1} [t^n] (t+a_c)^i / W_c(t)^{n+1}
+  //   R*_v: C_c[n][i] = mu_c th^{n+1} [t^n] (t+a_c)^i / ((t+a_c-a_*) W_c(t)^{n+1}) (c != c*),  C_*[n][i] = mu_* th^n [t^n] (t+a_*)^i / W_*(t)^n
+  function residueMatrices(kind, p, a, theta, rows, cols, opt) {
+    const s = a.length, R = rows, th = mod(theta, p), C = [];
+    for (let c = 0; c < s; c++) {
+      const Winv = sinv(Wc(a, c, R, p), R, p), lin = [mod(a[c], p), 1];
+      const colS = [[1].concat(new Array(R - 1).fill(0))];
+      for (let i = 1; i < cols; i++) colS.push(smul(colS[i - 1], lin, R, p));
+      const M = Array.from({ length: rows }, () => new Array(cols).fill(0));
+      let ker = [1].concat(new Array(R - 1).fill(0)), extra = null, base;
+      if (kind === 'U') base = 1;
+      else if (c === opt.cstar) base = 0;
+      else { extra = sinv([mod(a[c] - a[opt.cstar], p), 1], R, p); base = 1; }
+      for (let e = 0; e < base; e++) ker = smul(ker, Winv, R, p);
+      let thp = 1; for (let e = 0; e < base; e++) thp = thp * th % p;
+      const sc = kind === 'U' ? inv(opt.v[c], p) : mod(opt.mu[c], p);
+      for (let n = 0; n < rows; n++) {
+        const kk = extra ? smul(ker, extra, R, p) : ker, f = sc * thp % p;
+        for (let i = 0; i < cols; i++) { const col = colS[i]; let acc = 0; for (let j = 0; j <= n; j++) if (col[j] && kk[n - j]) acc += col[j] * kk[n - j]; M[n][i] = f * (acc % p) % p; }
+        ker = smul(ker, Winv, R, p); thp = thp * th % p;
+      }
+      C.push(M);
+    }
+    return C;
+  }
+  const residue = (p, a, theta, v, rows, cols) => residueMatrices('U', p, a, theta, rows, cols, { v });
+  const staggered = (p, a, theta, cstar, mu, rows, cols) => residueMatrices('R', p, a, theta, rows, cols, { cstar, mu });
+  function brickwall(p, rows, cols) { return staggered(p, [0, 1], mod(-inv(4, p), p), 1, [mod(-4, p), 2], rows, cols); }
+  function pascal(a, p, rows, cols) {                     // Pas_a[n][k] = binom(k, n) a^{k-n}
+    const M = Array.from({ length: rows }, () => new Array(cols).fill(0));
+    const B = [[1]]; for (let k = 1; k < cols; k++) { const r = [1]; for (let n = 1; n < k; n++) r.push((B[k - 1][n - 1] + B[k - 1][n]) % p); r.push(1); B.push(r); }
+    for (let n = 0; n < rows; n++) for (let k = n; k < cols; k++) { let x = B[k][n]; for (let e = 0; e < k - n; e++) x = x * mod(a, p) % p; M[n][k] = x; }
+    return M;
+  }
+  const faure = (p, s, rows, cols) => Array.from({ length: s }, (_, c) => pascal(c, p, rows, cols));
+  const Dfor = q => Math.floor(52 / Math.log2(q));       // digits kept per coordinate: q^D < 2^52 (exact in float64)
+
+  // ------------------------------------------------------------------ nets: register, generate points
+  function addNet(key, obj) { nets[key] = Object.assign({ s: obj.C ? obj.C.length : obj.s }, obj); delete cache[key]; delete evCache[key]; return nets[key]; }
+  function mulberry(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function hash32(a, b, c, d) {                          // integer hash (for the Owen scramble)
+    let h = Math.imul(a ^ 0x9e3779b9, 0x85ebca6b) ^ Math.imul(b + 0x7f4a7c15, 0xc2b2ae35) ^ Math.imul(c + 0x165667b1, 0x27d4eb2f) ^ Math.imul(d + 0x61c88647, 0x9e3779b1);
+    h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16; return h >>> 0;
+  }
+  function sobolDirs(poly, init, K) {                    // eq:sobrec, poly = [1, a_1, .., a_{e-1}, 1]; returns u_1..u_K (index 1..K)
+    const e = poly.length - 1, u = [0].concat(init);
+    for (let k = e + 1; k <= K; k++) { let x = u[k - e] ^ (u[k - e] * Math.pow(2, e)); for (let i = 1; i < e; i++) if (poly[i]) x ^= u[k - i] * Math.pow(2, i); u.push(x); }
+    return u;
+  }
+  function sobol3Matrices(D) {                           // van der Corput, z+1, z^2+z+1 (Joe-Kuo init 1, 3): C[n][k] = bit n of 2^{-(k+1)} u_{k+1}
+    const dirs = [null, sobolDirs([1, 1], [1], D), sobolDirs([1, 1, 1], [1, 3], D)];
+    return [0, 1, 2].map(c => Array.from({ length: D }, (_, n) => Array.from({ length: D }, (_, k) => {
+      if (c === 0) return +(n === k);
+      const u = dirs[c][k + 1]; const sh = k - n; return sh < 0 ? 0 : (Math.floor(u / Math.pow(2, sh)) & 1);
+    })));
+  }
+  const cache = {};
+  function points(key, N) {
+    const c0 = cache[key]; if (c0 && c0.N >= N) return c0;
+    const nt = nets[key], s = nt.s, X = Array.from({ length: s }, () => new Float64Array(N));
+    if (nt.kind === 'random') {
+      const rnd = mulberry(nt.seed || 1); for (let i = 0; i < N; i++) for (let c = 0; c < s; c++) X[c][i] = rnd();
+    } else if (nt.kind === 'halton') {
+      for (let c = 0; c < s; c++) { const b = nt.bases[c]; for (let i = 0; i < N; i++) { let v = i, f = 1 / b, x = 0; while (v > 0) { x += (v % b) * f; v = Math.floor(v / b); f /= b; } X[c][i] = x; } }
+    } else {                                              // digital over F_q (prime q), optional Owen scramble (q = 2)
+      const q = nt.q, D = nt.D, C = nt.C;
+      let m = 1; while (Math.pow(q, m) < N) m++;
+      if (m > nt.M) throw new Error(key + ': prefix too long for exported columns');
+      const S = C.map(Cc => Cc.slice(0, D).map(row => { const r = new Int32Array(m); let a = 0; for (let k = 0; k < m; k++) { a = (a + row[k]) % q; r[k] = a; } return r; }));
+      const y = Array.from({ length: s }, () => new Int32Array(D)), vd = new Int32Array(m + 1);
+      const pw = new Float64Array(D); pw[0] = 1 / q; for (let n = 1; n < D; n++) pw[n] = pw[n - 1] / q;
+      const owen = nt.owen != null;
+      for (let v = 0; v < N; v++) {
+        if (v > 0) { let k = 0; while (vd[k] === q - 1) { vd[k] = 0; k++; } vd[k]++; for (let c = 0; c < s; c++) { const Sc = S[c], yc = y[c]; for (let n = 0; n < D; n++) { const t = yc[n] + Sc[n][k]; yc[n] = t >= q ? t - q : t; } } }
+        for (let c = 0; c < s; c++) {
+          const yc = y[c]; let val = 0;
+          if (owen) { let pre = 1; for (let n = 0; n < D; n++) { const b = yc[n] ^ (hash32(nt.owen, c, n, pre) & 1); pre = (pre * 2 + yc[n]) >>> 0; if (b) val += pw[n]; } }
+          else if (nt.shift) { const sh = nt.shift[c]; for (let n = 0; n < D; n++) { const t = (yc[n] + sh[n]) % q; if (t) val += t * pw[n]; } }
+          else for (let n = 0; n < D; n++) if (yc[n]) val += yc[n] * pw[n];
+          X[c][v] = val;
+        }
+      }
+    }
+    return (cache[key] = { N, X, s, x: X[0], y: X[1], z: X[2] });
+  }
+  function td2(P, i, j) { let d2 = 0; for (let c = 0; c < P.s; c++) { let d = Math.abs(P.X[c][i] - P.X[c][j]); if (d > 0.5) d = 1 - d; d2 += d * d; } return d2; }
+
+  // ------------------------------------------------------------------ exact delta of EVERY prefix (incremental cell list, s = 2, 3)
+  // delta(P_[N]) = min(delta(P_[N-1]), distance of point N-1 to its nearest predecessor); only the drops are stored.
+  const evCache = {};
+  function sepEvents(key, N) {
+    const e0 = evCache[key]; if (e0 && e0.N >= N) return e0;
+    const P = points(key, N), s = P.s, X = P.X;
+    const G = Math.max(3, Math.floor(s === 2 ? Math.sqrt(N) / 1.5 : Math.cbrt(N) / 1.3)), Gs = Math.pow(G, s);
+    const head = new Int32Array(Gs).fill(-1), next = new Int32Array(N).fill(-1);
+    const bin = (i, c) => Math.min(G - 1, Math.floor(X[c][i] * G));
+    const cellOf = i => { let id = 0; for (let c = 0; c < s; c++) id = id * G + bin(i, c); return id; };
+    const evN = [], evD = [], evI = [], evJ = [];
+    let best = Infinity;
+    const ins = i => { const b = cellOf(i); next[i] = head[b]; head[b] = i; };
+    ins(0);
+    const cc = new Int32Array(s);
+    for (let i = 1; i < N; i++) {
+      const r = isFinite(best) ? Math.ceil(Math.sqrt(best) * G) + 1 : G;
+      let nb = best, nj = -1;
+      if (2 * r + 1 >= G) { for (let j = 0; j < i; j++) { const d = td2(P, i, j); if (d < nb) { nb = d; nj = j; } } }
+      else {
+        for (let c = 0; c < s; c++) cc[c] = bin(i, c);
+        if (s === 2) {
+          for (let a = -r; a <= r; a++) { const gx = ((cc[0] + a) % G + G) % G; for (let b = -r; b <= r; b++) { let j = head[gx * G + ((cc[1] + b) % G + G) % G]; while (j >= 0) { const d = td2(P, i, j); if (d < nb) { nb = d; nj = j; } j = next[j]; } } }
+        } else {
+          for (let a = -r; a <= r; a++) { const gx = ((cc[0] + a) % G + G) % G; for (let b = -r; b <= r; b++) { const gy = ((cc[1] + b) % G + G) % G; for (let e = -r; e <= r; e++) { let j = head[(gx * G + gy) * G + ((cc[2] + e) % G + G) % G]; while (j >= 0) { const d = td2(P, i, j); if (d < nb) { nb = d; nj = j; } j = next[j]; } } } }
+        }
+      }
+      if (nj >= 0) { best = nb; evN.push(i + 1); evD.push(Math.sqrt(nb)); evI.push(nj); evJ.push(i); }
+      ins(i);
+    }
+    return (evCache[key] = { N, evN, evD, evI, evJ, s });
+  }
+  function sepAt(ev, N) {                                  // delta, closest pair and sep = delta N^{1/s} of the first N points
+    let lo = 0, hi = ev.evN.length - 1;
+    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (ev.evN[mid] <= N) lo = mid; else hi = mid - 1; }
+    return { d: ev.evD[lo], i: ev.evI[lo], j: ev.evJ[lo], c: ev.evD[lo] * Math.pow(N, 1 / (ev.s || 2)) };
+  }
+  function minSepRange(ev, N0, N1) {                       // min over N0 <= N <= N1 of sep(P_[N]) (exact: sep rises between drops)
+    const s = ev.s || 2; let best = Infinity, at = 0;
+    for (let k = 0; k < ev.evN.length; k++) {
+      const a = ev.evN[k], b = k + 1 < ev.evN.length ? ev.evN[k + 1] - 1 : Infinity;
+      if (b < N0 || a > N1) continue; const n = Math.max(a, N0), c = ev.evD[k] * Math.pow(n, 1 / s);
+      if (c < best) { best = c; at = n; }
+    }
+    return { c: best, N: at };
+  }
+  // exact closest pair of a static set (first N points of P): cell list with ~1 point per cell, radius grown until exact
+  function closest(P, N) {
+    const s = P.s, X = P.X; let G = Math.max(1, Math.floor(Math.pow(N, 1 / s)));
+    let best = Infinity, bi = 0, bj = 1;
+    for (let pass = 0; pass < 6; pass++) {
+      const r = pass === 0 ? 1 : Math.ceil(Math.sqrt(best) * G);
+      if (2 * r + 1 >= G) {                               // brute force
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) { const d = td2(P, i, j); if (d < best) { best = d; bi = i; bj = j; } }
+        return { d: Math.sqrt(best), i: bi, j: bj };
+      }
+      const Gs = Math.pow(G, s), head = new Int32Array(Gs).fill(-1), next = new Int32Array(N);
+      const cell = new Int32Array(N * s);
+      for (let i = 0; i < N; i++) { let id = 0; for (let c = 0; c < s; c++) { const b = Math.min(G - 1, Math.floor(X[c][i] * G)); cell[i * s + c] = b; id = id * G + b; } next[i] = head[id]; head[id] = i; }
+      const offs = []; const rec = (pre, d) => { if (d === s) { offs.push(pre.slice()); return; } for (let a = -r; a <= r; a++) { pre.push(a); rec(pre, d + 1); pre.pop(); } }; rec([], 0);
+      for (let i = 0; i < N; i++) for (const o of offs) {
+        let id = 0; for (let c = 0; c < s; c++) id = id * G + (((cell[i * s + c] + o[c]) % G) + G) % G;
+        let j = head[id]; while (j >= 0) { if (j > i) { const d = td2(P, i, j); if (d < best) { best = d; bi = i; bj = j; } } j = next[j]; }
+      }
+      if (Math.sqrt(best) * G <= r) return { d: Math.sqrt(best), i: bi, j: bj };
+    }
+    return { d: Math.sqrt(best), i: bi, j: bj };
+  }
+
+  // ------------------------------------------------------------------ F_p linear algebra: graph form of a 2D full level
+  function invMod(A, p) {
+    const n = A.length, M = A.map((r, i) => r.slice().concat(Array.from({ length: n }, (_, j) => +(i === j))));
+    for (let col = 0; col < n; col++) {
+      let piv = col; while (piv < n && M[piv][col] % p === 0) piv++;
+      if (piv === n) throw new Error('singular');
+      [M[col], M[piv]] = [M[piv], M[col]];
+      const f = inv(M[col][col], p); for (let j = 0; j < 2 * n; j++) M[col][j] = M[col][j] * f % p;
+      for (let r = 0; r < n; r++) if (r !== col && M[r][col]) { const g = M[r][col]; for (let j = 0; j < 2 * n; j++) M[r][j] = mod(M[r][j] - g * M[col][j], p); }
+    }
+    return M.map(r => r.slice(n));
+  }
+  const solvers = {};
+  function level(key, K) {                                 // the level-K graph form of a 2D net (prime q): cell -> point
+    const id = key + ':' + K; if (solvers[id]) return solvers[id];
+    const nt = nets[key], q = nt.q, m = 2 * K, C = nt.C;
+    if (m > nt.M || K + 2 > nt.D) throw new Error('level too deep for exported matrices');
+    const B = []; for (let c = 0; c < 2; c++) for (let i = 0; i < K; i++) B.push(C[c][i].slice(0, m));
+    const Binv = invMod(B, q);
+    const pw = []; let t = 1 / q; for (let n = 0; n < nt.D; n++) { pw.push(t); t /= q; }
+    const apply = cell => { const v = []; for (let k = 0; k < m; k++) { let s = 0; for (let r = 0; r < m; r++) s += Binv[k][r] * cell[r]; v.push(s % q); } return v; };
+    const g = Math.pow(q, K);
+    function at(n0, n1) {                                  // the point of P_2K in cell (n0, n1): index, coordinates, digits
+      n0 = mod(n0, g); n1 = mod(n1, g);
+      const cell = []; for (const n of [n0, n1]) for (let i = 0; i < K; i++) cell.push(Math.floor(n / Math.pow(q, K - 1 - i)) % q);
+      const v = apply(cell), y = [0, 0], dig = [[], []];
+      for (let c = 0; c < 2; c++) for (let n = 0; n < nt.D; n++) { let s = 0; for (let k = 0; k < m; k++) s += C[c][n][k] * v[k]; s %= q; dig[c].push(s); y[c] += s * pw[n]; }
+      let idx = 0; for (let k = m - 1; k >= 0; k--) idx = idx * q + v[k];
+      return { v: idx, x: y[0], y: y[1], dig, r: [dig[0][K], dig[1][K]], n: [n0, n1] };
+    }
+    function law(l, cp, j = 1) {                           // carry response D_i(l)[c][cp], i < j, from the matrices
+      const e = new Array(m).fill(0); for (let a = K - l; a < K; a++) e[cp * K + a] = 1;
+      const v = apply(e), out = [[], []];
+      for (let c = 0; c < 2; c++) for (let i = 0; i < j; i++) { let s = 0; for (let k = 0; k < m; k++) s += C[c][K + i][k] * v[k]; out[c].push(s % q); }
+      return out;
+    }
+    return (solvers[id] = { K, q, g, at, law });
+  }
+
+  // ------------------------------------------------------------------ lattices: lambda_jit of the Construction-A lattice Lambda_v
+  // lambda_jit(Lambda)^2 = min over b != 0 in Lambda of ||(|b| - 1)_+||^2 (exact integer; thm:residue). Enumeration in a box
+  // [-B, B]^s grown until every vector outside it (some |b_c| >= B + 1, so value >= B^2) cannot win.
+  function ljit2(v, p) {
+    const s = v.length, last = inv(v[s - 1], p);
+    const val = b => { let t = 0; for (const x of b) { const a = Math.abs(x) - 1; if (a > 0) t += a * a; } return t; };
+    let best = (p - 1) * (p - 1), arg = [p].concat(new Array(s - 1).fill(0));
+    let B = Math.max(2, Math.ceil(2 * Math.pow(p, 1 / s)) + 1);
+    for (;;) {
+      const b = new Array(s).fill(0);
+      const rec = (d, part) => {
+        if (d === s - 1) {
+          let r = mod(-part * last, p); if (r > p / 2) r -= p;
+          for (let x = r - Math.ceil((B + r) / p) * p; x <= B; x += p) {
+            if (x < -B) continue; b[s - 1] = x;
+            if (b.every(z => z === 0)) continue;
+            const t = val(b); if (t < best) { best = t; arg = b.slice(); }
+          }
+          return;
+        }
+        for (let x = -B; x <= B; x++) { b[d] = x; rec(d + 1, (part + v[d] * x) % p); }
+      };
+      rec(0, 0);
+      if (best <= B * B) return { l2: best, b: arg };
+      B = Math.ceil(Math.sqrt(best)) + 1;
+    }
+  }
+
+  // ------------------------------------------------------------------ the digit relaxation in one coordinate (lem:cert, rem:onedigit)
+  const cen = (v, p) => { v = mod(v, p); return v > p / 2 ? v - p : v; };
+  function f1(e, sigma, p) {                               // guaranteed gap in one coordinate, one geometric digit
+    sigma = mod(sigma, p); let best = Infinity;
+    for (let R = 0; R < p; R++) { const d = Math.abs(e * p + ((R + sigma) % p) - R); if (d < best) best = d; }
+    return Math.max(0, best - 1) / p;
+  }
+
+  // ------------------------------------------------------------------ formatting + drawing helpers
+  const fmt = (c, k = 4) => (c < 0 ? '−' : '') + Math.abs(c).toFixed(k);
+  const fmtDown = (c, k = 4) => (Math.floor(c * Math.pow(10, k) + 1e-9) / Math.pow(10, k)).toFixed(k);   // truncate (sec:conventions)
+  const fmtN = N => String(N).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  function fitCanvas(cv) {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+    const w = Math.max(10, Math.round(r.width)), h = Math.max(10, Math.round(r.height));
+    if (cv.width !== w * dpr || cv.height !== h * dpr) { cv.width = w * dpr; cv.height = h * dpr; }
+    const ctx = cv.getContext('2d');
+    if (!ctx.__safeArc) { const arc0 = ctx.arc; ctx.arc = function (x, y, r, a, b) { return arc0.call(this, x, y, Math.max(0, r), a, b); }; ctx.__safeArc = true; }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    return { ctx, w, h };
+  }
+  const redrawers = [];
+  function onRedraw(fn) { redrawers.push(fn); }
+  let rq = 0, lastW = 0;
+  function redrawAll() { cancelAnimationFrame(rq); rq = requestAnimationFrame(() => redrawers.forEach(f => f())); }
+  if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('resize', () => { if (window.innerWidth !== lastW) { lastW = window.innerWidth; redrawAll(); } });
+    if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', redrawAll);
+  }
+  function seg(el, onPick) {                               // a group of toggle buttons with aria-pressed
+    const bs = [...el.querySelectorAll('button')];
+    bs.forEach(b => b.addEventListener('click', () => { bs.forEach(x => x.setAttribute('aria-pressed', String(x === b))); onPick(b.dataset.v, b); }));
+    return v => bs.forEach(x => x.setAttribute('aria-pressed', String(x.dataset.v === String(v))));
+  }
+  const svgNS = 'http://www.w3.org/2000/svg';
+  function svgEl(tag, attrs, parent) {
+    const e = document.createElementNS(svgNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e); return e;
+  }
+  const later = fn => setTimeout(fn, 0);                   // let the browser paint a "computing" note first
+  return { DATA, nets, mod, inv, smul, sinv, residue, staggered, brickwall, pascal, faure, sobol3Matrices, sobolDirs, Dfor, addNet,
+    mulberry, points, td2, sepEvents, sepAt, minSepRange, closest, invMod, level, ljit2, cen, f1, fmt, fmtDown, fmtN, css, fitCanvas,
+    onRedraw, redrawAll, seg, svgEl, later };
+})();
+if (typeof module !== 'undefined') module.exports = SQ;
+
+</script>
+<script>
+(() => {
+'use strict';
+const { nets, fmt, fmtDown, fmtN, css, svgEl, DATA } = SQ;
+const RES = { 13: { a: [2, 9, 10], th: 12, v: [5, 3, 6], LB: .425 }, 17: { a: [2, 9, 6], th: 12, v: [4, 10, 16], LB: .388 }, 23: { a: [18, 22, 15], th: 5, v: [4, 14, 20], LB: .497 }, 31: { a: [8, 0, 16], th: 9, v: [10, 30, 7], LB: .636 } };
+function axesLog(svg, x0, x1, y0, y1, N0, N1, ymax, ticks) {
+  const lx = Math.log(N0), rx = Math.log(N1), X = N => x0 + (x1 - x0) * (Math.log(N) - lx) / (rx - lx), Y = v => y1 - (y1 - y0) * Math.min(v, ymax) / ymax;
+  const g = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12, fill: css('--muted') }, svg);
+  for (const t of ticks) { svgEl('line', { x1: x0, x2: x1, y1: Y(t), y2: Y(t), stroke: css('--grid') }, g); svgEl('text', { x: x0 - 6, y: Y(t) + 4, 'text-anchor': 'end' }, g).textContent = t.toFixed(1); }
+  for (let e = Math.ceil(Math.log2(N0)); Math.pow(2, e) <= N1 * 1.0001; e += (N1 > 1e6 ? 3 : 2)) { const N = Math.pow(2, e); svgEl('line', { x1: X(N), x2: X(N), y1: y0, y2: y1, stroke: css('--grid') }, g); const t = svgEl('text', { x: X(N), y: y1 + 16, 'text-anchor': 'middle' }, g); t.innerHTML = `2<tspan dy="-5" font-size="9">${e}</tspan>`; }
+  svgEl('text', { x: x1, y: y1 + 32, 'text-anchor': 'end' }, g).textContent = 'N (log scale)';
+  return { X, Y };
+}
+function saw(evN, evD, N0, N1, X, Y) {
+  let d = '';
+  for (let k = 0; k < evN.length; k++) {
+    const b = k + 1 < evN.length ? evN[k + 1] - 1 : N1; if (b < N0) continue; const a = Math.max(evN[k], N0); if (a > N1) break;
+    const bb = Math.min(b, N1), st = Math.max(1, Math.min(10, Math.ceil(Math.log(bb / a) * 5)));
+    for (let t = 0; t <= st; t++) { const N = a * Math.pow(bb / a, t / st); d += (d ? 'L' : 'M') + X(N).toFixed(1) + ',' + Y(evD[k] * Math.cbrt(N)).toFixed(1); }
+  }
+  return d;
+}
+
+// ------------------------------------------------------------------ 1. the paper's long range (fig:evidence)
+function drawE() {
+  const svg = document.getElementById('svgE'); svg.innerHTML = '';
+  const N0 = 64, N1 = 1 << 23, { X, Y } = axesLog(svg, 46, 884, 14, 256, N0, N1, 1.0, [0, 0.2, 0.4, 0.6, 0.8, 1.0]);
+  const S = [['sob1', 'Owen-scrambled Sobol′, seed 1', '--s6'], ['sob2', 'seed 2', '--s6'], ['sob3', 'seed 3', '--s6'], ['fa31', 'Faure, p = 31', '--s2'], ['res31', 'residue sequence, p = 31', '--s1']];
+  const leg = [];
+  for (const [k, lab, cl] of S) {
+    const ev = DATA.practice[k], evN = ev.map(a => a[0]), evD = ev.map(a => a[1]);
+    svgEl('path', { d: saw(evN, evD, N0, N1, X, Y), fill: 'none', stroke: css(cl), 'stroke-width': k === 'res31' ? 1.8 : 1.1, opacity: k.startsWith('sob') ? 0.75 : 1 }, svg);
+    const m = SQ.minSepRange({ evN, evD, s: 3 }, N0, N1);
+    svgEl('circle', { cx: X(m.N), cy: Y(m.c), r: 5, fill: css('--surface'), stroke: css(cl), 'stroke-width': 2 }, svg);
+    leg.push(`<span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(${cl});stroke-width:2"/></svg>${lab}: 𝒥 = ${m.c.toFixed(3)} at N = ${fmtN(m.N)}</span>`);
+  }
+  const p = 31; svgEl('line', { x1: X(p * p) - 10, x2: X(p * p) + 10, y1: Y(0.636), y2: Y(0.636), stroke: css('--good'), 'stroke-width': 3 }, svg);
+  svgEl('line', { x1: 46, x2: 884, y1: Y(0.020), y2: Y(0.020), stroke: css('--good'), 'stroke-dasharray': '1.5 2.5' }, svg);
+  document.getElementById('legE').innerHTML = leg.reverse().join('') + '<span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(--good);stroke-width:3"/></svg>certified 0.636 at N = 31² (every K); dotted: 0.020 for every N</span>';
+}
+
+// ------------------------------------------------------------------ 2. live
+const lv = { p: 31, N: 65536, seed: 1 };
+SQ.seg(document.getElementById('lpSeg'), v => { lv.p = +v; runLive(); });
+SQ.seg(document.getElementById('lnSeg'), v => { lv.N = +v; runLive(); });
+document.getElementById('reseed').addEventListener('click', () => { lv.seed = 1 + Math.floor(Math.random() * 1e6); runLive(); });
+let sob3 = null;
+function nets3() {
+  const p = lv.p, D = SQ.Dfor(p), r = RES[p], m = Math.ceil(Math.log(1 << 17) / Math.log(p)) + 1;
+  const kr = `pr:res:${p}`, kf = `pr:fau:${p}`, ko = `pr:owen:${lv.seed}`;
+  if (!nets[kr]) SQ.addNet(kr, { q: p, D, M: m, C: SQ.residue(p, r.a, r.th, r.v, D, m) });
+  if (!nets[kf]) SQ.addNet(kf, { q: p, D, M: m, C: SQ.faure(p, 3, D, m) });
+  if (!sob3) sob3 = SQ.sobol3Matrices(30);
+  if (!nets[ko]) SQ.addNet(ko, { q: 2, D: 30, M: 18, C: sob3, owen: lv.seed });
+  if (!nets['pr:rand']) SQ.addNet('pr:rand', { kind: 'random', s: 3, q: 2, seed: 7 });
+  return [[kr, `residue sequence, p = ${p}`, '--s1'], [kf, `Faure, p = ${p}`, '--s2'], [ko, `Owen-scrambled Sobol′, seed ${lv.seed}`, '--s6'], ['pr:rand', 'random points', '--s5']];
+}
+function runLive() {
+  document.getElementById('noteLv').textContent = 'computing…';
+  SQ.later(() => {
+    const t0 = performance.now(), L = nets3(), N1 = lv.N, svg = document.getElementById('svgLv'); svg.innerHTML = '';
+    const { X, Y } = axesLog(svg, 46, 884, 14, 236, 64, N1, 1.2, [0, 0.4, 0.8, 1.2]);
+    const rows = [], leg = [];
+    for (const [k, lab, cl] of L) {
+      const ev = SQ.sepEvents(k, N1), m = SQ.minSepRange(ev, 64, N1);
+      svgEl('path', { d: saw(ev.evN, ev.evD, 64, N1, X, Y), fill: 'none', stroke: css(cl), 'stroke-width': k.includes('res') ? 1.8 : 1.1 }, svg);
+      svgEl('circle', { cx: X(m.N), cy: Y(m.c), r: 5, fill: css('--surface'), stroke: css(cl), 'stroke-width': 2 }, svg);
+      rows.push([lab, m.c, m.N]); leg.push(`<span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(${cl});stroke-width:2"/></svg>${lab}</span>`);
+    }
+    const p = lv.p; if (p * p <= N1) svgEl('line', { x1: X(p * p) - 10, x2: X(p * p) + 10, y1: Y(RES[p].LB), y2: Y(RES[p].LB), stroke: css('--good'), 'stroke-width': 3 }, svg);
+    document.getElementById('legLv').innerHTML = leg.join('') + `<span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(--good);stroke-width:3"/></svg>certified ${RES[p].LB} at N = ${p}²</span>`;
+    const best = rows[0][1];
+    document.getElementById('tabLv').innerHTML = `<tr><th>sequence</th><th>min sep, 64 ≤ N ≤ ${fmtN(N1)}</th><th>at N</th><th>ratio to the residue sequence</th></tr>` + rows.map(([l, c, n], k) => `<tr><td class="l">${l}</td><td class="${k === 0 ? 'hot' : ''}">${c.toFixed(3)}</td><td>${fmtN(n)}</td><td>${(c / best).toFixed(2)}</td></tr>`).join('');
+    document.getElementById('noteLv').textContent = `Exact, ${fmtN(N1)} points per sequence, computed in ${Math.round(performance.now() - t0)} ms. Over the paper's range 64 ≤ N ≤ 2^23 the residue sequence at p = ${p} has 𝒥 = ${({ 13: '0.248', 17: '0.235', 23: '0.251', 31: '0.267' })[p]} (tab:practice).`;
+  });
+}
+
+// ------------------------------------------------------------------ 3. digital shifts (lem:shift(b))
+const sh = { shift: null, seed: 0 };
+function drawSh() {
+  const p = 13, r = RES[p], D = SQ.Dfor(p), key = 'sh:' + sh.seed;
+  if (!nets[key]) { const rnd = SQ.mulberry(4242 + sh.seed); SQ.addNet(key, { q: p, D, M: 6, C: SQ.residue(p, r.a, r.th, r.v, D, 6), shift: sh.seed ? [0, 1, 2].map(() => Array.from({ length: D }, () => Math.floor(rnd() * p))) : null }); }
+  document.getElementById('readSh').innerHTML = '<dt>computing…</dt><dd></dd>';
+  SQ.later(() => {
+    const nt = nets[key], out = [];
+    for (const K of [1, 2]) {
+      const N = Math.pow(p, 3 * K - 1), P = SQ.points(key, N), c = SQ.closest(P, N), F = Math.pow(p, K);
+      const tgt = nt.shift ? SQ.mod(r.v.reduce((s, vc, cc) => s + vc * nt.shift[cc][K - 1], 0), p) : 0;
+      let ok = 0; for (let i = 0; i < N; i++) { let s = 0; for (let cc = 0; cc < 3; cc++) s += r.v[cc] * Math.floor(P.X[cc][i] * F); if (SQ.mod(s, p) === tgt) ok++; }
+      out.push([K, N, c.d * Math.cbrt(N), ok, tgt]);
+    }
+    document.getElementById('readSh').innerHTML = `<dt>shift</dt><dd>${sh.seed ? 'random #' + sh.seed : 'none'}</dd>` + out.map(([K, N, v, ok, t]) => `<dt>sep(P<sub>${3 * K - 1}</sub>), ${fmtN(N)} points</dt><dd class="em">${fmt(v)}</dd><dt>fine cells with v·b ≡ ${t} (mod 13)</dt><dd>${fmtN(ok)} of ${fmtN(N)}</dd>`).join('') + `<dt>certified for every K, shifted or not</dt><dd class="good">${r.LB.toFixed(3)}</dd>`;
+    document.getElementById('noteSh').innerHTML = sh.seed ? 'The shifted prefix occupies the coset v·b ≡ v·(shift digits at position K − 1), one point per fine cell, and its separation stays above the certified bound (lem:shift(b)).' : 'Unshifted: the occupied fine cells are exactly the lattice Λ<sub>v</sub> (v·b ≡ 0).';
+  });
+}
+document.getElementById('shiftBtn').addEventListener('click', () => { sh.seed++; drawSh(); });
+document.getElementById('shift0').addEventListener('click', () => { sh.seed = 0; drawSh(); });
+
+drawE(); runLive(); drawSh();
+SQ.onRedraw(() => { drawE(); });
+})();
+</script>
+</body>
+</html>

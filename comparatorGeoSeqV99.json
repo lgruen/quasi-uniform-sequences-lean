@@ -1,0 +1,35 @@
+{
+  "challenge_module": "GeoSeqV99Challenge",
+  "solution_module": "GeoSeqV99Solution",
+  "theorem_names": [
+    "GeoSeq.hrel_of_eval",
+    "GeoSeq.hNd_of_ndPoly",
+    "GeoSeq.dom_LB",
+    "GeoSeq.caCheck_sound",
+    "GeoSeq.blk4_hrel",
+    "GeoSeq.blk4_hNd",
+    "GeoSeq.blk4_LB_proof",
+    "GeoSeq.blk4_LB_chk",
+    "GeoSeq.blk4_LB_ca",
+    "GeoSeq.blk4_LB_ca109",
+    "GeoSeq.blk4_block",
+    "GeoSeq.blk5_hrel",
+    "GeoSeq.blk5_hNd",
+    "GeoSeq.blk5_LB_proof",
+    "GeoSeq.blk5_LB_chk",
+    "GeoSeq.prefix_of_level",
+    "GeoSeq.hasGap_sN",
+    "GeoSeq.covered_of_level",
+    "GeoSeq.covered_full",
+    "GeoSeq.covered_sq",
+    "GeoSeq.cov_dyadic",
+    "GeoSeq.cov_residue"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
