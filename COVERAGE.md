@@ -7,7 +7,8 @@ this repository to the paper. Results are cited by their LaTeX labels; the state
 (`GeoSeq/Statements/*.lean`) give the labels in their docstrings, statement by statement.
 
 All configurations permit exactly the axioms `propext`, `Quot.sound`, `Classical.choice` and enable the NanoDa kernel.
-Which configurations were re-run on this tree, and how long they took: [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md).
+The Comparator runs on this tree (all 53 configurations accepted by both kernels) and how long they took:
+[`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md).
 
 ## Results new in version 1: 32 configurations, 311 theorems
 

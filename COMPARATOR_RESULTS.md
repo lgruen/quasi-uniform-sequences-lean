@@ -3,11 +3,12 @@
 [Comparator](https://github.com/leanprover/comparator) (with `lean4export` at the toolchain's tag and the NanoDa
 kernel; on macOS `landrun` replaced by `scripts/fake-landrun.sh`, i.e. without sandbox) was run on this tree after a
 complete `lake build` (2026-10-29; Lean `v4.35.0-rc3`, Mathlib `v4.35.0-rc3`; 10-core, 32 GB laptop), one
-configuration at a time, each in the foreground with a wall-clock limit of about ten minutes. For every accepted
-configuration the log ends with `nanoda kernel accepts the solution`, `Lean default kernel accepts the solution` and
-`Your solution is okay!`. Every configuration permits exactly `propext`, `Quot.sound`, `Classical.choice`.
+configuration at a time, each in the foreground; the 50 shorter ones with a wall-clock limit of about ten minutes,
+the three longest (`comparatorGeoSeqS3.json`, `comparatorGeoSeqS4.json`, `comparatorGeoSeqV7full.json`) afterwards
+without a limit. For every configuration the log ends with `nanoda kernel accepts the solution`, `Lean default kernel
+accepts the solution` and `Your solution is okay!`. Every configuration permits exactly `propext`, `Quot.sound`, `Classical.choice`.
 
-## Accepted on this tree: 50 configurations
+## Accepted on this tree: all 53 configurations
 
 | configuration | theorems | result | wall time |
 |---|---|---|---|
@@ -61,27 +62,15 @@ configuration the log ends with `nanoda kernel accepts the solution`, `Lean defa
 | `comparatorGeoSeqK4.json` | 34 | both kernels accept, EXIT 0 | 275 s |
 | `comparatorGeoSeqS3core.json` | 16 | both kernels accept, EXIT 0 | 92 s |
 | `comparatorGeoSeqS4core.json` | 15 | both kernels accept, EXIT 0 | 62 s |
+| `comparatorGeoSeqS3.json` | 24 | both kernels accept, EXIT 0 | 871 s |
+| `comparatorGeoSeqS4.json` | 27 | both kernels accept, EXIT 0 | 740 s |
+| `comparatorGeoSeqV7full.json` | 3 | both kernels accept, EXIT 0 | 1166 s |
 
-Total wall time 3910 s. This covers all 32 configurations of the results new in version 1 (311 theorems), the
-Palomar entry `comparatorHeadlineSeqV4.json`, and 17 of the 20 configurations of the results kept from the previous
-version.
-
-## Not re-run on this tree
-
-Three configurations of the previous version take longer than the ten-minute limit of these runs; they were not
-re-run on this tree:
-
-| configuration | theorems | why | covered on this tree in part by |
-|---|---|---|---|
-| `comparatorGeoSeqS3.json` | 24 | about 14 minutes (stopped at 522 s here; its 8 theorems outside `comparatorGeoSeqS3core.json` were also stopped at 588 s) | `comparatorGeoSeqS3core.json` (16 of the 24 theorems) |
-| `comparatorGeoSeqS4.json` | 27 | about 11–12 minutes | `comparatorGeoSeqS4core.json` (15 of the 27 theorems) |
-| `comparatorGeoSeqV7full.json` | 3 | about 19 minutes | `comparatorGeoSeqV7d45.json`, `comparatorGeoSeqV7.json` (the coverage theorems with the small-base results as hypotheses) |
-
-In the development repository all three were accepted by both kernels in earlier runs (S3: 840 s; S4: 682 s;
-V7full: 19 min 23 s, the last on 2026-10-27), on earlier states of that repository; they have not been re-run on the
-final state. (The Lean code of this tree is identical to the final state of the development repository, comments and
-docstrings aside; checked file by file.) To run them here:
-`scripts/run_comparator.sh <tools dir> comparatorGeoSeqS3.json comparatorGeoSeqS4.json comparatorGeoSeqV7full.json`.
+Total wall time 6687 s (3910 s for the first 50, 2777 s for the three longest). This covers all 32
+configurations of the results new in version 1 (311 theorems), the Palomar entry `comparatorHeadlineSeqV4.json`,
+and all 20 configurations of the results kept from the previous version. (`comparatorGeoSeqS3core.json` and
+`comparatorGeoSeqS4core.json` are subsets of `comparatorGeoSeqS3.json` and `comparatorGeoSeqS4.json`, kept as
+shorter runs.) The Lean files of this tree were not changed after these runs.
 
 ## Build
 

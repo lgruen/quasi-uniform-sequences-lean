@@ -45,7 +45,8 @@ the only axioms are `propext`, `Classical.choice` and `Quot.sound`; there is no 
 are evaluated by the Lean kernel, `decide +kernel`); `sorry` occurs only in the statement files
 (`GeoSeq/Statements/*.lean`, `HeadlineSeqV4/Challenge.lean`), by design: the Challenge holds the statements, the
 Solution the proofs. [Comparator](https://github.com/leanprover/comparator) checks each configuration with the Lean
-kernel and the independent NanoDa kernel; see [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) for the runs and
+kernel and the independent NanoDa kernel; all 53 configurations were accepted by both kernels on this tree; see
+[`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) for the runs and
 [`COVERAGE.md`](COVERAGE.md) for what each configuration covers and what is not formalized.
 
 Statement review: TODO(author) — the author's review and sign-off of the Palomar entry's statements (and the basis on

@@ -19,31 +19,36 @@ Programs (audit programs, written from the statements):
   of given base degrees (modes: random non-monic; reducible with a repeated factor; a pure power of a linear factor;
   many linear factors), `u3` builds the pair of `thm:nonqu` directly from the formula, checks the carry and zero digit
   patterns from the definition of the radical inverse, the degrees, and the exact Euclidean distance against √(s+3)
-  (levels w = 0, 1 with L ≤ 12000); `campaign.sh P` runs the profiles of the audit campaign for the prime P.
+  (levels w = 0, 1 with L ≤ 12000); `campaign.sh P` runs the profiles of the audit campaign for the prime P. The frames
+  are deterministic: `gen3` uses `std::mt19937_64` (whose output the C++ standard fixes) with seed 1 and reduces its raw
+  output modulo p (no distribution objects), so every platform draws the same frames.
 
 ## Re-run (from the archive root)
 
     python3 failure/check_f4_sobol.py
     python3 failure/check_fail.py
     bash failure/campaign.sh 2      (then 3, 5, 7, 11, 13; one prime per call)
+    ./bin/u3 7 '2,2,4,1;2,0,3' 1 0 44000      (the one case of the campaign above the level cap, about 20 s)
 
 Expected: every line of the two scripts ends with `True`; `tab:sobolpar recomputed` lists s = 2..7 with
 (E, ν, k, L, m, (s−1)E) = (1, 2, 2, 3, 5, 1), (2, 12, 16, 34, 98, 4), (6, 168, 256, 1542, 6150, 18),
 (6, 168, 256, 1542, 7686, 24), (12, 1680, 2048, 24588, 147468, 60), (12, 1680, 2048, 24588, 172044, 72) and bounds
-1.58114, 0.972081, 0.116927, 0.101532, 0.00292969, 0.00253333 (the table rounds up to two significant digits:
+1.58114, 0.972081, 0.116927, 0.101532, 0.00292969, 0.00253333 (the table gives these rounded up:
 1.59, 0.98, 0.12, 0.11, 2.93·10⁻³, 2.54·10⁻³). `campaign.sh` ends with `TOTAL p=P ...: cases=n pass=n fail=0`
-(a case is `notrun` when its level exceeds L = 12000; that is not a failure).
+(a case is `notrun` when its level exceeds L = 12000; that is not a failure): 50, 52, 46, 36, 30, 30 cases for
+p = 2, 3, 5, 7, 11, 13, all `pass` except one `notrun` at p = 7 (bases 2+2z+4z²+z³ and 2+3z², carrying coordinate 1,
+level L = 43224); the separate `u3` call checks that case at L = 43224 and prints `RESULT PASS`.
 
 Negative control: `CTRL=1 ./bin/u3 3 '0,0,1;2,2,2;2,1,2' 0 1 12000` (N replaced by N − 1; `CTRL=2`: k by k + 1) makes the
 checker report `RESULT FAIL` with distances far above the bound.
 
-Result of the run of 2026-10-29 (count 2, seed 1 per profile): 244 cases, 243 PASS, 0 FAIL, 1 not run (p = 7, level
-above 12000). GAP: the audit campaign quoted in Table `tab:checks` (395 cases of bases and carrying coordinate,
-0 failures) drew its frames at random and did not store them, so exactly those 395 cases cannot be replayed; the archived
-campaign re-draws frames of the same profiles (any count and seed: `bash failure/campaign.sh P COUNT SEED`). The second,
-independent pipeline used in that campaign is a research program and is not archived (`camp3.sh` skips it).
+Result of the run of 2026-10-29 (count 2, seed 1 per profile): 244 cases of bases and carrying coordinate, 244 PASS
+(243 in the campaign, the remaining one by the separate call), 0 FAIL. This is the campaign quoted in Table
+`tab:checks`. (The audit campaign of the research repository drew its frames without a stored seed; it is not used
+for the number in the paper.) The second, independent pipeline used in that audit campaign is a research program and
+is not archived (`camp3.sh` skips it).
 
 Requirements: Python 3, a C++17 compiler, bash.
 
-Last run 2026-10-29: PASS, 0.1 s + 0.6 s; campaign 10.4 / 1.9 / 3.2 / 6.3 / 2.7 / 11.1 s for p = 2, 3, 5, 7, 11, 13
-(one core).
+Last run 2026-10-29: PASS, 0.7 s + 0.2 s; campaign 11.2 / 2.1 / 3.5 / 6.8 / 3.0 / 12.1 s for p = 2, 3, 5, 7, 11, 13;
+the case above the cap 17.9 s (one core).

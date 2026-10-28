@@ -16,6 +16,10 @@ Files:
   `thm:B2` (u = Σ_k x^{2^k}), written without the code that produced the table: compares the 64 words with the
   printed table and checks t = 0 (rank criterion) for every m ≤ 48 on 64 × 64 matrices; writes the 64-bit columns to
   `b2_cols_64bit.txt` (included: the first 64 digits of columns 0..63 of C_0 and C_1).
+* `b2_check.c` — the check stated at the end of the table file, with the table and the snippet (`b2_dropin.c`, included
+  unchanged): a loop over all elementary intervals (every box of volume 2^−m with dyadic sides holds exactly one point
+  of P_m, m ≤ 14), and a brute-force toroidal minimum distance over all pairs of P_m, m = 2, 4, ..., 12, in exact integer
+  arithmetic on the 32-bit coordinates.
 
 ## Re-run (from the archive root)
 
@@ -24,17 +28,16 @@ Files:
     ./bin/b2demo words > bin/words.txt
     python3 -c "W=[l.split() for l in open('bin/words.txt')]; C=[[x[:8] for x in l.split()[:32]] for l in open('b2_dropin/b2_cols_64bit.txt')]; print(W==C)"
     ./bin/b2demo 4
+    cc -O2 -std=c99 -Wall -o bin/b2check b2_dropin/b2_check.c -lm && ./bin/b2check
 
 Expected: `M_0 mismatches at columns: []`, `M_1 mismatches at columns: []`, `t=0 failures for m<=48: []`; `True`
 (the C table equals the top 32 bits of the rebuilt columns); the first points (0, 0), (0.6123161316, 0.8164215090),
-(0.375, 0.5), (0.9873161316, 0.3164215090).
+(0.375, 0.5), (0.9873161316, 0.3164215090); `b2check` prints `yes` for every m = 1, ..., 14, then sep(P_m) = 0.6334,
+0.4589, 0.3998, 0.3998, 0.3998, 0.3968 for m = 2, 4, ..., 12 (the values stated in the table file), and `ALL OK`.
 
-GAP: the table file also states that "a loop over all elementary intervals" with the table and the snippet confirms the
-(0,m,2)-net property for m ≤ 14 and that a brute-force toroidal minimum distance gives sep(P_m) = 0.6334, 0.4589,
-0.3998, 0.3998, 0.3998, 0.3968 (m = 2, 4, ..., 12). The program that did this is not in the archive. The net property
-of every prefix P_m, m ≤ 32, of the table follows from the t = 0 check of `b2build.py` together with the equality of the
-table with the rebuilt columns; the separation values are not re-checked here.
+The net property of every prefix P_m, m ≤ 32, also follows from the t = 0 check of `b2build.py` together with the
+equality of the table with the rebuilt columns.
 
-Requirements: Python 3, a C99 compiler (demo only).
+Requirements: Python 3, a C99 compiler (demo and `b2_check.c`).
 
-Last run 2026-10-29: PASS, < 0.1 s + 0.4 s (one core).
+Last run 2026-10-29: PASS, 0.1 s + 0.3 s + 0.1 s (one core).

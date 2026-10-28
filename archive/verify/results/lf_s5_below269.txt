@@ -1,6 +1,0 @@
-PASS lf_designs_s5_below269.txt:p239 s=5 p=239 s5_top1 cover=EEEEW LB=0.012552 Gamma=236
-PASS lf_designs_s5_below269.txt:p241 s=5 p=241 s5_top1 cover=EEEEW LB=0.016598 Gamma=237
-PASS lf_designs_s5_below269.txt:p251 s=5 p=251 s5_top1 cover=EEEEW LB=0.035857 Gamma=242
-PASS lf_designs_s5_below269.txt:p257 s=5 p=257 s5_top1 cover=EEEEW LB=0.046693 Gamma=245
-## lf_designs/lf_designs_s5_below269.txt: 4/4 PASS
-## TOTAL 4/4 PASS

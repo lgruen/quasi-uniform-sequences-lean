@@ -1,0 +1,7 @@
+ACCEPTED (stored own window longer than needed): pp_designs_s3.txt:p13 own window 2 shortened at lo
+ACCEPTED (stored own window longer than needed): pp_designs_s3.txt:p13 own window 2 shortened at hi
+ACCEPTED (stored own window longer than needed): pp_designs_s3.txt:p23 own window 2 shortened at lo
+ACCEPTED (stored own window longer than needed): pp_designs_s3.txt:p23 own window 2 shortened at hi
+records: 5 (all PASS uncorrupted)
+cross changed by one: 30/30 rejected
+own window shortened by one: 18/22 rejected, 4 accepted
