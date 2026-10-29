@@ -7,12 +7,7 @@ configuration at a time, each in the foreground with a wall-clock limit. For eve
 with `nanoda kernel accepts the solution`, `Lean default kernel accepts the solution` and `Your solution is okay!`.
 Every configuration permits exactly `propext`, `Quot.sound`, `Classical.choice`.
 
-## Accepted: all 79 configurations (76 re-run on this tree)
-
-The 76 configurations below were run on this tree. The 3 longest
-(`comparatorGeoSeqS3.json`, `comparatorGeoSeqS4.json`, `comparatorGeoSeqV7full.json`) were accepted by both kernels on an earlier, unpublished state of this repository
-(2026-10-29), whose Lean files are those of this tree except for the files added since (no file of their import
-closures changed); their re-run on this tree is pending.
+## Accepted on this tree: all 79 configurations
 
 | configuration | theorems | result | wall time |
 |---|---|---|---|
@@ -92,11 +87,11 @@ closures changed); their re-run on this tree is pending.
 | `comparatorGeoSeqK4.json` | 34 | both kernels accept, EXIT 0 | 275 s |
 | `comparatorGeoSeqS3core.json` | 16 | both kernels accept, EXIT 0 | 99 s |
 | `comparatorGeoSeqS4core.json` | 15 | both kernels accept, EXIT 0 | 62 s |
-| `comparatorGeoSeqS3.json` | 24 | both kernels accept, EXIT 0, on an earlier state of this tree (same Lean import closure); not yet re-run on this tree | 871 s (earlier state) |
-| `comparatorGeoSeqS4.json` | 27 | both kernels accept, EXIT 0, on an earlier state of this tree (same Lean import closure); not yet re-run on this tree | 740 s (earlier state) |
-| `comparatorGeoSeqV7full.json` | 3 | both kernels accept, EXIT 0, on an earlier state of this tree (same Lean import closure); not yet re-run on this tree | 1166 s (earlier state) |
+| `comparatorGeoSeqS3.json` | 24 | both kernels accept, EXIT 0 | 841 s |
+| `comparatorGeoSeqS4.json` | 27 | both kernels accept, EXIT 0 | 757 s |
+| `comparatorGeoSeqV7full.json` | 3 | both kernels accept, EXIT 0 | 1194 s |
 
-Total wall time of the runs on this tree 7175 s. This covers the 58 configurations of the results new in version 1
+Total wall time of the runs on this tree 9967 s. This covers the 58 configurations of the results new in version 1
 (679 theorems: 32 from the first stages, `comparatorGeoSeqV9*.json`, 26 added later, `comparatorGeoSeqV10_*.json`),
 the Palomar entry `comparatorHeadlineSeqV4.json`, and the 20 configurations of the results kept from the previous
 version. (`comparatorGeoSeqS3core.json` and `comparatorGeoSeqS4core.json` are subsets of `comparatorGeoSeqS3.json` and
