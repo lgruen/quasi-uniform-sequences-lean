@@ -26,7 +26,7 @@ Website: <https://lgruen.github.io/quasi-uniform-sequences-lean/>, with the inte
 
 | path | content | licence |
 |---|---|---|
-| repository root | the Lean 4 / Mathlib Lake project: library `GeoSeq/` (definitions, statement files `GeoSeq/Statements/*.lean`, proofs), `Z3Net/` (the part of the Lean library of the nets paper that `GeoSeq` imports), the Challenge/Solution roots `GeoSeq*Challenge.lean` / `GeoSeq*Solution.lean` and the 78 Comparator configurations `comparatorGeoSeq*.json`, tools in `scripts/` | MIT |
+| repository root | the Lean 4 / Mathlib Lake project: library `GeoSeq/` (definitions, statement files `GeoSeq/Statements/*.lean`, proofs), `Z3Net/` (the part of the Lean library of the nets paper that `GeoSeq` imports), the Challenge/Solution roots `GeoSeq*Challenge.lean` / `GeoSeq*Solution.lean` and the 79 Comparator configurations `comparatorGeoSeq*.json`, tools in `scripts/` | MIT |
 | [`HeadlineSeqV4/`](HeadlineSeqV4/), `comparatorHeadlineSeqV4.json`, [`palomar/headline-seq-v4/formalization.yaml`](palomar/headline-seq-v4/formalization.yaml) | the Palomar entry: a Mathlib-only statement file of 195 lines (`cor:halton`; `thm:residue` with `cor:korobov` and `cor:residueQU` for one explicit residue sequence) | MIT |
 | [`docs/library-formalization.yaml`](docs/library-formalization.yaml) | metadata of the whole library, in the `formalization.yaml` format; not a Palomar entry | MIT |
 | [`COVERAGE.md`](COVERAGE.md), [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) | the configurations and what they cover; the Comparator runs | MIT |
@@ -37,8 +37,8 @@ Website: <https://lgruen.github.io/quasi-uniform-sequences-lean/>, with the inte
 
 ## Status
 
-The paper (`app:lean`) lists what is formalized. The results new in version 1 are compared in 58 Comparator
-configurations with 679 theorems (32 with 311 theorems, `comparatorGeoSeqV9*.json`, and 26 with 368 theorems,
+The paper (`app:lean`) lists what is formalized. The results new in version 1 are compared in 59 Comparator
+configurations with 730 theorems (32 with 311 theorems, `comparatorGeoSeqV9*.json`, and 27 with 419 theorems,
 `comparatorGeoSeqV10_*.json`); the results kept from the previous version of the
 manuscript are compared in the 20 configurations of that version (`comparatorGeoSeq.json`, `…S3/S4/K4/S10/S11…`,
 `…V0…V7…`), and the Palomar entry in `comparatorHeadlineSeqV4.json` (4 theorems). Every compared theorem is proved;
@@ -46,7 +46,7 @@ the only axioms are `propext`, `Classical.choice` and `Quot.sound`; there is no 
 are evaluated by the Lean kernel, `decide +kernel`); `sorry` occurs only in the statement files
 (`GeoSeq/Statements/*.lean`, `HeadlineSeqV4/Challenge.lean`), by design: the Challenge holds the statements, the
 Solution the proofs. [Comparator](https://github.com/leanprover/comparator) checks each configuration with the Lean
-kernel and the independent NanoDa kernel; all 79 configurations were accepted by both kernels; see
+kernel and the independent NanoDa kernel; all 80 configurations were accepted by both kernels; see
 [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) for the runs and
 [`COVERAGE.md`](COVERAGE.md) for what each configuration covers and what is not formalized.
 

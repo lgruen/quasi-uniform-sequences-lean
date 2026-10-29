@@ -14,10 +14,11 @@ All commands are run from this directory (the archive root). Commands that compi
 `bin/` (created on first use; delete it afterwards). Requirements: Python 3 (standard library), a C++17 compiler
 (`g++`), a C99 compiler for `b2_dropin/`, and, through `uv` (or any Python environment with these packages), SymPy for
 `bs_ruleB_s3/`, `bs_s45_thresholds/` and `block_lb/fd_s45_check.py`, and NumPy for `practice/rebuild_check.py` (also
-used by `primepower/`) and `practice/j_check.py`. Every single command below ran in less than a minute on one core on
-2026-10-29 (most in a few seconds; the longest are the exact evaluations of LB(F) for s = 7 in `block_lb/`, split by
-prime ranges into runs of 23–44 s, and `practice/j_check.py`, 22–24 s per sequence); the full log of that run is
-summarised in each directory's README.
+used by `primepower/`), `practice/j_check.py` and `hammersley/brute_check.py`. Every single command below ran in less
+than a minute on one core on 2026-10-29 and again on 2026-10-30 with `hammersley/` (most in a few seconds; the longest
+are the exact evaluations of LB(F) for s = 7 in `block_lb/`, split by prime ranges into runs of 23–45 s,
+`practice/j_check.py`, 22–26 s per sequence, and the separations of the lifts in `hammersley/`, split into runs of at
+most 46 s); the full log of that run is summarised in each directory's README.
 
 | directory | paper statement (label) | finite check | re-run (from the archive root) |
 |---|---|---|---|
@@ -34,8 +35,9 @@ summarised in each directory's README.
 | `b2_dropin/` | `thm:B2`: drop-in table of 32-bit direction numbers, reference implementation in C | 64 words rebuilt from the series; t = 0; elementary intervals and sep(P_m) with the table | README there |
 | `failure/` | `tab:sobolpar` (s = 2, ..., 7); explicit pairs of `sec:fail` (`thm:nonqu`, `cor:halton`, `cor:sobol`, `cor:faure`, `cor:unscrambled`, `rem:faurerate`, `rem:toeplitz`) | exact parameters; exact distances of the pairs; 244 Halton-type cases (fixed seed) | `python3 failure/check_f4_sobol.py`; `python3 failure/check_fail.py`; `bash failure/campaign.sh P` |
 | `exact_relations/` | `rem:skelsearch` (exhaustive in its scope); example after `cor:nodesign` | exhaustive branch and bound; dimension of a space of relations | README there |
+| `hammersley/` | `sec:hammersley`: exact separations of the Hammersley lifts (comparison after `prop:liftcarry`, `fig:hammersley`); closest pairs of `prop:liftcarry`; checks of `prop:liftcarry` on explicit pairs | the 183 rows of `lift_results.csv` recomputed (the 70 smallest also by an all-pairs program); closest-pair index polynomials; the pair of the proof against the bound, exactly | README there |
 
-Summary of the run of 2026-10-29: all checks listed in the directory READMEs passed (window-system records: 5 / 5
+Summary of the runs of 2026-10-29 and 2026-10-30: all checks listed in the directory READMEs passed (window-system records: 5 / 5
 PASS, see `verify/results/`); the negative controls described there behaved as stated. Where a re-check differs from
 the paper's description, or something is not archived, the README of the directory concerned says so.
 

@@ -1,6 +1,6 @@
 # scripts/ — the programs that draw the figures of the paper
 
-Every figure of the paper (the 18 PDFs in `../figs/`) is drawn by the scripts in this directory from the generator
+Every figure of the paper (the 19 PDFs in `../figs/`) is drawn by the scripts in this directory from the generator
 matrices of the constructions; the scripts need no file outside this directory. Run them from the paper directory
 (the one containing `main.tex`, `figs/` and `scripts/`).
 
@@ -15,8 +15,8 @@ Apple-silicon laptop (2026-10-29): 51 s for all scripts (one core), of which 24 
 separation of every prefix up to 2^23 points).
 
 The committed PDFs were written with matplotlib 3.11.0 and carry their creation date, so their bytes are not
-reproduced; `figcmp.py` compares the rasterized pages (150 dpi) pixel by pixel. With matplotlib 3.11.0 all 18 figures
-are pixel-identical to `figs/` (checked 2026-10-29).
+reproduced; `figcmp.py` compares the rasterized pages (150 dpi) pixel by pixel. With matplotlib 3.11.0 all 19 figures
+are pixel-identical to `figs/` (checked 2026-10-29; `fig_hammersley` 2026-10-30).
 
 ## Commands
 
@@ -43,6 +43,7 @@ Build the C++ programs (done by `run_all.sh`):
 | `fig:dim3` | `fig_coverage` | `PY scripts/b6_figs.py --out DIR coverage` | 1 s |
 | `fig:evidence` | `fig_evidence3d_v4` | `PY scripts/b6_figs.py --out DIR evidence` (needs `bin/mdist`) | 25 s |
 | `fig:principles`, `fig:cost` | `fig_halfcell_v4`, `fig_volume_v4` | `PY scripts/cut1_figs.py --out DIR` | 1 s |
+| `fig:hammersley` | `fig_hammersley` | `PY scripts/b9_hammersley.py --out DIR` (reads `data/lift_results.csv`) | 1 s |
 | `fig:bsgeom` | `fig_bs_slab_v4`, `fig_bs_3d_v4` | `PY scripts/b5_figs.py --out DIR bs` (needs `bin/mdist`) | 3 s |
 | (comparison) | | `PY scripts/figcmp.py DIR` | 5 s |
 
@@ -61,7 +62,7 @@ independent generator `audit_gen.py`, the relations of `lem:residue-rel` and `le
 ## Files
 
 - Figure scripts: `b1_relabel.py`, `b2_carry.py`, `b3_figs.py`, `b4_figs.py`, `b5_figs.py`, `b6_figs.py`, `b7_levels.py`,
-  `b8_freediag.py`, `cut1_figs.py`; data generators `b7_levels_data.py`, `b8_freediag_data.py`; `run_all.sh`,
+  `b8_freediag.py`, `b9_hammersley.py`, `cut1_figs.py`; data generators `b7_levels_data.py`, `b8_freediag_data.py`; `run_all.sh`,
   `figcmp.py`; `_paths.py` (directories, `--out`).
 - Builders and generators: `make_figs.py`, `make_figs_v3.py`, `make_figs_bs.py` (figure builders; extracted from the
   development scripts with only the functions these figures use, code unchanged except for paths), `b3_gen.py`
@@ -77,7 +78,8 @@ independent generator `audit_gen.py`, the relations of `lem:residue-rel` and `le
   `drops_sob2.txt`, `drops_sob3.txt` (exact minimum distance of every prefix up to 2^23 points of the Faure sequence
   (I, P, P²) in base 31 and of three Owen-scrambled Sobol' sequences (base 2), dimension three, computed with
   `mdist.cpp` in the development repository; the program that generated the point sets is not included, so these
-  four files are inputs, not recomputed).
+  four files are inputs, not recomputed), `lift_results.csv` (exact toroidal separations of the Hammersley lifts,
+  identical to `archive/hammersley/lift_results.csv`, where the programs that compute it are; an input here).
 
 The three Sobol' coordinates use the first three direction-number sets (x, x+1, x²+x+1), which are written into the
 generator of the development repository; no table of direction numbers is needed or shipped.

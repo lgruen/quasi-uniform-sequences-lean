@@ -7,10 +7,10 @@ this repository to the paper. Results are cited by their LaTeX labels; the state
 (`GeoSeq/Statements/*.lean`) give the labels in their docstrings, statement by statement.
 
 All configurations permit exactly the axioms `propext`, `Quot.sound`, `Classical.choice` and enable the NanoDa kernel.
-The Comparator runs (all 79 configurations accepted by both kernels) and how long they took:
+The Comparator runs (all 80 configurations accepted by both kernels) and how long they took:
 [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md).
 
-## Results new in version 1: 58 configurations, 679 theorems
+## Results new in version 1: 59 configurations, 730 theorems
 
 First stages (V9): 32 configurations, 311 theorems.
 
@@ -28,7 +28,7 @@ First stages (V9): 32 configurations, 311 theorems.
 | `comparatorGeoSeqV99ca5_p<q>.json` (22) | 1 each | `thm:block`(c), s = 5: the kernel evaluation of the one-digit relaxation checker at the prime q, 19 ≤ q ≤ 109 (one configuration per prime, for run time) |
 | `comparatorGeoSeqV99cov.json` | 2 | `thm:coverage` as an assembly of the cited results, without its prime-power rows |
 
-Added for version 1 after the first stages (V10): 26 configurations, 368 theorems.
+Added for version 1 after the first stages (V10): 27 configurations, 419 theorems.
 
 | configuration | theorems | content (labels of version 1) |
 |---|---|---|
@@ -39,6 +39,7 @@ Added for version 1 after the first stages (V10): 26 configurations, 368 theorem
 | `comparatorGeoSeqV10_3x.json` | 41 | the further rows of `tab:primepower` (better f; q = 32, 64, 81, 121, 125, 128 for s = 2; 128, 169 for s = 3; s = 4, 5) and the coverage rows `coverage_pp_new` |
 | `comparatorGeoSeqV10_4.json` | 37 | `def:block`(a) for every reachable design (`designNum_exists`, `designNum_order`), `thm:block`(i)–(iii) for every reachable design, the transfer of U*_s (`ustar_reachable`), `thm:block`(c) for every s ≥ 3 at p ≥ 5a*_s + 4 (`blkS_block`), the column of ones (`ustar_col0`), `a*_s ≥ s − 1`, the equality given α_0 = a*_s (`blkS_LB_eq_of`); the free diagonal for every s (`blkSd_block`, `blkSd_block_sc`); `thm:block`(d) for s = 6 given the eleven checks (`blk6d_block_of_chk`, `blk6d_LB_eq_of_chk`, every prime p ≥ 125) |
 | `comparatorGeoSeqV10_4ca<k>.json` (11) | 11 each | `thm:block`(d), s = 6: the kernel evaluations of the sign-class checker at P = 6367 (121 evaluations, split for run time) |
+| `comparatorGeoSeqV10_5.json` | 51 | `sec:hammersley`: `prop:liftslab` (i), (ii) over every finite field and digit code (`liftslab_i`, `liftslab_ii`) with the in-slab bounds of the staggered residue, residue and block-periodic sequences; `prop:liftcarry` for every lower-triangular scramble and every digital shift (`liftcarry_sharp`, the display as a sum over the coordinates; `liftcarry`), the closed forms with γ = √(s+p²) (`liftcarry_closed0`, `liftcarry_closedMu` and their normalized forms), the lifts are not well separated (`lift_not_wellsep`; the residue and staggered residue sequences with the places 0, 1: `lift_resSeq01_not_wellsep`, `lift_resStar01_not_wellsep`) |
 
 Some unconditional forms are checked by `lake build` only, not by a configuration: `blk5_LB_eq` and `blk5d_block`,
 `blk5d_LB_eq`, `blk6d_block`, `blk6d_LB_eq` (their import closures contain all per-prime evaluations at once, too long

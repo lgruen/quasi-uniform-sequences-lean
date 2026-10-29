@@ -27,5 +27,6 @@ t0=$(date +%s)
 "${PY[@]}" scripts/b5_figs.py --out "$OUT" HB bs           # fig_HB_v4, fig_bs_slab_v4, fig_bs_3d_v4
 "${PY[@]}" scripts/b6_figs.py --out "$OUT"                 # fig_evidence3d_v4, fig_coverage, fig_B2_v4, fig_automaton_v4
 "${PY[@]}" scripts/cut1_figs.py --out "$OUT"               # fig_halfcell_v4, fig_volume_v4
+"${PY[@]}" scripts/b9_hammersley.py --out "$OUT"           # fig_hammersley
 echo "generated in $(( $(date +%s) - t0 )) s"
 "${PY[@]}" scripts/figcmp.py "$OUT"

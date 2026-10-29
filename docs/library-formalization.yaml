@@ -6,7 +6,7 @@ project:
     Lean 4 / Mathlib formalization of the manuscript "Low-discrepancy quasi-uniform digital sequences in every
     dimension" (version 1). Library GeoSeq (definitions, statement files GeoSeq/Statements/*.lean with sorry by
     design, proofs), which imports the part Z3Net/ of the Lean library of the companion nets paper. The results new
-    in version 1 are compared in 58 Comparator configurations with 679 theorems (comparatorGeoSeqV9*.json,
+    in version 1 are compared in 59 Comparator configurations with 730 theorems (comparatorGeoSeqV9*.json,
     comparatorGeoSeqV10_*.json); the
     results kept from the previous version of the manuscript in the 20 configurations of that version
     (comparatorGeoSeq.json, comparatorGeoSeq{S3,S3core,S4,S4core,K4,S10,S11}.json,
@@ -65,7 +65,7 @@ related_formalizations:
 
 status:
   scope: >-
-    Every compared theorem of the 78 comparatorGeoSeq*.json configurations is proved, symbolic in the dimension, the
+    Every compared theorem of the 79 comparatorGeoSeq*.json configurations is proved, symbolic in the dimension, the
     prime and the level where the paper is; finite computations are evaluated by the Lean kernel (decide +kernel).
     Comparator accepts each configuration with the Lean kernel and NanoDa (COMPARATOR_RESULTS.md). Results of the
     paper that are not formalized, and statements whose formal form differs from the printed one, are listed in

@@ -7,7 +7,7 @@
 %
 %
 \section{Practice}\label{sec:practice}
-The sequences of this paper are digital sequences with fixed generator matrices, generated like the Sobol' and Faure sequences. This section says what they cost, how they compare at the numbers of points one can actually use, and how to randomise them without losing the bound.
+The sequences of this paper are digital sequences with fixed generator matrices, generated like the Sobol' and Faure sequences. This section says what they cost, how they compare at the numbers of points one can actually use, how to randomise them without losing the bound, and what their Hammersley lifts give as nets.
 
 \subsection{Implementation and Cost}
 A point is a matrix--vector product over $\F_q$ in each coordinate. For the residue sequences of Section~\ref{sec:residue} the matrices are closed forms: each entry is one coefficient of a power series over $\F_p$,
@@ -64,7 +64,7 @@ Randomised quasi-Monte Carlo and rendering need many independent copies of a sam
 \begin{lemma}[Digital shifts]\label{lem:shift}
 Let $q$ be prime, or $q=2^r$ with an $\F_2$-linear code $\enc$. Let $(y(V))$ be a digital $(0,s)$-sequence over $\F_q$ and $\varsigma=(\varsigma_{c,n})$ any array of digits in $\F_q$. The sequence with the digits $y_{c,n}(V)+\varsigma_{c,n}$ is a $(0,s)$-sequence, and:
 \begin{enumerate}
-\item[(a)] every bound $\sep{P_{sK}}\ge\min(1,\LB_j)$ that Lemma~\ref{lem:cert} gives for the unshifted sequence holds for the shifted prefix $P_{sK}$;
+\item[(a)] every bound $\sep{P_{sK}}\ge\min(1,\LB_j)$ that Lemma~\ref{lem:cert} gives for the unshifted sequence holds for the shifted prefix $P_{sK}$, and so does every lower bound for $\LB_j$, such as the one-digit form ($j=1$) of Theorem~\ref{thm:block}(iii) and its one-coordinate form in Theorem~\ref{thm:residuestar};
 \item[(b)] if $q=p$ is prime and the unshifted sequence is a residue sequence $\Rv_v$, then for every $K\ge1$ the fine cells occupied by the shifted prefix $P_{sK-1}$ are the elements $\hat n$ of $[0,p^K)^s$ with $\sum_cv_c\hat n_c\equiv\sum_cv_c\varsigma_{c,K-1}\pmod p$, each holding one point, and $\sep{P_{sK-1}}\ge p^{-1/s}\ljit(\Lambda_v)$.
 \end{enumerate}
 In particular the bounds of Theorems~\ref{thm:residuestar}, \ref{thm:block}, \ref{thm:B2}, \ref{thm:S3}, \ref{thm:K4}, \ref{thm:S4} and~\ref{thm:p7}, of Remark~\ref{rem:B3}, and of the window constructions (all obtained from Lemma~\ref{lem:cert}), and of Theorem~\ref{thm:residue} hold for every digitally shifted copy, at the same levels; and if the unshifted bounds hold for every $K$ with $q^K\ge4$, the bounds of Lemma~\ref{lem:prefix} hold for the shifted sequence for every $N>q^{s(K_0-1)}$, where $K_0$ is the least $K$ with $q^K\ge4$; for $q\ge4$, and for (b), this is every $N\ge2$.
@@ -81,6 +81,62 @@ The last statement is Lemma~\ref{lem:prefix}, applied to the shifted sequence, a
 \end{proof}
 
 Part~(a) does not cover Theorem~\ref{thm:corrected}, whose correction terms are not of the form of Lemma~\ref{lem:cert}; we have not checked whether its bound survives a shift. In practice: XOR one random word per coordinate into every point in base $2$ and over $\F_4$; add one random digit vector modulo $p$ in a prime base. The shift must be additive in $\F_q$: digitwise addition modulo $4$ of the codes is not an $\F_4$-shift, and a non-affine permutation of a geometric digit, which still preserves the net property, can break the offset map (it brought the brick wall at $p=5$ down to $\sep{P_6}=0.068$, below its certified bound $0.2$). The lemma keeps the certified bound, not the exact separation, and a typical shift comes close to the bound, which is the worst case over the positions $R$ (for Theorem~\ref{thm:B2}, twelve random shifts all gave $\min_{4\le m\le20,\,m\text{ even}}\sep{P_m}\in[0.3680,0.3681]$, against $0.3678$). A uniformly random digital shift makes each point uniformly distributed (up to the digits used) and gives unbiased estimators \cite{DP10}, with the bound of every copy certified.
+
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+\subsection{Hammersley Lifts}\label{sec:hammersley}
+Hammersley's construction adds the index as a coordinate: the \emph{Hammersley lift} $\hat P_m=\{(\ind V\,p^{-m},y(V)):\deg V<m\}\subset[0,1)^{s+1}$ of a $(t,s)$-sequence is a $(t,m,s+1)$-net \cite[Lemma~4.22]{Nie92}. The frame nets of \cite{Gru26geo} (such as $\mathcal P_{k,q}$) have this shape, with the index read at the place $\infty$%
+, but with a scramble that depends on $m$, the index coordinate included. We measure $\delta(\hat P_m)N^{1/(s+1)}$, toroidal in all $s+1$ coordinates, as \cite{Gru26geo} does. A \emph{slab} is the set of points whose first coordinate lies in one interval $[a\,p^{-K_0},(a+1)p^{-K_0})$: an aligned block of $p^{m-K_0}$ indices.
+
+\begin{proposition}[What the lift inherits]\label{prop:liftslab}
+Let $(y(V))$ be a digital $(0,s)$-sequence over $\F_p$, $m\ge1$ and $0\le K_0\le m$. (i) $\hat P_m$ is a digital $(0,m,s+1)$-net. (ii) In its last $s$ coordinates every slab is a digitally shifted copy of $P_{m-K_0}$, so every bound that Lemma~\ref{lem:shift} transfers to shifted copies holds inside each slab. In particular, at the primes where the theorems hold, two points of one slab are at distance at least $\LB'N^{-1/(s+1)}$, where $\LB'$ is the bound of Theorem~\ref{thm:residuestar} for the staggered residue sequence ($\frac{p-3}{2p}$ for the brick wall) at $m=(s+1)K$, $K_0=K$; $p^{-1/(s+1)}\ljit(\Lambda_v)$ for the residue sequence at $m=(s+1)K-1$, $K_0=K$; and $\LB(F)$ for the block-periodic sequence at $m=s(s+1)K$, $K_0=sK$.
+\end{proposition}
+
+\begin{proof}
+(ii) A slab consists of the indices $V=U+z^{m-K_0}A$, $A$ fixed, $\deg U<m-K_0$; by linearity $y(V)=y(U)+y(z^{m-K_0}A)$, a shift of $P_{m-K_0}$. The three cases are Lemma~\ref{lem:shift}(a) (one-coordinate form) for $P_{sK}$, (b) for $P_{sK-1}$ and (a) (one-digit form) for $P_{s^2K}$, rescaled to $N=p^m$ points in dimension $s+1$. (i) A box with $d_0$ digits in the first coordinate and $\sum_cd_c=m$ is contained in one slab with $K_0=d_0$, a shifted $(0,m-d_0,s)$-net by (ii); a shift maps boxes to boxes of the same shape, so the box holds one point. The net is digital: the first coordinate has the matrix that reverses the $m$ index digits, the others the generator matrices restricted to the columns $0,\dots,m-1$.
+\end{proof}
+
+\emph{What the lift loses.} The sequence keeps points of order $N^{-1/s}$ apart inside an aligned block of $N$ indices; the lift needs the larger distance $N^{-1/(s+1)}$ between any two points whose indices differ by at most about $N^{s/(s+1)}$, aligned or not. Two indices on either side of a long carry share an aligned block only at a much higher level, where the sequence guarantees much less; for special carry lengths their index polynomials differ by a polynomial that vanishes to high order at the places, as in Theorem~\ref{thm:nonqu}. The index coordinate, which no scramble touches, plays the unscrambled coordinate of Corollary~\ref{cor:unscrambled}. Let $\mu_n$ be the group of $n$-th roots of unity in $\F_p$.
+
+\begin{proposition}[Close pairs across a carry of the index]\label{prop:liftcarry}
+Let $n\ge1$, and let $C_c=L_c\Pas_{a_c}$, $c<s$, be a scrambled frame over $\F_p$ with arbitrary fixed nonsingular lower-triangular $L_c$ and places $A=\{a_c\}\subseteq\{0\}\cup\mu_n$. Let $r,k\ge0$ with $k+np^r\le m$. Then
+\[
+\delta(\hat P_m)^2\ \le\ p^{2(k-m)}+[0\in A]\,p^{-2k}+[1\in A]\,p^{-2(p^r-1)}+|A\setminus\{0,1\}|\,p^{-2p^r}.
+\]
+In particular, with $\gamma=\sqrt{s+p^2}$, if $A=\{0\}\cup\mu_{s-1}$ or $A=\mu_s$, then for $m=sp^r$:
+\[
+\delta(\hat P_m)\,N^{1/(s+1)}\ \le\ \gamma\,p^{-p^r/(s+1)},\qquad\text{i.e.}\qquad \delta(\hat P_m)\le\gamma\,N^{-1/s};
+\]
+for these place sets and every fixed scramble the lifts are not a well-separated family of nets.
+\end{proposition}
+
+\begin{proof}
+Put $\ell=np^r-1$, $i=(p^\ell-1)p^k$, $j=p^{k+\ell}<p^m$; then $j-i=p^k$, $V_i=-(z^k+\dots+z^{k+\ell-1})$, $V_j=z^{k+\ell}$ and $D=V_j-V_i=z^k(z^{np^r}-1)/(z-1)$.
+In characteristic $p$, $z^{np^r}-1=(z^n-1)^{p^r}=(z-1)^{p^r}H^{p^r}$ with $H=1+z+\dots+z^{n-1}$, so $D=z^k(z-1)^{p^r-1}H^{p^r}$; as $H(\zeta)=(\zeta^n-1)/(\zeta-1)=0$ for $\zeta\in\mu_n\setminus\{1\}$, $D$ vanishes to order $k$ at $0$, to order at least $p^r-1$ at $1$ and at least $p^r$ at the other $\zeta\in\mu_n$. Coordinate $c$ changes by $L_c\Pas_{a_c}D$; the Taylor coefficients $\Pas_{a_c}D$ vanish below the order of $D$ at $a_c$, and $L_c$ is lower triangular. So the two points share the first $k$ digits of a coordinate with $a_c=0$, the first $p^r-1$ digits of one with $a_c=1$ and the first $p^r$ digits of the others, and the index coordinates differ by $p^k/N$; summing squares gives the bound. For $m=sp^r$ we have $N^{1/s}=p^{p^r}$; multiply the bound by $N^{2/s}$. For $A=\{0\}\cup\mu_{s-1}$ take $n=s-1$, $k=p^r$: the terms become $p^{-2(s-2)p^r}\le1$, $1$, $p^2$ and $s-2$ times $1$. For $A=\mu_s$ take $n=s$, $k=0$: $p^{-2(s-1)p^r}\le1$, $0$, $p^2$ and $s-1$ times $1$. In both cases $\delta(\hat P_m)^2N^{2/s}\le s+p^2$, and $N^{1/(s+1)}=N^{1/s}p^{-p^r/(s+1)}$.
+\end{proof}
+
+The proof covers every pair with $V_j-V_i=D$ and index distance $p^k/N$, also when the carry runs out of the top digit ($j\equiv i+p^k\pmod{p^m}$, across the torus boundary of the index coordinate), and every digitally shifted copy. In plain words, $\delta\le\gamma N^{-1/s}$ says that at these sizes the lift, $N$ points in dimension $s+1$, is no better separated than a good set of $N$ points in dimension $s$. The bound is far from sharp, and below $1$ only in windows around $m=sp^r$, geometrically far apart; inside them it decays fast: $0.355$ at $p=5$, $m=10$; below $10^{-3}$ at $p=13$, $24\le m\le27$; $7.7\cdot10^{-6}$ at $p=5$, $m=50$ (Figure~\ref{fig:hammersley}(c)). These place sets, the only ones of the proposition with a bound tending to $0$, cover, whatever the scramble, the two-dimensional sequences with the places $0,1$ (Theorems~\ref{thm:WF}, \ref{thm:residuestar} and~\ref{thm:residue} with these places, \ref{thm:block}(a), \ref{thm:blocktwo} with $s=2$ and these places, \ref{thm:HB}, \ref{thm:B2}, Remark~\ref{rem:B3}, so all of Corollary~\ref{cor:allprimes}), and in dimension three the places $0,\pm1$ (Theorem~\ref{thm:S3}, Theorem~\ref{thm:p7} with these places) and $\mu_3\subset\F_7$ (the archived instance of Theorem~\ref{thm:p7}). They do not cover the places $0,1,2$ for $p\ge5$, other place sets, or the sequences over $\F_4$ of Theorems~\ref{thm:K4} and~\ref{thm:S4} (base-$4$ carries do not give $D$); whether their lifts are well separated is open.
+
+\emph{Comparison} (exact, illustration; computed range only). We computed the lifts of four sequences with the places $0,1$: Faure, the brick wall (Definition~\ref{def:WF}, $\theta=-\frac14$), the residue sequence with a Korobov vector (Corollary~\ref{cor:korobov}, $\theta=1$) and the block-periodic sequence of Theorem~\ref{thm:block}(a) ($\theta=1$). At $m=3$ ($p=5,\dots,19$) and $m=6$ ($p\le17$) they give $0.04$ to $0.71$, against $0.73$ to $0.97$ for the nets of \cite{Gru26geo} (column nets, $\mathcal P_{2,q}$)%
+; at $p=5$ the last three fall to $0.07$--$0.14$ at $m=9,10$ (Faure to $0.02$), where \cite{Gru26geo} certifies $0.632$ resp.\ $0.630$%
+. Their exact closest pairs there are pairs of the proposition ($\ell=4$; $k=4$, or $k=5$ for the residue and block-periodic lifts at $m=10$; three across the torus boundary), and in $20$ of the $21$ cases computed for these three sequences at $m\in\{6,9,10\}$ the minimum comes from neighbouring slabs. In dimension four ($m=4$, places $(0,1,2)$ or $(0,2,1)$, $p\le13$) the lifts give $0.18$--$0.65$, against at least $0.8$ for \cite{Gru26geo} at $p=11,13$ (at $p=5,7$ its certified values do not decide)%
+. So the lifts are nets for free, but for separation the frame nets of \cite{Gru26geo}, scrambled for each $m$, are the right tool.
+
+\begin{figure}[t]
+\centering
+\paperfig{fig_hammersley}
+\caption{Lifts (places $0,1$) against the nets of \cite{Gru26geo}, $\delta N^{1/3}$. (a)~$p=5$; diamonds: exact (filled) and certified (open) values of \cite{Gru26geo}; triangles: the bound of Proposition~\ref{prop:liftcarry}. (b)~$m=6$; dashed: $c(q)$ of \cite{Gru26geo}. (c)~The bound of Proposition~\ref{prop:liftcarry} where below $1$: each V-shaped curve is one $r$ (best $k$ at each $m$), small only near $m=2p^r$; circles: $\sqrt{2+p^2}\,p^{-p^r/3}$ at $m=2p^r$. The minima tend to $0$.}
+\label{fig:hammersley}
+\end{figure}
 
 \subsection{Limitations}
 A sequence in base $p$ is stratified in base $p$, not in base $2$: renderers that rely on dyadic strata at power-of-two sample counts should use base $2$ or $4$ (Theorems~\ref{thm:B2}, \ref{thm:K4}, \ref{thm:S4}). Within one base, $\sep{P_{[N]}}$ fluctuates with the position of $N$ between the powers of $p$, more so for large $p$; for the residue sequences the certified sizes are $p^{sK-1}$, and the smallest values come just after them. The discrepancy is $O((\log N)^s/N)$ with a constant that grows with $p$ \cite{Nie92}, but separation and integration error are different quantities, and a comparison with Owen-scrambled Sobol' on rendering integrands and smooth test functions is the obvious next experiment. The guarantees concern the geometry of the point sets: they matter where clumping at an unknown, open-ended number of samples must be excluded, as in progressive sampling, in stippling and object placement, and in quasi-uniform designs for kernel interpolation, where the mesh ratio of Lemma~\ref{lem:prefix} enters directly.

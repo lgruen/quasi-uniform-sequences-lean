@@ -7,11 +7,16 @@ configuration at a time, each in the foreground with a wall-clock limit. For eve
 with `nanoda kernel accepts the solution`, `Lean default kernel accepts the solution` and `Your solution is okay!`.
 Every configuration permits exactly `propext`, `Quot.sound`, `Classical.choice`.
 
-## Accepted on this tree: all 79 configurations
+The configurations `comparatorGeoSeqV10_5.json`, `comparatorHeadlineSeqV4.json` were run on this tree on 2026-10-30, after the
+formalization of the Hammersley lifts (`sec:hammersley`, `comparatorGeoSeqV10_5.json`) was added; the other
+78 were run on 2026-10-29 on the state of this repository before that addition. The addition only
+added files: no Lean file of the import closures of those 78 configurations changed.
+
+## Accepted: all 80 configurations
 
 | configuration | theorems | result | wall time |
 |---|---|---|---|
-| `comparatorHeadlineSeqV4.json` | 4 | both kernels accept, EXIT 0 | 52 s |
+| `comparatorHeadlineSeqV4.json` | 4 | both kernels accept, EXIT 0 | 39 s |
 | `comparatorGeoSeqV10_1.json` | 55 | both kernels accept, EXIT 0 | 148 s |
 | `comparatorGeoSeqV10_1ca5_p23.json` | 1 | both kernels accept, EXIT 0 | 98 s |
 | `comparatorGeoSeqV10_1ca5_p29.json` | 1 | both kernels accept, EXIT 0 | 84 s |
@@ -90,14 +95,15 @@ Every configuration permits exactly `propext`, `Quot.sound`, `Classical.choice`.
 | `comparatorGeoSeqS3.json` | 24 | both kernels accept, EXIT 0 | 841 s |
 | `comparatorGeoSeqS4.json` | 27 | both kernels accept, EXIT 0 | 757 s |
 | `comparatorGeoSeqV7full.json` | 3 | both kernels accept, EXIT 0 | 1194 s |
+| `comparatorGeoSeqV10_5.json` | 51 | both kernels accept, EXIT 0 | 53 s |
 
-Total wall time of the runs on this tree 9967 s. This covers the 58 configurations of the results new in version 1
-(679 theorems: 32 from the first stages, `comparatorGeoSeqV9*.json`, 26 added later, `comparatorGeoSeqV10_*.json`),
+Total wall time of these runs 10007 s. This covers the 59 configurations of the results new in version 1
+(730 theorems: 32 from the first stages, `comparatorGeoSeqV9*.json`, 27 added later, `comparatorGeoSeqV10_*.json`),
 the Palomar entry `comparatorHeadlineSeqV4.json`, and the 20 configurations of the results kept from the previous
 version. (`comparatorGeoSeqS3core.json` and `comparatorGeoSeqS4core.json` are subsets of `comparatorGeoSeqS3.json` and
 `comparatorGeoSeqS4.json`, kept as shorter runs.) One run of `comparatorGeoSeqV7d45.json` was stopped at the wall-clock
-limit (150 s left in its batch) and repeated without a shorter limit (accepted, the time above). The Lean files of this
-tree were not changed after these runs.
+limit (150 s left in its batch) and repeated without a shorter limit (accepted, the time above). After these runs the
+Lean files of this tree were not changed; files were only added (the modules of `comparatorGeoSeqV10_5.json`).
 
 ## Build
 
@@ -107,7 +113,8 @@ the first stages (including one interrupted parallel attempt), built in pieces (
 modules: `GeoSeq.S3Cert0`, `S3Cert1`, `S3Cert2` about 3.5 min each, `GeoSeq.V99Ca5a`–`f` 2–2.7 min each,
 `GeoSeq.S4AutoB`–`D` together 3.6 min), and about 30 minutes for the modules added later, built one heavy module at a
 time (`GeoSeq.V10_1D5caa`, `…cab`, `…cac` 145 s, 146 s, 74 s; `GeoSeq.V10_3RowsX` 103 s; `GeoSeq.V10_4S6ca0`–`ca10`
-101–104 s each; the rest in one `lake build`, 78 s). A fully parallel build exceeded the memory of the 32 GB machine
+101–104 s each; the rest in one `lake build`, 78 s); the modules of `comparatorGeoSeqV10_5.json` (2026-10-30) build in
+seconds each. A fully parallel build exceeded the memory of the 32 GB machine
 (heavy swapping); building the heavy modules first, one at a time, and the rest afterwards avoids this. The build
 reports `declaration uses 'sorry'` only for the statement files (`GeoSeq/Statements/*.lean`,
 `HeadlineSeqV4/Challenge.lean`), and every `#print axioms` lists a subset of `propext`, `Classical.choice`, `Quot.sound`.
