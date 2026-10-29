@@ -1,5 +1,7 @@
 # Low-discrepancy quasi-uniform digital sequences in every dimension
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23769767.svg)](https://doi.org/10.5281/zenodo.23769767)
+
 Manuscript, Lean 4 formalization, data and verification archive, and interactive explainers for
 
 > Leonhard Gruenschloss, *Low-discrepancy quasi-uniform digital sequences in every dimension*, version 1 (2026).
@@ -17,7 +19,7 @@ repository is release **v1.0.0**, which accompanies **version 1** of the manuscr
 [hexagon:2610.00217v1](https://hexagonmath.org/abs/2610.00217v1); repository
 <https://github.com/lgruen/separated-nets-lean>, Zenodo [10.5281/zenodo.23327748](https://doi.org/10.5281/zenodo.23327748)).
 
-Archived at Zenodo: concept DOI ZENODO_DOI_TBD (all versions); release v1.0.0: version DOI ZENODO_VERSION_DOI_TBD.
+Archived at Zenodo: concept DOI [10.5281/zenodo.23769767](https://doi.org/10.5281/zenodo.23769767) (all versions); release v1.0.0: version DOI [10.5281/zenodo.23769768](https://doi.org/10.5281/zenodo.23769768).
 Palomar entry (`cor:halton`; `thm:residue` with `cor:korobov`, `cor:residueQU`): PALOMAR_ID_TBD.
 Website: <https://lgruen.github.io/quasi-uniform-sequences-lean/>, with the interactive explainers
 <https://lgruen.github.io/quasi-uniform-sequences-lean/explainers/>.
@@ -104,8 +106,8 @@ The constructions, proofs and Lean formalization were produced by an AI system (
 
 ## Citation
 
-See [`CITATION.cff`](CITATION.cff). The archive is cited by its Zenodo concept DOI ZENODO_DOI_TBD (all versions) or,
-for release v1.0.0, by its version DOI ZENODO_VERSION_DOI_TBD.
+See [`CITATION.cff`](CITATION.cff). The archive is cited by its Zenodo concept DOI [10.5281/zenodo.23769767](https://doi.org/10.5281/zenodo.23769767) (all versions) or,
+for release v1.0.0, by its version DOI [10.5281/zenodo.23769768](https://doi.org/10.5281/zenodo.23769768).
 
 ## Licence and third-party material
 

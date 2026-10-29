@@ -1,5 +1,5 @@
 # Palomar entry of version 1 (staged, not submitted). The four statements and the public abstract
-# (project.description) were signed off by the author on 2026-10-29; ZENODO_DOI_TBD is filled after the release.
+# (project.description) were signed off by the author on 2026-10-29; sources[0] is the Zenodo version DOI of release v1.0.0.
 # project.description is the public abstract: every sentence in it is meant to be a literal reading of the four
 # Lean statements in HeadlineSeqV4/Challenge.lean (quantifiers, constants, the level set N = p^(sK-1), the scope).
 version: "v0.4"
@@ -56,13 +56,13 @@ classification:
   msc2020: [11K38, 65C05, 11K45, 52C17, 68V20]
 
 sources:
-  # ZENODO_DOI_TBD: the Zenodo version DOI of release v1.0.0 (filled after the release, as for the nets entry).
+  # sources[0]: the Zenodo version DOI of release v1.0.0 (as for the nets entry).
   - title: "Low-discrepancy quasi-uniform digital sequences in every dimension (version 1)"
     authors:
       - {name: "Leonhard Gruenschloss", orcid: "0009-0004-6476-2191"}
     type: paper
-    id: "doi:ZENODO_DOI_TBD"
-    location: "https://doi.org/ZENODO_DOI_TBD (paper/main.tex of release v1.0.0 of https://github.com/lgruen/quasi-uniform-sequences-lean)"
+    id: "doi:10.5281/zenodo.23769768"
+    location: "https://doi.org/10.5281/zenodo.23769768 (paper/main.tex of release v1.0.0 of https://github.com/lgruen/quasi-uniform-sequences-lean)"
     relationship: formalizes
     note: >-
       Results cited by their LaTeX labels. This entry formalizes cor:halton (section sec:fail, the

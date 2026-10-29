@@ -11,8 +11,14 @@ repository-code: "https://github.com/lgruen/quasi-uniform-sequences-lean"
 url: "https://lgruen.github.io/quasi-uniform-sequences-lean/"
 version: "1.0.0"
 date-released: "2026-10-30"   # date of the v1.0.0 release (YYYY-MM-DD; same day as the paper's \VersionDate)
-# doi: "ZENODO_DOI_TBD"   # Zenodo concept DOI (all versions); filled after the release (uncommented then)
+doi: "10.5281/zenodo.23769767"   # Zenodo concept DOI (all versions)
 identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23769767"
+    description: "Zenodo concept DOI (all versions)"
+  - type: doi
+    value: "10.5281/zenodo.23769768"
+    description: "Zenodo version DOI of release v1.0.0"
   - type: url
     value: "https://lgruen.github.io/quasi-uniform-sequences-lean/explainers/"
     description: "Interactive explainers"

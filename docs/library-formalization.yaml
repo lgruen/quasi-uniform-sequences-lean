@@ -27,13 +27,12 @@ classification:
   msc2020: [11K38, 65C05, 11K45, 52C17, 68V20]
 
 sources:
-  # ZENODO_DOI_TBD: the Zenodo version DOI of release v1.0.0 (filled after the release).
   - title: "Low-discrepancy quasi-uniform digital sequences in every dimension (version 1)"
     authors:
       - {name: "Leonhard Gruenschloss", orcid: "0009-0004-6476-2191"}
     type: paper
-    id: "doi:ZENODO_DOI_TBD"
-    location: "https://doi.org/ZENODO_DOI_TBD (paper/main.tex of release v1.0.0 of https://github.com/lgruen/quasi-uniform-sequences-lean)"
+    id: "doi:10.5281/zenodo.23769768"
+    location: "https://doi.org/10.5281/zenodo.23769768 (paper/main.tex of release v1.0.0 of https://github.com/lgruen/quasi-uniform-sequences-lean)"
     relationship: formalizes
     note: >-
       Results are cited by their LaTeX labels, never by number. COVERAGE.md maps the configurations to the labels.
