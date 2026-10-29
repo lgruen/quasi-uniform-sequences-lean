@@ -17,15 +17,18 @@ measured values rounded, and every negative statement is given with its scope, a
 
 - `*.html`: the pages, assembled by `build_page.py` from `src/<page>_src.html`, `src/style.css`, `src/core.js`
   (generators, exact separations, λ_jit), `src/refs.json` (the reference lists) and `data.json`.
-- `data.json`: values computed by the paper's figure and audit programs in the development repository (exact
-  separations, the drop data of `fig:evidence`, the reference matrices); the generating script needs those programs and
-  is not part of this repository. `check/ref.json`: reference generator matrices from the paper's builders.
+- `data.json`: values computed by `gen_data.py` with the paper's figure builders (`../paper/scripts/`: exact
+  separations by `sepx.cpp`, asserted against the printed values; the drop data of `fig:evidence`; the free-diagonal
+  constants of `fig:freediag`; the reference matrices). `check/ref.json`: reference generator matrices from the
+  paper's builders, also written by `gen_data.py`. Rerunning `gen_data.py` reproduces both files byte for byte.
 - `check/crosscheck.cjs`: runs `src/core.js` under node and checks it against the paper: the JavaScript generators
   against the reference matrices entry by entry, the in-browser exact separations against the precomputed values,
   λ_jit and the bounds of `tab:residue` and `cor:dyadic`, the explicit close pairs, and the certified bounds of
   `tab:practice`.
 
 ```sh
+g++ -O3 -std=c++17 -o paper/scripts/bin/sepx paper/scripts/sepx.cpp      # once (see paper/scripts/README.md)
+uv run --no-project --with numpy --with matplotlib==3.11.0 python explainers/gen_data.py   # data.json, check/ref.json (~5 s)
 python3 explainers/build_page.py          # rebuild the pages from src/ and data.json
 node explainers/check/crosscheck.cjs      # cross-check (a few seconds)
 ```

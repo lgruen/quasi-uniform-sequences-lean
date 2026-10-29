@@ -30,9 +30,9 @@ Website: <https://lgruen.github.io/quasi-uniform-sequences-lean/>, with the inte
 | [`HeadlineSeqV4/`](HeadlineSeqV4/), `comparatorHeadlineSeqV4.json`, [`palomar/headline-seq-v4/formalization.yaml`](palomar/headline-seq-v4/formalization.yaml) | the Palomar entry: a Mathlib-only statement file of 195 lines (`cor:halton`; `thm:residue` with `cor:korobov` and `cor:residueQU` for one explicit residue sequence) | MIT |
 | [`docs/library-formalization.yaml`](docs/library-formalization.yaml) | metadata of the whole library, in the `formalization.yaml` format; not a Palomar entry | MIT |
 | [`COVERAGE.md`](COVERAGE.md), [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) | the configurations and what they cover; the Comparator runs | MIT |
-| [`paper/`](paper/) | `main.tex`, `sections/`, `refs.bib`, `main.bbl`, `main.pdf`, `figs/`, `Makefile` | manuscript CC BY 4.0 ([`paper/LICENSE.md`](paper/LICENSE.md)) |
+| [`paper/`](paper/) | `main.tex`, `sections/`, `refs.bib`, `main.bbl`, `main.pdf`, `figs/`, `Makefile`; [`scripts/`](paper/scripts/) (the programs that draw every figure from the generator matrices, with their data; driver `scripts/run_all.sh`) | manuscript CC BY 4.0 ([`paper/LICENSE.md`](paper/LICENSE.md)); `paper/scripts/` MIT |
 | [`archive/`](archive/) | the data and verification archive of the computer-assisted parts (`app:archive`): one directory per item, each with a README naming the statement it supports and the command that re-runs its check | MIT |
-| [`explainers/`](explainers/) | five interactive pages that compute the sequences in the browser, with a cross-check against the paper's numbers | MIT |
+| [`explainers/`](explainers/) | five interactive pages that compute the sequences in the browser, their data generator `gen_data.py` (uses `paper/scripts/`), and a cross-check against the paper's numbers | MIT |
 | `.github/workflows/pages.yml`, `site/` | GitHub Pages build of the explainers and the paper PDF (manual trigger only) | MIT |
 
 ## Status
@@ -86,6 +86,10 @@ cd paper && make pdf                     # or: latexmk -pdf main.tex
 The archive (Python 3, a C++17 compiler, [uv](https://docs.astral.sh/uv/) for SymPy/NumPy): see
 [`archive/README.md`](archive/README.md); every check runs in under half a minute on one core.
 
+The figures (uv, a C++17 compiler, `pdftoppm` for the comparison): `bash paper/scripts/run_all.sh` regenerates every
+figure into a temporary directory and compares it with `paper/figs/` (about a minute; see
+[`paper/scripts/README.md`](paper/scripts/README.md)).
+
 The explainers' cross-check (needs `node`): `node explainers/check/crosscheck.cjs`. The pages can be opened locally
 (`site/build_site.sh _site` assembles the website in `_site/`).
 
@@ -105,7 +109,7 @@ for release v1.0.0, by its version DOI ZENODO_VERSION_DOI_TBD.
 
 ## Licence and third-party material
 
-Code, Lean sources, scripts, archive programs and data: MIT ([`LICENSE`](LICENSE)). Manuscript (`paper/main.tex`,
+Code, Lean sources, scripts (including `paper/scripts/`), archive programs and data: MIT ([`LICENSE`](LICENSE)). Manuscript (`paper/main.tex`,
 `paper/sections/`, `paper/refs.bib`, `paper/main.bbl`, `paper/main.pdf`, `paper/figs/`): CC BY 4.0
 ([`paper/LICENSE.md`](paper/LICENSE.md)).
 
@@ -116,4 +120,5 @@ Palomar formalization of the even-order Grünschloß–Keller nets, <https://git
 its copyright line is reproduced in `LICENSE`. The layout of the Lean project follows the same repository's Palomar
 template. Lean 4, Mathlib and the Python packages used by the scripts are dependencies fetched at build time; they are
 not redistributed here. The Sobol' direction-number files of Joe and Kuo are not redistributed (the explainers
-use only the initial values of the first three dimensions, quoted in `explainers/src/core.js`).
+use only the initial values of the first three dimensions, quoted in `explainers/src/core.js`; the Sobol' curves of
+`fig:evidence` are read from precomputed data in `paper/scripts/data/`).
