@@ -20,7 +20,7 @@ repository is release **v1.0.0**, which accompanies **version 1** of the manuscr
 <https://github.com/lgruen/separated-nets-lean>, Zenodo [10.5281/zenodo.23327748](https://doi.org/10.5281/zenodo.23327748)).
 
 Archived at Zenodo: concept DOI [10.5281/zenodo.23769767](https://doi.org/10.5281/zenodo.23769767) (all versions); release v1.0.0: version DOI [10.5281/zenodo.23769768](https://doi.org/10.5281/zenodo.23769768).
-Palomar entry (`cor:halton`; `thm:residue` with `cor:korobov`, `cor:residueQU`): PALOMAR_ID_TBD.
+Palomar entry (`cor:halton`; `thm:residue` with `cor:korobov`, `cor:residueQU`): [PALOMAR-2026-10-29-000041](https://palomar-registry.org/entry?id=PALOMAR-2026-10-29-000041&version=1), version 1 (commit `96081a7`).
 Website: <https://lgruen.github.io/quasi-uniform-sequences-lean/>, with the interactive explainers
 <https://lgruen.github.io/quasi-uniform-sequences-lean/explainers/>.
 
