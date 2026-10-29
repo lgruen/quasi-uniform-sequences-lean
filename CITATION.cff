@@ -10,7 +10,7 @@ license: MIT
 repository-code: "https://github.com/lgruen/quasi-uniform-sequences-lean"
 url: "https://lgruen.github.io/quasi-uniform-sequences-lean/"
 version: "1.0.0"
-date-released: "RELEASE_DATE_TBD"   # date of the v1.0.0 release (YYYY-MM-DD; same day as the paper's \VersionDate)
+date-released: "2026-10-30"   # date of the v1.0.0 release (YYYY-MM-DD; same day as the paper's \VersionDate)
 # doi: "ZENODO_DOI_TBD"   # Zenodo concept DOI (all versions); filled after the release (uncommented then)
 identifiers:
   - type: url
