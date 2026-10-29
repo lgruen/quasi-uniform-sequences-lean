@@ -5,6 +5,20 @@
 %
 %
 %
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.48\linewidth]{fig_halfcell_v4.pdf}
+\caption{The half-cell stagger: the one-digit gap $\bar f(e,\Phi)$ of Lemma~\ref{lem:antipode} for $e=+1,-1,0$. $\Phi=\frac12$ is the only response where all three agree, whatever the sign of the step; a window $\frac12\pm0.1$ is shaded (schematic).}
+\label{fig:principles}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.66\linewidth]{fig_volume_v4.pdf}
+\caption{The volume bound (Lemma~\ref{lem:volume}) for $s=2$, $p=7$, $\alpha=(1,3)$. The free digit of column $c'$ moves its responses along a line $\beta+\F_p\alpha_{c'}$, so the column window must meet every line; each pair (own, cross) is labelled by its line. (a)~A $3\times3$ box meets all $7$ lines. (b)~A strip with one own value and the full cross axis also meets all $7$ lines; an entry that the bound never reads costs nothing. Both coverings are checked exhaustively.}
+\label{fig:cost}
+\end{figure}
+
 \section{Window Systems}\label{app:LFdata}
 This appendix contains the details of the staggered windows of Section~\ref{sec:antipode} at a finite prime: the coverings by a hierarchy of step sizes (Appendix~\ref{app:coverings}); the staggered windows at a finite prime, which prove Theorem~\ref{thm:A} (Appendix~\ref{app:BSfinite}); their data and thresholds (Appendix~\ref{app:windowdata}); and a deterministic selection rule for the free digits (Appendix~\ref{app:steerrule}). Throughout, $p\ge5$ is prime and all window systems are instances of Proposition~\ref{prop:steer}.
 
@@ -24,20 +38,6 @@ Then for every $\sigma\in(\Z/p)^k$, every set of $N_k$ consecutive integers cont
 \begin{proof}
 By induction on $t$: every $N_t$ consecutive integers contain an $o$ with $\sigma_r+om_r\in I_r$ for all $r\le t$. \emph{Fast row.} For $N_1$ consecutive $o$, the residues $\sigma_1$ with some $\sigma_1+om_1\in I_1$ form the union of the translates $I_1-om_1$; consecutive translates are shifted by $\nu_1\le|I_1|$, so the union is an arc of $\min(p,|I_1|+(N_1-1)\nu_1)=p$ residues. \emph{Slow rows.} We may assume $m_t=\nu_t>0$. Write $I_t=\{L,\dots,L+|I_t|-1\}\bmod p$, fix an integer representative $\hat\sigma$ of $\sigma_t$, and put $o(n)=\lceil(L+np-\hat\sigma)/\nu_t\rceil$ for $n\in\Z$. For the $N_{t-1}$ integers $o(n),\dots,o(n)+N_{t-1}-1$ we have $\hat\sigma+o\nu_t\in[L+np,\,L+np+|I_t|-1]$, so $\sigma_t+o\nu_t\in I_t$. The $o(n)$ increase, are unbounded in both directions and satisfy $o(n+1)-o(n)\le\lceil p/\nu_t\rceil$; so a run of $N_t$ consecutive integers contains a whole run $o(n),\dots,o(n)+N_{t-1}-1$, which by induction contains an $o$ that is good for every $r<t$, and it is good for $t$ as well.
 \end{proof}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.48\linewidth]{fig_halfcell_v4.pdf}
-\caption{The half-cell stagger: the one-digit gap $\bar f(e,\Phi)$ of Lemma~\ref{lem:antipode} for $e=+1,-1,0$. $\Phi=\frac12$ is the only response where all three agree, whatever the sign of the step; a window $\frac12\pm0.1$ is shaded (schematic).}
-\label{fig:principles}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.66\linewidth]{fig_volume_v4.pdf}
-\caption{The volume bound (Lemma~\ref{lem:volume}) for $s=2$, $p=7$, $\alpha=(1,3)$. The free digit of column $c'$ moves its responses along a line $\beta+\F_p\alpha_{c'}$, so the column window must meet every line; each pair (own, cross) is labelled by its line. (a)~A $3\times3$ box meets all $7$ lines. (b)~A strip with one own value and the full cross axis also meets all $7$ lines; an entry that the bound never reads costs nothing. Both coverings are checked exhaustively.}
-\label{fig:cost}
-\end{figure}
 
 \subsection{Staggered Windows at a Finite Prime}\label{app:BSfinite}
 This subsection proves Theorem~\ref{thm:A}: the bound for staggered windows at a finite prime (Lemma~\ref{lem:W}), the realization of the depth-zero crosses with the half from a power of two (Lemmas~\ref{lem:D} and~\ref{lem:R}), the staggered rule (Definition~\ref{def:BS}) and its thresholds (Proposition~\ref{prop:P0}, Theorem~\ref{thm:A3}). Throughout, $p$ is an odd prime and $C=\{c\ne\cstar\}$.

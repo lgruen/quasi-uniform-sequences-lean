@@ -1,0 +1,14 @@
+{
+  "challenge_module": "GeoSeqV10_1ca5aChallenge",
+  "solution_module": "GeoSeqV10_1ca5aSolution",
+  "theorem_names": [
+    "GeoSeq.blk5d_chk31"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

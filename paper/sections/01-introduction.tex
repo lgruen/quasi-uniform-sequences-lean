@@ -45,7 +45,7 @@ The nets of \cite{Gru26geo} go further at the full levels: they prescribe all $s
 
 \begin{figure}[t]
 \centering
-\paperfig{fig_levels}
+\includegraphics[width=0.9\linewidth]{fig_levels.pdf}
 \caption{Level families. (a)~The exponents $m\le27$ at which each construction has a certified lower bound on $\sep{P_m}$ in dimension $s=3$ (filled; shaded columns are the full levels), with the certified constant at $p=37$: residue sequence, best check vector of Table~\ref{tab:residue} (Theorem~\ref{thm:residue}); staggered residue sequence with dyadic weights, $8/37$ (Corollary~\ref{cor:dyadic}); block-periodic residue sequence, $1-2/37$ (Theorem~\ref{thm:block}(b)); block period $\ell=4$ (Theorem~\ref{thm:blocktwo}): the design at $m\in12\N$ and skeleton relations at $m=5,17,29,\dots$ (blue). The classical sequences have no certified level; they fail along explicit sequences of levels (Section~\ref{sec:fail}). (b)~Exact $\sep{P_m}$, $m=1,\dots,10$, in dimension two over $\F_5$: the residue sequence with the Korobov vector $v=(2,-1)$ (certified $0.447$ at odd $m$), the brick wall $W^-$ (certified $0.2$ at even $m$, Theorem~\ref{thm:WF}) and the block-periodic sequence of Theorem~\ref{thm:block}(a) (certified $0.6$ at $m\in4\N$). Filled markers: sizes in the level family; bars: the certified bounds. Off its family a sequence is not controlled: the block-periodic sequence falls to $0.092$ at $m=9$ and the residue sequence to $0.246$ at $m=10$. Exact computations from the generator matrices (\texttt{paper/\allowbreak v4/\allowbreak figs/\allowbreak b7\_levels.py}).}
 \label{fig:levels}
 \end{figure}
@@ -56,10 +56,10 @@ The nets of \cite{Gru26geo} go further at the full levels: they prescribe all $s
 \begin{enumerate}
 \item \emph{The classical sequences fail} (Section~\ref{sec:fail}, Table~\ref{tab:negative}), with explicit close pairs.
 \item \emph{A closed form in every dimension.} For every $s\ge2$ and every prime $p>2^s$ the residue sequence with a Korobov check vector is a quasi-uniform digital $(0,s)$-sequence with $\sep{P_{sK-1}}\ge(\rho-1)p^{-1/s}>1-2p^{-1/s}$ for every $K$ (Theorem~\ref{thm:residue}, Corollaries~\ref{cor:korobov} and~\ref{cor:residueQU}), and the staggered residue sequence has $\sep{P_{sK}}\ge(\lfloor p/2^{s-1}\rfloor-1)/p$ for every $K$ (Corollary~\ref{cor:dyadic}). With searched check vectors the constant of the residue sequence reaches $1.024$ in dimension two ($p=1009$) and $1.035$ in dimension three ($p=10007$) (Table~\ref{tab:residue}).
-\item \emph{Separation $1-O(1/p)$ from small primes on, at every $s$-th full level.} The block-periodic residue sequences have $\sep{P_{4K}}\ge1-2/p$ for every prime $p\ge3$ ($s=2$), $\sep{P_{9K}}\ge1-2/p$ for every prime $p\ge5$ ($s=3$), $\sep{P_{16K}}\ge1-6/p$ for every prime $p\ge7$ ($s=4$), $\sep{P_{25K}}\ge1-17/p$ for every prime $p\ge19$ ($s=5$), and $1-(a^*_s+1)/p$ at $m\in s^2\N$ in every dimension $s\ge4$ for $p\ge5a^*_s+4$ (Theorem~\ref{thm:block}).
+\item \emph{Separation $1-O(1/p)$ from small primes on, at every $s$-th full level.} The block-periodic residue sequences have $\sep{P_{s^2K}}\ge1-2/p$ for every prime $p\ge3$ ($s=2$) and $p\ge5$ ($s=3$), and $1-(a^*_s+1)/p$ in every dimension $s\ge4$ for $p\ge5a^*_s+4$; with a smaller diagonal of the design, $1-4/p$, $1-8/p$, $1-15/p$, $1-60/p$ for $s=4,\dots,7$ and every prime $p\ge11$, $23$, $37$, $191$ (Theorem~\ref{thm:block}; computer-assisted for these four).
 \item \emph{Limits of exact relations} (Section~\ref{sec:count}): about one exact relation of bounded depth per level, in the scope stated there.
 \item \emph{Every full level.} For every $s\ge3$ a closed form gives $\sep{P_{sK}}\ge1-C''_s/p$ for every prime $p\ge p_0(s)$ (Theorem~\ref{thm:A}), in dimension three $1-742/p$ for every prime $p\ge1.97\cdot10^7$ (Theorem~\ref{thm:A3}); in dimension two, $1-17/p$ for every prime $p>3677$ (Corollary~\ref{cor:HB17}).
-\item \emph{Every base in small dimensions} (Theorem~\ref{thm:coverage}, which lists the level families). In dimension two every prime base is covered (base $3$ by Theorem~\ref{thm:block}(a) and, at every full level, by a computer-assisted bound); in base $2$ the sequence is a two-sided scramble of the Sobol' sequence with $\sep{P_{2K}}\ge0.3678$, which answers a question of Dick, Goda and Suzuki \cite[Section~4.2]{DGS2}: it is well-separated in their sense \cite[Def.~3.8]{DGS2} (Theorem~\ref{thm:B2}). In dimension three every prime base $p\ge3$ is covered, base $5$ at the sizes $5^{9K}$ only, and base $4$; in dimension four every prime $p\ge7$ and base $4$; in dimension five every prime $p\ge19$; in every dimension $s$ every prime $p>2^s$.
+\item \emph{Every base in small dimensions} (Theorem~\ref{thm:coverage}, which lists the level families). In dimension two every prime base is covered (base $3$ by Theorem~\ref{thm:block}(a) and, at every full level, by a computer-assisted bound); in base $2$ the sequence is a two-sided scramble of the Sobol' sequence with $\sep{P_{2K}}\ge0.3678$, which answers a question of Dick, Goda and Suzuki \cite[Section~4.2]{DGS2}: it is well-separated in their sense \cite[Def.~3.8]{DGS2} (Theorem~\ref{thm:B2}). In dimension three every prime base $p\ge3$ is covered, base $5$ at the sizes $5^{9K}$ only, and base $4$; in dimension four every prime $p\ge7$ and base $4$; in dimension five every prime $p\ge11$; in dimension six every prime $p\ge17$; in every dimension $s$ every prime $p>2^s$; and prime-power bases in dimensions two to five (Table~\ref{tab:primepower}).
 \end{enumerate}
 
 \begin{table}[t]
@@ -76,7 +76,8 @@ $\ge2$ & prime $p>2^s$ & $s\N-1$ & $(\rho-1)p^{-1/s}>1-2p^{-1/s}$; searched $v$:
 $\ge2$ & prime $p>2^s$ & $s\N$ & $(\lfloor p/2^{s-1}\rfloor-1)/p$ & $\LB/p$ & closed & proof & Cor.~\ref{cor:dyadic}\\
 $2$ & prime $p\ge3$ & $4\N$ & $1-2/p$ & $\LB/p^2$ & closed & proof & Thm.~\ref{thm:block}\\
 $3$ & prime $p\ge5$ & $9\N$ & $1-2/p$ & $\LB/p^3$ & closed & proof & Thm.~\ref{thm:block}\\
-$4$; $5$ & prime $p\ge7$; $p\ge19$ & $16\N$; $25\N$ & $1-6/p$; $1-17/p$ & $\LB/p^s$ & closed & proof${}+{}$c.a. & Thm.~\ref{thm:block}\\
+$4$; $5$ & prime $p\ge11$; $23$ & $16\N$; $25\N$ & $1-4/p$; $1-8/p$ & $\LB/p^s$ & closed & c.a. & Thm.~\ref{thm:block}\\
+$6$; $7$ & prime $p\ge37$; $191$ & $36\N$; $49\N$ & $1-15/p$; $1-60/p$ & $\LB/p^s$ & closed & c.a. & Thm.~\ref{thm:block}\\
 $\ge4$ & prime $p\ge5a^*_s+4$ & $s^2\N$ & $1-(a^*_s+1)/p$ & $\LB/p^s$ & closed & proof & Thm.~\ref{thm:block}\\
 $\ge3$ & prime $p\ge p_0(s)$ & $s\N$ & $1-C''_s/p$ & $\LB/p$ & closed & proof & Thm.~\ref{thm:A}\\
 $3$ & prime $p\ge1.97\cdot10^7$ & $3\N$ & $1-742/p$ & $\LB/p$ & closed & proof${}^\star$ & Thm.~\ref{thm:A3}\\
@@ -85,7 +86,7 @@ $2$ & $2$ & $2\N$ & $0.3678$ & $\LB/2$ & closed & c.a. & Thm.~\ref{thm:B2}\\
 $3$ & $3$; $4$ & $3\N$ & $0.05598$; $0.11293$ & $\LB/q$ & closed & c.a. & Thms.~\ref{thm:S3}, \ref{thm:K4}\\
 $3$ & $7$ & $3\N$ & $1/7$ & $\LB/7$ & table & c.a. & Thm.~\ref{thm:p7}\\
 $4$ & $4$ & $4\N$ & $0.03013$ & $\LB/4$ & closed & c.a. & Thm.~\ref{thm:S4}\\
-$2$; $3$ & $\F_8,\dots,\F_{49}$; $\F_{25},\dots,\F_{125}$ & $s\N$ & Table~\ref{tab:primepower} & $\LB/q$ & closed & c.a. & Prop.~\ref{prop:primepower}\\
+$2$--$5$ & $\F_8,\dots,\F_{169}$ (Tab.~\ref{tab:primepower}) & $s\N$ & Table~\ref{tab:primepower} & $\LB/q$ & closed & c.a. & Prop.~\ref{prop:primepower}\\
 \bottomrule
 \end{tabular}
 \end{table}

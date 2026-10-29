@@ -1,6 +1,6 @@
 name = "z3net"
 version = "0.1.0"
-defaultTargets = ["Z3Net", "GeoSeq", "HeadlineSeqV4", "GeoSeqChallenge", "GeoSeqSolution", "GeoSeqS10Challenge", "GeoSeqS10Solution", "GeoSeqS11Challenge", "GeoSeqS11Solution", "GeoSeqS3Challenge", "GeoSeqS3Solution", "GeoSeqS4Challenge", "GeoSeqS4Solution", "GeoSeqK4Challenge", "GeoSeqK4Solution", "GeoSeqV0Challenge", "GeoSeqV0Solution", "GeoSeqV1Challenge", "GeoSeqV1Solution", "GeoSeqV2Challenge", "GeoSeqV2Solution", "GeoSeqV3Challenge", "GeoSeqV3Solution", "GeoSeqV4Challenge", "GeoSeqV4Solution", "GeoSeqV4s4Challenge", "GeoSeqV4s4Solution", "GeoSeqV4s5Challenge", "GeoSeqV4s5Solution", "GeoSeqV5Challenge", "GeoSeqV5Solution", "GeoSeqV6Challenge", "GeoSeqV6Solution", "GeoSeqV7Challenge", "GeoSeqV7Solution", "GeoSeqV9Challenge", "GeoSeqV9Solution", "GeoSeqV93Challenge", "GeoSeqV93Solution", "GeoSeqV94Challenge", "GeoSeqV94Solution", "GeoSeqV95Challenge", "GeoSeqV95Solution", "GeoSeqV96Challenge", "GeoSeqV96Solution", "GeoSeqV97Challenge", "GeoSeqV97Solution", "GeoSeqV98Challenge", "GeoSeqV98Solution", "GeoSeqV99Challenge", "GeoSeqV99Solution", "GeoSeqV99caChallenge", "GeoSeqV99caSolution", "GeoSeqV99ca5eChallenge", "GeoSeqV99ca5eSolution", "GeoSeqV99ca5fChallenge", "GeoSeqV99ca5fSolution", "GeoSeqV99ca5aChallenge", "GeoSeqV99ca5aSolution", "GeoSeqV99ca5bChallenge", "GeoSeqV99ca5bSolution", "GeoSeqV99ca5cChallenge", "GeoSeqV99ca5cSolution", "GeoSeqV99ca5dChallenge", "GeoSeqV99ca5dSolution", "GeoSeqV99covChallenge", "GeoSeqV99covSolution"]
+defaultTargets = ["Z3Net", "GeoSeq", "HeadlineSeqV4", "GeoSeqChallenge", "GeoSeqSolution", "GeoSeqS10Challenge", "GeoSeqS10Solution", "GeoSeqS11Challenge", "GeoSeqS11Solution", "GeoSeqS3Challenge", "GeoSeqS3Solution", "GeoSeqS4Challenge", "GeoSeqS4Solution", "GeoSeqK4Challenge", "GeoSeqK4Solution", "GeoSeqV0Challenge", "GeoSeqV0Solution", "GeoSeqV1Challenge", "GeoSeqV1Solution", "GeoSeqV2Challenge", "GeoSeqV2Solution", "GeoSeqV3Challenge", "GeoSeqV3Solution", "GeoSeqV4Challenge", "GeoSeqV4Solution", "GeoSeqV4s4Challenge", "GeoSeqV4s4Solution", "GeoSeqV4s5Challenge", "GeoSeqV4s5Solution", "GeoSeqV5Challenge", "GeoSeqV5Solution", "GeoSeqV6Challenge", "GeoSeqV6Solution", "GeoSeqV7Challenge", "GeoSeqV7Solution", "GeoSeqV9Challenge", "GeoSeqV9Solution", "GeoSeqV93Challenge", "GeoSeqV93Solution", "GeoSeqV94Challenge", "GeoSeqV94Solution", "GeoSeqV95Challenge", "GeoSeqV95Solution", "GeoSeqV96Challenge", "GeoSeqV96Solution", "GeoSeqV97Challenge", "GeoSeqV97Solution", "GeoSeqV98Challenge", "GeoSeqV98Solution", "GeoSeqV99Challenge", "GeoSeqV99Solution", "GeoSeqV99caChallenge", "GeoSeqV99caSolution", "GeoSeqV99ca5eChallenge", "GeoSeqV99ca5eSolution", "GeoSeqV99ca5fChallenge", "GeoSeqV99ca5fSolution", "GeoSeqV99ca5aChallenge", "GeoSeqV99ca5aSolution", "GeoSeqV99ca5bChallenge", "GeoSeqV99ca5bSolution", "GeoSeqV99ca5cChallenge", "GeoSeqV99ca5cSolution", "GeoSeqV99ca5dChallenge", "GeoSeqV99ca5dSolution", "GeoSeqV99covChallenge", "GeoSeqV99covSolution", "GeoSeqV10_1Challenge", "GeoSeqV10_1Solution", "GeoSeqV10_1ca5aChallenge", "GeoSeqV10_1ca5aSolution", "GeoSeqV10_1ca5bChallenge", "GeoSeqV10_1ca5bSolution", "GeoSeqV10_1ca5cChallenge", "GeoSeqV10_1ca5cSolution", "GeoSeqV10_2Challenge", "GeoSeqV10_2Solution", "GeoSeqV10_3Challenge", "GeoSeqV10_3Solution", "GeoSeqV10_3xChallenge", "GeoSeqV10_3xSolution", "GeoSeqV10_4Challenge", "GeoSeqV10_4Solution", "GeoSeqV10_4ca0Challenge", "GeoSeqV10_4ca0Solution", "GeoSeqV10_4ca1Challenge", "GeoSeqV10_4ca1Solution", "GeoSeqV10_4ca10Challenge", "GeoSeqV10_4ca10Solution", "GeoSeqV10_4ca2Challenge", "GeoSeqV10_4ca2Solution", "GeoSeqV10_4ca3Challenge", "GeoSeqV10_4ca3Solution", "GeoSeqV10_4ca4Challenge", "GeoSeqV10_4ca4Solution", "GeoSeqV10_4ca5Challenge", "GeoSeqV10_4ca5Solution", "GeoSeqV10_4ca6Challenge", "GeoSeqV10_4ca6Solution", "GeoSeqV10_4ca7Challenge", "GeoSeqV10_4ca7Solution", "GeoSeqV10_4ca8Challenge", "GeoSeqV10_4ca8Solution", "GeoSeqV10_4ca9Challenge", "GeoSeqV10_4ca9Solution"]
 
 [leanOptions]
 autoImplicit = false
@@ -348,3 +348,193 @@ roots = ["GeoSeqV99covChallenge"]
 [[lean_lib]]
 name = "GeoSeqV99covSolution"
 roots = ["GeoSeqV99covSolution"]
+
+# comparatorGeoSeqV10_1.json
+[[lean_lib]]
+name = "GeoSeqV10_1Challenge"
+roots = ["GeoSeqV10_1Challenge"]
+
+# comparatorGeoSeqV10_1.json
+[[lean_lib]]
+name = "GeoSeqV10_1Solution"
+roots = ["GeoSeqV10_1Solution"]
+
+# comparatorGeoSeqV10_1ca5_p23.json, comparatorGeoSeqV10_1ca5_p29.json, comparatorGeoSeqV10_1ca5_p31.json, comparatorGeoSeqV10_1ca5_p37.json
+[[lean_lib]]
+name = "GeoSeqV10_1ca5aChallenge"
+roots = ["GeoSeqV10_1ca5aChallenge"]
+
+# comparatorGeoSeqV10_1ca5_p23.json, comparatorGeoSeqV10_1ca5_p29.json, comparatorGeoSeqV10_1ca5_p31.json, comparatorGeoSeqV10_1ca5_p37.json
+[[lean_lib]]
+name = "GeoSeqV10_1ca5aSolution"
+roots = ["GeoSeqV10_1ca5aSolution"]
+
+# comparatorGeoSeqV10_1ca5_p41.json, comparatorGeoSeqV10_1ca5_p43.json, comparatorGeoSeqV10_1ca5_p47.json, comparatorGeoSeqV10_1ca5_p53.json
+[[lean_lib]]
+name = "GeoSeqV10_1ca5bChallenge"
+roots = ["GeoSeqV10_1ca5bChallenge"]
+
+# comparatorGeoSeqV10_1ca5_p41.json, comparatorGeoSeqV10_1ca5_p43.json, comparatorGeoSeqV10_1ca5_p47.json, comparatorGeoSeqV10_1ca5_p53.json
+[[lean_lib]]
+name = "GeoSeqV10_1ca5bSolution"
+roots = ["GeoSeqV10_1ca5bSolution"]
+
+# comparatorGeoSeqV10_1ca5_p59.json, comparatorGeoSeqV10_1ca5_p61.json
+[[lean_lib]]
+name = "GeoSeqV10_1ca5cChallenge"
+roots = ["GeoSeqV10_1ca5cChallenge"]
+
+# comparatorGeoSeqV10_1ca5_p59.json, comparatorGeoSeqV10_1ca5_p61.json
+[[lean_lib]]
+name = "GeoSeqV10_1ca5cSolution"
+roots = ["GeoSeqV10_1ca5cSolution"]
+
+# comparatorGeoSeqV10_2.json
+[[lean_lib]]
+name = "GeoSeqV10_2Challenge"
+roots = ["GeoSeqV10_2Challenge"]
+
+# comparatorGeoSeqV10_2.json
+[[lean_lib]]
+name = "GeoSeqV10_2Solution"
+roots = ["GeoSeqV10_2Solution"]
+
+# comparatorGeoSeqV10_3.json
+[[lean_lib]]
+name = "GeoSeqV10_3Challenge"
+roots = ["GeoSeqV10_3Challenge"]
+
+# comparatorGeoSeqV10_3.json
+[[lean_lib]]
+name = "GeoSeqV10_3Solution"
+roots = ["GeoSeqV10_3Solution"]
+
+# comparatorGeoSeqV10_3x.json
+[[lean_lib]]
+name = "GeoSeqV10_3xChallenge"
+roots = ["GeoSeqV10_3xChallenge"]
+
+# comparatorGeoSeqV10_3x.json
+[[lean_lib]]
+name = "GeoSeqV10_3xSolution"
+roots = ["GeoSeqV10_3xSolution"]
+
+# comparatorGeoSeqV10_4.json
+[[lean_lib]]
+name = "GeoSeqV10_4Challenge"
+roots = ["GeoSeqV10_4Challenge"]
+
+# comparatorGeoSeqV10_4.json
+[[lean_lib]]
+name = "GeoSeqV10_4Solution"
+roots = ["GeoSeqV10_4Solution"]
+
+# comparatorGeoSeqV10_4ca0.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca0Challenge"
+roots = ["GeoSeqV10_4ca0Challenge"]
+
+# comparatorGeoSeqV10_4ca0.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca0Solution"
+roots = ["GeoSeqV10_4ca0Solution"]
+
+# comparatorGeoSeqV10_4ca1.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca1Challenge"
+roots = ["GeoSeqV10_4ca1Challenge"]
+
+# comparatorGeoSeqV10_4ca1.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca1Solution"
+roots = ["GeoSeqV10_4ca1Solution"]
+
+# comparatorGeoSeqV10_4ca10.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca10Challenge"
+roots = ["GeoSeqV10_4ca10Challenge"]
+
+# comparatorGeoSeqV10_4ca10.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca10Solution"
+roots = ["GeoSeqV10_4ca10Solution"]
+
+# comparatorGeoSeqV10_4ca2.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca2Challenge"
+roots = ["GeoSeqV10_4ca2Challenge"]
+
+# comparatorGeoSeqV10_4ca2.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca2Solution"
+roots = ["GeoSeqV10_4ca2Solution"]
+
+# comparatorGeoSeqV10_4ca3.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca3Challenge"
+roots = ["GeoSeqV10_4ca3Challenge"]
+
+# comparatorGeoSeqV10_4ca3.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca3Solution"
+roots = ["GeoSeqV10_4ca3Solution"]
+
+# comparatorGeoSeqV10_4ca4.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca4Challenge"
+roots = ["GeoSeqV10_4ca4Challenge"]
+
+# comparatorGeoSeqV10_4ca4.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca4Solution"
+roots = ["GeoSeqV10_4ca4Solution"]
+
+# comparatorGeoSeqV10_4ca5.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca5Challenge"
+roots = ["GeoSeqV10_4ca5Challenge"]
+
+# comparatorGeoSeqV10_4ca5.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca5Solution"
+roots = ["GeoSeqV10_4ca5Solution"]
+
+# comparatorGeoSeqV10_4ca6.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca6Challenge"
+roots = ["GeoSeqV10_4ca6Challenge"]
+
+# comparatorGeoSeqV10_4ca6.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca6Solution"
+roots = ["GeoSeqV10_4ca6Solution"]
+
+# comparatorGeoSeqV10_4ca7.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca7Challenge"
+roots = ["GeoSeqV10_4ca7Challenge"]
+
+# comparatorGeoSeqV10_4ca7.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca7Solution"
+roots = ["GeoSeqV10_4ca7Solution"]
+
+# comparatorGeoSeqV10_4ca8.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca8Challenge"
+roots = ["GeoSeqV10_4ca8Challenge"]
+
+# comparatorGeoSeqV10_4ca8.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca8Solution"
+roots = ["GeoSeqV10_4ca8Solution"]
+
+# comparatorGeoSeqV10_4ca9.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca9Challenge"
+roots = ["GeoSeqV10_4ca9Challenge"]
+
+# comparatorGeoSeqV10_4ca9.json
+[[lean_lib]]
+name = "GeoSeqV10_4ca9Solution"
+roots = ["GeoSeqV10_4ca9Solution"]

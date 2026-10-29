@@ -226,7 +226,21 @@ table.t td.l { text-align: left; font-family: var(--sans); }
   <div class="prose" style="margin-top:14px">
     <p>These are the strongest constants of the paper <em>at</em> their certified sizes, from small primes on. For every <i>N</i> they are weaker: the certified sizes are <i>s</i><sup>2</sup> digits apart, and the bound for all <i>N</i> (<span class="mono">lem:prefix</span>) loses the factor <i>p</i><sup>−<i>s</i></sup> instead of <i>p</i><sup>−1</sup>: for <i>s</i> = 2, <i>p</i> = 5, 0.024 against 0.089 for the residue sequence. With a longer block the same scramble also carries skeleton relations at most levels in between (<span class="mono">thm:blocktwo</span>). Why not the full design at every full level? Page 3.</p>
   </div>
-  <div class="refs">In the paper: <span class="ref">def:block</span><span class="ref">thm:block</span><span class="ref">fig:block</span><span class="ref">rem:blockexact</span><span class="ref">thm:blocktwo</span></div>
+  <div class="prose" style="margin-top:14px">
+    <p><b>Dimensions four to seven: the free diagonal.</b> For <i>s</i> ≥ 4 the design is the one of the nets, <i>U</i>*<sub><i>s</i></sub>, moved to the places 0, 1, ½, …, 1/(<i>s</i> − 1). Its diagonal is chosen for <em>diagonal dominance</em>, which the nets need: on every step every moving coordinate moves backward. That costs the axis step along a coordinate <i>a</i>*<sub><i>s</i></sub> + 1 units, so the bound is 1 − (<i>a</i>*<sub><i>s</i></sub> + 1)/<i>p</i>. The sequence never uses the diagonal (only the entries off the diagonal must be reachable), so it can be lowered as long as every step keeps one short backward coordinate or two backward ones (<span class="mono">lem:signclass</span>, a finite check). The chart shows the certified constant LB(<i>F</i>) at the primes where the paper states it, for both diagonals; each value is an exact evaluation of the one-digit relaxation.</p>
+  </div>
+  <div class="fig" style="grid-template-columns:1fr">
+    <div>
+      <div class="ctl" style="margin-bottom:8px"><span id="fdLab">Dimension <i>s</i></span>
+        <div class="seg" role="group" aria-labelledby="fdLab" id="fdSeg">
+          <button class="btn" type="button" data-v="4" aria-pressed="false">4</button><button class="btn" type="button" data-v="5" aria-pressed="false">5</button><button class="btn" type="button" data-v="6" aria-pressed="true">6</button><button class="btn" type="button" data-v="7" aria-pressed="false">7</button>
+        </div></div>
+      <div class="chartwrap"><svg id="svgFD" viewBox="0 0 900 300" role="img" aria-label="Certified separation constant of the block-periodic designs against the prime p, nets' diagonal and free diagonal"></svg></div>
+      <div class="legend" id="legFD"></div>
+      <p class="note" id="noteFD"></p>
+    </div>
+  </div>
+  <div class="refs">In the paper: <span class="ref">def:block</span><span class="ref">thm:block</span><span class="ref">fig:block</span><span class="ref">rem:blockexact</span><span class="ref">thm:blocktwo</span><span class="ref">lem:signclass</span><span class="ref">tab:block</span></div>
 </section>
 
 <section class="credits" id="credits" aria-labelledby="h-credits">
@@ -497,7 +511,37 @@ function drawK() {
 }
 
 kButtons(); drawB(); drawL(); draw3(true); calcG(false); calcS(); drawK();
-SQ.onRedraw(() => { drawB(); drawL(); draw3(false); drawK(); });
+const fd = { s: 6 };
+SQ.seg(document.getElementById('fdSeg'), v => { fd.s = +v; drawFD(); });
+function drawFD() {
+  const F = DATA.freediag, s = fd.s, S = F.series[String(s)], svg = document.getElementById('svgFD');
+  svg.innerHTML = '';
+  const x0 = 64, x1 = 880, y0 = 14, y1 = 252, P0 = 5, P1 = 1100;
+  const X = p => x0 + (x1 - x0) * Math.log(p / P0) / Math.log(P1 / P0), Y = v => y1 - (y1 - y0) * Math.max(0, Math.min(1, v));
+  const g = svgEl('g', { 'font-family': css('--sans'), 'font-size': 12, fill: css('--muted') }, svg);
+  for (const t of [0, 0.2, 0.4, 0.6, 0.8, 1]) { svgEl('line', { x1: x0, x2: x1, y1: Y(t), y2: Y(t), stroke: css('--grid') }, g); svgEl('text', { x: x0 - 6, y: Y(t) + 4, 'text-anchor': 'end' }, g).textContent = t.toFixed(1); }
+  for (const p of [5, 10, 20, 50, 100, 200, 500, 1000]) { svgEl('line', { x1: X(p), x2: X(p), y1: y0, y2: y1, stroke: css('--grid') }, g); svgEl('text', { x: X(p), y: y1 + 16, 'text-anchor': 'middle' }, g).textContent = p; }
+  svgEl('text', { x: x1, y: y1 + 34, 'text-anchor': 'end' }, g).textContent = 'prime p (log scale)';
+  svgEl('text', { x: x0 + 6, y: y0 + 14 }, g).innerHTML = 'LB(F): certified separation at N = p<tspan dy="-5" font-size="9">s²K</tspan><tspan dy="5">, every K</tspan>';
+  const curve = (pts, A, col, dash) => {                     // analytic 1 - (A+1)/p between the computed points
+    const lo = pts[0][0], d = []; for (let p = lo; p <= P1; p *= 1.01) d.push(`${d.length ? 'L' : 'M'}${X(p).toFixed(1)},${Y(1 - (A + 1) / p).toFixed(1)}`);
+    svgEl('path', { d: d.join(''), fill: 'none', stroke: css(col), 'stroke-width': 1.6, 'stroke-dasharray': dash || '' }, svg);
+    for (const [p, v] of pts) svgEl('circle', { cx: X(p), cy: Y(v), r: 3, fill: css(col) }, svg);
+  };
+  const dfrom = F.fromD[String(s)], dl = S.diag.filter(([p]) => p >= dfrom), dx = S.diag.filter(([p]) => p < dfrom);
+  curve(S.ustar, F.astar[String(s)], '--jit', '5 4');
+  curve(dl, F.A[String(s)], '--accent');
+  for (const [p, v] of dx) svgEl('circle', { cx: X(p), cy: Y(v), r: 3.4, fill: 'none', stroke: css('--accent'), 'stroke-width': 1.6 }, svg);
+  const dd = F.delta[String(s)].join(', '), a1 = F.astar[String(s)] + 1, A1 = F.A[String(s)] + 1;
+  document.getElementById('legFD').innerHTML =
+    `<span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(--jit);stroke-width:2;stroke-dasharray:5 4"/></svg>U*<sub>${s}</sub>, nets' diagonal: 1 − ${a1}/p from p ≥ ${F.fromU[String(s)]} (thm:block(c))</span>` +
+    `<span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(--accent);stroke-width:2"/></svg>free diagonal δ = (${dd}): 1 − ${A1}/p from p ≥ ${dfrom} (thm:block(d), computer-assisted)</span>`;
+  const extra = dx.length ? ` Open circles: the smaller primes whose exact values the paper quotes (${dx.map(([p, v]) => `p = ${p}: ${fmtDown(v, 4)}`).join(', ')}).` : '';
+  const pos = F.posD[String(s)] ? ` LB(F) > 0 also at p = ${F.posD[String(s)]} (values not plotted).` : '';
+  document.getElementById('noteFD').innerHTML = `Dots: exact evaluations at primes in the stated ranges; lines: the closed forms they equal. At p = 1009 the nets' diagonal gives ${fmtDown(1 - a1 / 1009, 4)}, the free diagonal ${fmtDown(1 - A1 / 1009, 4)}.${extra}${pos} With the entries off the diagonal fixed, no other diagonal of F<sub>0</sub> does better for s = 4, 5, 6 in the limit p → ∞ (exhaustive search); for s = 7 this δ is the best found.`;
+}
+drawFD();
+SQ.onRedraw(() => { drawB(); drawL(); draw3(false); drawK(); drawFD(); });
 })();
 </script>
 </body>

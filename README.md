@@ -26,7 +26,7 @@ Website: <https://lgruen.github.io/quasi-uniform-sequences-lean/>, with the inte
 
 | path | content | licence |
 |---|---|---|
-| repository root | the Lean 4 / Mathlib Lake project: library `GeoSeq/` (definitions, statement files `GeoSeq/Statements/*.lean`, proofs), `Z3Net/` (the part of the Lean library of the nets paper that `GeoSeq` imports), the Challenge/Solution roots `GeoSeq*Challenge.lean` / `GeoSeq*Solution.lean` and the 52 Comparator configurations `comparatorGeoSeq*.json`, tools in `scripts/` | MIT |
+| repository root | the Lean 4 / Mathlib Lake project: library `GeoSeq/` (definitions, statement files `GeoSeq/Statements/*.lean`, proofs), `Z3Net/` (the part of the Lean library of the nets paper that `GeoSeq` imports), the Challenge/Solution roots `GeoSeq*Challenge.lean` / `GeoSeq*Solution.lean` and the 78 Comparator configurations `comparatorGeoSeq*.json`, tools in `scripts/` | MIT |
 | [`HeadlineSeqV4/`](HeadlineSeqV4/), `comparatorHeadlineSeqV4.json`, [`palomar/headline-seq-v4/formalization.yaml`](palomar/headline-seq-v4/formalization.yaml) | the Palomar entry: a Mathlib-only statement file of 195 lines (`cor:halton`; `thm:residue` with `cor:korobov` and `cor:residueQU` for one explicit residue sequence) | MIT |
 | [`docs/library-formalization.yaml`](docs/library-formalization.yaml) | metadata of the whole library, in the `formalization.yaml` format; not a Palomar entry | MIT |
 | [`COVERAGE.md`](COVERAGE.md), [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) | the configurations and what they cover; the Comparator runs | MIT |
@@ -37,15 +37,16 @@ Website: <https://lgruen.github.io/quasi-uniform-sequences-lean/>, with the inte
 
 ## Status
 
-The paper (`app:lean`) lists what is formalized. The results new in version 1 are compared in 32 Comparator
-configurations with 311 theorems (`comparatorGeoSeqV9*.json`); the results kept from the previous version of the
+The paper (`app:lean`) lists what is formalized. The results new in version 1 are compared in 58 Comparator
+configurations with 679 theorems (32 with 311 theorems, `comparatorGeoSeqV9*.json`, and 26 with 368 theorems,
+`comparatorGeoSeqV10_*.json`); the results kept from the previous version of the
 manuscript are compared in the 20 configurations of that version (`comparatorGeoSeq.json`, `…S3/S4/K4/S10/S11…`,
 `…V0…V7…`), and the Palomar entry in `comparatorHeadlineSeqV4.json` (4 theorems). Every compared theorem is proved;
 the only axioms are `propext`, `Classical.choice` and `Quot.sound`; there is no `native_decide` (finite computations
 are evaluated by the Lean kernel, `decide +kernel`); `sorry` occurs only in the statement files
 (`GeoSeq/Statements/*.lean`, `HeadlineSeqV4/Challenge.lean`), by design: the Challenge holds the statements, the
 Solution the proofs. [Comparator](https://github.com/leanprover/comparator) checks each configuration with the Lean
-kernel and the independent NanoDa kernel; all 53 configurations were accepted by both kernels on this tree; see
+kernel and the independent NanoDa kernel; all 79 configurations were accepted by both kernels; see
 [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) for the runs and
 [`COVERAGE.md`](COVERAGE.md) for what each configuration covers and what is not formalized.
 
@@ -65,7 +66,9 @@ lake build HeadlineSeqV4           # only the Palomar entry (and what it imports
 ```
 
 Some modules evaluate long kernel computations (the certificates of `thm:S3`, `thm:K4`, `thm:S4`, `thm:p7`, the data
-of the earlier ordered window systems, and the per-prime checks of `thm:block`(c), `GeoSeq/V99Ca5*.lean`). Lake builds
+of the earlier ordered window systems, the per-prime checks of `thm:block`(c), (d), `GeoSeq/V99Ca5*.lean`,
+`GeoSeq/V10_1D5ca*.lean`, the eleven evaluations of `GeoSeq/V10_4S6ca*.lean` (about 1.7 min each), and the prime-power
+rows `GeoSeq/V10_3RowsX.lean`). Lake builds
 modules in parallel, which can exceed the memory of a 32 GB machine; if it starts swapping, build the heavy modules one
 at a time first and then run `lake build` again. Measured build times are in `COMPARATOR_RESULTS.md`.
 

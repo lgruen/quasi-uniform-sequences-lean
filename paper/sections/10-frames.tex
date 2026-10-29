@@ -186,32 +186,54 @@ The proofs of Lemmas~\ref{lem:residuestar-t0} and~\ref{lem:residuestar-rel} use 
 
 \begin{table}[t]
 \centering
-\small
-\caption{Proposition~\ref{prop:primepower}: the staggered residue sequence over $\F_q$, $q=p^r$, with the power-basis encoding of the monic irreducible polynomial $f$ (for every $q$ except $32$ the smallest one, ordered by the codes of the coefficients below the leading one). Weights $k$ are given by their codes; $\beta_q$ is the best value over all weights for this encoding (exhaustive), certified for every $K$ at every full level ($\Lev=s\N$). Last column: exact $\sep{P_3}$ for the places with codes $0,1,2$, $\cstar=2$, $\theta=1$ (illustration). The value $\beta_q$ depends on the encoding: for $q=25$, $s=2$ it ranges from $5/25$ ($x^2+2$) to $8/25$ ($x^2+3$) over the irreducible quadratics, and for $q=32$, $s=3$ it is positive for $2$ of the $6$ irreducible quintics (here $x^5+x^3+x^2+x+1$).}
+\footnotesize
+\caption{Proposition~\ref{prop:primepower}: the staggered residue sequence over $\F_q$, $q=p^r$, with the power-basis encoding of the monic irreducible $f$; weights $k$ by their codes; $\beta_q$ is certified for every $K$ ($\Lev=s\N$). For $s\le3$, $f$ and $k$ give the best value over all $f$ and $k$ (exhaustive); for $s=4,5$ they were found by search. Last column: exact $\sep{P_3}$ for the places $0,1,2$ (codes), $\cstar=2$, $\theta=1$. $\beta_q$ depends on the encoding: for $q=25$, $s=2$ it ranges from $5/25$ ($x^2+2$) to $8/25$ ($x^2+3$), and for $q=32$, $s=3$ it is positive for $2$ of the $6$ irreducible quintics.}
 \label{tab:primepower}
-\begin{tabular}{@{}cr l l r c@{}}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}[t]{@{}r l l r@{}}
 \toprule
-$s$ & $q$ & $f$ & weights $k$ & $\beta_q$ & exact $\sep{P_3}$\\
+\multicolumn{4}{@{}l}{$s=2$}\\
+$q$ & $f$ & $k$ & $\beta_q$\\
 \midrule
-2 & 8 & $x^3+x+1$ & $(2)$ & $1/8$ & --\\
- & 9 & $x^2+1$ & $(3)$ & $1/9$ & --\\
- & 16 & $x^4+x+1$ & $(2)$ & $1/16$ & --\\
- & 25 & $x^2+2$ & $(10)$ & $5/25$ & --\\
- & 27 & $x^3+2x+1$ & $(11)$ & $3/27$ & --\\
- & 49 & $x^2+1$ & $(21)$ & $17/49$ & --\\
-\addlinespace
-3 & 25 & $x^2+2$ & $(7,2)$ & $1/25$ & $0.1885$\\
- & 32 & $x^5+x^3+x^2+x+1$ & $(12,2)$ & $1/32$ & --\\
+8 & $x^3+x+1$ & $(2)$ & $1/8$\\
+9 & $x^2+1$ & $(3)$ & $1/9$\\
+16 & $x^4+x+1$ & $(2)$ & $1/16$\\
+25 & $x^2+3$ & $(10)$ & $8/25$\\
+27 & $x^3+x^2+2x+1$ & $(15)$ & $5/27$\\
+32 & $x^5+x^3+x^2+x+1$ & $(23)$ & $7/32$\\
+49 & $x^2+2x+2$ & $(21)$ & $19/49$\\
+64 & $x^6+x^4+x^3+x+1$ & $(45)$ & $13/64$\\
+81 & $x^4+x^2+x+1$ & $(31)$ & $17/81$\\
+121 & $x^2+9$ & $(55)$ & $53/121$\\
+125 & $x^3+3x+3$ & $(51)$ & $44/125$\\
+128 & $x^7+x^5+x^4+x^3+x^2+x+1$ & $(95)$ & $31/128$\\
+\bottomrule
+\end{tabular}\hfill
+\begin{tabular}[t]{@{}c r l l r c@{}}
+\toprule
+$s$ & $q$ & $f$ & $k$ & $\beta_q$ & $\sep{P_3}$\\
+\midrule
+3 & 25 & $x^2+x+2$ & $(9,12)$ & $2/25$ & $0.1961$\\
+ & 32 & $x^5+x^3+x^2+x+1$ & $(12,2)$ & $1/32$ & $0.1814$\\
  & 49 & $x^2+1$ & $(21,7)$ & $5/49$ & $0.3565$\\
  & 64 & $x^6+x+1$ & $(42,23)$ & $2/64$ & $0.1781$\\
- & 81 & $x^4+x+2$ & $(17,3)$ & $1/81$ & $0.1546$\\
- & 121 & $x^2+1$ & $(55,22)$ & $19/121$ & $0.3277$\\
- & 125 & $x^3+x+1$ & $(35,26)$ & $8/125$ & $0.1684$\\
+ & 81 & $x^4+2x^3+x^2+x+2$ & $(3,9)$ & $2/81$ & $0.1848$\\
+ & 121 & $x^2+2x+5$ & $(22,54)$ & $20/121$ & $0.2719$\\
+ & 125 & $x^3+4x^2+4$ & $(45,66)$ & $14/125$ & $0.2323$\\
+ & 128 & as for $s=2$ & $(56,95)$ & $7/128$ & $0.1767$\\
+ & 169 & $x^2+4x+9$ & $(51,89)$ & $35/169$ & $0.2320$\\
+\addlinespace
+4 & 49 & $x^2+1$ & $(7,16,19)$ & $1/49$ & --\\
+ & 121 & $x^2+x+8$ & $(21,31,49)$ & $7/121$ & --\\
+ & 125 & $x^3+x+1$ & $(2,5,10)$ & $1/125$ & --\\
+\addlinespace
+5 & 121 & $x^2+1$ & $(13,28,36,47)$ & $1/121$ & --\\
+ & 169 & $x^2+2$ & $(17,58,63,83)$ & $2/169$ & --\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The bound uses one coordinate and one digit, as in Corollary~\ref{cor:dyadic}, and it is small; the exact separations are several times larger (last column of Table~\ref{tab:primepower}; for $s=3$ the smallest $\sep{P_{[N]}}$ over all $N$ up to about $10^7$ is between $0.0256$ ($q=64$) and $0.1618$ ($q=121$), above $\beta_q/q$ in every case). A zero is a zero of this bound for this encoding, not a statement about the base: for $q=8$, $9$, $16$ and $27$ in dimension three every power-basis encoding gives $\beta_q=0$ for every choice of weights (exact computation); other encodings, other constructions and deeper certificates are untried there.
+The bound uses one coordinate and one digit, as in Corollary~\ref{cor:dyadic}, and it is small; the exact separations are several times larger (last column of Table~\ref{tab:primepower}; for $s=3$ the smallest $\sep{P_{[N]}}$ over all $N$ up to $10^7$ is between $0.0144$ ($q=32$) and $0.1484$ ($q=49$), above $\beta_q/q$ in every case). The proof uses the encoding only through the set $\mathcal D_f$ of increments $\Delta(y)$, so it holds for every bijection $\enc$ with $\mathcal D_f$ replaced by its set of increments. A zero is a zero of this bound, not a statement about the base: for $q=8,9$ in dimension three $\beta_q=0$ for every digit code and every weight, for $q=16,27$ for every $\F_p$-linear code; in dimension four $\beta_q=0$ for $q=16,25,27,32,64,81$, and in dimension five for $q=49$, for every power-basis encoding and every weight (exact computations). Other constructions and certificates with more digits are untried there.
 
 \subsection{Coverage by Dimension}\label{sec:coverage}
 Which bases admit a quasi-uniform digital $(0,s)$-sequence with a certified bound, and on which level family? The answer collects the results of Sections~\ref{sec:residue}--\ref{sec:frames}. The level family matters: every family of this paper gives quasi-uniformity, but a denser family gives the better bound for every $N$ (Lemma~\ref{lem:prefix}), and the full levels $\Lev=s\N$ are the classical choice. Table~\ref{tab:coverage} and Figure~\ref{fig:dim3} give the details.
@@ -219,27 +241,29 @@ Which bases admit a quasi-uniform digital $(0,s)$-sequence with a certified boun
 \begin{theorem}[Coverage]\label{thm:coverage}
 In each of the following cases there is an explicit digital $(0,s)$-sequence over $\F_q$ with a positive lower bound on $\sep{P_m}$ for every $m$ in the stated level family $\Lev$, and hence, by Lemma~\ref{lem:prefix}, a quasi-uniform one.
 \begin{enumerate}
-\item[(a)] $s=2$: every prime $p$, with $\Lev=2\N$; the prime powers $q=8,9,16,25,27,49$, with $\Lev=2\N$.
-\item[(b)] $s=3$: $q=3$, $q=4$, $q=7$ and every prime $p\ge11$, with $\Lev=3\N$; every prime $p\ge5$, with $\Lev=9\N$; the prime powers $q=25,32,49,64,81,121,125$, with $\Lev=3\N$. In particular every prime base $p\ge3$ is covered; $p=5$ only with $\Lev=9\N$.
-\item[(c)] $s=4$: $q=4$ and every prime $p\ge17$, with $\Lev=4\N$; every prime $p\ge7$, with $\Lev=16\N$.
-\item[(d)] $s=5$: every prime $p\ge37$, with $\Lev=5\N$; every prime $p\ge19$, with $\Lev=25\N$.
-\item[(e)] every $s\ge2$: every prime $p>2^s$, with $\Lev=s\N$ and, by a second sequence, with $\Lev=s\N-1$; both are closed forms with written proofs.
+\item[(a)] $s=2$: every prime $p$, with $\Lev=2\N$; the prime powers $q=8$, $9$, $16$, $25$, $27$, $32$, $49$, $64$, $81$, $121$, $125$, $128$, with $\Lev=2\N$.
+\item[(b)] $s=3$: $q=3$, $q=4$, $q=7$ and every prime $p\ge11$, with $\Lev=3\N$; every prime $p\ge5$, with $\Lev=9\N$; the prime powers $q=25$, $32$, $49$, $64$, $81$, $121$, $125$, $128$, $169$, with $\Lev=3\N$. In particular every prime base $p\ge3$ is covered; $p=5$ only with $\Lev=9\N$.
+\item[(c)] $s=4$: $q=4$, $49$, $121$, $125$ and every prime $p\ge17$, with $\Lev=4\N$; every prime $p\ge7$, with $\Lev=16\N$.
+\item[(d)] $s=5$: $q=121$, $169$ and every prime $p\ge37$, with $\Lev=5\N$; every prime $p\ge11$, with $\Lev=25\N$.
+\item[(e)] $s=6$: every prime $p\ge17$, with $\Lev=36\N$; $s=7$: $p=17,19,23$ and every prime $p\ge31$, with $\Lev=49\N$.
+\item[(f)] every $s\ge2$: every prime $p>2^s$, with $\Lev=s\N$ and, by a second sequence, with $\Lev=s\N-1$; both are closed forms with written proofs.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
 Each case is a cited result; Table~\ref{tab:coverage} lists the construction, the bound and the kind of proof for each.
-(e) Corollary~\ref{cor:dyadic} (staggered residue sequence, $\Lev=s\N$) and Corollary~\ref{cor:korobov} with Corollary~\ref{cor:residueQU} (residue sequence, $\Lev=s\N-1$), both for every prime $p>2^s$.
+(f) Corollary~\ref{cor:dyadic} (staggered residue sequence, $\Lev=s\N$) and Corollary~\ref{cor:korobov} with Corollary~\ref{cor:residueQU} (residue sequence, $\Lev=s\N-1$), both for every prime $p>2^s$.
 (a) $p=2$: Theorem~\ref{thm:B2}; $p=3$: Remark~\ref{rem:B3} (computer-assisted), and Theorem~\ref{thm:block}(a) with $\Lev=4\N$ (proof); $p\ge5$: Theorem~\ref{thm:WF}. The prime powers: Proposition~\ref{prop:primepower}.
-(b) $q=3$: Theorem~\ref{thm:S3}; $q=4$: Theorem~\ref{thm:K4}; $q=7$: Theorem~\ref{thm:p7}; $p\ge11$: case (e), since $11>2^3$. $\Lev=9\N$: Theorem~\ref{thm:block}(b), for every prime $p\ge5$. The prime powers: Proposition~\ref{prop:primepower}.
-(c) $q=4$: Theorem~\ref{thm:S4}; $p\ge17$: case (e). $\Lev=16\N$: Theorem~\ref{thm:block}(c); its written proof covers every prime $p\ge5a^*_4+4=29$, and the exact evaluation of $\LB(F)$ covers every prime $7\le p\le109$. The two ranges overlap, so together they cover every prime $p\ge7$.
-(d) $p\ge37$: case (e), since $37$ is the least prime above $2^5$. $\Lev=25\N$: Theorem~\ref{thm:block}(c); the written proof covers every prime $p\ge5a^*_5+4=84$, and the exact evaluation covers every prime $19\le p\le109$; together, every prime $p\ge19$.
+(b) $q=3$: Theorem~\ref{thm:S3}; $q=4$: Theorem~\ref{thm:K4}; $q=7$: Theorem~\ref{thm:p7}; $p\ge11$: case (f), since $11>2^3$. $\Lev=9\N$: Theorem~\ref{thm:block}(b), for every prime $p\ge5$. The prime powers: Proposition~\ref{prop:primepower}.
+(c) $q=4$: Theorem~\ref{thm:S4}; $q=49,121,125$: Proposition~\ref{prop:primepower}; $p\ge17$: case (f). $\Lev=16\N$: Theorem~\ref{thm:block}(c) (written proof for $p\ge29$, exact evaluation for $7\le p\le109$).
+(d) $q=121,169$: Proposition~\ref{prop:primepower}; $p\ge37$: case (f), since $37$ is the least prime above $2^5$. $\Lev=25\N$: Theorem~\ref{thm:block}(d), computer-assisted (the written proof of (c) covers $p\ge84$).
+(e) Theorem~\ref{thm:block}(d), computer-assisted.
 \end{proof}
 
 \begin{table}[t]
 \centering
-\small
-\caption{Coverage by dimension (Theorem~\ref{thm:coverage}): base, construction, level family $\Lev$ (the exponents $m$ with a certified bound on $\sep{P_m}$), the bound, and the kind of proof (``c.a.'': computer-assisted, with the scope stated in the cited result). The bound for every $N$ is $\LB\,q^{-\Delta_{\Lev}/s}$ with $\Delta_{\Lev}=s$ for $\Lev=s\N$ and $s\N-1$ and $\Delta_{\Lev}=s^2$ for $\Lev=s^2\N$ (Lemma~\ref{lem:prefix}). $\rho=\lfloor p^{1/s}\rfloor$. Constructions certified at every full level with constants tending to $1$ from large primes on (staggered windows, Section~\ref{sec:antipode}) are not repeated here.}
+\footnotesize
+\caption{Coverage by dimension (Theorem~\ref{thm:coverage}): base, construction, level family $\Lev$ (the exponents $m$ with a certified bound on $\sep{P_m}$), the bound, and the kind of proof (``c.a.'': computer-assisted, with the scope stated in the cited result). The bound for every $N$ is $\LB\,q^{-\Delta_{\Lev}/s}$ with $\Delta_{\Lev}=s$ for $\Lev=s\N$ and $s\N-1$ and $\Delta_{\Lev}=s^2$ for $\Lev=s^2\N$ (Lemma~\ref{lem:prefix}). $\rho=\lfloor p^{1/s}\rfloor$. For $s=4,5$ the written proof of Theorem~\ref{thm:block}(c) gives $1-6/p$ and $1-17/p$ from $p=29$ and $84$ on. Constructions certified at every full level with constants tending to $1$ from large primes on (staggered windows, Section~\ref{sec:antipode}) are not repeated here.}
 \label{tab:coverage}
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}c l l l l l@{}}
@@ -251,7 +275,7 @@ $s$ & base & construction & $\Lev$ & $\sep{P_m}\ge$ & proof\\
  & $p\ge5$ & brick wall, Thm.~\ref{thm:WF} & $2\N$ & $(p-3)/(2p)$ & proof\\
  & $p\ge5$ & residue seq., Cor.~\ref{cor:korobov} & $2\N-1$ & $(\rho-1)p^{-1/2}$ & proof\\
  & $p\ge3$ & block-periodic, Thm.~\ref{thm:block}(a) & $4\N$ & $1-2/p$ & proof\\
- & $q=8,9,16,25,27,49$ & Prop.~\ref{prop:primepower} & $2\N$ & Tab.~\ref{tab:primepower} & c.a.\\
+ & $q=8,\dots,128$ & Prop.~\ref{prop:primepower} & $2\N$ & Tab.~\ref{tab:primepower} & c.a.\\
 \addlinespace
 3 & $q=3$ & Thm.~\ref{thm:S3} & $3\N$ & $0.05598$ & c.a.\\
  & $q=4$ & Thm.~\ref{thm:K4} & $3\N$ & $0.11293$ & c.a.\\
@@ -259,16 +283,20 @@ $s$ & base & construction & $\Lev$ & $\sep{P_m}\ge$ & proof\\
  & $p\ge11$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $3\N$ & $(\lfloor p/4\rfloor-1)/p$ & proof\\
  & $p\ge11$ & residue seq., Cor.~\ref{cor:korobov} & $3\N-1$ & $(\rho-1)p^{-1/3}$ & proof\\
  & $p\ge5$ & block-periodic, Thm.~\ref{thm:block}(b) & $9\N$ & $1-2/p$ & proof\\
- & $q=25,32,\dots,125$ & Prop.~\ref{prop:primepower} & $3\N$ & Tab.~\ref{tab:primepower} & c.a.\\
+ & $q=25,\dots,169$ & Prop.~\ref{prop:primepower} & $3\N$ & Tab.~\ref{tab:primepower} & c.a.\\
 \addlinespace
 4 & $q=4$ & Thm.~\ref{thm:S4} & $4\N$ & $0.03013$ & c.a.\\
  & $p\ge17$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $4\N$ & $(\lfloor p/8\rfloor-1)/p$ & proof\\
  & $p\ge17$ & residue seq., Cor.~\ref{cor:korobov} & $4\N-1$ & $(\rho-1)p^{-1/4}$ & proof\\
- & $p\ge7$ & block-periodic, Thm.~\ref{thm:block}(c) & $16\N$ & $1-6/p$ & proof $p\ge29$, c.a.\ $7$--$109$\\
+ & $p\ge7$ & block-periodic, Thm.~\ref{thm:block} & $16\N$ & $1-4/p$ ($p\ge11$) & c.a.\\
+ & $q=49,121,125$ & Prop.~\ref{prop:primepower} & $4\N$ & Tab.~\ref{tab:primepower} & c.a.\\
 \addlinespace
 5 & $p\ge37$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $5\N$ & $(\lfloor p/16\rfloor-1)/p$ & proof\\
  & $p\ge37$ & residue seq., Cor.~\ref{cor:korobov} & $5\N-1$ & $(\rho-1)p^{-1/5}$ & proof\\
- & $p\ge19$ & block-periodic, Thm.~\ref{thm:block}(c) & $25\N$ & $1-17/p$ & proof $p\ge84$, c.a.\ $19$--$109$\\
+ & $p\ge11$ & block-periodic, Thm.~\ref{thm:block} & $25\N$ & $1-8/p$ ($p\ge23$) & c.a.\\
+ & $q=121,169$ & Prop.~\ref{prop:primepower} & $5\N$ & Tab.~\ref{tab:primepower} & c.a.\\
+\addlinespace
+6; 7 & see (e) & block-periodic, Thm.~\ref{thm:block} & $36\N$; $49\N$ & Tab.~\ref{tab:block} & c.a.\\
 \addlinespace
 $s$ & $p>2^s$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $s\N$ & $(\lfloor p/2^{s-1}\rfloor-1)/p$ & proof\\
  & $p>2^s$ & residue seq., Cor.~\ref{cor:korobov} & $s\N-1$ & $(\rho-1)p^{-1/s}$ & proof\\
@@ -280,11 +308,11 @@ $s$ & $p>2^s$ & stagg.\ residue, Cor.~\ref{cor:dyadic} & $s\N$ & $(\lfloor p/2^{
 \begin{figure}[t]
 \centering
 \paperfig{fig_coverage}
-\caption{Coverage for $s=2,\dots,5$ (Theorem~\ref{thm:coverage}). Each row is a level family: all full levels $s\N$, the prefixes $s\N-1$ one digit before them, and every $s$-th full level $s^2\N$ (which is contained in $s\N$, so every base covered in the first row is covered in the third). Dark: a written proof covers this base; light: computer-assisted only (the small-base theorems of this section, Theorem~\ref{thm:p7}, and the exact evaluations of Theorem~\ref{thm:block}(c) below its proof range); hatched: no $(0,s)$-sequence exists in base $q<s$. Every prime above $113$ is covered as in the last column. Base $5$ in dimension three is certified only on $9\N$.}
+\caption{Coverage for $s=2,\dots,7$ (Theorem~\ref{thm:coverage}). Each row is a level family: all full levels $s\N$, the prefixes $s\N-1$ one digit before them, and every $s$-th full level $s^2\N$ (which is contained in $s\N$, so every base covered in the first row is covered in the third). Dark: a written proof covers this base; light: computer-assisted only (the small-base theorems of this section, Theorem~\ref{thm:p7}, the exact evaluations of Theorem~\ref{thm:block}(c) below its proof range, and Theorem~\ref{thm:block}(d)); hatched: no $(0,s)$-sequence exists in base $q<s$. Every prime above $113$ is covered as in the last column, except for $s=7$, where the full levels are covered from $p=131$ on. Base $5$ in dimension three is certified only on $9\N$.}
 \label{fig:dim3}
 \end{figure}
 
-\emph{What is not covered.} Bases $q<s$ are impossible: a $(0,s)$-sequence in base $q$ exists only for $s\le q$ \cite{Nie92}. Among the possible bases the following are not covered by this paper, and we do not claim that they cannot be: in dimension two, the prime powers other than $8,9,16,25,27,49$; in dimension three, base $5$ at every full level (Remark~\ref{rem:base5}), and the prime powers $q=8,9,16,27$ (the bound of Proposition~\ref{prop:primepower} is $0$ for every power-basis encoding; nothing else was tried) and the prime powers above $125$; in dimension four, $p=5$, the primes $7\le p\le13$ at every full level (they are covered with $\Lev=16\N$), and the prime powers other than $4$; in dimension five, the primes $5\le p\le17$, the primes $19\le p\le31$ at every full level (covered with $\Lev=25\N$), and all prime powers that are not prime; in dimension $s\ge6$, the prime powers that are not prime and the primes $s\le p<2^s$, apart from those where the proof range $p\ge5a^*_s+4$ of Theorem~\ref{thm:block}(c) starts below $2^s$. For $s=6$ and $s=7$ it starts at $219$ and $854$, above $2^s$, and exact evaluations of $\LB(F)$ for single primes have not been done. Whether residue sequences are quasi-uniform for $s\le p<2^s$ is not addressed (Section~\ref{sec:open}).
+\emph{What is not covered.} Bases $q<s$ are impossible: a $(0,s)$-sequence in base $q$ exists only for $s\le q$ \cite{Nie92}. Among the possible bases the following are not covered by this paper, and we do not claim that they cannot be: the prime powers that are not in Table~\ref{tab:primepower}, except $q=4$ for $s=3,4$ (for $q=8,9,16,27$ in dimension three the bound of Proposition~\ref{prop:primepower} is $0$, for every encoding resp.\ every $\F_p$-linear one); base $5$ in dimension three at every full level (Remark~\ref{rem:base5}); and for $s\ge4$ the primes $s\le p<2^s$ at every full level. On the levels $s^2\N$ these primes are covered from $p=7$, $11$, $17$ on for $s=4,5,6$, for $s=7$ at $p=17,19,23$ and $p\ge31$, and for $s\ge8$ where the proof range $p\ge5a^*_s+4$ of Theorem~\ref{thm:block}(c) starts below $2^s$ (not for $s=8,9,10$). Whether residue sequences are quasi-uniform for $s\le p<2^s$ is not addressed (Section~\ref{sec:open}).
 
 \begin{remark}[Base five in dimension three]\label{rem:base5}
 For $p=5$ and $s=3$, Theorem~\ref{thm:block}(b) gives $\sep{P_{9K}}\ge3/5$ for every $K$ (exact $\sep{P_9}=0.6211$), and hence $\delta(P_{[N]})\ge(3/5)\,5^{-3}N^{-1/3}$ for every $N$. A certificate at every full level is open. What was tried: (i) the ordered windows of an earlier version of this work (shown there to give no positive bound at $p=5$); (ii) the symmetric frames of this section have no three-dimensional instance over $\F_5$, since three places cannot form one orbit of a subgroup of the affine group of $\F_5$, whose order $20$ is prime to $3$; (iii) the staggered residue sequences have $\beta(k)\le0$ at $p=5$ (Corollary~\ref{cor:dyadic}), and among all their parameters up to the affine symmetries of $\F_5$ ($128$ choices of $\cstar$, $\theta$ and the weights) the best keeps $\sep{P_{3K}}\ge0.30$ for $K\le4$ (exact), but at deeper levels there are explicit close pairs: $\sep{P_{216}}\le0.0047$ for the choice that is best at $K\le4$, and $\sep{P_{300}}\le2.9\cdot10^{-6}$ for another (exact computations of the two points; whether any of them is quasi-uniform is open); (iv) for one-digit certificates that cover every possible cross response (the graph rule of Appendix~\ref{app:p7} and window coverings), and for several classes of two-digit certificates (ordered product windows as in (i) on $192$ relaxed instances, two further window classes on single instances, a frame-independent two-digit graph rule), a SAT solver reported that no positive bound exists in the instances solved; no independently checked certificate of these results was produced, so they are evidence about these classes only. General two-digit windows, certificates with more digits, and other constructions remain unexplored.

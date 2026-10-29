@@ -1,0 +1,24 @@
+{
+  "challenge_module": "GeoSeqV10_4ca6Challenge",
+  "solution_module": "GeoSeqV10_4ca6Solution",
+  "theorem_names": [
+    "GeoSeq.blk6d_chk6_0",
+    "GeoSeq.blk6d_chk6_1",
+    "GeoSeq.blk6d_chk6_2",
+    "GeoSeq.blk6d_chk6_3",
+    "GeoSeq.blk6d_chk6_4",
+    "GeoSeq.blk6d_chk6_5",
+    "GeoSeq.blk6d_chk6_6",
+    "GeoSeq.blk6d_chk6_7",
+    "GeoSeq.blk6d_chk6_8",
+    "GeoSeq.blk6d_chk6_9",
+    "GeoSeq.blk6d_chk6_10"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

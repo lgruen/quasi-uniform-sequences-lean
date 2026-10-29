@@ -58,6 +58,7 @@ the layer of the three-dimensional nets of \cite{Gru26geo}%
 \item[(c)] $s\ge4$, the design $U^*_s$ of \cite{Gru26geo}%
 \ moved to the places $0,1,\frac12,\dots,\frac1{s-1}$, with $v=(1,1,2,\dots,s-1)$: $\sep{P_{s^2K}}\ge1-(a^*_s+1)/p$ for every prime $p\ge5a^*_s+4$, where $a^*_s$ is the constant of \cite{Gru26geo}%
 \ ($a^*_4=5$, $a^*_5=16$, $a^*_6=43$, $a^*_7=170$). For $s=4$ at every prime $7\le p\le109$ and for $s=5$ at every prime $19\le p\le109$ the value $\LB(F)=1-(a^*_s+1)/p$ holds as well (computer-assisted). Hence $\sep{P_{16K}}\ge1-6/p$ for every prime $p\ge7$ and $\sep{P_{25K}}\ge1-17/p$ for every prime $p\ge19$.
+\item[(d)] The diagonal entries of $F$ are free: (i)--(iii) hold for every diagonal. Keep the off-diagonal entries of (c), put $F_0[c][c]=-\delta_c$ and $F_n[c][c]=0$ for $n\ge1$, with $\delta=(3,3,3,3)$, $(7,\dots,7)$, $(3,12,13,14,13,13)$, $(41,44,59,57,56,6,32)$ for $s=4,5,6,7$ (in the order of the places). Then $\sep{P_{s^2K}}$ is at least $1-4/p$, $1-8/p$, $1-15/p$, $1-60/p$ for every prime $p\ge11$, $23$, $37$, $191$, respectively, and $\sep{P_{16K}}\ge\sqrt3/7$ at $p=7$; also $\LB(F)>0$ for $s=5$ at $p=11,13,17,19$, for $s=6$ at every prime $17\le p\le31$, and for $s=7$ at $p=17,19,23$ and every prime $31\le p\le181$ (computer-assisted).
 \end{enumerate}
 \end{theorem}
 
@@ -87,10 +88,36 @@ an affine function of $\tau_{cd}$ whose coefficients depend on the column only. 
 
 \emph{The bound.} $U^*_s$ has the diagonal $F_0[c][c]=-\alpha_c$ and zero diagonal at the carry depths $n\ge1$, and it is diagonally dominant: $\alpha_c\ge\sum_{d\ne c}\max_j|M^{(j)}[c][d]|$, with $a^*_s=\max_c\alpha_c$ \cite{Gru26geo}%
 . An axis step along $c$ has $\sigma_c=-e_c\alpha_c$, a term $1-(\alpha_c+1)/p\ge1-(a^*_s+1)/p$. On a step with at least two moving axes every moving coordinate is backward with $|\sigma_i|\le2a^*_s<p$, so the step has at least two terms $c_{2a^*_s+1}$, and $\sqrt2(p-2a^*_s-1)\ge p-a^*_s-1$ for $p\ge(3+\sqrt2)a^*_s+1$, in particular for $p\ge5a^*_s+4$. This is the diagonal dominance argument of \cite{Gru26geo}%
-\ with a jitter of one unit on the axis steps. So $\LB(F)\ge1-(a^*_s+1)/p$ for $p\ge5a^*_s+4$, with equality when a row with $\alpha_c=a^*_s$ has the other entries of its column of $F_0$ in $\{-1,0,1\}$, since its axis step then attains the bound. This holds for every $s\le10$: the coordinate of the place $0$ (the place $\infty$ of \cite{Gru26geo}) has $\alpha_c=a^*_s$, and its column of $F_0$ has all other entries equal to $1$ (exact computation).
+\ with a jitter of one unit on the axis steps. So $\LB(F)\ge1-(a^*_s+1)/p$ for $p\ge(3+\sqrt2)a^*_s+1$ (for $s=6$, $7$ from $p=191$, $757$ on), with equality when a row with $\alpha_c=a^*_s$ has the other entries of its column of $F_0$ in $\{-1,0,1\}$, since its axis step then attains the bound. The coordinate of the place $0$ (the place $\infty$ of \cite{Gru26geo}) has such a column for every $s$: at carry depth $0$ its column is a multiple of $(\tilde w_{c\infty})_c=(1,\dots,1)$, and $U^*_s$ takes $(1,\dots,1)$%
+; for $s\le10$ it has $\alpha_c=a^*_s$ (exact computation). As the entries of $F_0$ off the diagonal are nonzero integers, $\alpha_c\ge s-1$, so $p\ge5a^*_s+4$ implies $p\ge s$.
 
-\emph{Small primes.} $\LB(F)$ is a minimum over finitely many configurations (steps, and carry lengths capped at $s-1$), and the reachability above holds for every prime $p\ge s$. Evaluating this minimum exactly at every prime $7\le p\le109$ for $s=4$ and $19\le p\le109$ for $s=5$ gives $1-(a^*_s+1)/p$ each time. Together with $5a^*_4+4=29$ and $5a^*_5+4=84$ this covers every prime $p\ge7$ resp.\ $p\ge19$.
+\emph{Small primes.} $\LB(F)$ is a minimum over finitely many configurations (steps, and carry lengths capped at $s-1$), and the reachability above holds for every prime $p\ge s$. Its exact value at every prime $7\le p\le109$ ($s=4$) and $19\le p\le109$ ($s=5$) is $1-(a^*_s+1)/p$; with $5a^*_4+4=29$ and $5a^*_5+4=84$ this covers every prime $p\ge7$ resp.\ $p\ge19$ (only the lower bound needs the computation). Part (d) is proved after Lemma~\ref{lem:signclass}.
 \end{proof}
+
+\emph{The free diagonal.} The diagonal of $U^*_s$ is chosen for diagonal dominance, which the nets need: on every step every moving coordinate is backward. The sequence never uses the diagonal: reachability and the system (a) involve only the entries $F_n[i][c]$, $i\ne c$, and in the own multiplier (c) the diagonal terms carry the factor $\Omega$. But $\LB(F)$ is set by the worst step, and the axis step along $c$ pays $\alpha_c+1$. A smaller diagonal softens this step, as long as every other step keeps one short backward coordinate or two backward ones. Figure~\ref{fig:freediag} shows the gain. Here changes are computed in the integers, $\sigma=\sum_ce_cM^{(\min(l_c,s-1)-1)}[\cdot][c]$, and a moving coordinate $i$ is backward if $e_i\sigma_i\le0$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig_freediag.pdf}
+\caption{$\LB(F)$ of Theorem~\ref{thm:block} against $p$. Grey: $U^*_s$ (dashed: $1-(a^*_s+1)/p$, written proof for $p\ge5a^*_s+4$; squares: exact values, c.a.). Blue, all c.a.: the free diagonal of (d) (solid: $1-(A+1)/p$ past the threshold of Lemma~\ref{lem:signclass}; dots: exact values below it; circles: the quoted values at $p=7$, $11\le p\le19$). Dotted: the thresholds. In Lean for $s=4,5,6$ (from $p=11$, $23$, $125$), not for $s=7$.}
+\label{fig:freediag}
+\end{figure}
+
+\begin{lemma}[Backward coordinates]\label{lem:signclass}
+Let $F$ be a design with partial sums $M^{(j)}$, let $A\ge0$ be an integer, and let $S=\max_i\sum_c\max_j|M^{(j)}[i][c]|$. Suppose that every step $e$, with every choice of carry lengths, has a backward moving coordinate with $|\sigma_i|\le A$ or two backward moving coordinates. Then $\LB(F)\ge1-(A+1)/p$ for every prime $p>S$ with $(p-A-1)^2\le2(p-S-1)^2$.
+\end{lemma}
+
+\begin{proof}
+For $p>S$ every change has $|\sigma_i|\le S<p$, so a backward coordinate contributes $c_{|\sigma_i|+1}$ (proof of Theorem~\ref{thm:block}(iii)). The term of the step is at least $c_{A+1}$ in the first case and at least $\sqrt2\,c_{S+1}\ge c_{A+1}$ in the second.
+\end{proof}
+
+The hypothesis does not depend on $p$ and is a finite check. Diagonal dominance is the case in which every moving coordinate is backward; for $U^*_s$ ($A=a^*_s$, $S\le2a^*_s$) the lemma gives the range $p\ge(3+\sqrt2)a^*_s+1$ above.
+
+\begin{proof}[Proof of Theorem~\ref{thm:block}(d)]
+Reachability is that of (c). The hypothesis of Lemma~\ref{lem:signclass} holds with $A=3$, $7$, $14$, $59$ and $S=8$, $23$, $46$, $211$ (exhaustive check, computer-assisted), which gives $\LB(F)\ge1-(A+1)/p$ for every prime $p\ge23$, $67$, $127$, $587$. Below these primes $\LB(F)$ was evaluated exactly at every prime of the stated ranges (computer-assisted; for $s=5$ it is $1/11$, $3/13$, $3\sqrt5/17$, $\sqrt{101}/19$ at $p=11,\dots,19$), and Theorem~\ref{thm:block}(iii) applies. For $s=4,5$ the bound is attained by the axis step at the place $0$ (its column of $F_0$ is $(1,\dots,1)$ off the diagonal, and $\delta_0=A$), for $s=6$ by the axis step at the place $\frac13$ with carry length $4$.
+\end{proof}
+
+How far can the diagonal go? With the off-diagonal entries of $U^*_s$ fixed, the least $A$ in Lemma~\ref{lem:signclass} gives $\lim_{p\to\infty}p(1-\LB(F))=A+1$ (a step whose only backward coordinate has $|\sigma_i|=A$ has the term $1-(A+1)/p+O(p^{-2})$). An axis step forces $0\le\delta_c\le A$, and an exhaustive search over $\delta\in[0,A]^s$ finds no diagonal with $A\le2$, $6$, $13$ for $s=4,5,6$ (computer-assisted): in this sense $4$, $8$, $15$ are optimal. For $s=7$, $60$ is the best found, against $a^*_7+1=171$.
 
 For $s=4$ the design of Theorem~\ref{thm:block}(c) is, in the order of the places $0,1,\frac12,\frac13$ and with $v=(1,1,2,3)$,
 \[
@@ -98,43 +125,47 @@ F_0=\begin{pmatrix}-5&2&1&2\\1&-3&-1&-1\\1&2&-5&-2\\1&1&1&-3\end{pmatrix},\quad
 F_1=\begin{pmatrix}0&-3&-1&-1\\-2&0&2&1\\-1&-1&0&3\\0&-1&0&0\end{pmatrix},\quad
 F_2=\begin{pmatrix}0&2&0&-1\\2&0&-2&0\\0&-1&0&-2\\-1&0&-1&0\end{pmatrix};
 \]
-the largest diagonal entry is $a^*_4=5$. Table~\ref{tab:block} collects the data. Figure~\ref{fig:block} shows what the theorem certifies, and what it does not: at the level $m=8$ the points of the two-dimensional sequence for $p=7$ sit, up to the jitter, on patches of the slightly rotated square lattice $(I+F_0/p)\Z^2$, separated by slip planes; at $m=6$, a full level outside the family, the geometric digits are not designed and two points come within $0.1117$ cell units.
+the largest diagonal entry is $a^*_4=5$, and the design of (d) replaces the diagonal of $F_0$ by $-3$. Table~\ref{tab:block} collects the data. Figure~\ref{fig:block} shows the case $s=2$, $p=7$ inside and outside the family.
 
 \begin{table}[t]
 \centering
-\small
-\caption{The block-periodic residue sequences of Theorem~\ref{thm:block} (level family $m\in s^2\N$). Places and row constants are listed in the same order of the coordinates. ``proof'': the bound holds by the written proof for every prime in this range; ``c.a.'': exact evaluation of $\LB(F)$ at every prime of this range (computer-assisted). For $s\ge6$ only the proof range is known; at $s=6$ it starts at $5a^*_6+4=219$.}
+\footnotesize
+\caption{The block-periodic residue sequences of Theorem~\ref{thm:block} ($\Lev=s^2\N$). Places and row constants: $(0,1)$, $(1,1)$ for $s=2$; $(0,2,1)$, $(\frac12,\frac12,-1)$ for $s=3$; $(0,1,\frac12,\dots,\frac1{s-1})$, $(1,1,2,\dots,s-1)$ for $s\ge4$. ``$U^*_s$, $\delta$'': $U^*_s$ off the diagonal, $F_0[c][c]=-\delta_c$. ``proof'': written proof; ``c.a.'': computer-assisted (exact $\LB(F)$, and for (d) Lemma~\ref{lem:signclass}); each for every prime in the range; in parentheses, further primes with $\LB(F)>0$.}
 \label{tab:block}
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}c l l l l l l@{}}
+\begin{tabular}{@{}c l l l l@{}}
 \toprule
-$s$ & places & $v$ & design & $\LB(F)$ & proof & c.a.\\
+$s$ & design & $\LB(F)$ & proof & c.a.\\
 \midrule
-2 & $0,1$ & $1,1$ & $F_0=\bigl(\begin{smallmatrix}-1&1\\-1&-1\end{smallmatrix}\bigr)$ & $1-2/p$ & $p\ge3$ & --\\
-3 & $0,2,1$ & $\frac12,\frac12,-1$ & $(M,J)$, Thm.~\ref{thm:block}(b) & $1-2/p$ & $p\ge5$ & --\\
-4 & $0,1,\frac12,\frac13$ & $1,1,2,3$ & $U^*_4$ (above) & $1-6/p$ & $p\ge29$ & $7\le p\le109$\\
-5 & $0,1,\frac12,\frac13,\frac14$ & $1,1,2,3,4$ & $U^*_5$ & $1-17/p$ & $p\ge84$ & $19\le p\le109$\\
-$\ge4$ & $0,1,\dots,\frac1{s-1}$ & $1,\dots,s-1$ & $U^*_s$ & $1-\frac{a^*_s+1}p$ & $p\ge5a^*_s+4$ & --\\
+2 & $F_0=\bigl(\begin{smallmatrix}-1&1\\-1&-1\end{smallmatrix}\bigr)$ & $1-2/p$ & $p\ge3$ & --\\
+3 & $(M,J)$, Thm.~\ref{thm:block}(b) & $1-2/p$ & $p\ge5$ & --\\
+4 & $U^*_4$ (above) & $1-6/p$ & $p\ge29$ & $7\le p\le109$\\
+5 & $U^*_5$ & $1-17/p$ & $p\ge84$ & $19\le p\le109$\\
+$\ge4$ & $U^*_s$ & $1-(a^*_s+1)/p$ & $p\ge5a^*_s+4$ & --\\
+4 & $U^*_4$, $\delta=(3,3,3,3)$ & $1-4/p$ & -- & $p\ge11$ ($7$)\\
+5 & $U^*_5$, $\delta=(7,7,7,7,7)$ & $1-8/p$ & -- & $p\ge23$ ($11$--$19$)\\
+6 & $U^*_6$, $\delta=(3,12,13,14,13,13)$ & $1-15/p$ & -- & $p\ge37$ ($17$--$31$)\\
+7 & $U^*_7$, $\delta=(41,44,59,57,56,6,32)$ & $1-60/p$ & -- & $p\ge191$ ($17$--$23$, $31$--$181$)\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{figure}[t]
 \centering
-\paperfig{fig_block}
-\caption{The block-periodic residue sequence of Theorem~\ref{thm:block}(a), $s=2$, $p=7$, places $(0,1)$, $\theta=1$; exact points from the generator matrices (\texttt{paper/v4/figs/b3\_figs.py}). (a)~The full level $m=8$ ($K=4$, $2401\times2401$ cells), an $11\times11$ block of cells around the closest pair: each point (dot) lies within one unit of the last digit of its lattice image $n+r/p$ (open circle), and wherever no geometric digit wraps, neighbouring lattice images differ by exactly a column of $I+F_0/p$ (light segments): patches of $\Z^2$ rotated by $\arctan(1/6)$ and scaled by $\sqrt{37}/7\approx0.87$, separated by slip planes. Exact $\sep{P_8}=0.7416$ ($0.7613$ at $m=4$), certified bound $1-2/7=0.7143$. (b)~The full level $m=6$, which is not in the family $4\N$: its geometric digits are not designed, and the closest pair is only $0.1117$ cell units apart (exact).}
+\includegraphics[width=0.9\linewidth]{fig_block.pdf}
+\caption{The block-periodic residue sequence of Theorem~\ref{thm:block}(a), $s=2$, $p=7$, places $(0,1)$, $\theta=1$ (exact points). (a)~The full level $m=8$ ($2401\times2401$ cells), $11\times11$ cells around the closest pair: each point (dot) lies within one unit of the last digit of its lattice image $n+r/p$ (open circle); where no geometric digit wraps, neighbouring lattice images differ by a column of $I+F_0/p$ (light segments): patches of $\Z^2$ rotated by $\arctan(1/6)$, scaled by $\sqrt{37}/7\approx0.87$, separated by slip planes. Exact $\sep{P_8}=0.7416$ ($0.7613$ at $m=4$), certified bound $1-2/7=0.7143$. (b)~The full level $m=6$, which is not in the family $4\N$: its geometric digits are not designed, and the closest pair is only $0.1117$ cell units apart (exact).}
 \label{fig:block}
 \end{figure}
 
 \begin{remark}[Exact separations and the levels in between]\label{rem:blockexact}
-The certified values are close to the exact ones (exact computations, illustration only): for $s=2$, $\sep{P_4}=0.5730$, $\sep{P_8}=\sep{P_{12}}=0.3862$ and $\sep{P_{16}}=0.3610$ at $p=3$ (bound $1/3$); $0.6237$ at $m=4,8$ for $p=5$ (bound $0.6$); $0.8383$, $0.8604$, $0.8909$, $0.9016$, $0.9177$ at $m=4$ for $p=11$, $13$, $17$, $19$, $23$; for $s=3$, $\sep{P_9}=0.6211$ at $p=5$ ($\theta=1$; bound $0.6$) and $0.7378$ at $p=7$ (bound $0.7143$); at $p=3$, where the bound of (b) is $0$, $\sep{P_9}=0.4381$. Outside the family the separation is not controlled and decays: for $s=2$, $p=5$ the levels $m=2,3,5,6,7,9,10$ have $0.368$, $0.366$, $0.276$, $0.159$, $0.354$, $0.092$, $0.159$ (evidence, not a claim).
+Exact values (illustration only) are close to the certified ones: for $s=2$, $\sep{P_4}=0.5730$, $\sep{P_8}=\sep{P_{12}}=0.3862$ and $\sep{P_{16}}=0.3610$ at $p=3$ (bound $1/3$); $0.6237$ at $m=4,8$ for $p=5$ (bound $0.6$); $0.8383$, $0.8604$, $0.8909$, $0.9016$, $0.9177$ at $m=4$ for $p=11$, $13$, $17$, $19$, $23$; for $s=3$, $\sep{P_9}=0.6211$ at $p=5$ ($\theta=1$; bound $0.6$) and $0.7378$ at $p=7$ (bound $0.7143$); at $p=3$, where the bound of (b) is $0$, $\sep{P_9}=0.4381$. Outside the family the separation is not controlled: for $s=2$, $p=5$ the levels $m=2,3,5,6,7,9,10$ have $0.368$, $0.366$, $0.276$, $0.159$, $0.354$, $0.092$, $0.159$ (evidence, not a claim).
 \end{remark}
 
-\emph{All $N$.} The family $s^2\N$ has largest gap $s^2$, so Lemma~\ref{lem:prefix} gives $\delta(P_{[N]})N^{1/s}\ge\LB(F)\,p^{-s}$ for every $N\ge2$ and the mesh ratio $h/\delta\le\sqrt s\,p^{s+1}/\LB(F)$: these sequences are quasi-uniform, but in this measure they are weaker than the residue sequences of Section~\ref{sec:residue}, whose bound $\LB/p$ is larger whenever $p>2^s$ (for $s=2$, $p=5$: $0.024$ against $0.089$). The block-periodic sequences are the strongest of our constructions \emph{at} their certified sizes, from small primes on; the residue sequences are stronger for all $N$.
+\emph{All $N$.} The family $s^2\N$ has largest gap $s^2$, so Lemma~\ref{lem:prefix} gives $\delta(P_{[N]})N^{1/s}\ge\LB(F)\,p^{-s}$ for every $N\ge2$ and the mesh ratio $h/\delta\le\sqrt s\,p^{s+1}/\LB(F)$: these sequences are quasi-uniform, the strongest of our constructions \emph{at} their certified sizes, but for all $N$ weaker than the residue sequences of Section~\ref{sec:residue}, whose bound $\LB/p$ is larger whenever $p>2^s$ (for $s=2$, $p=5$: $0.024$ against $0.089$).
 
 \emph{The lost $1/p$.} The nets of \cite{Gru26geo} with the layer $(M,J)$ reach $1-1/q$ at every full level for $q\ge8$%
 . The difference is the axis step: in the nets the deeper digits of a coordinate do not depend on its own cell%
-, so a step along one axis has no jitter in the moving coordinate; in the block-periodic sequence they do, the jitter costs one more unit, and $1-1/p$ becomes $1-2/p$. Whether free data in the scramble can restore $1-1/p$ is open.
+, so an axis step has no jitter in the moving coordinate; here it has, and $1-1/p$ becomes $1-2/p$. Whether free data in the scramble can restore $1-1/p$ is open.
 
 \subsection{Two Level Families from One Scramble}\label{sec:blocktwo}
 With a block period $\ell>s$ the scramble has $\ell-s$ local multipliers left over. Giving them to a second check vector adds skeleton relations of the residue sequence at most levels in between.
@@ -197,7 +228,7 @@ The fine cells occupied by $P_{4K+1}$ form the square lattice $\Z(1,u)+\Z(u,-1)$
 For $s=2$ reachability only asks for nonzero crosses. With $w=z^2-z$, $w'(0)=-1$, $w'(1)=1$, the vector $\bar v=(u,-1)$ satisfies $\bar v_i=v_i/w'(a_i)$, and $\bar v^{\mathsf T}F_0=(-u+u,\,u^2+1)\equiv0$. \emph{Design levels.} The carry length does not matter, and the four steps give $\sigma=(-1,-u)$, $(u,-1)$, $(u-1,-u-1)$ and $(-u-1,1-u)$. The axis steps have the terms $\bigl((p-2)^2+(u-1)^2\bigr)^{1/2}/p\ge(p-2)/p$. On the diagonal steps the two coordinates contribute $(u-2)/p$ and $(p-u-2)/p=(u^2-u-1)/p$, and $(p-2)^2-(p-u-2)^2-(u-2)^2=2pu-2u^2-4>0$, so the diagonal term is the minimum; it is at least $(p-u-2)/p$. \emph{Skeleton levels.} By Proposition~\ref{prop:implied} the skeleton relation with $\bar v$ holds at $m=4K+1$. The lattice $\Lambda_{\bar v}=\{b:ub_0\equiv b_1\}$ contains $(1,u)$ and $(u,-1)$, whose determinant is $-p$, so they span it, and $|m(1,u)+n(u,-1)|^2=(m^2+n^2)p$. The four vectors $\pm(1,u)$, $\pm(u,-1)$ have $\|(|b|-\mathbf 1)_+\|_2=u-1$, and every other nonzero vector has length at least $\sqrt{2p}$, hence $\|(|b|-\mathbf 1)_+\|_2\ge\sqrt{2p}-\sqrt2\ge u-1$. So $\ljit(\Lambda_{\bar v})=u-1$, and Theorem~\ref{thm:residue} applies.
 \end{proof}
 
-At the skeleton levels $\bar v=(u,-1)$ is the Korobov vector of Corollary~\ref{cor:korobov} ($\rho=u$), so the bound is the Korobov bound $(\rho-1)p^{-1/2}$ of the residue sequence; it is about $1-p^{-1/2}$, against the general lower form $1-2p^{-1/2}$, because the fine-cell lattice is an exact square. It is the best possible over all check vectors at $p=5$, $17$, $37$, $197$, but not at $p=101$, $257$, $401$, where other check vectors have a larger $\ljit^2$ ($85$, $241$, $369$ against $81$, $225$, $361$; exact computation). At the design levels the constant is $1-O(p^{-1/2})$, below the $1-2/p$ of Theorem~\ref{thm:block}(a): that is the price of the implied relation. Exact computations agree: $\LB(F)=0.6576$, $0.7912$, $0.8847$ at $p=17$, $37$, $101$, against $\sep{P_4}=0.6597$, $0.8072$, $0.8885$; at the skeleton level $m=5$, $\sep{P_5}=0.6406$, $0.7988$, $0.9094$ at $p=5$, $17$, $37$, against $0.4472$, $0.7276$, $0.8220$.
+At the skeleton levels $\bar v=(u,-1)$ is the Korobov vector of Corollary~\ref{cor:korobov} ($\rho=u$), so the bound is the Korobov bound $(\rho-1)p^{-1/2}$ of the residue sequence; it is about $1-p^{-1/2}$, against the general lower form $1-2p^{-1/2}$, because the fine-cell lattice is an exact square. It is the best over all check vectors at $p=5$, $17$, $37$, $197$, not at $p=101$, $257$, $401$, where other check vectors have a larger $\ljit^2$ ($85$, $241$, $369$ against $81$, $225$, $361$; exact computation). At the design levels the constant is $1-O(p^{-1/2})$, below the $1-2/p$ of Theorem~\ref{thm:block}(a): the price of the implied relation. Exact computations agree: $\LB(F)=0.6576$, $0.7912$, $0.8847$ at $p=17$, $37$, $101$, against $\sep{P_4}=0.6597$, $0.8072$, $0.8885$; at the skeleton level $m=5$, $\sep{P_5}=0.6406$, $0.7988$, $0.9094$ at $p=5$, $17$, $37$, against $0.4472$, $0.7276$, $0.8220$.
 
 \begin{remark}[Meeting the density bound]\label{rem:gaussfrontier}
 For $s=2$ and $\ell\ge3$, adding the skeleton multipliers of Theorem~\ref{thm:blocktwo} to the design of Corollary~\ref{cor:gauss} certifies the design at $m\in2\ell\N$ and the skeleton relation at the levels $m=2N+1$ with $N\not\equiv-1\pmod\ell$, i.e.\ at a fraction $(\ell-1)/\ell$ of the levels $m\equiv1\pmod2$ (Theorem~\ref{thm:blocktwo}(iii) and Proposition~\ref{prop:implied}). The two densities add up to $1$, the largest value that exact relations of bounded depth allow (Corollary~\ref{cor:density}). The bound for all $N$ does not improve on that of the residue sequence: the largest gap between certified levels is $3$, against $2$ for the residue sequence.

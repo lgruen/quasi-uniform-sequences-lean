@@ -1,0 +1,7 @@
+# Free-diagonal designs of thm:block(d) (Table tab:block): s, then delta_0 ... delta_{s-1}, in the order of the
+# places 0, 1, 1/2, ..., 1/(s-1). The design has the off-diagonal entries of U*_s (block_lb/ustar<s>.txt),
+# F_0[c][c] = -delta_c and F_n[c][c] = 0 for n >= 1.
+4 3 3 3 3
+5 7 7 7 7 7
+6 3 12 13 14 13 13
+7 41 44 59 57 56 6 32

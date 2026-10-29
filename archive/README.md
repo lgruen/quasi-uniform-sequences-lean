@@ -13,18 +13,19 @@ Paper statements are cited by their LaTeX labels (e.g. `thm:block`, `tab:residue
 All commands are run from this directory (the archive root). Commands that compile C++ or C write the binaries to
 `bin/` (created on first use; delete it afterwards). Requirements: Python 3 (standard library), a C++17 compiler
 (`g++`), a C99 compiler for `b2_dropin/`, and, through `uv` (or any Python environment with these packages), SymPy for
-`bs_ruleB_s3/` and `bs_s45_thresholds/`, and NumPy for `practice/rebuild_check.py` (also used by `primepower/`) and
-`practice/j_check.py`. Every single command below ran in less than a minute on one core on 2026-10-29 (most in a few
-seconds; the longest, `practice/j_check.py`, 25–32 s per sequence); the full log of that run is summarised in each
-directory's README.
+`bs_ruleB_s3/`, `bs_s45_thresholds/` and `block_lb/fd_s45_check.py`, and NumPy for `practice/rebuild_check.py` (also
+used by `primepower/`) and `practice/j_check.py`. Every single command below ran in less than a minute on one core on
+2026-10-29 (most in a few seconds; the longest are the exact evaluations of LB(F) for s = 7 in `block_lb/`, split by
+prime ranges into runs of 23–44 s, and `practice/j_check.py`, 22–24 s per sequence); the full log of that run is
+summarised in each directory's README.
 
 | directory | paper statement (label) | finite check | re-run (from the archive root) |
 |---|---|---|---|
 | `verify/` | common verifier of the window systems: hypotheses of `prop:steer`, crosses by `prop:LI`(c), coverings (exact or by `lem:ws`), window bound `lem:cert` (j = 1); the five archived systems (`sec:practice` comparison, `fig:bsgeom`); negative controls | per record | `python3 verify/verify_designs.py practice/pp_designs_s3.txt selection_rule/cfg/bs_s3_p101.cfg` (record format in `verify/README.md`) |
 | `common/` | shared C++ header (F_p arithmetic, one-digit certificate, coverings) used by `selection_rule/` | — | — |
 | `residue_tables/` | `tab:residue` (`thm:residue`, `cor:korobov`); the four check vectors of `tab:practice` | exact ljit(Λ_v)² of every listed v; all (x,−1) for the rows marked E; Korobov column | `python3 residue_tables/run_programs.py`; `sh residue_tables/audit2_run.sh` (after compiling, see README); `python3 residue_tables/box_check.py` |
-| `block_lb/` | `thm:block`(c) below its proof range | exact LB(F) of U*_4, U*_5 at every prime 7 ≤ p ≤ 109 (s = 4), 19 ≤ p ≤ 109 (s = 5) | `python3 block_lb/lbcheck_allR.py`; `python3 block_lb/lbF.py 4 7 109`; `python3 block_lb/lbF.py 5 19 109`; `python3 block_lb/run_third.py` |
-| `primepower/` | `prop:primepower`, `tab:primepower` | exact β_q for every weight vector, 13 rows; every power-basis encoding | `sh primepower/run_all.sh`; `uv run --with numpy python practice/rebuild_check.py primepower` |
+| `block_lb/` | `thm:block`(c) below its proof range; `thm:block`(d) with `lem:signclass` (`tab:block`, `fig:freediag`); data check of U*_4, ..., U*_7; optimality remark after `thm:block`(d) | exact LB(F) of U*_4, U*_5 at every prime 7 ≤ p ≤ 109 (s = 4), 19 ≤ p ≤ 109 (s = 5); hypothesis of `lem:signclass` (A, S) and exact LB(F) of the free-diagonal designs, s = 4, ..., 7, below the threshold; U*_s files vs an independent implementation of its definition, reachability over Q; no δ ∈ [0,A]^s with A ≤ 2, 6, 13 | `python3 block_lb/lbcheck_allR.py`; `python3 block_lb/lbF.py 4 7 109`; `python3 block_lb/lbF.py 5 19 109`; `python3 block_lb/run_third.py`; `python3 block_lb/run_freediag.py ...` (after compiling, see README) |
+| `primepower/` | `prop:primepower`, `tab:primepower`; zeros of β_q in the text after it | exact β_q of the 26 rows; for s ≤ 3 the maximum over every monic irreducible f and every weight; zeros over every digit code / F_p-linear code / power-basis code in the stated cases | `python3 primepower/rows_check.py audit2`; `python3 primepower/best_check.py fq` (after compiling, see README); first version: `sh primepower/run_all.sh` |
 | `p7_graph_certificate/` | `thm:p7` (Appendix `app:p7`) | LB(w) ≥ 1/7 (two programs); law, t = 0; LB_K of the archived instance, K ≤ 140 | README there |
 | `bs_ruleB_s3/` | `thm:A3` (predicate of `prop:P0` at p_0 = 19 673 600), `rem:A3range` | Π(p_0); per-prime hypotheses on [3·10⁶, 1.97·10⁷] | README there |
 | `bs_s45_thresholds/` | thresholds quoted after `thm:A` (s = 4, 5) | Π(p_0) by exact bisection; spot checks above p_0 | README there |

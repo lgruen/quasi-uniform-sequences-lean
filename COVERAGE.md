@@ -7,10 +7,12 @@ this repository to the paper. Results are cited by their LaTeX labels; the state
 (`GeoSeq/Statements/*.lean`) give the labels in their docstrings, statement by statement.
 
 All configurations permit exactly the axioms `propext`, `Quot.sound`, `Classical.choice` and enable the NanoDa kernel.
-The Comparator runs on this tree (all 53 configurations accepted by both kernels) and how long they took:
+The Comparator runs (all 79 configurations accepted by both kernels) and how long they took:
 [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md).
 
-## Results new in version 1: 32 configurations, 311 theorems
+## Results new in version 1: 58 configurations, 679 theorems
+
+First stages (V9): 32 configurations, 311 theorems.
 
 | configuration | theorems | content (labels of version 1) |
 |---|---|---|
@@ -25,6 +27,23 @@ The Comparator runs on this tree (all 53 configurations accepted by both kernels
 | `comparatorGeoSeqV99ca.json` | 2 | `thm:block`(c) for s = 5, assembled from the per-prime checks |
 | `comparatorGeoSeqV99ca5_p<q>.json` (22) | 1 each | `thm:block`(c), s = 5: the kernel evaluation of the one-digit relaxation checker at the prime q, 19 ≤ q ≤ 109 (one configuration per prime, for run time) |
 | `comparatorGeoSeqV99cov.json` | 2 | `thm:coverage` as an assembly of the cited results, without its prime-power rows |
+
+Added for version 1 after the first stages (V10): 26 configurations, 368 theorems.
+
+| configuration | theorems | content (labels of version 1) |
+|---|---|---|
+| `comparatorGeoSeqV10_1.json` | 55 | upper densities of `cor:layer`(a) and `cor:density`; `prop:joint`(ii) for a general multiplier; the equality of LB(F) in `thm:block`(c) for s = 4, 5 (`blk4_LB_eq`, `blk5_LB_eq_of`; upper bound `axis_term`); `rem:randomize`(a), (b) (digital shifts, index scrambles) and (c) for level families; `rem:residuefull` (`residue_full`); `cor:N1` (offset-map form); `lem:signclass` (`sc_LB`, checker `ca_signclass`); `thm:block`(d) for s = 4 (`blk4d_block`, every prime p ≥ 11) and s = 5 (`blk5d_block_of`, `blk5d_LB_eq_of`, given the per-prime checks; `blk5d_block_proof` for p ≥ 67) |
+| `comparatorGeoSeqV10_1ca5_p<q>.json` (10) | 1 each | `thm:block`(d), s = 5: the kernel evaluation of the checker at the prime q, 23 ≤ q ≤ 61 (one configuration per prime, for run time) |
+| `comparatorGeoSeqV10_2.json` | 41 | `lem:reschange` over every commutative ring, `lem:resform`(b) over every field, `def:selfsim` as written (`IsSelfSim`) and the bridges of `lem:residue-t0`, `def:residuestar`, `prop:onerel`, `cor:residuerows`, `lem:corrS`, `prop:joint` to it |
+| `comparatorGeoSeqV10_3.json` | 63 | `sec:fail` over every finite field and every digit code with a carry pair (`carrypairD`, `nonqu_code`, `faure_code`, `nied_not_quD`, `unscrambledD`; `carryPair_nat`); `prop:primepower` (`primepower_of_check`) with the 13 rows of the first version of `tab:primepower` on explicit models F_p[x]/(f); the prime-power rows of `thm:coverage` (`coverage_pp_of_parts`) |
+| `comparatorGeoSeqV10_3x.json` | 41 | the further rows of `tab:primepower` (better f; q = 32, 64, 81, 121, 125, 128 for s = 2; 128, 169 for s = 3; s = 4, 5) and the coverage rows `coverage_pp_new` |
+| `comparatorGeoSeqV10_4.json` | 37 | `def:block`(a) for every reachable design (`designNum_exists`, `designNum_order`), `thm:block`(i)–(iii) for every reachable design, the transfer of U*_s (`ustar_reachable`), `thm:block`(c) for every s ≥ 3 at p ≥ 5a*_s + 4 (`blkS_block`), the column of ones (`ustar_col0`), `a*_s ≥ s − 1`, the equality given α_0 = a*_s (`blkS_LB_eq_of`); the free diagonal for every s (`blkSd_block`, `blkSd_block_sc`); `thm:block`(d) for s = 6 given the eleven checks (`blk6d_block_of_chk`, `blk6d_LB_eq_of_chk`, every prime p ≥ 125) |
+| `comparatorGeoSeqV10_4ca<k>.json` (11) | 11 each | `thm:block`(d), s = 6: the kernel evaluations of the sign-class checker at P = 6367 (121 evaluations, split for run time) |
+
+Some unconditional forms are checked by `lake build` only, not by a configuration: `blk5_LB_eq` and `blk5d_block`,
+`blk5d_LB_eq`, `blk6d_block`, `blk6d_LB_eq` (their import closures contain all per-prime evaluations at once, too long
+for one configuration); the compared forms take the per-prime checks as hypotheses, and these
+checks are compared separately (`…V99ca5_p<q>`, `…V10_1ca5_p<q>`, `…V10_4ca<k>`).
 
 ## Results kept from the previous version: 20 configurations, 440 theorems
 
@@ -69,9 +88,10 @@ list of divergences from the paper, in `palomar/headline-seq-v4/formalization.ya
 
 ## Not formalized
 
-As listed in `app:lean`: `lem:resform`(b) and `lem:reschange`; `prop:primepower` beyond t = 0 and the relation, and
-hence the prime-power rows of `thm:coverage`; `thm:block`(c) for s ≥ 6; the prime powers in `sec:fail`, and the
-digital shifts and index scrambles of `rem:randomize`; the computer-assisted tables (`tab:residue`, `tab:sobolpar`,
-`tab:primepower`, `tab:practice`) and `rem:A3range`, `lem:riordan`, `lem:witness`, the binary-sequence clauses of
-`thm:K4` and `thm:S4`, `rem:toeplitz`, the remaining remarks and the figures. The computer-assisted items are checked
-by the programs of [`archive/`](archive/).
+As listed in `app:lean` ("Not formalized"): `thm:block`(d) for s = 7, for s = 6 below p = 125, for s = 4, 5 below
+p = 11, 23; a*_s for s ≥ 6 (the formal U*_s is defined by choice and a*_s is not evaluated); the optimality remark
+after `thm:block`(d); `rem:randomize`(a), (b) for prime powers; the tables `tab:residue`, `tab:sobolpar`,
+`tab:practice`, and the optimality over f, k in `tab:primepower`; `rem:A3range`, `lem:riordan`, `lem:witness`, the
+binary-sequence clauses of `thm:K4` and `thm:S4`, `rem:toeplitz`, the other remarks and the figures. In
+`thm:coverage`, p = 11, 13, 17 in case (d) and case (e) are not formalized. The computer-assisted items are checked by
+the programs of [`archive/`](archive/).
