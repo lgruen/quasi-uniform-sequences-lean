@@ -50,9 +50,10 @@ kernel and the independent NanoDa kernel; all 79 configurations were accepted by
 [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) for the runs and
 [`COVERAGE.md`](COVERAGE.md) for what each configuration covers and what is not formalized.
 
-Statement review: TODO(author) — the author's review and sign-off of the Palomar entry's statements (and the basis on
-which the other library statements are accepted) are recorded here before the release. No independent human peer
-review has been performed.
+The four statements of the Palomar entry (`HeadlineSeqV4/Challenge.lean`) and its public abstract were reviewed against
+the manuscript and signed off by the author on 2026-10-29. The author accepts the other statements of the library on the
+basis of statement-review notes prepared in AI-assisted review passes, which relate each formal statement to the printed
+statement by its label, with every divergence. No independent human peer review has been performed.
 
 ## Building
 
@@ -95,7 +96,7 @@ repository, a new Zenodo version under the same concept DOI, and a new version o
 
 ## Use of AI
 
-The constructions, proofs and Lean formalization were produced by AI systems (Anthropic Claude Opus 5.5; some early exploratory results used Claude Fable 5.1) under the author's direction. The author selected the problems, steered the research and reviewed the formal statements, but has not verified every proof by hand. AI systems are not listed as authors; responsibility for the deposit rests with the author.
+The constructions, proofs and Lean formalization were produced by an AI system (Anthropic Claude Opus 5.5) under the author's direction. The author selected the problems, steered the research and reviewed the formal statements, but has not verified every proof by hand; the computer-assisted parts are exact finite computations whose scope is stated with each result. AI systems are not listed as authors; responsibility for this work rests with the author.
 
 ## Citation
 

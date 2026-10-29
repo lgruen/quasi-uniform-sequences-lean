@@ -90,10 +90,15 @@ automation:
       models: []
       framework: "n/a"
       tool_setup: >-
-        Author review of the formal statements against the manuscript. STATUS: TODO(author) -- not yet recorded.
+        Author review of the formal statements against the manuscript. The four statements of the Palomar entry
+        (HeadlineSeqV4/Challenge.lean, palomar/headline-seq-v4/formalization.yaml) and its public abstract were
+        reviewed and signed off by the author on 2026-10-29; the other statements of the library the author accepts
+        on the basis of the statement-review notes of the development repository (prepared in AI-assisted review
+        and audit passes; they relate each formal statement to the printed statement by its label, with every
+        divergence), recorded 2026-10-29.
   spend_usd: "not tracked"
   notes: >-
-    The constructions, proofs and Lean formalization were produced by AI systems (Anthropic Claude Opus 5.5; some early exploratory results used Claude Fable 5.1) under the author's direction. The author selected the problems, steered the research and reviewed the formal statements, but has not verified every proof by hand. AI systems are not listed as authors; responsibility for the deposit rests with the author.
+    The constructions, proofs and Lean formalization were produced by an AI system (Anthropic Claude Opus 5.5) under the author's direction. The author selected the problems, steered the research and reviewed the formal statements, but has not verified every proof by hand; the computer-assisted parts are exact finite computations whose scope is stated with each result. AI systems are not listed as authors; responsibility for this work rests with the author.
 
 fidelity:
   divergences: |-
@@ -111,9 +116,11 @@ review:
   reviewers: []
   notes: >-
     Every statement was checked against the source by AI-assisted passes (Anthropic Claude), acting as automated
-    assistants rather than reviewers of record. TODO(author): the author's review of the statements (the Palomar
-    entry's statements, and the basis on which the other library statements are accepted) is recorded here before
-    the release. No independent human peer review has been performed.
+    assistants rather than reviewers of record. The author reviewed the four statements of the Palomar entry and its
+    abstract against the manuscript and signed them off on 2026-10-29; he accepts the other library statements on
+    the basis of the statement-review notes of the development repository, which relate each formal statement to
+    the printed statement by its label, with every divergence (recorded 2026-10-29). No independent human peer
+    review has been performed.
 
 alignment:
   namespace: "GeoSeq"

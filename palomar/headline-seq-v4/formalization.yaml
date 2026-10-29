@@ -1,5 +1,5 @@
-# Palomar entry of version 1 (staged, not submitted). Fields that need the author are marked TODO(author)
-# (statement sign-off) or carry a placeholder token (ZENODO_DOI_TBD).
+# Palomar entry of version 1 (staged, not submitted). The four statements and the public abstract
+# (project.description) were signed off by the author on 2026-10-29; ZENODO_DOI_TBD is filled after the release.
 # project.description is the public abstract: every sentence in it is meant to be a literal reading of the four
 # Lean statements in HeadlineSeqV4/Challenge.lean (quantifiers, constants, the level set N = p^(sK-1), the scope).
 version: "v0.4"
@@ -126,13 +126,15 @@ automation:
       models: []
       framework: "n/a"
       tool_setup: >-
-        Author review of the Challenge statements against the manuscript. STATUS: TODO(author) -- the
-        author has not yet reviewed or signed off these statements (sign-off to be recorded here and in
-        review.notes before submission).
+        Author review of the Challenge statements against the manuscript. STATUS: APPROVED -- the
+        author reviewed and signed off the four statements of HeadlineSeqV4/Challenge.lean
+        (GeoSeqV4.halton_not_quasiUniform, halton_bases_exist, residue_quasiUniform, residue_data) and
+        the public abstract (project.description) on 2026-10-29.
   spend_usd: "not tracked"
-  # TODO(author): confirm the AI-use statement (the approved statement of the nets deposit, verbatim).
+  # AI-use statement: approved by the author (2026-10-29); the same text as in the paper, README.md and
+  # the venue metadata.
   notes: >-
-    The constructions, proofs and Lean formalization were produced by AI systems (Anthropic Claude Opus 5.5; some early exploratory results used Claude Fable 5.1) under the author's direction. The author selected the problems, steered the research and reviewed the formal statements, but has not verified every proof by hand. AI systems are not listed as authors; responsibility for the deposit rests with the author.
+    The constructions, proofs and Lean formalization were produced by an AI system (Anthropic Claude Opus 5.5) under the author's direction. The author selected the problems, steered the research and reviewed the formal statements, but has not verified every proof by hand; the computer-assisted parts are exact finite computations whose scope is stated with each result. AI systems are not listed as authors; responsibility for this work rests with the author.
 
 fidelity:
   divergences: |-
@@ -190,9 +192,12 @@ review:
     1) and checked against the source by AI-assisted passes (Anthropic Claude), acting as automated
     assistants rather than reviewers of record. Comparator (Lean kernel + NanoDa) accepts the four
     declarations of comparatorHeadlineSeqV4.json with axioms propext, Quot.sound, Classical.choice
-    (COMPARATOR_RESULTS.md). TODO(author): review and sign-off of the Challenge
-    statements and of the abstract (project.description). No independent human peer review has been
-    performed.
+    (COMPARATOR_RESULTS.md). The author reviewed the four statements and the abstract
+    (project.description) against the manuscript and signed them off on 2026-10-29 (approved). Beyond
+    this entry, the author accepts the statements of the library (comparatorGeoSeq*.json) on the basis
+    of the statement-review notes of the development repository, which relate each formal statement to
+    the printed statement by its label, with every divergence (recorded 2026-10-29). No independent
+    human peer review has been performed.
 
 alignment:
   namespace: "GeoSeqV4"
