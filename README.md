@@ -5,7 +5,7 @@
 Manuscript, Lean 4 formalization, data and verification archive, and interactive explainers for
 
 > Leonhard Gruenschloss, *Low-discrepancy quasi-uniform digital sequences in every dimension*, version 1 (2026).
-> Hexagon: HEXAGON_ID_TBD.
+> Hexagon: [hexagon:2610.00664v1](https://hexagonmath.org/abs/2610.00664v1).
 
 A sequence in the unit cube is quasi-uniform if, for every N, its first N points have minimum distance and covering
 radius both of the optimal order N^(-1/s). Dick, Goda and Suzuki asked for such sequences among the digital sequences
