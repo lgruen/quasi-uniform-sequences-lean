@@ -12,4 +12,4 @@ paper/main-p1.png
 comparator_*.log
 comparator_*.result
 comparator_runs.txt
-explainers/figs/*_data.json
+explainers/figs/*.json
