@@ -34,7 +34,7 @@ Website: <https://lgruen.github.io/quasi-uniform-sequences-lean/>, with the inte
 | [`COVERAGE.md`](COVERAGE.md), [`COMPARATOR_RESULTS.md`](COMPARATOR_RESULTS.md) | the configurations and what they cover; the Comparator runs | MIT |
 | [`paper/`](paper/) | `main.tex`, `sections/`, `refs.bib`, `main.bbl`, `main.pdf`, `figs/`, `Makefile`; [`scripts/`](paper/scripts/) (the programs that draw every figure from the generator matrices, with their data; driver `scripts/run_all.sh`) | manuscript CC BY 4.0 ([`paper/LICENSE.md`](paper/LICENSE.md)); `paper/scripts/` MIT |
 | [`archive/`](archive/) | the data and verification archive of the computer-assisted parts (`app:archive`): one directory per item, each with a README naming the statement it supports and the command that re-runs its check | MIT |
-| [`explainers/`](explainers/) | five interactive pages that compute the sequences in the browser, their data generator `gen_data.py` (uses `paper/scripts/`), and a cross-check against the paper's numbers | MIT |
+| [`explainers/`](explainers/) | a step-by-step explainer series for readers new to the subject (in progress; plan and tutor notes in `explainers/tutor/COURSE.md`), the shared in-browser generators `src/core.js`, their data generator `gen_data.py` (uses `paper/scripts/`), and a cross-check against the paper | MIT |
 | `.github/workflows/pages.yml`, `site/` | GitHub Pages build of the explainers and the paper PDF (manual trigger only) | MIT |
 
 ## Status

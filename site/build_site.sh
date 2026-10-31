@@ -2,7 +2,7 @@
 # Assemble the website of the repository (GitHub Pages; see .github/workflows/pages.yml):
 #   OUT/index.html        landing page
 #   OUT/paper.pdf         paper/main.pdf
-#   OUT/explainers/       the five explainer pages (self-contained HTML; explainers/index.html is the first page)
+#   OUT/explainers/       the explainer pages (self-contained HTML; explainers/index.html is the overview)
 # usage: site/build_site.sh [OUT=_site]        (POSIX sh; no network access, no build tools)
 set -eu
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
@@ -38,7 +38,7 @@ quasi-uniform digital (0, s)-sequences for every dimension s and every prime bas
 formalized in Lean&nbsp;4 and checked by Comparator with two kernels.</p>
 <ul>
 <li><a href="paper.pdf">Paper (PDF)</a></li>
-<li><a href="explainers/index.html">Interactive explainers</a> (five pages)</li>
+<li><a href="explainers/index.html">Explainers</a> (step by step, in progress)</li>
 <li><a href="https://github.com/lgruen/quasi-uniform-sequences-lean">Source repository</a> (paper, Lean project, data archive)</li>
 <li>Companion: <a href="https://lgruen.github.io/separated-nets-lean/">Low-discrepancy quasi-uniform digital nets in every dimension</a></li>
 </ul>
